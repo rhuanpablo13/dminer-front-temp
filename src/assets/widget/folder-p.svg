@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-851.395 -845.235 618.711 590.924" xmlns="http://www.w3.org/2000/svg">
+  <polygon class="st0" points="-820.248 -764.842 -236.717 -764.842 -236.717 -785.379 -278.291 -843.076 -400.89 -843.076 -434.645 -810.89 -790.668 -811.285" style="fill: rgb(170, 255, 72);"/>
+  <polyline class="st1" points="-846.176 -546.035 -820.248 -565.019 -820.248 -764.842 -790.668 -811.285 -450.207 -813.147 -413.324 -841.202" style="fill: none; stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 6px;"/>
+  <polyline class="st1" points="-820.248 -554.628 -843.329 -538.946 -846.176 -322.943 -813.02 -279.038 -268.506 -279.038 -245.314 -322.606 -245.314 -557.099" style="fill: none; stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 6px;"/>
+  <polyline class="st1" points="-432.91 -813.239 -400.89 -843.076 -278.291 -843.076 -236.717 -785.379 -236.717 -500.846" style="fill: none; stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 6px;"/>
+  <polygon class="st2" points="-464.303 -279.038 -464.303 -254.311 -281.672 -254.311 -268.506 -279.038" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 6px;"/>
+  <line class="st1" x1="-790.615" y1="-267.098" x2="-464.303" y2="-266.252" style="fill: none; stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-817.053" cy="-557.099" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-847.362" cy="-544.714" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-793.459" cy="-266.841" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-245.314" cy="-561.057" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-236.717" cy="-496.885" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-434.645" cy="-810.89" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+  <circle class="st3" cx="-413.324" cy="-841.202" r="4.033" style="fill: rgb(170, 255, 72); stroke: rgb(35, 31, 32); stroke-miterlimit: 10; stroke-width: 3px;"/>
+</svg>

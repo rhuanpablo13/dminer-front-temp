@@ -1,0 +1,68 @@
+{
+  "events": [
+    {
+      "id": "1",
+      "title": "Event in bar",
+      "start": "2021-10-01",
+      "end": "2021-10-01",
+      "allDay": true
+    },
+    {
+      "id": "2",
+      "title": "Event in dot",
+      "date": "2021-10-02T08:00:00"
+    },
+    {
+      "id": "3",
+      "title": "Event in time",
+      "date": "2021-10-02T09:30:00"
+    },
+    {
+      "id": "4",
+      "title": "Day bar",
+      "start": "2021-10-09",
+      "end": "2021-10-09",
+      "allDay": true
+    },
+    {
+      "id": "5",
+      "title": "Time dot",
+      "date": "2021-10-09T12:00:00"
+    },
+    {
+      "id": "6",
+      "title": "Long event",
+      "start": "2021-10-04",
+      "end": "2021-10-07T24:00:00",
+      "allDay": true
+    },
+    {
+      "id": "7",
+      "title": "Monday to saturday event",
+      "start": "2021-10-11",
+      "end": "2021-10-16T24:00:00",
+      "allDay": true
+    },
+    {
+      "id": "8",
+      "title": "Tuesday to friday event",
+      "start": "2021-10-12",
+      "end": "2021-10-15T24:00:00",
+      "allDay": true
+    },
+    {
+      "id": "9",
+      "title": "Short event",
+      "start": "2021-10-13",
+      "end": "2021-10-14T24:00:00",
+      "allDay": true
+    },
+    {
+      "id": "10",
+      "title": "Conference",
+      "start": "2021-10-27",
+      "end": "2021-10-29T24:00:00",
+      "allDay": true
+    }
+  ]
+}

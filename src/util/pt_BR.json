@@ -1,0 +1,11 @@
+{
+  "MESSAGE": {
+    "SUCCESS_REGISTRATION": "Sucesso! Cadastrado realizado.",
+    "SUCCESS_UPDATE": "Sucesso! Atualização realizada.",
+    "SUCCESS_SEARCH": "Sucesso! Busca realizada.",
+    "ERROR_SEARCH": "Erro! Nenhum requistro encontrado.",
+    "ERROR_UPDATE": "Erro! Atualização não realizada.",
+    "ERROR_LOGIN": "Erro! Erro ao realizar login.",
+    "SUCCESS_LOGIN": "Sucesso! usuário logado"
+  }
+}

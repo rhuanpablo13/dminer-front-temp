@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="17.073 25.282 2021.249 5966.44" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+	.st0{fill:#AAFF48;}
+	.st1{fill:none;stroke:#231F20;stroke-width:6;stroke-miterlimit:10;}
+	.st2{fill:#AAFF48;stroke:#231F20;stroke-width:6;stroke-miterlimit:10;}
+	.st3{fill:#AAFF48;stroke:#231F20;stroke-width:4;stroke-miterlimit:10;}
+</style>
+  </defs>
+  <polygon class="st0" points="131.285 382.157 2012.82 382.157 2012.82 291.994 1878.771 38.677 1483.464 38.677 1374.624 179.99 226.665 178.255" style=""/>
+  <polyline class="st1" points="39.02 1487.18 122.99 1394.537 122.99 419.359 218.79 192.708 1321.41 183.622 1432.565 46.707" style=""/>
+  <polyline class="st1" points="183.63400268554688 1419.864013671875 48.2400016784668 1563.51904296875 39.02000045776367 5128.537109375 146.39999389648438 5853.1591796875 1909.8699951171875 5853.1591796875 1984.97998046875 5134.0927734375 1984.97998046875 1263.9150390625" style=""/>
+  <polyline class="st1" points="1377.43 166.51 1481.13 38.677 1878.18 38.677 2012.82 285.876 2012.82 1504.922" style=""/>
+  <polygon class="st2" points="1275.761 5851.638 1275.761 5991.722 1867.231 5991.722 1909.871 5851.638" style=""/>
+  <line class="st1" x1="222.309" y1="5925.141" x2="1279.109" y2="5929.934" style=""/>
+  <circle class="st3" cx="176.515" cy="1032.75" r="13.06" style="" transform="matrix(1.225907, 0, 0, 1.322908, -20.40469, 46.668114)"/>
+  <circle class="st3" cx="37.127" cy="1078.529" r="13.06" style="" transform="matrix(1.267766, 0, 0, 1.394072, -13.438347, -12.526937)"/>
+  <circle class="st3" cx="207.762" cy="3626.232" r="13.06" style="" transform="matrix(1.403221, 0, 0, 1.7493, -89.040146, -419.944)"/>
+  <circle class="st3" cx="1984.98" cy="949.77" r="13.06" style="" transform="matrix(1.317586, 0, 0, 1.322908, -634.549927, -9.503186)"/>
+  <circle class="st3" cx="2012.82" cy="1157.6" r="13.06" style="" transform="matrix(1.476379, 0, 0, 1.481701, -952.644226, -191.24823)"/>
+  <circle class="st3" cx="1371.81" cy="140.66" r="13.06" style="" transform="matrix(1.217909, 0, 0, 1.322908, -308.526764, -9.503186)"/>
+  <circle class="st3" cx="1440.86" cy="42.49" r="13.06" style="" transform="matrix(1.217909, 0, 0, 1.322908, -312.674438, -13.650862)"/>
+</svg>

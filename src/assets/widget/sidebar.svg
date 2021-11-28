@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 150 650" style="enable-background:new 0 0 150 650;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:none;stroke:#000000;stroke-width:0.7169;stroke-miterlimit:10;}
+	.st2{fill:#AAFF48;stroke:#020202;stroke-width:0.7169;stroke-miterlimit:9.9998;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="72.7441" y1="517.6613" x2="68.7295" y2="-139.7409" gradientTransform="matrix(1 0 0 -1 0 501)">
+	<stop  offset="3.254735e-02" style="stop-color:#A8FF00"/>
+	<stop  offset="0.2151" style="stop-color:#9AFB13"/>
+	<stop  offset="0.5853" style="stop-color:#75F144"/>
+	<stop  offset="1" style="stop-color:#47E482"/>
+</linearGradient>
+<polygon class="st0" points="0,0.5 0,650 127.9,650 127.5,136 144.5,128 144.5,0.5 "/>
+<polyline class="st1" points="144.5,0.5 144.5,128 120,139.5 "/>
+<polyline class="st1" points="127.9,650 127.5,145.2 144.5,136.8 "/>
+<ellipse class="st2" cx="120.4" cy="139" rx="2.1" ry="2.1"/>
+<ellipse class="st2" cx="145" cy="136.5" rx="2.1" ry="2.1"/>
+</svg>
