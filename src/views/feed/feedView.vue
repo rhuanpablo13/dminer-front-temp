@@ -3,7 +3,7 @@
     <widget-modal
       v-if="showModalFeed"
       title="feed"
-      :onClick="setDoc"
+      :onClick="openModal"
       @close="closeModalFeed"
     >
       <template v-slot:body>
@@ -51,12 +51,7 @@
       </template>
     </widget-modal>
   </transition>
-  <form-crud
-    :showModal="showModal"
-    @close="close"
-    :value="value"
-    :isEdit="isEdit"
-  />
+  <form-crud :showModal="showModal" @close="close" :isEdit="isEdit" />
 </template>
 
 <script>
@@ -127,16 +122,14 @@ export default {
       this.isEdit = true
       this.setDoc(value)
     },
-    setDoc(value) {
-      this.value = value
-      this.openModal()
-    },
+
     close() {
-      this.setBenefit()
       this.showModal = false
+      this.$router.push('/')
     },
     closeModalFeed() {
       this.showModalFeed = false
+      this.showModal = false
       this.$router.push('/')
     },
     clickView(id) {

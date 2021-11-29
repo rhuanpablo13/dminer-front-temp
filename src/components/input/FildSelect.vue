@@ -43,7 +43,7 @@ import 'vue-next-select/dist/index.min.css'
 
 export default {
   setup(props) {
-    const value = ref(0)
+    const value = reactive({})
     const options = reactive(props.options)
 
     const verifyLabelIndex = Object.keys(options).filter((option) =>
@@ -59,7 +59,7 @@ export default {
 
   computed: {
     isError() {
-      const error = this.$store.state.form.isError
+      const error = this.$store.state.form.isError && !this.value
       const circle = document.querySelector(
         `.container_input_${this.text} .icon__line > .st1`
       )

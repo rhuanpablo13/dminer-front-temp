@@ -1,130 +1,98 @@
 <template>
-  <transition name="modal">
-    <widget-modal
-      v-if="showModal"
-      layout="icon-modal-folder"
-      :title="'cadastro de benefícios'"
-    >
-      <template v-slot:body>
-        <div class="benefit_form_container">
-          <upload-image v-model="value.image" :propsImage="value.image" />
-          <div class="benefit_form_container_text">
-            <fild-input
-              :text="'Título'"
-              v-model="value.title"
-              :value="value.title"
-              required
-              :isError="isError && !value.title"
-            />
-            <fild-input
-              :text="'Conteúdo'"
-              v-model="value.content"
-              :value="value.content"
-              required
-              :isError="isError && !value.content"
-            />
+  <form-modal :showModal="showModal" title="post" @submit="sendForm">
+    <div class="benefit_form_container">
+      <upload-image v-model="value.image" :propsImage="value.image" />
+      <div class="benefit_form_container_text">
+        <fild-input
+          text="Tópico"
+          v-model="value.title"
+          :value="value.title"
+          required
+        />
+        <fild-input
+          text="Post"
+          v-model="value.content"
+          :value="value.content"
+          required
+        />
 
-            <fild-select
-              :text="'Permissão'"
-              v-model="value.permission"
-              :value="value.permission"
-              required
-              :isError="isError && !value.permission"
-              :options="getPermission"
-            />
-          </div>
-        </div>
-      </template>
-      <template v-slot:footer>
-        <send
-          :isLoading="isLoading"
-          :isSuccess="isSuccess"
-          :isError="isError"
-          @click="sendForm"
-        ></send>
-      </template>
-    </widget-modal>
-  </transition>
+        <fild-select
+          text="Tipo"
+          v-model="value.type"
+          :value="value.type"
+          required
+          :options="typeList"
+        />
+      </div>
+    </div>
+  </form-modal>
 </template>
+
 <script>
+import { reactive } from 'vue'
+
+import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
-import IconBase from '@/components/svg/IconBase.vue'
-import Send from '@/components/button/Send.vue'
-import WidgetModal from '@/components/widget/WidgetModal.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
-import useBenefit from '@/composables/useBenefit'
-import usePermission from '@/composables/usePermission'
+import useFeed from '@/composables/useFeed'
 import { dateHourFormarUs } from '@/util/date'
 
 export default {
-  data() {
-    return {
-      isLoading: false,
-      isSuccess: false,
-      isError: false
-    }
-  },
   components: {
     FildInput,
-    IconBase,
-    Send,
-    WidgetModal,
+    FormModal,
     FildSelect,
     UploadImage
   },
   props: {
-    showModal: { type: Boolean, required: true },
-    isEdit: false,
-    value: {
-      type: Object,
-      required: false,
-      default: {
-        title: '',
-        content: '',
-        permissions: 0,
-        image: null
-      }
-    }
+    showModal: { type: Boolean, required: true, default: false },
+    isEdit: false
   },
   setup() {
-    const { create, update } = useBenefit()
-    const { getPermission } = usePermission()
+    const typeList = [
+      { id: 0, name: 'Interno' },
+      { id: 1, name: 'Externo' }
+    ]
 
-    return { create, getPermission, update }
+    const value = reactive({
+      title: '',
+      content: '',
+      permissions: 0,
+      image: null,
+      type: typeList[0]
+    })
+
+    const { create, update } = useFeed()
+
+    return { create, typeList, update, value }
   },
 
   methods: {
     sendForm() {
-      this.isLoading = true
-      if (this.validForm()) {
-        let result
-        if (this.isEdit) {
-          result = this.update(this.value)
-        } else {
-          result = this.create(this.value)
-        }
+      this.$store.dispatch('form/setLoading')
+      debugger
 
-        this.isLoading = false
+      if (this.validForm()) {
+        let result = this.isEdit
+          ? this.update(this.value)
+          : this.create(this.value)
+
+        this.$store.dispatch('form/setLoading')
         if (result) {
-          this.isSuccess = true
-          setTimeout(() => {
-            this.isSuccess = false
+          this.$store.dispatch('form/setSuccess').then(() => {
             this.$emit('close')
-          }, 3000)
+          })
         }
       } else {
-        this.isLoading = false
-        this.isError = true
-        setTimeout(() => {
-          this.isError = false
-        }, 3000)
+        this.$store.dispatch('form/setLoading')
+        this.$store.dispatch('form/setError')
       }
     },
     validForm() {
       this.value.date = dateHourFormarUs(new Date())
-      this.value.creator = parseInt(localStorage.idUser)
+      this.value.login = this.$store.state.user.login
 
       return Object.values(this.value).every((item) => !!item)
     }
@@ -135,7 +103,6 @@ export default {
 <style scope>
 .benefit_form_container {
   display: flex;
-  width: 100%;
   height: 100%;
   margin: auto;
   padding: 2rem;
@@ -144,6 +111,7 @@ export default {
   margin: auto;
   gap: 1rem;
   justify-content: center;
+  font-size: 0.8rem;
 }
 
 .benefit_form_container_text {

@@ -1,12 +1,17 @@
-const baseURL = 'https://dminer-api.herokuapp.com/api/feed'
+import { messagesFetch } from '@/util/toast.js'
+import { apiIntra } from './http'
 
-export const fetchAllFeed = async () => {
-  const response = await fetch(`${baseURL}/all`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  const json = await response.json()
-  return response.status === 200 ? json.data : []
+export const fetchAll = async () => {
+  const response = await apiIntra(`${URL}/all`)
+  return response.status === 200 ? response.data.data : []
+}
+
+export const fetchCreate = async (item) => {
+  const response = await apiIntra.post(`${URL}/post`, item)
+  return messagesFetch('registration', response.status, response.data.data)
+}
+
+export const fetchUpdate = async (item) => {
+  const response = await apiIntra.put(`${URL}/post`, item)
+  return messagesFetch('update', response.status, response.data.data)
 }
