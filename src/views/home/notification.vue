@@ -8,9 +8,18 @@
   >
     <ul>
       <li v-for="item in $store.state.home.notificationlist" :key="item.id">
-        <Title>
-          {{ item.notification }}
-        </Title>
+        <icon-base
+          viewBox="0 0 500 500"
+          icon-name="icon"
+          width="100%"
+          height="100%"
+        >
+          <frame-notification>
+            <Title>
+              {{ item.notification }}
+            </Title>
+          </frame-notification>
+        </icon-base>
       </li>
     </ul>
   </widget-layout-home>
@@ -38,6 +47,7 @@ import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FildInput from '@/components/input/Fild.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import Title from '@/components/title/Title.vue'
+import FrameNotification from '@/components/svg/FrameNotification.vue'
 
 import useNotification from '@/composables/useNotification'
 
@@ -88,7 +98,8 @@ export default {
     WidgetLayoutHome,
     IconBase,
     FormModal,
-    FildInput
+    FildInput,
+    FrameNotification
   }
 }
 </script>
@@ -102,17 +113,10 @@ export default {
 ul {
   list-style-type: none;
   display: grid;
-  grid-gap: 3rem;
-  margin-top: -0.5rem;
 }
 
 li {
-  text-align: unset;
-}
-
-li:nth-child(even) {
-  text-align: left;
-  margin-left: 1rem;
+  margin-bottom: -21rem;
 }
 
 .form_container {

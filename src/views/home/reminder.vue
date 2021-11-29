@@ -12,9 +12,27 @@
         :key="key"
         :id="`reminder_li_${key}`"
       >
-        <Title>
-          {{ item.reminderDescrible }}
-        </Title>
+        <icon-base
+          viewBox="0 0 500 500"
+          icon-name="icon"
+          width="100%"
+          height="100%"
+        >
+          <frame-notification>
+            <div class="reminder">
+              <fild-checkbox
+                :text="item.reminderDescrible"
+                v-model="value.active"
+                :value="value.active"
+                type="checkbox"
+              />
+            </div>
+
+            <!-- <Title>
+                {{ item.reminderDescrible }}
+              </Title> -->
+          </frame-notification>
+        </icon-base>
       </li>
     </ul>
   </widget-layout-home>
@@ -65,8 +83,10 @@ import FormModal from '@/components/FormModal.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
-
+import FrameNotification from '@/components/svg/FrameNotification.vue'
 import Title from '@/components/title/Title.vue'
+import IconBase from '@/components/svg/IconBase.vue'
+import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import useReminder from '@/composables/useReminder.js'
 import { dateHourFormart } from '@/util/date.js'
@@ -77,7 +97,8 @@ export default {
       showModal: false,
       value: {
         dataHora: new Date(),
-        reminder: ''
+        reminder: '',
+        active: false
       }
     }
   },
@@ -120,7 +141,10 @@ export default {
     FormModal,
     FildDate,
     FildInput,
-    FildSelect
+    FildSelect,
+    FrameNotification,
+    IconBase,
+    FildCheckbox
   }
 }
 </script>
@@ -130,14 +154,14 @@ export default {
   width: 108%;
   margin-left: -12px;
 }
+
 ul {
   list-style-type: none;
+  display: grid;
 }
+
 li {
-  height: 15vh;
-  margin-bottom: 1.6rem;
-  width: 90%;
-  padding: 1rem;
+  margin-bottom: -21rem;
 }
 
 .reminder_footer {
@@ -162,5 +186,12 @@ li {
   display: grid;
   grid-template-columns: 45% 45%;
   grid-gap: 10%;
+}
+
+.reminder {
+  font-size: 1.8rem;
+  margin: 0.5rem 1.2rem;
+  word-wrap: break-word;
+  width: 25rem;
 }
 </style>
