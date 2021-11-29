@@ -72,8 +72,6 @@ export default {
   methods: {
     sendForm() {
       this.$store.dispatch('form/setLoading')
-      debugger
-
       if (this.validForm()) {
         let result = this.isEdit
           ? this.update(this.value)
@@ -94,7 +92,9 @@ export default {
       this.value.date = dateHourFormarUs(new Date())
       this.value.login = this.$store.state.user.login
 
-      return Object.values(this.value).every((item) => !!item)
+      return
+
+      // return Object.values(this.value).every((item) => !!item)
     }
   }
 }

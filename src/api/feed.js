@@ -15,3 +15,8 @@ export const fetchUpdate = async (item) => {
   const response = await apiIntra.put(`${URL}/post`, item)
   return messagesFetch('update', response.status, response.data.data)
 }
+
+export const fetchCreateComment = async (item) => {
+  const response = await apiIntra.put(`${URL}/post`, item)
+  return messagesFetch('update', response.status, response.data.data)
+}

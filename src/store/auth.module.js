@@ -1,4 +1,5 @@
 import useAuth from '@/composables/useAuth'
+import { messagesFetch } from '@/util/toast.js'
 
 const userLocalStorage = localStorage.user && JSON.parse(localStorage.user)
 
@@ -21,6 +22,7 @@ export const auth = {
         (error) => {
           console.log(error)
           commit('loginFailure')
+          messagesFetch('login', 400, null)
           return Promise.reject(error)
         }
       )

@@ -38,24 +38,24 @@
 <style>
 .feed > .st0 {
   fill: #ffffff;
-  stroke-width: 2;
+  stroke-width: 1;
   stroke-miterlimit: 10;
 }
 .feed > .st1 {
   fill: #aaff48;
-  stroke-width: 2;
+  stroke-width: 1;
 }
 .feed > .st2 {
   fill: none;
   stroke: #363636;
-  stroke-width: 2;
+  stroke-width: 1;
 
   stroke-miterlimit: 10;
 }
 .feed > .st3 {
   fill: #aaff48;
   stroke: #363636;
-  stroke-width: 2;
+  stroke-width: 1;
   stroke-miterlimit: 10;
 }
 </style>

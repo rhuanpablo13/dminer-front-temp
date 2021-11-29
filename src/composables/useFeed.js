@@ -1,5 +1,10 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate } from '@/api/feed.js'
+import {
+  fetchAll,
+  fetchCreate,
+  fetchUpdate,
+  fetchCreateComment
+} from '@/api/feed.js'
 
 export default function useFeed() {
   const getFeeds = ref([])
@@ -12,6 +17,10 @@ export default function useFeed() {
     return await fetchCreate(item)
   }
 
+  const crateComment = async (item) => {
+    return await fetchCreateComment(item)
+  }
+
   const update = async (item) => {
     return await fetchUpdate(item)
   }
@@ -20,6 +29,7 @@ export default function useFeed() {
     getFeeds,
     setFeed,
     create,
-    update
+    update,
+    crateComment
   }
 }

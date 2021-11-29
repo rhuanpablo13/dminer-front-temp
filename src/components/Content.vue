@@ -82,6 +82,7 @@ export default {
 .container__right {
   width: 20%;
   position: relative;
+  /* margin: inherit; */
 }
 
 @media only screen and (max-width: 1080px) {
@@ -98,7 +99,7 @@ export default {
   .container__right {
     /* width: 100%; */
     width: auto;
-    margin: inherit;
+    /* margin: inherit; */
     margin-top: -6rem;
   }
 }
