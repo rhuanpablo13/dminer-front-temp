@@ -6,14 +6,17 @@
           <h2>{{ title }}</h2>
         </div>
         <div
-          :class="classContent"
-          class="notices__content"
+          :class="classContent || 'notices__content'"
           :style="{ 'max-height': !isExpanded && '18rem' }"
           :id="id"
         >
           <slot />
         </div>
-        <div class="notices__footer" v-if="hasButton">
+
+        <div
+          :class="{ notices__footer: !isPost, post__footer: isPost }"
+          v-if="hasButton"
+        >
           <icon-base
             viewBox="0 0 1024 1024"
             icon-name="icon"
@@ -49,6 +52,7 @@ export default {
     classContent: { type: String, required: false },
     id: { type: String, required: false },
     hasButton: { type: Boolean, required: false, default: true },
+    isPost: { type: Boolean, required: false, default: false },
     layout: { type: String, required: true }
   },
   components: {
@@ -74,6 +78,7 @@ export default {
   display: grid;
   grid-auto-rows: 1fr 4.1fr 1fr;
   padding: 0 1rem;
+  position: relative;
 }
 
 .notices__head {
@@ -93,6 +98,11 @@ export default {
   justify-content: flex-end;
   align-items: end;
   margin-top: 5px;
+}
+.post__footer {
+  position: absolute;
+  bottom: 0rem;
+  right: 2rem;
 }
 
 h2 {

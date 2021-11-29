@@ -5,6 +5,7 @@
       title="feed"
       :onClick="openModal"
       @close="closeModalFeed"
+      :overflow="false"
     >
       <template v-slot:body>
         <div class="feed_container">
@@ -17,9 +18,11 @@
                 :key="post.id"
               >
                 <widget-layout-home
+                  classContent="feed_all_widget"
                   layout="icon-folder-feed"
                   isExpanded
                   :onClick="() => clickView(value?.id)"
+                  isPost
                 >
                   <Post :value="value" />
                 </widget-layout-home>
@@ -145,8 +148,10 @@ export default {
 
 <style scoped>
 .feed_all_container {
-  /* display: grid;
-  grid-template-columns: auto 6rem; */
+  overflow-y: auto;
+  width: 90%;
+  margin-left: 1rem;
+  margin-top: -2rem;
 }
 
 .post_container {
@@ -154,7 +159,16 @@ export default {
   grid-template-columns: 48% 48%;
   gap: 1rem;
   list-style-type: none;
+  max-height: 358px;
+  overflow-y: auto;
 }
+
+.feed_all_widget {
+  overflow: hidden !important;
+  max-height: 300px;
+  margin-top: -2rem !important;
+}
+
 .feed_container_li {
   margin-left: -1rem;
   height: 15rem;

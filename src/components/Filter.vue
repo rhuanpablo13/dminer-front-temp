@@ -1,8 +1,17 @@
 <template>
-  <form action="#" @submit.prevent="sendForm">
+  <form
+    action="#"
+    @submit.prevent="sendForm"
+    :class="{ form_filter: !isLogin, form_login: isLogin }"
+  >
     <slot />
     <div class="filter_button">
-      <Send @click="sendForm" width="100%" :text="text"></Send>
+      <Send
+        @click="sendForm"
+        width="100%"
+        :text="text"
+        :class="{ login_button: isLogin, filter_button: !isLogin }"
+      ></Send>
     </div>
   </form>
 </template>
@@ -14,7 +23,8 @@ import FildDate from '@/components/input/FildDate.vue'
 export default {
   props: {
     filterData: { type: Object, required: true, default: false },
-    text: { type: String, required: false, default: 'Enviar' }
+    text: { type: String, required: false, default: 'Enviar' },
+    isLogin: { type: Boolean, required: false, default: false }
   },
   methods: {
     sendForm() {
@@ -25,13 +35,22 @@ export default {
 }
 </script>
 <style scoped>
-form {
+.form_filter {
+}
+
+.form_login {
   display: grid;
   align-content: center;
 }
+.login_button {
+  width: 6rem;
+  margin: auto;
+  margin-top: -7rem;
+}
+
 .filter_button {
   width: 6rem;
   margin: auto;
-  margin-top: -5rem;
+  margin-top: 0;
 }
 </style>

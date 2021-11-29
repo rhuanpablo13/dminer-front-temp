@@ -3,7 +3,7 @@
     <div class="login_img">
       <div class="login_logo_completa"></div>
     </div>
-    <filter-vue @submit="sendForm" text="Entrar">
+    <filter-vue @submit="sendForm" text="Entrar" isLogin>
       <div class="login_form">
         <div class="login_form_container">
           <div class="login_logo"></div>

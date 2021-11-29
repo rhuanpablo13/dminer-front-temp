@@ -20,7 +20,7 @@ export default {
 }
 </script>
 <template>
-  <transition name="fade" v-if="loggedIn">
+  <transition name="fade">
     <div>
       <Sidebar />
       <Banner :isLoading="banner" />
@@ -28,7 +28,7 @@ export default {
       <Content />
     </div>
   </transition>
-  <transition name="fade" v-else>
+  <transition name="fade" v-if="loggedIn">
     <Login />
   </transition>
 </template>

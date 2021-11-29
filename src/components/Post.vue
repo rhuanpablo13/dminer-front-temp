@@ -21,7 +21,7 @@
       </icon-base>
     </div>
 
-    <div>
+    <div class="feed_container_comments">
       <ul>
         <li v-for="comment in value.comments" :key="comment.id">
           <comment-post :avatar="value.user.avatar" :text="comment.content" />
@@ -84,11 +84,15 @@ export default {
   margin-top: 5rem;
 }
 
+.feed_container_comments {
+  height: 8rem;
+  overflow-y: auto;
+}
+
 ul {
   width: 15rem;
   list-style-type: none;
-  height: 8rem;
-  overflow-y: auto;
+
   margin: auto;
   margin-top: 1rem;
 }

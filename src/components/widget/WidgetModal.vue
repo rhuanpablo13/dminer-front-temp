@@ -31,7 +31,12 @@
             <div class="modal-left">
               <slot name="left" />
             </div>
-            <div class="modal-body">
+            <div
+              :class="{
+                'modal-body': overflow,
+                'modal-body-no-overflow': !overflow
+              }"
+            >
               <slot name="body"></slot>
             </div>
           </div>
@@ -134,6 +139,12 @@ export default {
   width: 95%;
   max-height: 358px;
   overflow-y: auto;
+}
+.modal-body-no-overflow {
+  margin: 20px 0;
+  width: 95%;
+
+  overflow-y: hidden;
 }
 
 .modal-left {
