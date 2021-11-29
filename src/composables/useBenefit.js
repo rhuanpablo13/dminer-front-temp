@@ -16,6 +16,8 @@ export default function useBenefit() {
     return await fetchUpdate(item)
   }
 
+  onMounted(setBenefit)
+
   return {
     getBenefits,
     setBenefit,

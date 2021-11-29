@@ -25,9 +25,13 @@ export default {
 }
 </script>
 <style scoped>
+form {
+  display: grid;
+  align-content: center;
+}
 .filter_button {
-  width: 3rem;
+  width: 6rem;
   margin: auto;
-  margin-top: -1rem;
+  margin-top: -5rem;
 }
 </style>

@@ -14,7 +14,7 @@
     <div class="container__right">
       <feed>
         <publication
-          v-for="(post, key) in PostList"
+          v-for="(post, key) in feedList"
           :key="key"
           :content="post.content"
           :onClick="() => openFeedView(post.id)"
@@ -54,6 +54,9 @@ export default {
   computed: {
     sidebarWidth() {
       return this.$store.state.sidebar.sidebarWidth
+    },
+    feedList() {
+      return this.$store.state.home.feedList
     }
   },
   methods: {

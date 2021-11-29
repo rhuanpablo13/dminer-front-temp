@@ -3,7 +3,7 @@
     class="icon__feed"
     icon-name="icon"
     viewBox="0 0 250 500"
-    width="auto"
+    width="100%"
     height="100%"
   >
     <icon-feed>

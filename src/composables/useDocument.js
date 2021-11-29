@@ -16,6 +16,7 @@ export default function useDocument() {
     return await fetchUpdate(item)
   }
 
+  onMounted(setDocument)
   return {
     getDocuments,
     setDocument,

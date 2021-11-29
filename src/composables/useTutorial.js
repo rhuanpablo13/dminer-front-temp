@@ -17,6 +17,8 @@ export default function useTutorial() {
     return await fetchUpdate(item)
   }
 
+  onMounted(setTutorial)
+
   return {
     getTutorials,
     setTutorial,

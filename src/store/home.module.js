@@ -10,7 +10,8 @@ const initialState = {
   reminderList: [],
   birthdayList: [],
   quizList: [],
-  usersList: []
+  usersList: [],
+  feedList: []
 }
 
 const homeState = localStorage.home
