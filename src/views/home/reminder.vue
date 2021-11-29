@@ -84,7 +84,7 @@ import FildSelect from '@/components/input/FildSelect.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FrameNotification from '@/components/svg/FrameNotification.vue'
-import Title from '@/components/title/Title.vue'
+// import Title from '@/components/title/Title.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
@@ -137,7 +137,7 @@ export default {
   },
   components: {
     WidgetLayoutHome,
-    Title,
+    // Title,
     FormModal,
     FildDate,
     FildInput,

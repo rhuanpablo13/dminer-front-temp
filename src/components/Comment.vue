@@ -1,9 +1,11 @@
 <template>
-  <div class="feed_comment_input">
-    <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
+  <form action="#" @submit.prevent="send">
+    <div class="feed_comment_input">
+      <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
 
-    <fild-input text="Comentar" v-model="value" :value="value" required />
-  </div>
+      <fild-input text="Comentar" v-model="value" :value="value" required />
+    </div>
+  </form>
 </template>
 
 <script>
@@ -29,17 +31,15 @@ export default {
   methods: {
     send() {
       this.$store.dispatch('form/setLoading')
-      if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
+      let result = this.isEdit
+        ? this.update(this.value)
+        : this.create(this.value)
 
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
-        }
+      this.$store.dispatch('form/setLoading')
+      if (result) {
+        this.$store.dispatch('form/setSuccess').then(() => {
+          this.$emit('close')
+        })
       } else {
         this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')

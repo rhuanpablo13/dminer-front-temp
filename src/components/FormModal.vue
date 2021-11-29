@@ -2,7 +2,8 @@
   <transition name="modal">
     <widget-modal v-if="showModal" layout="icon-modal-folder" :title="title">
       <template v-slot:body>
-        <form action="#" @submit.prevent="">
+        <!-- <form action="#" @submit.prevent="$emit('submit')"> -->
+        <form action="#">
           <slot />
         </form>
       </template>
