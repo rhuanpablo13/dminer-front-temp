@@ -22,7 +22,6 @@
                   layout="icon-folder-feed"
                   isExpanded
                   :onClick="() => clickView(value?.id)"
-                  isPost
                 >
                   <Post :value="value" />
                 </widget-layout-home>
@@ -146,7 +145,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .feed_all_container {
   overflow-y: auto;
   width: 90%;
@@ -165,8 +164,8 @@ export default {
 
 .feed_all_widget {
   overflow: hidden !important;
-  max-height: 300px;
   margin-top: -2rem !important;
+  max-height: none;
 }
 
 .feed_container_li {
