@@ -109,12 +109,12 @@ export default {
   },
   setup() {
     const { updateCount, create } = useQuiz()
-
     return { updateCount, create }
   },
+
   methods: {
     count(id, item) {
-      this.updateCount(id, item)
+      this.$store.dispatch('home/answer',{ id, item})
     },
     sendForm() {
       this.$store.dispatch('form/setLoading')

@@ -1,7 +1,4 @@
-// import useNotice from '@/composables/useNotice'
-// import useNotification from '@/composables/useNotification'
-// import useReminder from '@/composables/useReminder'
-// import useQuiz from '@/composables/useQuiz'
+import useQuiz from '@/composables/useQuiz'
 import useSearch from '@/composables/useSearch'
 
 const initialState = {
@@ -19,6 +16,8 @@ const homeState = localStorage.home
   : initialState
 
 const { getSearch } = useSearch()
+const { updateCount, setQuiz } = useQuiz()
+
 
 export const home = {
   namespaced: true,
@@ -39,7 +38,22 @@ export const home = {
           return Promise.reject(error)
         }
       )
-    }
+    },
+    answer({ commit }, {id, item }) {
+      return updateCount(id, item, this.state.user.login).then(
+        (payload) => {
+
+          this.state.home.quizList = setQuiz()
+          // commit('searchSuccess', payload)
+          return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('searchFailure')
+          return Promise.reject(error)
+        }
+      )
+    } 
   },
   mutations: {
     searchSuccess(state, payload) {
