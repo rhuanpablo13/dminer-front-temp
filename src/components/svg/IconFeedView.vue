@@ -390,7 +390,7 @@
     </g>
   </g>
 </template>
-<style scoped>
+<style>
 .feed_view_st0 {
   fill: url(#SVGID_1_);
   stroke: #231f20;

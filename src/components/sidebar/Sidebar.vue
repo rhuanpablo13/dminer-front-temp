@@ -60,11 +60,17 @@
         </SidebarLink>
       </div>
     </div>
-    <span
-      class="collapse-icon"
+
+    <icon-base 
+      icon-name="icon"       
+      class="collapse_icon"
       :class="{ 'rotate-180': collapsed }"
-      @click="toggleSidebar"
-    ></span>
+      :onClick="toggleSidebar"
+      width="1rem"
+    >
+     <icon-open />
+    </icon-base>
+
   </div>
 </template>
 
@@ -81,6 +87,7 @@ import IconBirthday from '@/components/svg/IconBirthday.vue'
 import IconPower from '@/components/svg/IconPower.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
+import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
   props: { user: { type: Object, required: true } },
@@ -97,7 +104,8 @@ export default {
     IconEmail,
     IconPower,
     IconEdit,
-    IconBase
+    IconBase,
+    IconOpen
   },
 
   computed: {
@@ -158,5 +166,19 @@ export default {
 .username {
   font-size: 3rem;
   margin-bottom: 2rem;
+}
+
+.collapse_icon {
+  position: absolute;
+  bottom: 1rem;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+
+.rotate-180 {
+  transform: rotate(0deg);
+  left: 40%;
 }
 </style>
