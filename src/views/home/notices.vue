@@ -1,35 +1,41 @@
 <template>
   <widget-layout-home
-    layout="icon-notices"
+    layout="icon-folder"
     class="mt-3 cursor-move"
+    title="avisos"
     classContent="folder__notification__content"
     id="folder_notices"
     :onClick="openAddNotices"
   >
     <ul>
-      <li
-        class="notifices_li"
-        v-for="item in $store.state.home.noticeList"
-        :key="item.id"
-        :id="`notifices_li_${key}`"
-      >
-        <Title>
-          {{ item.creator }}
-        </Title>
-        <span class="">{{ item.warning }}</span>
-        <div class="notices_footer">
-          <span>
-            <b>Prioridade:</b>
-            {{ getPriority(item.priority) }}
-          </span>
+      <li v-for="item in $store.state.home.noticeList" :key="item.id">
+        <icon-base
+          viewBox="0 0 500 347.7"
+          icon-name="icon"
+          width="92%"
+          height="100%"
+        >
+          <frame-notices>
+            <Title>
+              {{ item.creator }}
+            </Title>
+            <span class="">{{ item.warning }}</span>
+            <div class="notices_footer">
+              <span>
+                <b>Prioridade:</b>
+                {{ getPriority(item.priority) }}
+              </span>
 
-          <br />
-          <span>
-            <b>Data:</b>
-            {{ dateHourFormart(item.date) }}
-          </span>
-        </div>
+              <br />
+              <span>
+                <b>Data:</b>
+                {{ dateHourFormart(item.date) }}
+              </span>
+            </div>
+          </frame-notices>
+        </icon-base>
       </li>
+
     </ul>
   </widget-layout-home>
 
@@ -83,6 +89,8 @@ import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
+import IconBase from '@/components/svg/IconBase.vue'
+import FrameNotices from '@/components/svg/FrameNotices.vue'
 
 import useNotice from '@/composables/useNotice.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
@@ -128,7 +136,9 @@ export default {
     FormModal,
     FildInput,
     FildDate,
-    FildSelect
+    FildSelect,
+    IconBase,
+    FrameNotices
   },
   methods: {
     openAddNotices() {
@@ -176,8 +186,8 @@ ul {
   list-style-type: none;
 }
 li {
-  height: 38vh;
-  padding: 1rem;
+  /* height: 38vh;
+  padding: 1rem; */
 }
 
 .notices_footer {

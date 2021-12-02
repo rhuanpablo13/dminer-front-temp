@@ -34,7 +34,6 @@
 <script>
 import IconButton from '@/components/svg/IconButton.vue'
 import IconBase from '@/components/svg/IconBase.vue'
-import IconNotices from '@/components/svg/IconNotices.vue'
 import IconFolderNotification from '@/components/svg/IconFolderNotification.vue'
 import IconFolderReminder from '@/components/svg/IconFolderReminder.vue'
 import IconSidebar from '@/components/svg/IconSidebar.vue'
@@ -54,7 +53,6 @@ export default {
   components: {
     IconBase,
     IconButton,
-    IconNotices,
     IconFolderNotification,
     IconFolderReminder,
     IconSidebar,
