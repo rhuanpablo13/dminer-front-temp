@@ -9,7 +9,7 @@
     <ul>
       <li v-for="item in $store.state.home.notificationlist" :key="item.id">
         <icon-base
-          viewBox="0 0 500 500"
+          viewBox="0 0 500 85.1"
           icon-name="icon"
           width="100%"
           height="100%"
@@ -115,7 +115,7 @@ ul {
 }
 
 li {
-  margin-bottom: -21rem;
+    margin-bottom: 1rem;
 }
 
 .form_container {

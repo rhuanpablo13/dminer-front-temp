@@ -47,3 +47,9 @@ export const fetchCreateUser = async (user) => {
   const response = await apiIntra.post(`${URL}`, user)
   return messagesFetch('registration', response.status, response.data.data)
 }
+
+
+export const fetchDropdownUser = async (token) => {
+  const response = await apiIntra.post(`${URL}/dropdown`, {token})
+  return response.status === 200 ? response.data.data : []
+}

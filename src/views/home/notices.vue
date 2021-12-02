@@ -61,7 +61,7 @@
           v-model="value.users"
           :value="value.users"
           required
-          :options="getAllUsers"
+          :options="getDropdownUser"
           :multiple="true"
         />
 
@@ -85,8 +85,8 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 
 import useNotice from '@/composables/useNotice.js'
+import useUser from '@/composables/useUser.js'
 import { dateHourFormart } from '@/util/date.js'
-import useAllUsers from '@/composables/useAllUsers'
 
 export default {
   data() {
@@ -117,9 +117,9 @@ export default {
   },
   setup() {
     const { getNotices, create } = useNotice()
-    const { getAllUsers } = useAllUsers()
+    const { getDropdownUser } = useUser(true)
 
-    return { getNotices, getAllUsers, create, dateHourFormart }
+    return { getNotices, getDropdownUser, create, dateHourFormart }
   },
   components: {
     Title,
@@ -168,7 +168,8 @@ export default {
       this.$store.dispatch('form/setLoading')
 
       if (this.validForm()) {
-        this.value.users = [this.value.users]
+        this.value.users = this.value.users
+        this.value.date  =  dateHourFormart(this.value.users)
 
         let result = this.isEdit
           ? this.update(this.value)

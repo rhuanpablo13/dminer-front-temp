@@ -13,7 +13,7 @@
         :id="`reminder_li_${key}`"
       >
         <icon-base
-          viewBox="0 0 500 500"
+          viewBox="0 0 500 85.1"
           icon-name="icon"
           width="100%"
           height="100%"
@@ -161,7 +161,7 @@ ul {
 }
 
 li {
-  margin-bottom: -21rem;
+  margin-bottom: 1rem;
 }
 
 .reminder_footer {

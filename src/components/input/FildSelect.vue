@@ -56,12 +56,12 @@ export default {
     )
 
     const verifyLabelIndexUsuario = Object.keys(options).filter((option) =>
-      options[option].hasOwnProperty('usuario')
+      options[option].hasOwnProperty('username')
     )
 
     if (verifyLabelIndexTitle.length) title = 'title'
     if (verifyLabelIndexName.length) title = 'name'
-    if (verifyLabelIndexUsuario.length) title = 'usuario'
+    if (verifyLabelIndexUsuario.length) title = 'username'
 
 
     return {
