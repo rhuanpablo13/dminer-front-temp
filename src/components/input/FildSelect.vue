@@ -43,17 +43,31 @@ import 'vue-next-select/dist/index.min.css'
 
 export default {
   setup(props) {
+    let title = 'title'
     const value = reactive({})
     const options = reactive(props.options)
 
-    const verifyLabelIndex = Object.keys(options).filter((option) =>
+    const verifyLabelIndexTitle = Object.keys(options).filter((option) =>
       options[option].hasOwnProperty('title')
     )
+
+    const verifyLabelIndexName = Object.keys(options).filter((option) =>
+      options[option].hasOwnProperty('name')
+    )
+
+    const verifyLabelIndexUsuario = Object.keys(options).filter((option) =>
+      options[option].hasOwnProperty('usuario')
+    )
+
+    if (verifyLabelIndexTitle.length) title = 'title'
+    if (verifyLabelIndexName.length) title = 'name'
+    if (verifyLabelIndexUsuario.length) title = 'usuario'
+
 
     return {
       value,
       options,
-      title: verifyLabelIndex.length ? 'title' : 'name'
+      title: title
     }
   },
 

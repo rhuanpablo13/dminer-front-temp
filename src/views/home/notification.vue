@@ -57,7 +57,7 @@ export default {
       showModal: false,
       value: {
         notification: '',
-        userId: ''
+        userId: this.$store.state.user.login
       }
     }
   },
@@ -69,7 +69,6 @@ export default {
   methods: {
     sendForm() {
       this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
         let result = this.isEdit
           ? this.update(this.value)

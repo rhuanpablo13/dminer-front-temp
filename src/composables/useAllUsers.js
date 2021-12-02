@@ -8,6 +8,7 @@ export default function useAllUsers() {
     getAllUsers.value = await fetchAllUser()
   }
 
+  onMounted(setAllUsers)
   return {
     setAllUsers,
     getAllUsers

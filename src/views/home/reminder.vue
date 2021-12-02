@@ -21,7 +21,7 @@
           <frame-notification>
             <div class="reminder">
               <fild-checkbox
-                :text="item.reminderDescrible"
+                :text="item.reminder"
                 v-model="value.active"
                 :value="value.active"
                 type="checkbox"

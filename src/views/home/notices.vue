@@ -20,13 +20,13 @@
         <div class="notices_footer">
           <span>
             <b>Prioridade:</b>
-            {{ item.priority }}
+            {{ getPriority(item.priority) }}
           </span>
 
           <br />
           <span>
             <b>Data:</b>
-            {{ item.date }}
+            {{ dateHourFormart(item.date) }}
           </span>
         </div>
       </li>
@@ -85,7 +85,7 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 
 import useNotice from '@/composables/useNotice.js'
-import debounce from '@/util/debounce.js'
+import { dateHourFormart } from '@/util/date.js'
 import useAllUsers from '@/composables/useAllUsers'
 
 export default {
@@ -95,15 +95,15 @@ export default {
       lastScrollTop: 0,
       priorityList: [
         {
-          id: 0,
+          id: 1,
           title: 'Alta'
         },
         {
-          id: 1,
+          id: 2,
           title: 'Média'
         },
         {
-          id: 2,
+          id: 3,
           title: 'Baixa'
         }
       ],
@@ -119,7 +119,7 @@ export default {
     const { getNotices, create } = useNotice()
     const { getAllUsers } = useAllUsers()
 
-    return { getNotices, getAllUsers, create }
+    return { getNotices, getAllUsers, create, dateHourFormart }
   },
   components: {
     Title,
@@ -159,7 +159,11 @@ export default {
     openAddNotices() {
       this.showModal = true
     },
+    getPriority(id) {
+     const priority = this.priorityList.filter(item => item.id === id);
 
+      return priority[0].title
+    },
     sendForm() {
       this.$store.dispatch('form/setLoading')
 
