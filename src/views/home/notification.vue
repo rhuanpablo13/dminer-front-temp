@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import FormModal from '@/components/FormModal.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FildInput from '@/components/input/Fild.vue'
@@ -57,7 +59,7 @@ export default {
       showModal: false,
       value: {
         notification: '',
-        userId: this.$store.state.user.login
+        idUser: this.getUser
       }
     }
   },
@@ -65,7 +67,9 @@ export default {
     const { create } = useNotification()
     return { create }
   },
-
+  computed: mapState({
+    getUser: (state) => state.user.login
+  }),
   methods: {
     sendForm() {
       this.$store.dispatch('form/setLoading')
@@ -77,7 +81,7 @@ export default {
         this.$store.dispatch('form/setLoading')
         if (result) {
           this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
+            this.showModal = false
           })
         }
       } else {
@@ -86,6 +90,7 @@ export default {
       }
     },
     validForm() {
+      this.value.idUser = this.getUser
       return Object.values(this.value).every((item) => !!item)
     },
     openModal() {

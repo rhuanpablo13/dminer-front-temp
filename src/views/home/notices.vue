@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Title from '@/components/title/Title.vue'
 import FormModal from '@/components/FormModal.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
@@ -119,13 +121,14 @@ export default {
         date: new Date(),
         priority: 'Média',
         users: [],
-        creator: this.$store.state.user.login
+        creator: this.getUser
       }
     }
   },
-  computed: {
-    dropdownUser() { return  this.$store.state.dropdown.user}
-  },
+  computed: mapState({
+    dropdownUser: (state) => state.dropdown.user,
+    getUser: (state) => state.user.login
+  }),
   setup() {
     const { getNotices, create } = useNotice()
     return { getNotices, create, dateHourFormart }
