@@ -67,8 +67,8 @@ input {
   font-family: var(--font-family--text);
   color: var(--color-title);
   font-weight: 300;
-  font-size: 0.8rem;
-  margin-top: 0.8rem;
+  font-size: 0.5rem;
+  margin-top: 0.9rem;
 }
 
 .input__date {

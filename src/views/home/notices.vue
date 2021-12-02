@@ -130,32 +130,32 @@ export default {
     FildSelect
   },
 
-  mounted() {
-    const folder = document.getElementById('folder_notices')
-    folder.addEventListener('scroll', debounce(this.handleScroll), {
-      passive: true
-    })
-  },
-  destroyed() {
-    const folder = document.getElementById('folder_notices')
-    folder.removeEventListener('scroll', debounce(this.handleScroll), {
-      passive: true
-    })
-  },
+  // mounted() {
+  //   const folder = document.getElementById('folder_notices')
+  //   folder.addEventListener('scroll', debounce(this.handleScroll), {
+  //     passive: true
+  //   })
+  // },
+  // destroyed() {
+  //   const folder = document.getElementById('folder_notices')
+  //   folder.removeEventListener('scroll', debounce(this.handleScroll), {
+  //     passive: true
+  //   })
+  // },
   methods: {
-    handleScroll(e) {
-      const folder_notices = document.getElementById('folder_notices')
+    // handleScroll(e) {
+    //   const folder_notices = document.getElementById('folder_notices')
 
-      if (e.target.scrollTop > this.lastScrollTop) {
-        console.log('desceu')
-        folder_notices.scrollTop += 200
-      } else {
-        console.log('subiu')
-        // folder_notices.scrollTop -= 200
-      }
+    //   if (e.target.scrollTop > this.lastScrollTop) {
+    //     console.log('desceu')
+    //     folder_notices.scrollTop += 200
+    //   } else {
+    //     console.log('subiu')
+    //     // folder_notices.scrollTop -= 200
+    //   }
 
-      this.lastScrollTop = e.target.scrollTop
-    },
+    //   this.lastScrollTop = e.target.scrollTop
+    // },
     openAddNotices() {
       this.showModal = true
     },
