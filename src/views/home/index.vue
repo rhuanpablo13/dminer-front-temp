@@ -56,6 +56,8 @@ export default {
       // localStorage.position_components_home = JSON.stringify(
       //   this.listComponents
       // )
+
+      this.$store.dispatch('dropdown/getDropdownUser')
     }
   },
 

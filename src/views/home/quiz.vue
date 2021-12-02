@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     count(id, item) {
-      this.updateCount(id, item, this.$store.state.user.login)
+      this.updateCount(id, item)
     },
     sendForm() {
       this.$store.dispatch('form/setLoading')

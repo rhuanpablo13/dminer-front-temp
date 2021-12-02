@@ -63,11 +63,11 @@ export default {
     if (verifyLabelIndexName.length) title = 'name'
     if (verifyLabelIndexUsuario.length) title = 'username'
 
-
     return {
       value,
       options,
       title: title
+
     }
   },
 
@@ -99,8 +99,8 @@ export default {
       // input.focus()
     },
     changeInput(e) {
-      console.log(e)
-      this.$emit('update:modelValue', e.id)
+      const index = this.title === 'username' ? 'login' : 'id'
+       this.$emit('update:modelValue', e[index])
     }
   }
 }

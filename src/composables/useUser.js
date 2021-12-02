@@ -3,9 +3,8 @@ import { fetchAvatar, fetchBanner, fetchUpdateBanner, fetchDropdownUser } from '
 import { getBase64 } from '@/util/convertBase64'
 import { useStore } from 'vuex'
 
-export default function useUser(dropdown = false) {
+export default function useUser() {
   const store = useStore()
-  const getDropdownUser  = ref([]);
 
   const getAvatar = async (id) => {
     const user = JSON.parse(localStorage.user)
@@ -43,16 +42,15 @@ export default function useUser(dropdown = false) {
   }
 
   const setDropdownUser = async () => {
-    getDropdownUser.value = await fetchDropdownUser(store.state.user.baererAuthentication)
+    const user = JSON.parse(localStorage.user)
+    return fetchDropdownUser(user.baererAuthentication)
   }
-
-  if(dropdown) onMounted(setDropdownUser)
 
 
   return {
     getAvatar,
     getBanner,
     updateBanner,
-    getDropdownUser
+    setDropdownUser
   }
 }

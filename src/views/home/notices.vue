@@ -61,7 +61,7 @@
           v-model="value.users"
           :value="value.users"
           required
-          :options="getDropdownUser"
+          :options="dropdownUser"
           :multiple="true"
         />
 
@@ -85,8 +85,7 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 
 import useNotice from '@/composables/useNotice.js'
-import useUser from '@/composables/useUser.js'
-import { dateHourFormart } from '@/util/date.js'
+import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
 
 export default {
   data() {
@@ -111,15 +110,17 @@ export default {
         warning: '',
         date: new Date(),
         priority: 'Média',
-        users: []
+        users: [],
+        creator: this.$store.state.user.login
       }
     }
   },
+  computed: {
+    dropdownUser() { return  this.$store.state.dropdown.user}
+  },
   setup() {
     const { getNotices, create } = useNotice()
-    const { getDropdownUser } = useUser(true)
-
-    return { getNotices, getDropdownUser, create, dateHourFormart }
+    return { getNotices, create, dateHourFormart }
   },
   components: {
     Title,
@@ -129,33 +130,7 @@ export default {
     FildDate,
     FildSelect
   },
-
-  // mounted() {
-  //   const folder = document.getElementById('folder_notices')
-  //   folder.addEventListener('scroll', debounce(this.handleScroll), {
-  //     passive: true
-  //   })
-  // },
-  // destroyed() {
-  //   const folder = document.getElementById('folder_notices')
-  //   folder.removeEventListener('scroll', debounce(this.handleScroll), {
-  //     passive: true
-  //   })
-  // },
   methods: {
-    // handleScroll(e) {
-    //   const folder_notices = document.getElementById('folder_notices')
-
-    //   if (e.target.scrollTop > this.lastScrollTop) {
-    //     console.log('desceu')
-    //     folder_notices.scrollTop += 200
-    //   } else {
-    //     console.log('subiu')
-    //     // folder_notices.scrollTop -= 200
-    //   }
-
-    //   this.lastScrollTop = e.target.scrollTop
-    // },
     openAddNotices() {
       this.showModal = true
     },
@@ -168,8 +143,8 @@ export default {
       this.$store.dispatch('form/setLoading')
 
       if (this.validForm()) {
-        this.value.users = this.value.users
-        this.value.date  =  dateHourFormart(this.value.users)
+        this.value.users = [this.value.users]
+        this.value.date  =  dateHourFormarUs( this.value.date)
 
         let result = this.isEdit
           ? this.update(this.value)
@@ -177,9 +152,8 @@ export default {
 
         this.$store.dispatch('form/setLoading')
         if (result) {
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
+          this.$store.dispatch('form/setSuccess')
+          this.showModal = false
         }
       } else {
         this.$store.dispatch('form/setLoading')
