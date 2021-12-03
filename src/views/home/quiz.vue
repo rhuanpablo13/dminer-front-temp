@@ -162,9 +162,10 @@ export default {
 ul {
   list-style-type: none;
   position: relative;
+  width: 27rem;
 }
 li {
-  height: 38vh;
+  height: 23rem;
   display: flex;
   position: relative;
   margin-left: -1rem;
