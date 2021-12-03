@@ -69,10 +69,10 @@ export default {
 .feed_comment_input {
   display: flex;
   height: 4rem;
-  gap: 1rem;
-  width: 15rem;
+  gap: 0.5rem;
+  /* width: 15rem; */
   font-size: 0.5rem;
   margin: auto;
-  margin-top: -2rem;
+  /* margin-top: -2rem; */
 }
 </style>

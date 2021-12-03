@@ -27,9 +27,11 @@
           <comment-post :avatar="value.user.avatar" :text="comment.content" />
         </li>
       </ul>
+      <div class="comment_input">
+       <comment :avatar="value.user.avatar" />
+      </div>
     </div>
   </div>
-    <comment :avatar="value.user.avatar" />
 </template>
 
 <script>
@@ -110,8 +112,14 @@ export default {
     margin-top: 3rem;
 }
 
+.comment_input {
+  width: 18rem;
+  margin: auto;
+  margin-top: 1rem;
+}
+
 ul {
-  width: 15rem;
+  width: 18rem;
   list-style-type: none;
 
   margin: auto;
