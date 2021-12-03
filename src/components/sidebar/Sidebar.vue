@@ -4,9 +4,9 @@
     :class="{
       'sidebar-closed': collapsed
     }"
-    :style="{ width: sidebarWidth }"
+    :style="{ left: collapsed ? '-9rem' : '0' , width: '180px'}"
   >
-    <span v-show="collapsed" class="username">
+    <span v-show="collapsed" class="username" :style="{ marginLeft: collapsed ? '8rem' : 0 }">
       {{ user?.usuario?.charAt(0) }}
     </span>
     <div class="container-avatar" v-show="!collapsed">
@@ -18,11 +18,16 @@
         />
       </div>
     </div>
-    <div class="menu" :style="{ display: collapsed ? 'block' : 'grid' }">
+    <div class="menu" 
+      :style="{ 
+        display: collapsed ? 'block' : 'grid',
+        justifyContent:  collapsed ? 'right' :'left',
+        width: collapsed ? '2.5rem' : 'auto',
+        marginLeft: collapsed ? '8rem' : 0 
+      }">
       <div
         :style="{
           display: collapsed ? 'block' : ' flex',
-          'justify-content': 'left'
         }"
       >
         <SidebarLink to="/email" icon="email" isIconLink>
@@ -67,6 +72,9 @@
       :class="{ 'rotate-180': collapsed }"
       :onClick="toggleSidebar"
       width="1rem"
+       :style="{ 
+        marginLeft: collapsed ? '4.5rem' : 0 
+      }"
     >
      <icon-open />
     </icon-base>
@@ -139,7 +147,7 @@ export default {
   position: fixed;
   z-index: 9999;
   top: -1px;
-  left: 0;
+  /* left: 0; */
   bottom: 0;
   padding: 1.5em;
   display: flex;
