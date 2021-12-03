@@ -3,27 +3,40 @@
     <div class="feed_comment_input">
       <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
 
-      <fild-input text="Comentar" v-model="value" :value="value" required />
+      <fild-input text="Comentar" v-model="value.content" :value="value.content" required />
     </div>
   </form>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { mapState } from 'vuex'
 import Avatar from '@/components/Avatar.vue'
 import FildInput from '@/components/input/Fild.vue'
 
 import useFeed from '@/composables/useFeed.js'
+import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
 
 export default {
+  data() {
+    return {
+       value: { 
+        content: '',
+        login: '', 
+        date: ''
+      }
+    }
+  }, 
   props: {
     avatar: { type: String, required: true }
   },
   setup() {
-    const value = ref(null)
     const { crateComment } = useFeed()
-    return { value, crateComment }
+    return { crateComment }
   },
+  computed: mapState({
+    getUser: (state) => state.user.login
+  }),
+
   components: {
     Avatar,
     FildInput
@@ -31,9 +44,12 @@ export default {
   methods: {
     send() {
       this.$store.dispatch('form/setLoading')
-      let result = this.isEdit
-        ? this.update(this.value)
-        : this.create(this.value)
+      this.value = {
+        ...this.value,
+        login: this.getUser,
+        date: dateHourFormarUs( this.value.date)
+      }
+      let result =  this.crateComment(this.value)
 
       this.$store.dispatch('form/setLoading')
       if (result) {
