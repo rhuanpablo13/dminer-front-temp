@@ -1,3 +1,4 @@
+import useReminder from '@/composables/useReminder'
 import useQuiz from '@/composables/useQuiz'
 import useSearch from '@/composables/useSearch'
 
@@ -17,6 +18,7 @@ const homeState = localStorage.home
 
 const { getSearch } = useSearch()
 const { updateCount, setQuiz } = useQuiz()
+const { updateReminder, setReminder } = useReminder()
 
 
 export const home = {
@@ -45,6 +47,19 @@ export const home = {
 
           this.state.home.quizList = setQuiz()
           // commit('searchSuccess', payload)
+          return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('searchFailure')
+          return Promise.reject(error)
+        }
+      )
+    },
+    reminderCheck({ commit }, item) {
+      return updateReminder(item).then(
+        (payload) => {
+          this.state.home.quizList = setReminder()
           return Promise.resolve(payload)
         },
         (error) => {

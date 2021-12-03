@@ -25,6 +25,7 @@
                 v-model="value.active"
                 :value="value.active"
                 type="checkbox"
+                @change="change(item)"
               />
             </div>
 
@@ -46,12 +47,19 @@
     <div class="form_container">
       <div class="form_container_text">
         <fild-input
-          :text="'Título'"
-          v-model="value.title"
-          :value="value.title"
+          text="Lembrete"
+          v-model="value.reminder"
+          :value="value.reminder"
           required
         />
-        <fild-input
+
+        <fild-date
+          text="Data"
+          v-model="value.date"
+          :value="value.date"
+          required
+        />
+        <!-- <fild-input
           :text="'Link'"
           v-model="value.contentLink"
           :value="value.contentLink"
@@ -71,34 +79,35 @@
           :value="value.category"
           required
           :options="getCategories"
-        />
+        /> -->
       </div>
     </div>
   </form-modal>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FormModal from '@/components/FormModal.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FrameNotification from '@/components/svg/FrameNotification.vue'
-// import Title from '@/components/title/Title.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import useReminder from '@/composables/useReminder.js'
-import { dateHourFormart } from '@/util/date.js'
+import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
 
 export default {
   data() {
     return {
       showModal: false,
       value: {
-        dataHora: new Date(),
+        date: new Date(),
         reminder: '',
-        active: false
+        login: this.getUser
       }
     }
   },
@@ -107,11 +116,18 @@ export default {
 
     return { dateHourFormart, updateCount, create }
   },
+    computed: mapState({
+    dropdownUser: (state) => state.dropdown.user,
+    getUser: (state) => state.user.login
+  }),
   methods: {
     sendForm() {
       this.$store.dispatch('form/setLoading')
 
       if (this.validForm()) {
+        this.value.date  =  dateHourFormarUs(this.value.date)
+        this.value.action  = false
+
         let result = this.isEdit
           ? this.update(this.value)
           : this.create(this.value)
@@ -119,7 +135,7 @@ export default {
         this.$store.dispatch('form/setLoading')
         if (result) {
           this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
+            this.showModal = false
           })
         }
       } else {
@@ -128,11 +144,15 @@ export default {
       }
     },
     validForm() {
-      this.value.login = this.$store.state.user.login
+      this.value.login = this.getUser
       return Object.values(this.value).every((item) => !!item)
     },
     openModal() {
       this.showModal = true
+    }, 
+    change(item) {
+      item.active = !item.active
+      this.$store.dispatch('home/reminderCheck', item)
     }
   },
   components: {
