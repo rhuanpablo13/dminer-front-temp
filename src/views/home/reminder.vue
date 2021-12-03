@@ -28,10 +28,6 @@
                 @change="change(item)"
               />
             </div>
-
-            <!-- <Title>
-                {{ item.reminderDescrible }}
-              </Title> -->
           </frame-notification>
         </icon-base>
       </li>
@@ -59,27 +55,7 @@
           :value="value.date"
           required
         />
-        <!-- <fild-input
-          :text="'Link'"
-          v-model="value.contentLink"
-          :value="value.contentLink"
-          required
-        />
-        <fild-select
-          :text="'Permissão'"
-          v-model="value.permission"
-          :value="value.permission"
-          required
-          :options="getPermission"
-        />
-
-        <fild-select
-          :text="'Categoria'"
-          v-model="value.category"
-          :value="value.category"
-          required
-          :options="getCategories"
-        /> -->
+       
       </div>
     </div>
   </form-modal>
@@ -157,7 +133,6 @@ export default {
   },
   components: {
     WidgetLayoutHome,
-    // Title,
     FormModal,
     FildDate,
     FildInput,

@@ -3,7 +3,7 @@
     <icon-base
       icon-name="icon"
       viewBox="0 0 500 500"
-      width="100%"
+      width="97%"
       height="100%"
     >
       <icon-publicationP>

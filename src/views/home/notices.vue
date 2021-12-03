@@ -12,7 +12,7 @@
         <icon-base
           viewBox="0 0 500 347.7"
           icon-name="icon"
-          width="92%"
+          width="96%"
           height="100%"
         >
           <frame-notices>
@@ -189,8 +189,9 @@ ul {
   list-style-type: none;
 }
 li {
-  /* height: 38vh;
-  padding: 1rem; */
+ margin-top: -1.3rem;
+ margin-bottom: 2rem;
+ margin-right: -1rem;
 }
 
 .notices_footer {
