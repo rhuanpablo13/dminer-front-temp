@@ -8,7 +8,11 @@
     >
       <icon-publicationP>
         <div class="publication__title">
-          {{ content }}
+          <Title>
+            {{ title }}
+          </Title>
+
+          {{content}}
         </div>
       </icon-publicationP>
     </icon-base>
@@ -32,13 +36,14 @@
 import IconBase from '@/components/svg/IconBase.vue'
 import IconPublicationP from '@/components/svg/IconPublicationP.vue'
 import IconButton from '@/components/svg/IconButton.vue'
+import Title from '@/components/title/Title.vue'
 
 export default {
   props: {
     content: { type: String, required: true },
     onClick: { type: Function, required: false, default: null }
   },
-  components: { IconBase, IconPublicationP, IconButton }
+  components: { IconBase, IconPublicationP, IconButton, Title }
 }
 </script>
 <style scoped>
@@ -51,14 +56,11 @@ export default {
 }
 
 .publication__title {
-  font-family: var(--font-family-title);
-  width: 320px;
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
-  text-align: center;
-  padding-left: 0.5rem;
-  font-size: 1.5rem;
+  text-align: left;
+  padding-left: 3rem;
 }
 
 .publication_icon_button {
