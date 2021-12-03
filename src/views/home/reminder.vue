@@ -188,5 +188,6 @@ li {
   margin: 0.5rem 1.2rem;
   word-wrap: break-word;
   width: 25rem;
+  height: 100%;
 }
 </style>

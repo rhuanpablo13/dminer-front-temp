@@ -120,6 +120,8 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: center;
+
+  height: 100vh;
 }
 
 .modal-container {

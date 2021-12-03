@@ -42,6 +42,7 @@ export default {
 .container_input {
   display: grid;
   align-items: center;
+  height: 100%;
 }
 
 .input_text {
