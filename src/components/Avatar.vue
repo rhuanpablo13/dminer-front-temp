@@ -4,7 +4,7 @@
       class="hex"
       :style="{
         'background-image': `url(${
-          previewImage || 'src/assets/widget/avatar.svg'
+          previewImage ||'../src/assets/widget/avatar.svg'
         })`,
         width: width,
         height: height
@@ -31,7 +31,7 @@ export default {
     avatar: {
       type: String,
       required: true,
-      default: 'src/assets/widget/avatar.svg'
+      default:'../src/assets/widget/avatar.svg'
     },
     username: { type: String, required: false, default: '' },
     width: { type: String, required: false, default: '8rem' },

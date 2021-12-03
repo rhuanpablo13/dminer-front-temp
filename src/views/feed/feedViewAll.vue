@@ -9,7 +9,25 @@
     >
       <template v-slot:body>
         <div class="feed_container">
-            <post :value="value"  />
+          <div class="feed_all_container">
+            <ul class="post_container" >
+              <li
+                class="feed_container_li"
+                v-for="item in value"
+                :key="item.id"
+              >
+                <widget-layout-home
+                  classContent="feed_all_widget"
+                  layout="icon-folder-feed"
+                  isExpanded
+                  :onClick="() => clickView(item.id)"
+                >
+                  <post :value="item" />
+                </widget-layout-home>
+              </li>
+            </ul>
+          </div>
+
          <div>
           <filter-feed
             @submit="filter"
@@ -55,7 +73,6 @@ export default {
     return {
       showModalFeed: true,
       showModal: false,
-      comment: '',
       filterData: {
         date: new Date(),
         user: ''
@@ -67,13 +84,12 @@ export default {
     const route = useRoute()
     const value = ref()
     const { getPost, getAllPost } = useFeed()
-    const idParam = route.params.id
-
-    getPost(idParam).then((response) =>  {
+    
+    getAllPost().then((response) =>  {
       value.value = response
     })
-    
-    return { value, viewAll: !!idParam }
+
+    return { value }
   },
 
   components: {
@@ -102,7 +118,7 @@ export default {
       this.$router.push('/')
     },
     clickView(id) {
-      this.$emit('close')
+      this.showModalFeed = false
       this.$router.push(`/feed/${id}`)
     },
     filter() {

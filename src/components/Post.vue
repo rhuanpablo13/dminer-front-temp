@@ -1,34 +1,35 @@
 <template>
   <header-post
-    :avatar="value.user.avatar"
-    :username="value.user.usuario"
-    text="Tópico"
+    :avatar="post.user.avatar"
+    :username="post.user.username"
+    :text="post.title"
   />
 
   <div class="feed_contant">
-    <div class="feed_container_text">{{ value.content }}</div>
+    <div class="feed_container_text"  v-if="post.content">{{ post.content }}</div>
     <div
+      v-if="post.anexos && post.anexos.length"
       class="feed_container_imagem"
-      :style="{ 'background-image': `url(${value.user.avatar})` }"
+      :style="{ 'background-image': `url(${post.anexos[0]})` }"
     >
+    </div>
       <icon-base
         viewBox="0 0 500 58"
-        width="100%"
+        width="80%"
         height="100%"
         class="fild_container_icon"
       >
         <icon-line-mult />
       </icon-base>
-    </div>
 
     <div class="feed_container_comments">
       <ul>
-        <li v-for="comment in value.comments" :key="comment.id">
-          <comment-post :avatar="value.user.avatar" :text="comment.content" />
+        <li v-for="comment in post.comments" :key="comment.id">
+          <comment-post :avatar="comment.user.avatar" :text="comment.content" />
         </li>
       </ul>
       <div class="comment_input">
-       <comment :avatar="value.user.avatar" />
+       <comment :avatar="post.user.avatar" />
       </div>
     </div>
   </div>
@@ -45,6 +46,13 @@ import Comment from '@/components/Comment.vue'
 export default {
   props: {
     value: { type: Array, required: true }
+  },
+  setup(props) {
+
+    const post = props.value ||  {
+      user: {avatar: '', username: '', anexos: []}
+    }
+    return { post }
   },
   components: {
     HeaderPost,
@@ -105,7 +113,8 @@ export default {
 
 
 .fild_container_icon {
-  margin-top: 6rem;
+  /* margin-top: 6rem; */
+  margin-top: 1rem;
 }
 
 .feed_container_comments {
