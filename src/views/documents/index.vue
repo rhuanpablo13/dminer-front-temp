@@ -105,6 +105,7 @@ li {
 
 a {
   text-decoration: none;
+  color: var(--color-title);
 }
 .icon_green {
   width: 0.5rem;
@@ -125,10 +126,6 @@ a {
 .team_icon_edit {
   width: 24%;
   height: 1rem;
-}
-
-a {
-  text-decoration: none;
 }
 
 .fild_container_icon {

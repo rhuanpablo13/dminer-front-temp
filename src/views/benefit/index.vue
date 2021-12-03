@@ -89,7 +89,7 @@ export default {
       this.setDoc(value)
     },
     setDoc(value) {
-      this.value = value
+      this.value = {...value, permission: value.permission.id }
       this.openModal()
     },
     close() {
@@ -103,7 +103,7 @@ export default {
 <style scoped>
 ul {
   display: grid;
-  width: 80%;
+  width: 90%;
   list-style-type: none;
   position: relative;
   margin: auto;
@@ -111,6 +111,7 @@ ul {
 
 li {
   position: relative;
+  width: 95%;
 }
 
 .team_btn_edit {

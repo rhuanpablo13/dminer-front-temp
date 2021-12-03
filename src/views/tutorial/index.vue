@@ -105,7 +105,7 @@ export default {
 <style scoped>
 ul {
   display: grid;
-  width: 80%;
+  width: 90%;
   list-style-type: none;
   position: relative;
   height: 100%;
@@ -114,6 +114,7 @@ ul {
 
 li {
   position: relative;
+  width: 95%;
 }
 
 .team_btn_edit {

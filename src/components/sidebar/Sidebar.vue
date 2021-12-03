@@ -50,7 +50,7 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="user.type === 'ADMINISTRADOR'">
+      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="user.type !== 'ADMINISTRADOR'" >
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>

@@ -43,6 +43,7 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  margin-left: 2rem;
 }
 
 .image_details_content {

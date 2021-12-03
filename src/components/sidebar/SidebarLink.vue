@@ -29,15 +29,15 @@ export default {
 
 <template>
   <router-link
-    :to="to"
+    :to=" disabled ? '' : to"
     class="link"
-    :class="{ active: isActive }"
+    :class="{ active: isActive, disabled: disabled }"
     :style="{
-      'justify-content': isIconLink || isPower ? 'center' : ''
+      'justify-content': isIconLink || isPower ? 'center' : '',
     }"
     :disabled="disabled"
   >
-    <icon-base icon-name="icon">
+    <icon-base icon-name="icon"  >
       <slot />
     </icon-base>
     <transition name="fade">
@@ -98,9 +98,11 @@ export default {
   background-color: var(--sidebar-item-active);
 }
 
-.link:disabled {
+.link.disabled {
   cursor: not-allowed;
+  color: var(--gray);
 }
+
 
 .link .icon {
   flex-shrink: 0;
