@@ -82,7 +82,7 @@ export default {
   --font-weight--text: 300px;
 
   --color-title: var(--gray);
-  --color-text: var(--black);
+  --color-text: #2c3e50;
 
   --background-color: white;
 
@@ -130,7 +130,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--color-text);
 
   width: 100vw;
   overflow: hidden;

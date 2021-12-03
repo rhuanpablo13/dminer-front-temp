@@ -5,7 +5,8 @@ export default function useAllUsers() {
   const getAllUsers = ref([])
 
   const setAllUsers = async () => {
-    getAllUsers.value = await fetchAllUser()
+    const user = JSON.parse(localStorage.user)
+    getAllUsers.value = await fetchAllUser(user.baererAuthentication)
   }
 
   onMounted(setAllUsers)

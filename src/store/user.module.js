@@ -17,15 +17,14 @@ export const user = {
   namespaced: true,
   state: userLocalStorage,
   actions: {
-    setUser({ commit }, user) {
+    setUser({ commit, state }, user) {
       const user_ = {
         ...state,
-        usuario: user.usuario,
+        name: user.usuario,
         login: user.login,
         permission: user.type
       }
 
-      this.state.user = user_
       this.dispatch('user/avatar', user_)
     },
     avatar({ commit, state }, user) {
