@@ -3,7 +3,9 @@ import {
   fetchAll,
   fetchCreate,
   fetchUpdate,
-  fetchCreateComment
+  fetchCreateComment,
+  fetchPost,
+  fetchAllPost
 } from '@/api/feed.js'
 
 export default function useFeed() {
@@ -25,11 +27,22 @@ export default function useFeed() {
     return await fetchUpdate(item)
   }
 
+  const getPost = async (id) => {
+    return await fetchPost(id)
+  }
+
+  const getAllPost = async () => {
+    return await fetchAllPost()
+  }
+
+
   return {
     getFeeds,
     setFeed,
     create,
     update,
-    crateComment
+    crateComment,
+    getPost,
+    getAllPost
   }
 }

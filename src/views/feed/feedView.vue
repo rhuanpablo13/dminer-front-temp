@@ -16,27 +16,24 @@
             <ul class="post_container">
               <li
                 class="feed_container_li"
-                v-for="post in value"
-                :key="post.id"
+                v-for="item in value"
+                :key="item.id"
               >
                 <widget-layout-home
                   classContent="feed_all_widget"
                   layout="icon-folder-feed"
                   isExpanded
-                  :onClick="() => clickView(value.idPost)"
+                  :onClick="() => clickView(item.id)"
                 >
-                  <post :value="value" />
+                  <post :value="item" />
                 </widget-layout-home>
               </li>
             </ul>
           </div>
 
-      <div>
+         <div>
           <filter-feed
             @submit="filter"
-            :isLoading="isLoading"
-            :isSuccess="isSuccess"
-            :isError="isError"
             class="feed_view_filter"
             text="Filtrar"
           >
@@ -70,44 +67,38 @@ import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 
+import useFeed from '@/composables/useFeed'
+import { ref } from 'vue'
+import { useRoute } from "vue-router";
+
 export default {
   data() {
     return {
       showModalFeed: true,
       showModal: false,
-      viewAll: this.$route.params.id,
       comment: '',
-      isLoading: false,
-      isSuccess: false,
-      isError: false,
       filterData: {
         date: new Date(),
         user: ''
       },
-      value: {
-        comments: [
-          {
-            content: '',
-            date: '',
-            user: {
-              login: 'teste',
-              avatar: ''
-            },
-          }
-        ],
-        arquivos: '',
-        date: '',
-        title: '',
-        content:'',
-        user: {
-          login: '',
-          avatar: ''
-        }
-      },
       isEdit: false
     }
   },
-  setup() {},
+  setup() {
+    const route = useRoute()
+    const value = ref()
+    const { getPost, getAllPost } = useFeed()
+    const viewAll = route.params.id
+
+    if (viewAll) {
+      value.value = getPost(viewAll)
+    } else {
+      value.value = getAllPost()
+    }
+
+    return { value, viewAll }
+  },
+
   components: {
     WidgetModal,
     formCrud,
