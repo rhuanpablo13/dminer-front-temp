@@ -20,7 +20,7 @@
                     <Avatar
                       width="90%"
                       height="80%"
-                      :avatar="getBase64(item.avatar)"
+                      :avatar="item.avatar"
                       isBirthday
                     />
                   </div>
@@ -72,9 +72,6 @@ import IconBase from '@/components/svg/IconBase.vue'
 import FrameTeam from '@/components/svg/FrameTeam.vue'
 
 import useAllUsers from '@/composables/useAllUsers'
-import { getBase64 } from '@/util/convertBase64'
-
-import { dayMounthFormart } from '@/util/date.js'
 
 export default {
   data() {
@@ -82,31 +79,17 @@ export default {
   },
   setup() {
      const { getAllUsers } = useAllUsers()
-    return { getAllUsers, dayMounthFormart, getBase64 }
+    return { getAllUsers}
   },
   components: {
     WidgetModal,
     Title,
     Avatar,
-    // FormUser,
     IconEdit,
     IconBase,
     FrameTeam
   },
-
-
   methods: {
-    // openModal() {
-    //   this.showModal = true
-    // },
-    // edit(value) {
-    //   this.isEdit = true
-    //   this.setUser(value)
-    // },
-    // setUser(value) {
-    //   this.value = value
-    //   this.openModal()
-    // }
     close() {
       this.setDocument()
       this.showModal = false

@@ -185,6 +185,7 @@ export default {
   width: 108%;
   margin-left: -12px;
 }
+
 ul {
   list-style-type: none;
 }

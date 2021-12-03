@@ -5,21 +5,27 @@
     classContent="folder__birthday__content"
   >
     <ul>
-      <li
-        class="birthday_li"
-        v-for="(item, key) in getBirthdays"
-        :key="key"
-        :id="`birthday_li_${key}`"
-      >
-        <Avatar :avatar="item.avatar" isBirthday height="8rem" />
+      <li v-for="(item, key) in birthdayList" :key="key">
+          <icon-base
+            viewBox="0 0 500 200"
+            icon-name="icon"
+            width="100%"
+            height="100%"
+          >
+            <frame-team>
+              <div class="birthday_container_li">
+               <Avatar :avatar="item.avatar" isBirthday height="8rem" />
 
-        <div class="notices_footer">
-          <Title>{{ item.name }}</Title>
-          <span>
-            <b>Data:</b>
-            {{ dayMounthFormart(item.dtBirthday) }}
-          </span>
-        </div>
+              <div class="birthday_text">
+                <Title>{{ item.userName  }}</Title>
+                <span>
+                  <b>Data:</b>
+                  {{item.birthDate}}
+                </span>
+              </div>
+              </div>
+            </frame-team>
+          </icon-base>
       </li>
     </ul>
   </widget-layout-home>
@@ -31,14 +37,10 @@ import { mapState } from 'vuex'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import Title from '@/components/title/Title.vue'
 import Avatar from '@/components/Avatar.vue'
-
-import { dayMounthFormart } from '@/util/date.js'
-import { getBase64 } from '@/util/convertBase64'
+import IconBase from '@/components/svg/IconBase.vue'
+import FrameTeam from '@/components/svg/FrameTeam.vue'
 
 export default {
-  data() {
-    return { dayMounthFormart, getBase64 }
-  },
   computed: mapState({
     birthdayList: (state) => state.home.birthdayList
   }),
@@ -46,7 +48,9 @@ export default {
   components: {
     WidgetLayoutHome,
     Title,
-    Avatar
+    Avatar,
+    IconBase,
+    FrameTeam
   }
 }
 </script>
@@ -57,29 +61,20 @@ export default {
   margin-left: -12px;
 }
 ul {
-  max-height: 358px;
   list-style-type: none;
+  margin: auto;
 }
-li {
-  /* display: grid;
-  grid-template-columns: 40% 60%;
-  justify-content: start;
-  align-content: stretch;
-  border: 1px solid;
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-right: 1rem; */
 
+li {
+  width: 85%;
+  margin: auto;
+}
+
+.birthday_container_li {
   display: flex;
-  background-image: url(/src/assets/widget/frame-team.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 90%;
-  position: relative;
-  text-align: left;
   gap: 1rem;
-  padding: 1rem;
+  justify-content: space-around;    
+  width: 90%;
 }
 
 .container_quiz {
@@ -147,5 +142,9 @@ button > span {
   cursor: pointer;
   background-color: transparent;
   color: red;
+}
+
+.birthday_text {
+  font-size: 1.5rem;
 }
 </style>
