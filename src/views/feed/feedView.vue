@@ -127,11 +127,9 @@ export default {
 
     close() {
       this.showModal = false
-      this.$router.push('/')
     },
     closeModalFeed() {
       this.showModalFeed = false
-      this.showModal = false
       this.$router.push('/')
     },
     clickView(id) {

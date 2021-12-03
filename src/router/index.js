@@ -48,8 +48,13 @@ const routes = [
     component: () => import('@/views/Birthday.vue')
   },
   {
-    path: '/feed/:id',
+    path: '/feed',
     name: 'Feed',
+    component: () => import('@/views/feed/feedView.vue')
+  },
+  {
+    path: '/feed/:id',
+    name: 'Visualizacao feed',
     component: () => import('@/views/feed/feedView.vue')
   }
 ]

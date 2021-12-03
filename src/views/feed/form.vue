@@ -1,7 +1,7 @@
 <template>
   <form-modal :showModal="showModal" title="post" @submit="sendForm">
     <div class="benefit_form_container">
-      <upload-image v-model="value.image" :propsImage="value.image" />
+      <upload-image v-model="value.anexos" :propsImage="value.anexos" />
       <div class="benefit_form_container_text">
         <fild-input
           text="Tópico"
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { reactive } from 'vue'
 
 import FormModal from '@/components/FormModal.vue'
@@ -52,22 +53,25 @@ export default {
   },
   setup() {
     const typeList = [
-      { id: 0, name: 'Interno' },
-      { id: 1, name: 'Externo' }
+      { id: 1, name: 'Interno' },
+      { id: 2, name: 'Externo' }
     ]
 
     const value = reactive({
       title: '',
       content: '',
-      permissions: 0,
-      image: null,
-      type: typeList[0]
+      // permissions: 0,
+      anexos: null,
+      type: typeList[0].id
     })
 
     const { create, update } = useFeed()
 
     return { create, typeList, update, value }
   },
+  computed: mapState({
+    getUser: (state) => state.user.login
+  }),
 
   methods: {
     sendForm() {
@@ -90,11 +94,9 @@ export default {
     },
     validForm() {
       this.value.date = dateHourFormarUs(new Date())
-      this.value.login = this.$store.state.user.login
+      this.value.login = this.getUser
 
-      return
-
-      // return Object.values(this.value).every((item) => !!item)
+      return Object.values(this.value).every((item) => !!item)
     }
   }
 }
