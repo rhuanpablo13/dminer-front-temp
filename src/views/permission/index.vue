@@ -8,10 +8,10 @@
     >
       <template v-slot:body>
         <ul>
-          <li v-for="(item, key) in getAllUsers" :key="key">
+          <li v-for="(item, key) in dropdownUser" :key="key">
             <h4>{{ item.name }}</h4>
             <div class="permition_select">
-              <fild-select :options="getPermission" text="permitir" />
+              <fild-select :options="dropdownPermission" text="permitir" />
             </div>
 
             <icon-base
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
@@ -43,8 +45,6 @@ import formCrud from './form.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
-import usePermission from '@/composables/usePermission'
-import useAllUsers from '@/composables/useAllUsers'
 
 export default {
   data() {
@@ -56,10 +56,6 @@ export default {
     }
   },
   setup() {
-    const { getPermission } = usePermission()
-    const { getAllUsers } = useAllUsers()
-
-    return { getPermission, getAllUsers }
   },
   components: {
     WidgetModal,
@@ -69,6 +65,10 @@ export default {
     FildSelect,
     IconLine
   },
+  computed: mapState({
+    dropdownUser: (state) => state.dropdown.user,
+    dropdownPermission: (state) => state.dropdown.permissions
+  }),
   methods: {
     openModal() {
       this.showModal = true
@@ -112,7 +112,7 @@ h4 {
   align-items: center;
   margin-left: auto;
   margin-right: 2rem;
-  z-index: 4;
+  z-index: 9999999999999999999;
 
   cursor: pointer;
 }
