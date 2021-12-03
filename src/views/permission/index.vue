@@ -9,7 +9,7 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in dropdownUser" :key="key">
-            <h4>{{ item.name }}</h4>
+            <label>{{ item.username }}</label>
             <div class="permition_select">
               <fild-select :options="dropdownPermission" text="permitir" />
             </div>
@@ -102,9 +102,10 @@ li {
   position: relative;
 }
 
-h4 {
+label {
   text-transform: uppercase;
   margin-left: 2rem;
+  font-size: 0.7rem;
 }
 
 .permition_select {

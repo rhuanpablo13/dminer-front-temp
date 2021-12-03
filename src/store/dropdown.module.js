@@ -12,7 +12,7 @@ const dropdownInit = localStorage.dropdown
   : initialState
 
 const { setDropdownUser } = useUser()
-const { getPermission } = usePermission()
+const { setPermission } = usePermission()
 
 export const dropdown = {
   namespaced: true,
@@ -34,19 +34,18 @@ export const dropdown = {
       )
     },
     getDropdownPermission({ commit }) {
-      this.state.dropdown.permissions = getPermission
-      commit('dropdownSuccess', this.state.dropdown)
-
-      // return setDropdownUser().then(
-      //   (payload) => {
-      //     return Promise.resolve(payload)
-      //   },
-      //   (error) => {
-      //     console.log(error)
-      //     commit('dropdownFailure')
-      //     return Promise.reject(error)
-      //   }
-      // )
+      return setPermission().then(
+        (payload) => {
+          this.state.dropdown.permissions = payload
+          commit('dropdownSuccess', this.state.dropdown)
+          return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('dropdownFailure')
+          return Promise.reject(error)
+        }
+      )
     }
   },
   mutations: {

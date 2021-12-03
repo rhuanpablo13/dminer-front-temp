@@ -6,14 +6,13 @@ export default function usePermission() {
 
   const setPermission = async () => {
     const user = JSON.parse(localStorage.user)
-    getPermission.value = await fetchDropdownPermissions(user.baererAuthentication)
+    return await fetchDropdownPermissions(user.baererAuthentication)
   }
 
   const create = async (item) => {
     return await fetchCreate(item)
   }
 
-  onMounted(setPermission)
 
   return {
     getPermission,

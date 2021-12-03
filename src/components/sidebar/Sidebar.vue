@@ -1,4 +1,5 @@
 <template>
+<transition name="fade">
   <div
     class="sidebar"
     :class="{
@@ -18,6 +19,7 @@
         />
       </div>
     </div>
+    <transition name="fade">
     <div class="menu" 
       :style="{ 
         display: collapsed ? 'block' : 'grid',
@@ -65,6 +67,7 @@
         </SidebarLink>
       </div>
     </div>
+    </transition>
 
     <icon-base 
       icon-name="icon"       
@@ -80,6 +83,7 @@
     </icon-base>
 
   </div>
+  </transition>
 </template>
 
 <script>
