@@ -52,6 +52,7 @@ export default {
   font-size: 0.5rem;
   text-overflow: ellipsis;
   padding: 0rem 1rem;
+  width: 10rem;
 }
 
 .image_details_categorie {

@@ -105,14 +105,14 @@ export default {
 <style scoped>
 ul {
   display: grid;
-  width: 90%;
+  width: 80%;
   list-style-type: none;
   position: relative;
   height: 100%;
+  margin: auto;
 }
 
 li {
-  width: 90%;
   position: relative;
 }
 
