@@ -24,7 +24,7 @@ export const user = {
         login: user.login,
         permission: user.type
       }
-
+      this.dispatch('home/search', null)
       this.dispatch('user/avatar', user_)
     },
     avatar({ commit, state }, user) {
@@ -48,7 +48,6 @@ export const user = {
           state.banner = response
           commit('success', user)
 
-          this.dispatch('home/search', null)
 
           return Promise.resolve(response)
         },
