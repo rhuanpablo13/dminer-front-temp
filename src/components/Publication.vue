@@ -8,10 +8,8 @@
     >
       <icon-publicationP>
         <div class="publication__title">
-          <Title>
-            {{ title }}
-          </Title>
 
+          <Title> {{ title }} </Title>
           {{content}}
         </div>
       </icon-publicationP>
@@ -40,6 +38,7 @@ import Title from '@/components/title/Title.vue'
 
 export default {
   props: {
+    title: { type: String, required: true },
     content: { type: String, required: true },
     onClick: { type: Function, required: false, default: null }
   },
@@ -61,6 +60,8 @@ export default {
   overflow: hidden;
   text-align: left;
   padding-left: 3rem;
+  width: 20rem;
+  height: 12rem;
 }
 
 .publication_icon_button {

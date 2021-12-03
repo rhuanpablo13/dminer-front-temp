@@ -17,7 +17,8 @@
           v-for="(post, key) in feedList"
           :key="key"
           :content="post.content"
-          :onClick="() => openFeedView(post.id)"
+          :title="post.title"
+          :onClick="() => openFeedView(post.idPost)"
         />
       </feed>
     </div>

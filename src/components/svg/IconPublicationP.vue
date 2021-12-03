@@ -258,7 +258,7 @@
     <rect x="442.3" y="127.4" class="st8" width="55.3" height="14.6" />
     <rect x="2.5" y="2.5" class="st9" width="420.3" height="245.1" />
   </g>
-  <foreignObject y="9.5%" x="0" width="100%" height="100%">
+  <foreignObject y="5%" x="0" width="100%" height="100%">
     <slot />
   </foreignObject>
 </template>

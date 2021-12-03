@@ -28,8 +28,8 @@
         </li>
       </ul>
     </div>
-    <comment :avatar="value.user.avatar" />
   </div>
+    <comment :avatar="value.user.avatar" />
 </template>
 
 <script>
@@ -59,34 +59,55 @@ export default {
 .feed_contant {
   padding: 1rem 2rem;
   margin: auto;
+  overflow: auto;
+  max-height: 100%;
 }
 
-.feed_container_imagem {
+/* .feed_container_imagem {
   height: 8rem;
   width: 15rem;
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0.5rem auto;
-  /* margin: 0.5rem 0; */
+  position: relative;
+} */
+
+.feed_container_imagem {
+  height: 10rem;
+  width: 20rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0.5rem auto;
   position: relative;
 }
 
-.feed_container_text {
+
+/* .feed_container_text {
   word-break: break-word;
   text-overflow: ellipsis;
   text-align: start;
   width: 15rem;
   font-size: 0.6rem;
   margin: auto;
+} */
+
+.feed_container_text {
+  word-break: break-word;
+  text-overflow: ellipsis;
+  text-align: start;
+  width: 20rem;
+  /* font-size: 1rem; */
+  margin:  1rem auto;
+
 }
 
+
 .fild_container_icon {
-  margin-top: 5rem;
+  margin-top: 6rem;
 }
 
 .feed_container_comments {
-  height: 8rem;
-  overflow-y: auto;
+    margin-top: 3rem;
 }
 
 ul {
