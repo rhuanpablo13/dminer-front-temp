@@ -50,7 +50,7 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image">
+      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="user.type === 'ADMINISTRADOR'">
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import SidebarLink from './SidebarLink.vue'
 import Avatar from '@/components/Avatar.vue'
 import IconBenefits from '@/components/svg/IconBenefits.vue'
@@ -90,8 +92,6 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
-  props: { user: { type: Object, required: true } },
-
   components: {
     SidebarLink,
     Avatar,
@@ -108,17 +108,12 @@ export default {
     IconOpen
   },
 
-  computed: {
-    user() {
-      return this.$store.state.user
-    },
-    collapsed() {
-      return this.$store.state.sidebar.collapsed
-    },
-    sidebarWidth() {
-      return this.$store.state.sidebar.sidebarWidth
-    }
-  },
+  computed: mapState({
+    user: (state) => state.user,
+    collapsed: (state) => state.sidebar.collapsed,
+    sidebarWidth: (state) => state.sidebar.sidebarWidth,
+  }),
+
   methods: {
     updateUser() {
       this.$emit('update:modelValue', this.user)

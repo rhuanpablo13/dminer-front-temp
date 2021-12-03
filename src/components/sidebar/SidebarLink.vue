@@ -10,6 +10,7 @@ export default {
     to: { type: String, required: true },
     icon: { type: Element, required: true },
     isIconLink: { type: Boolean, required: false },
+    disabled: { type: Boolean, required: false, default: false },
     isPower: { type: Boolean, required: false }
   },
   components: { IconBase, IconLine },
@@ -34,6 +35,7 @@ export default {
     :style="{
       'justify-content': isIconLink || isPower ? 'center' : ''
     }"
+    :disabled="disabled"
   >
     <icon-base icon-name="icon">
       <slot />
@@ -94,6 +96,10 @@ export default {
 
 .link.active {
   background-color: var(--sidebar-item-active);
+}
+
+.link:disabled {
+  cursor: not-allowed;
 }
 
 .link .icon {
