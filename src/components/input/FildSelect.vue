@@ -12,6 +12,7 @@
         :options="options"
         close-on-select
         placeholder=""
+        :value="value"
         @update:modelValue="changeInput"
         :reduce="(item) => item.id"
         :label-by="title"

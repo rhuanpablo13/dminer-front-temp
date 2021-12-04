@@ -86,10 +86,10 @@ export default {
     },
     edit(value) {
       this.isEdit = true
+      this.value = {...value, permission: value.permission.id }
       this.setDoc(value)
     },
     setDoc(value) {
-      this.value = {...value, permission: value.permission.id }
       this.openModal()
     },
     close() {

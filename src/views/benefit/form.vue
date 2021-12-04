@@ -25,7 +25,7 @@
           v-model="value.permission"
           :value="value.permission"
           required
-          :options="getPermission"
+          :options="dropdownPermission"
         />
       </div>
     </div>
@@ -33,13 +33,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
 import useBenefit from '@/composables/useBenefit'
-import usePermission from '@/composables/usePermission'
 import { dateHourFormarUs } from '@/util/date'
 
 export default {
@@ -65,10 +66,13 @@ export default {
   },
   setup() {
     const { create, update } = useBenefit()
-    const { getPermission } = usePermission()
 
-    return { create, getPermission, update }
+    return { create, update }
   },
+
+  computed: mapState({
+    dropdownPermission: (state) => state.dropdown.permissions,
+  }),
 
   methods: {
     sendForm() {

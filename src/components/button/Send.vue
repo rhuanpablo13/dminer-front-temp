@@ -33,8 +33,8 @@
         <icon-base
           viewBox="0 0 32 32"
           icon-name="icon"
-          width="20%"
-          height="20%"
+          :width="width === '15%' ? '20%' : '60%'"
+          :height="width === '15%' ? '20%' : '60%'"
           class="icon_close"
         >
           <icon-close />

@@ -9,7 +9,7 @@
     >
       <template v-slot:body>
         <div class="feed_container">
-            <post :value="value"  />
+            <post :value="getPost"  />
          <div>
           <filter-feed
             @submit="filter"
@@ -46,7 +46,7 @@ import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 
-import useFeed from '@/composables/useFeed'
+import usePost from '@/composables/usePost'
 import { ref } from 'vue'
 import { useRoute } from "vue-router";
 
@@ -66,14 +66,11 @@ export default {
   setup() {
     const route = useRoute()
     const value = ref()
-    const { getPost, getAllPost } = useFeed()
     const idParam = route.params.id
+    const { getPost } = usePost(idParam)
 
-    getPost(idParam).then((response) =>  {
-      value.value = response
-    })
-    
-    return { value, viewAll: !!idParam }
+
+    return { getPost, viewAll: !!idParam }
   },
 
   components: {

@@ -45,14 +45,7 @@ import Comment from '@/components/Comment.vue'
 
 export default {
   props: {
-    value: { type: Array, required: true }
-  },
-  setup(props) {
-
-    const post = props.value ||  {
-      user: {avatar: '', username: '', anexos: []}
-    }
-    return { post }
+    value: { type: Object, required: true }
   },
   components: {
     HeaderPost,

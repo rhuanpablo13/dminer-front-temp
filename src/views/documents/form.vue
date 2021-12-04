@@ -23,7 +23,7 @@
           v-model="value.permission"
           :value="value.permission"
           required
-          :options="getPermission"
+          :options="dropdownPermission"
         />
 
         <fild-select
@@ -38,13 +38,14 @@
   </form-modal>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 
 import useDocument from '@/composables/useDocument'
 import useCategory from '@/composables/useCategory'
-import usePermission from '@/composables/usePermission'
 
 export default {
   components: { FildInput, FormModal, FildSelect },
@@ -64,12 +65,13 @@ export default {
   },
   setup() {
     const { create, update } = useDocument()
-
     const { getCategories } = useCategory()
-    const { getPermission } = usePermission()
 
-    return { create, getCategories, getPermission, update }
+    return { create, getCategories, update }
   },
+  computed: mapState({
+    dropdownPermission: (state) => state.dropdown.permissions,
+  }),
 
   methods: {
     sendForm() {
