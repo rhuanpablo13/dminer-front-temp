@@ -78,7 +78,12 @@ export default {
   },
 
   created() {
-    setTimeout(() => { this.isLoading = true }, 1000)
+    const interval = setInterval(() => { 
+      if (this.getPost.user.avatar) {
+        this.isLoading = true
+        clearInterval(interval)
+      }
+     }, 1000)
   },
 
   components: {
