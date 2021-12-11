@@ -10,7 +10,7 @@ export default function useAllUsers() {
   }
 
   const search = async (keyword) => {
-    return await fetcSearch(keyword)
+    getAllUsers.value = await fetcSearch(keyword)
   }
 
   onMounted(setAllUsers)

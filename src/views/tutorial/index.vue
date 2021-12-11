@@ -122,7 +122,7 @@ export default {
     },
     submit(value) {
       if (typeof value == "string" && value.length) {
-        this.getTutorials = this.search(value)
+        this.search(value)
       } else if(typeof value == "string" && !value.length) {
         this.setTutorial()
       }

@@ -21,7 +21,7 @@ export default function useBenefit() {
   }
     
   const search = async (keyword) => {
-    return await fetcSearch(keyword)
+    getBenefits.value =  await fetcSearch(keyword)
   }
 
   onMounted(setBenefit)

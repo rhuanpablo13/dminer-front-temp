@@ -21,7 +21,7 @@ export default function useDocument() {
   } 
   
   const search = async (keyword) => {
-    return await fetcSearch(keyword)
+    getDocuments.value = await fetcSearch(keyword)
   }
 
   onMounted(setDocument)

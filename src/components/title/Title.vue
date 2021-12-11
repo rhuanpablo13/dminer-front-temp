@@ -8,6 +8,8 @@ h1 {
   color: var(--color-title);
   font-weight: 300;
   text-transform: uppercase;
-  /* padding: 0 1rem; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

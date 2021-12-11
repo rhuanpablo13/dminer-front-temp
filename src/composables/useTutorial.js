@@ -21,7 +21,7 @@ export default function useTutorial() {
   }
 
   const search = async (keyword) => {
-    return await fetcSearch(keyword)
+    getTutorials.value = await fetcSearch(keyword)
   }
 
   onMounted(setTutorial)

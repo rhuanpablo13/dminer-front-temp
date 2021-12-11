@@ -98,7 +98,7 @@ export default {
     },
     submit(value) {
       if (typeof value == "string" && value.length) {
-        this.getAllUsers = this.search(value)
+        this.search(value)
       } else if(typeof value == "string" && !value.length) {
         this.setAllUsers()
       }

@@ -2,7 +2,7 @@
   <form-modal
     :showModal="showModal"
     title="cadastro de documentos"
-    @submit="sendForm"
+    @submit="sendForm(e)"
   >
     <div class="form_container">
       <div class="form_container_text">
@@ -74,7 +74,8 @@ export default {
   }),
 
   methods: {
-    sendForm() {
+    sendForm(e) {
+      debugger
       this.$store.dispatch('form/setLoading')
 
       if (this.validForm()) {
