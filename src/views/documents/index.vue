@@ -12,13 +12,20 @@
             <a :href="item.content" target="_blank">
               {{ item.title }}
             </a>
-            <button class="team_btn_edit">
+            <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
                 class="team_icon_edit"
                 @click="edit(item)"
               >
                 <icon-edit />
+              </icon-base>
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteDoc(item.id)"
+              >
+                <icon-trash />
               </icon-base>
             </button>
             <icon-base
@@ -48,6 +55,7 @@ import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import formCrud from '@/views/documents/form.vue'
 import IconLine from '@/components/svg/IconLine.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useDocument from '@/composables/useDocument'
 
@@ -56,16 +64,22 @@ export default {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false }
   },
   setup() {
-    const { getDocuments, setDocument } = useDocument()
+    const { getDocuments, setDocument, deleteItem } = useDocument()
 
-    return { getDocuments, setDocument }
+    return { getDocuments, setDocument, deleteItem }
+  },
+  computed: {
+    permissionADM() {
+      return this.$store.state.user.type === 'ADMINISTRADOR'
+    }
   },
   components: {
     WidgetModal,
     formCrud,
     IconEdit,
     IconBase,
-    IconLine
+    IconLine,
+    IconTrash
   },
   methods: {
     openModal() {
@@ -74,6 +88,12 @@ export default {
     edit(value) {
       this.isEdit = true
       this.setDoc(value)
+    },
+    deleteDoc(id) {
+      this.deleteItem(id)
+      setTimeout(() => {
+        this.setDocument()
+      }, 300)
     },
     setDoc(value) {
       this.value = value

@@ -34,17 +34,12 @@ export default {
 
     return { fileInput }
   },
-  // updated() {
-  //   if (this.update) {
-  //     this.previewImage = this.banner
-  //   }
-  // },
   computed: {
     sidebarWidth() {
       return this.$store.state.sidebar.sidebarWidth
     },
     banner() {
-       this.previewImage =  this.$store.state.user.banner
+      this.previewImage =  this.$store.state.user.banner
     }
   },
 

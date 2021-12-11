@@ -9,7 +9,7 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in getBenefits" :key="key">
-            <button class="team_btn_edit">
+            <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
                 class="team_icon_edit"
@@ -17,6 +17,15 @@
               >
                 <icon-edit />
               </icon-base>
+
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteBenefit(item.id)"
+              >
+                <icon-trash />
+              </icon-base>
+
             </button>
             <image-details
               :image="item.image"
@@ -55,6 +64,7 @@ import IconBase from '@/components/svg/IconBase.vue'
 import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useBenefit from '@/composables/useBenefit'
 
@@ -68,9 +78,14 @@ export default {
     }
   },
   setup() {
-    const { getBenefits, setBenefit } = useBenefit()
+    const { getBenefits, setBenefit, deleteItem } = useBenefit()
 
-    return { getBenefits, setBenefit }
+    return { getBenefits, setBenefit, deleteItem }
+  },
+  computed: {
+    permissionADM() {
+      return this.$store.state.user.type === 'ADMINISTRADOR'
+    }
   },
   components: {
     WidgetModal,
@@ -78,7 +93,8 @@ export default {
     IconEdit,
     IconBase,
     ImageDetails,
-    IconLine
+    IconLine,
+    IconTrash
   },
   methods: {
     openModal() {
@@ -88,6 +104,12 @@ export default {
       this.isEdit = true
       this.value = {...value, permission: value.permission.id }
       this.setDoc(value)
+    },
+    deleteBenefit(id) {
+      this.deleteItem(id)
+      setTimeout(() => {
+        this.setBenefit()
+      }, 300)
     },
     setDoc(value) {
       this.openModal()

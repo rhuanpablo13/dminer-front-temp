@@ -94,12 +94,12 @@ export default {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 0;
+  width: 2px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /* background: var(--background-color); */
+  background: var(--background-color);
 }
 
 /* Handle */

@@ -77,6 +77,7 @@ export const user = {
   mutations: {
     success(state, user) {
       state = user
+      
     },
     failure(state) {
       state.user = initialState

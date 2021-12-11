@@ -32,7 +32,7 @@
                       {{ item.email }}
                     </div>
                     <div class="team_container_span">
-                      <div class="icon_green"></div>
+                      <div class="icon_green" v-if="item.birthDate"></div>
                       {{ item.birthDate }}
                       <div class="icon_green"></div>
                       <a :href="item.linkedinUrl" target="_blank">linkedin</a>

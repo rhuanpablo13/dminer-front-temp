@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate } from '@/api/tutorial.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete } from '@/api/tutorial.js'
 
 export default function useTutorial() {
   const getTutorials = ref([])
@@ -16,12 +16,17 @@ export default function useTutorial() {
     return await fetchUpdate(item)
   }
 
+  const deleteItem = async (id) => {
+    return await fetchDelete(id)
+  }
+
   onMounted(setTutorial)
 
   return {
     getTutorials,
     setTutorial,
     create,
-    update
+    update,
+    deleteItem
   }
 }

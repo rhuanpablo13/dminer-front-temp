@@ -17,3 +17,8 @@ export const fetchUpdate = async (item) => {
   const response = await apiIntra.put(`${URL}`, item)
   return messagesFetch('update', response.status, response.data.data)
 }
+
+export const fetchDelete = async (id) => {
+  const response = await apiIntra.delete(`${URL}/${id}`)
+  return messagesFetch('delete', response.status, [])
+}

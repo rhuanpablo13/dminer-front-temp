@@ -9,13 +9,20 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in getTutorials" :key="key">
-            <button class="team_btn_edit">
+            <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
                 class="team_icon_edit"
                 @click="edit(item)"
               >
                 <icon-edit />
+              </icon-base>
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteTutorial(item.id)"
+              >
+                <icon-trash />
               </icon-base>
             </button>
             <image-details
@@ -55,6 +62,7 @@ import IconBase from '@/components/svg/IconBase.vue'
 import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useTutorial from '@/composables/useTutorial'
 import usePermission from '@/composables/usePermission'
@@ -69,10 +77,15 @@ export default {
     }
   },
   setup() {
-    const { getTutorials, setTutorial } = useTutorial()
+    const { getTutorials, setTutorial, deleteItem } = useTutorial()
     const { getPermission } = usePermission()
 
-    return { getTutorials, getPermission, setTutorial }
+    return { getTutorials, getPermission, setTutorial, deleteItem }
+  },
+  computed: {
+    permissionADM() {
+      return this.$store.state.user.type === 'ADMINISTRADOR'
+    }
   },
   components: {
     WidgetModal,
@@ -80,7 +93,8 @@ export default {
     IconEdit,
     IconBase,
     ImageDetails,
-    IconLine
+    IconLine,
+    IconTrash
   },
   methods: {
     openModal() {
@@ -93,6 +107,12 @@ export default {
     setDoc(value) {
       this.value = value
       this.openModal()
+    },
+    deleteTutorial(id) {
+      this.deleteItem(id)
+      setTimeout(() => {
+        this.setTutorial()
+      }, 300)
     },
     close() {
       this.setTutorial()
