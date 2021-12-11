@@ -53,3 +53,8 @@ export const fetchDropdownUser = async (token) => {
   const response = await apiIntra.post(`${URL}/dropdown`, {token})
   return response.status === 200 ? response.data.data : []
 }
+
+export const fetcSearch = async (keyword) => {
+  const response = await apiIntra(`${URL}/search/${keyword}`)
+  return response.status === 200 ? response.data.data : []
+}

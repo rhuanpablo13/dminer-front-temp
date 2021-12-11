@@ -22,3 +22,8 @@ export const fetchDelete = async (id) => {
   const response = await apiIntra.delete(`${URL}/${id}`)
   return messagesFetch('delete', response.status, [])
 }
+
+export const fetcSearch = async (keyword) => {
+  const response = await apiIntra(`${URL}/search/${keyword}`)
+  return response.status === 200 ? response.data.data : []
+}

@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate, fetchDelete } from '@/api/benefit.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetcSearch } from '@/api/benefit.js'
 
 export default function useBenefit() {
   const getBenefits = ref([])
@@ -19,6 +19,10 @@ export default function useBenefit() {
   const deleteItem = async (id) => {
     return await fetchDelete(id)
   }
+    
+  const search = async (keyword) => {
+    return await fetcSearch(keyword)
+  }
 
   onMounted(setBenefit)
 
@@ -27,6 +31,7 @@ export default function useBenefit() {
     setBenefit,
     create,
     update,
-    deleteItem
+    deleteItem,
+    search
   }
 }

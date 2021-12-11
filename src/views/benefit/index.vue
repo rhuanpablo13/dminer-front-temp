@@ -5,6 +5,8 @@
       title="benefícios"
       :onClick="setDoc"
       @close="this.$router.push('/')"
+      search
+      @submit="submit"
     >
       <template v-slot:body>
         <ul>
@@ -78,9 +80,9 @@ export default {
     }
   },
   setup() {
-    const { getBenefits, setBenefit, deleteItem } = useBenefit()
+    const { getBenefits, setBenefit, deleteItem, search } = useBenefit()
 
-    return { getBenefits, setBenefit, deleteItem }
+    return { getBenefits, setBenefit, deleteItem, search }
   },
   computed: {
     permissionADM() {
@@ -117,6 +119,13 @@ export default {
     close() {
       this.setBenefit()
       this.showModal = false
+    },
+    submit(value) {
+      if (typeof value == "string" && value.length) {
+        this.getBenefits = this.search(value)
+      } else if(typeof value == "string" && !value.length) {
+        this.setBenefit()
+      }
     }
   }
 }

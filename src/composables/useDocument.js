@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate, fetchDelete } from '@/api/document.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetcSearch } from '@/api/document.js'
 
 export default function useDocument() {
   const getDocuments = ref([])
@@ -18,6 +18,10 @@ export default function useDocument() {
 
   const deleteItem = async (id) => {
     return await fetchDelete(id)
+  } 
+  
+  const search = async (keyword) => {
+    return await fetcSearch(keyword)
   }
 
   onMounted(setDocument)
@@ -26,6 +30,7 @@ export default function useDocument() {
     setDocument,
     create,
     update,
-    deleteItem
+    deleteItem,
+    search
   }
 }

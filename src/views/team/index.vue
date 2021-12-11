@@ -4,6 +4,8 @@
       v-if="showModalEquipe"
       title="Equipe"
       @close="this.$router.push('/')"
+      search
+      @submit="submit"
     >
       <template v-slot:body>
         <ul>
@@ -18,8 +20,8 @@
                 <div class="team_container">
                   <div class="team_avatar">
                     <Avatar
-                      width="90%"
-                      height="80%"
+                      width="8rem"
+                      height="7rem"
                       :avatar="item.avatar"
                       isBirthday
                     />
@@ -78,8 +80,8 @@ export default {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false }
   },
   setup() {
-     const { getAllUsers } = useAllUsers()
-    return { getAllUsers}
+     const { getAllUsers, setAllUsers,  search } = useAllUsers()
+    return { getAllUsers, setAllUsers,  search}
   },
   components: {
     WidgetModal,
@@ -91,8 +93,15 @@ export default {
   },
   methods: {
     close() {
-      this.setDocument()
+      this.setAllUsers()
       this.showModal = false
+    },
+    submit(value) {
+      if (typeof value == "string" && value.length) {
+        this.getAllUsers = this.search(value)
+      } else if(typeof value == "string" && !value.length) {
+        this.setAllUsers()
+      }
     }
   }
 }

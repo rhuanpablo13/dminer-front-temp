@@ -5,6 +5,8 @@
       title="d-guide"
       :onClick="setDoc"
       @close="this.$router.push('/')"
+      search
+      @submit="submit"
     >
       <template v-slot:body>
         <ul>
@@ -64,9 +66,9 @@ export default {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false }
   },
   setup() {
-    const { getDocuments, setDocument, deleteItem } = useDocument()
+    const { getDocuments, setDocument, deleteItem, search } = useDocument()
 
-    return { getDocuments, setDocument, deleteItem }
+    return { getDocuments, setDocument, deleteItem, search }
   },
   computed: {
     permissionADM() {
@@ -79,7 +81,7 @@ export default {
     IconEdit,
     IconBase,
     IconLine,
-    IconTrash
+    IconTrash,
   },
   methods: {
     openModal() {
@@ -102,6 +104,13 @@ export default {
     close() {
       this.setDocument()
       this.showModal = false
+    },
+    submit(value) {
+      if (typeof value == "string" && value.length) {
+        this.getDocuments = this.search(value)
+      } else if(typeof value == "string" && !value.length) {
+        this.setDocument()
+      }
     }
   }
 }

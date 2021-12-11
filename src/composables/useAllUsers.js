@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAllUser } from '@/api/user'
+import { fetchAllUser, fetcSearch } from '@/api/user'
 
 export default function useAllUsers() {
   const getAllUsers = ref([])
@@ -9,9 +9,14 @@ export default function useAllUsers() {
     getAllUsers.value = await fetchAllUser(user.baererAuthentication)
   }
 
+  const search = async (keyword) => {
+    return await fetcSearch(keyword)
+  }
+
   onMounted(setAllUsers)
   return {
     setAllUsers,
-    getAllUsers
+    getAllUsers,
+    search
   }
 }

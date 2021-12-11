@@ -26,7 +26,11 @@
                   <icon-button-close></icon-button-close>
                 </icon-base>
               </button>
-              <!-- <slot name="header">default header</slot> -->
+            <section class="header__section" v-if="search">
+              <form action="#" @submit.prevent="$emit('submit', inputValue)">
+                <inputDate v-model="inputValue" />
+              </form>
+            </section>
             </div>
             <div class="modal-left">
               <slot name="left" />
@@ -69,8 +73,12 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconButtonClose from '@/components/svg/IconButtonClose.vue'
 import IconModalFolder from '@/components/svg/IconModalFolder.vue'
 import IconButton from '@/components/svg/IconButton.vue'
+import InputDate from '@/components/input/InputDate.vue'
 
 export default {
+  data () {
+    return {inputValue: ''}
+  },
   props: {
     layout: { type: String, required: false, default: 'icon-modal-folder' },
     width: { type: String, required: false, default: '100%' },
@@ -78,6 +86,7 @@ export default {
     title: { type: String, required: true, default: '' },
     onClick: { type: Function, required: false, default: '' },
     overflow: { type: Boolean, required: false, default: true },
+    search: { type: Boolean, required: false, default: false },
     classButton: {
       type: String,
       required: false,
@@ -96,12 +105,18 @@ export default {
     IconFolder,
     IconModalFolder,
     IconFolderFeed,
-    IconButton
+    IconButton,
+    InputDate
   }
 }
 </script>
 
 <style scoped>
+.header__section {
+  width: 80%;
+  margin: auto;
+  margin-top: -2rem;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -137,9 +152,9 @@ export default {
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin: 1rem 0;
   width: 95%;
-  max-height: 358px;
+  max-height: 330px;
   overflow-y: auto;
 }
 .modal-body-no-overflow {

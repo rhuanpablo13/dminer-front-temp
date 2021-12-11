@@ -5,6 +5,8 @@
       title="tutorial"
       :onClick="setDoc"
       @close="this.$router.push('/')"
+      search
+      @submit="submit"
     >
       <template v-slot:body>
         <ul>
@@ -77,10 +79,10 @@ export default {
     }
   },
   setup() {
-    const { getTutorials, setTutorial, deleteItem } = useTutorial()
+    const { getTutorials, setTutorial, deleteItem, search } = useTutorial()
     const { getPermission } = usePermission()
 
-    return { getTutorials, getPermission, setTutorial, deleteItem }
+    return { getTutorials, getPermission, setTutorial, deleteItem, search }
   },
   computed: {
     permissionADM() {
@@ -117,6 +119,13 @@ export default {
     close() {
       this.setTutorial()
       this.showModal = false
+    },
+    submit(value) {
+      if (typeof value == "string" && value.length) {
+        this.getTutorials = this.search(value)
+      } else if(typeof value == "string" && !value.length) {
+        this.setTutorial()
+      }
     }
   }
 }
