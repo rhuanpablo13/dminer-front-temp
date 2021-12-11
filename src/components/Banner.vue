@@ -9,7 +9,7 @@
       <Title v-if="!previewImage">Banner (espaço para upload)</Title>
     </div>
     <div
-      v-if="isLoading"
+      v-if="previewImage"
       class="imagePreviewWrapper"
       :style="{ 'background-image': `url(${previewImage})` }"
       @click="selectImage"
@@ -26,23 +26,25 @@ export default {
   data() {
     return {
       previewImage: this.$store.state.user.banner,
-      update: this.isLoading
+      update: true
     }
   },
-  props: { isLoading: { type: Boolean, required: false, default: false } },
   setup() {
     const fileInput = ref([])
 
     return { fileInput }
   },
-  updated() {
-    if (this.update) {
-      this.previewImage = this.$store.state.user.banner
-    }
-  },
+  // updated() {
+  //   if (this.update) {
+  //     this.previewImage = this.banner
+  //   }
+  // },
   computed: {
     sidebarWidth() {
       return this.$store.state.sidebar.sidebarWidth
+    },
+    banner() {
+       this.previewImage =  this.$store.state.user.banner
     }
   },
 

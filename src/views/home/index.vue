@@ -53,9 +53,9 @@ export default {
         quiz
       ]
 
-      // localStorage.position_components_home = JSON.stringify(
-      //   this.listComponents
-      // )
+      localStorage.position_components_home = JSON.stringify(
+        this.listComponents
+      )
 
       this.$store.dispatch('dropdown/getDropdownUser')
       this.$store.dispatch('dropdown/getDropdownPermission')
