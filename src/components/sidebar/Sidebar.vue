@@ -32,7 +32,7 @@
           display: collapsed ? 'block' : ' flex',
         }"
       >
-        <SidebarLink to="/email" icon="email" isIconLink>
+        <SidebarLink to="https://dminer.com.br/" icon="email" isIconLink external>
           <icon-email />
         </SidebarLink>
 
@@ -163,7 +163,7 @@ export default {
 .menu {
   justify-content: left;
   margin-top: 10%;
-  overflow-y: scroll;
+  overflow-y: auto;
   font-size: 0.8rem;
   font-family: var(--font-family--text);
 

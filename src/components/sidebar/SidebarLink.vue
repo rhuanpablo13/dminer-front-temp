@@ -11,7 +11,8 @@ export default {
     icon: { type: Element, required: true },
     isIconLink: { type: Boolean, required: false },
     disabled: { type: Boolean, required: false, default: false },
-    isPower: { type: Boolean, required: false }
+    isPower: { type: Boolean, required: false },
+    external: { type: Boolean, required: false, default: false }
   },
   components: { IconBase, IconLine },
   computed: {
@@ -29,6 +30,7 @@ export default {
 
 <template>
   <router-link
+    v-if="!external"
     :to=" disabled ? '' : to"
     class="link"
     :class="{ active: isActive, disabled: disabled }"
@@ -56,6 +58,37 @@ export default {
       <icon-line />
     </icon-base>
   </router-link>
+
+  <a
+    target="_blank"
+    v-else
+    :href=" disabled ? '' : to"
+    class="link"
+    :class="{ active: isActive, disabled: disabled }"
+    :style="{
+      'justify-content': isIconLink || isPower ? 'center' : '',
+    }"
+    :disabled="disabled"
+  >
+    <icon-base icon-name="icon"  >
+      <slot />
+    </icon-base>
+    <transition name="fade">
+      <span v-if="!collapsed">
+        <slot />
+      </span>
+    </transition>
+
+    <icon-base
+      v-if="collapsed || !isIconLink"
+      viewBox="0 0 500 58"
+      width="100%"
+      height="100%"
+      class="fild_container_icon"
+    >
+      <icon-line />
+    </icon-base>
+  </a>
 </template>
 
 <style scoped>
