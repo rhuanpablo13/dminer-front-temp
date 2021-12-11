@@ -53,7 +53,7 @@ const routes = [
     component: () => import('@/views/feed/feedViewAll.vue')
   },
   {
-    path: '/feed/:id',
+    path: '/post/:id',
     name: 'Visualizacao feed',
     component: () => import('@/views/feed/feedView.vue')
   }

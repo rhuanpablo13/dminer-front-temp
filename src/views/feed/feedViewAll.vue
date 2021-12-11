@@ -13,7 +13,7 @@
             <ul class="post_container" >
               <li
                 class="feed_container_li"
-                v-for="item in value"
+                v-for="item in getPostsAll"
                 :key="item.id"
               >
                 <widget-layout-home
@@ -65,7 +65,6 @@ import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 
 import useFeed from '@/composables/useFeed'
-import { ref } from 'vue'
 import { useRoute } from "vue-router";
 
 export default {
@@ -82,14 +81,10 @@ export default {
   },
   setup() {
     const route = useRoute()
-    const value = ref()
-    const { getPost, getAllPost } = useFeed()
-    
-    getAllPost().then((response) =>  {
-      value.value = response
-    })
+    const {  getPostsAll, setAllPost } = useFeed()
+    setAllPost()
 
-    return { value }
+    return { getPostsAll }
   },
 
   components: {
@@ -119,7 +114,7 @@ export default {
     },
     clickView(id) {
       this.showModalFeed = false
-      this.$router.push(`/feed/${id}`)
+      this.$router.push(`/post/${id}`)
     },
     filter() {
       console.log(this.filterData)

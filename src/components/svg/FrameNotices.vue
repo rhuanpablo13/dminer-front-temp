@@ -298,7 +298,7 @@
 		<rect x="3.4" y="20.4" class="frame_notices_st22" width="414.4" height="303"/>
 	</g>
 </g>
-      <foreignObject y="5rem" x="0" width="100%" height="100%">
+      <foreignObject y="5rem" x="-2rem" width="100%" height="100%">
         <slot />
       </foreignObject>
 </template>

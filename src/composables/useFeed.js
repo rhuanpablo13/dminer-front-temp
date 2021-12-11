@@ -10,6 +10,7 @@ import {
 
 export default function useFeed() {
   const getFeeds = ref([])
+  const getPostsAll = ref([])
 
   const setFeed = async () => {
     getFeeds.value = await fetchAll()
@@ -31,10 +32,9 @@ export default function useFeed() {
     return await fetchPost(id)
   }
 
-  const getAllPost = async () => {
-    return await fetchAllPost()
+  const setAllPost = async () => {
+    getPostsAll.value =  await fetchAllPost()
   }
-
 
   return {
     getFeeds,
@@ -43,6 +43,7 @@ export default function useFeed() {
     update,
     crateComment,
     getPost,
-    getAllPost
+    setAllPost,
+    getPostsAll
   }
 }

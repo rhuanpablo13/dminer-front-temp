@@ -1,16 +1,16 @@
 <template>
   <header-post
-    :avatar="post.user.avatar"
-    :username="post.user.username"
-    :text="post.title"
+    :avatar="value.user.avatar"
+    :username="value.user.username"
+    :text="value.title"
   />
 
   <div class="feed_contant">
-    <div class="feed_container_text"  v-if="post.content">{{ post.content }}</div>
+    <div class="feed_container_text"  v-if="value.content">{{ value.content }}</div>
     <div
-      v-if="post.anexos && post.anexos.length"
+      v-if="value.anexos && value.anexos.length"
       class="feed_container_imagem"
-      :style="{ 'background-image': `url(${post.anexos[0]})` }"
+      :style="{ 'background-image': `url(${value.anexos[0]})` }"
     >
     </div>
       <icon-base
@@ -24,12 +24,12 @@
 
     <div class="feed_container_comments">
       <ul>
-        <li v-for="comment in post.comments" :key="comment.id">
+        <li v-for="comment in value.comments" :key="comment.id">
           <comment-post :avatar="comment.user.avatar" :text="comment.content" />
         </li>
       </ul>
       <div class="comment_input">
-       <comment :avatar="post.user.avatar" />
+       <comment :avatar="value.user.avatar" />
       </div>
     </div>
   </div>

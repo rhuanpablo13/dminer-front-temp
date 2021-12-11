@@ -5,7 +5,7 @@ import {
   fetchPost,
 } from '@/api/feed.js'
 
-export default function usePost(id) {
+export default function usePost() {
   const getPost = ref([])
 
   const crateComment = async (item) => {
@@ -16,12 +16,9 @@ export default function usePost(id) {
     return await fetchUpdate(item)
   }
 
-  const setPost = async () => {
+  const setPost = async (id) => {
     getPost.value =  await fetchPost(id)
   }
-
-
-  onMounted(setPost)
 
   return {
     update,

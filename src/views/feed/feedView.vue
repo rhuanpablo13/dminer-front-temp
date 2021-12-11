@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
     <widget-modal
-      v-if="showModalFeed"
+      v-if="showModalPost"
       title="feed"
       :onClick="openModal"
       @close="closeModalFeed"
@@ -9,7 +9,10 @@
     >
       <template v-slot:body>
         <div class="feed_container">
-            <post :value="getPost"  />
+          <div class="feed_all_container">
+            <post :value="getPost"  v-if="isLoading" />
+          </div>
+
          <div>
           <filter-feed
             @submit="filter"
@@ -38,22 +41,22 @@
 
 <script>
 import WidgetModal from '@/components/widget/WidgetModal.vue'
-import formCrud from './form.vue'
 
 import FildInput from '@/components/input/Fild.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
+import formCrud from './form.vue'
 
 import usePost from '@/composables/usePost'
-import { ref } from 'vue'
 import { useRoute } from "vue-router";
 
 export default {
   data() {
     return {
-      showModalFeed: true,
+      isLoading: false,
+      showModalPost: true,
       showModal: false,
       comment: '',
       filterData: {
@@ -65,22 +68,27 @@ export default {
   },
   setup() {
     const route = useRoute()
-    const value = ref()
     const idParam = route.params.id
-    const { getPost } = usePost(idParam)
 
+    const { getPost, setPost } = usePost()
 
-    return { getPost, viewAll: !!idParam }
+    setPost(idParam)
+
+    return { getPost}
+  },
+
+  created() {
+    setTimeout(() => { this.isLoading = true }, 1000)
   },
 
   components: {
     WidgetModal,
-    formCrud,
     FildInput,
     FildDate,
     Post,
     WidgetLayoutHome,
-    FilterFeed
+    FilterFeed,
+    formCrud
   },
   methods: {
     openModal() {
@@ -95,7 +103,7 @@ export default {
       this.showModal = false
     },
     closeModalFeed() {
-      this.showModalFeed = false
+      this.showModalPost = false
       this.$router.push('/')
     },
     clickView(id) {

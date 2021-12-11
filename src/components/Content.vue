@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     openFeedView(id) {
-      this.$router.push(`/feed/${id}`)
+      this.$router.push(`/post/${id}`)
     }
   }
 }
