@@ -1,6 +1,6 @@
 <template>
   <div class="container_input" @click="focus($event)">
-    <div class="input_text">
+    <div class="input_text" :title="text">
       <input
         :id="`container_input_${text}`"
         class="input_form"
@@ -55,6 +55,10 @@ export default {
 .input_label {
   text-transform: capitalize;
   text-align: start;
+  width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .input_form {

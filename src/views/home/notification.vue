@@ -7,7 +7,7 @@
     :onClick="openModal"
   >
     <ul>
-      <li v-for="item in $store.state.home.notificationlist" :key="item.id">
+      <li v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
         <icon-base
           viewBox="0 0 500 85.1"
           icon-name="icon"
