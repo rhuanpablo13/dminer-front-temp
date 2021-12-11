@@ -57,7 +57,7 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="user.type !== 'ADMINISTRADOR'" >
+      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="permissionADM" >
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>
@@ -124,6 +124,9 @@ export default {
     user: (state) => state.user,
     collapsed: (state) => state.sidebar.collapsed,
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
+    permissionADM() {
+      return this.$store.state.user.type !== 'ADMINISTRADOR'
+    }
   }),
 
   methods: {
