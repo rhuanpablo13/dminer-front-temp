@@ -30,10 +30,6 @@ export default function useFeed() {
     return await fetchUpdate(item)
   }
 
-  const getPost = async (id) => {
-    return await fetchPost(id)
-  }
-
   const setAllPost = async () => {
     getPostsAll.value =  await fetchAllPost()
   }
@@ -48,7 +44,6 @@ export default function useFeed() {
     create,
     update,
     crateComment,
-    getPost,
     setAllPost,
     getPostsAll,
     search

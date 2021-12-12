@@ -57,6 +57,7 @@ import { useRoute } from "vue-router";
 export default {
   data() {
     return {
+      interval: null,
       isLoading: false,
       showModalPost: true,
       showModal: false,
@@ -81,12 +82,18 @@ export default {
   },
 
   created() {
-    const interval = setInterval(() => { 
-      if (this.getPost.user.avatar) {
-        this.isLoading = true
-        clearInterval(interval)
-      }
-     }, 1000)
+    if (this.filterData.id) {
+      this.interval = setInterval(() => { 
+        if (this.getPost.user.avatar) {
+          this.isLoading = true
+          clearInterval( this.interval)
+        }
+       }, 1000)
+    }
+  },
+
+  unmounted() {
+     clearInterval( this.interval)
   },
 
   computed: mapState({

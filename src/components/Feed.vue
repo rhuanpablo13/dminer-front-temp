@@ -27,7 +27,7 @@
     </icon-feed>
   </icon-base>
   <transition name="fade" v-if="showModalView">
-    <feed-view :show="showModalView" @close="closeView"></feed-view>
+    <feed-view  ></feed-view>
   </transition>
 </template>
 
@@ -61,11 +61,7 @@ export default {
       console.log('save')
     },
     clickView() {
-      this.showModalView = true
       this.$router.push('/feed')
-    },
-    closeView() {
-      this.showModalView = false
     }
   }
 }
