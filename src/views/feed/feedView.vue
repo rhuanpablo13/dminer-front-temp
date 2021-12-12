@@ -25,10 +25,11 @@
               :value="filterData.date"
             />
 
-            <fild-input
+            <fild-select
               text="Filtrar por pessoa"
               v-model="filterData.user"
               :value="filterData.user"
+              :options="dropdownUser"
             />
           </filter-feed>
           </div>
@@ -40,9 +41,10 @@
 </template>
 
 <script>
-import WidgetModal from '@/components/widget/WidgetModal.vue'
+import { mapState } from 'vuex'
 
-import FildInput from '@/components/input/Fild.vue'
+import WidgetModal from '@/components/widget/WidgetModal.vue'
+import FildSelect from '@/components/input/FildSelect.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
@@ -61,20 +63,21 @@ export default {
       comment: '',
       filterData: {
         date: new Date(),
-        user: ''
+        user: '',
+        id: this.route.params.id
       },
-      isEdit: false
+      isEdit: false, 
     }
   },
   setup() {
     const route = useRoute()
     const idParam = route.params.id
 
-    const { getPost, setPost } = usePost()
+    const { getPost, setPost, search } = usePost()
 
     setPost(idParam)
 
-    return { getPost}
+    return { getPost, search, route}
   },
 
   created() {
@@ -86,9 +89,13 @@ export default {
      }, 1000)
   },
 
+  computed: mapState({
+    dropdownUser: (state) => state.dropdown.user,
+  }),
+
   components: {
     WidgetModal,
-    FildInput,
+    FildSelect,
     FildDate,
     Post,
     WidgetLayoutHome,
@@ -116,7 +123,9 @@ export default {
       this.$router.push(`/feed/${id}`)
     },
     filter() {
-      console.log(this.filterData)
+      if (this.filterData ) {
+        this.search(this.filterData)
+      }
     }
   }
 }

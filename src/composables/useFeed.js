@@ -1,11 +1,13 @@
 import { ref, onMounted } from 'vue'
+import { dateHourFormarUs } from '@/util/date'
 import {
   fetchAll,
   fetchCreate,
   fetchUpdate,
   fetchCreateComment,
   fetchPost,
-  fetchAllPost
+  fetchAllPost,
+  fetchSearchAll
 } from '@/api/feed.js'
 
 export default function useFeed() {
@@ -36,6 +38,10 @@ export default function useFeed() {
     getPostsAll.value =  await fetchAllPost()
   }
 
+  const search = async (data) => {
+    getPostsAll.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
+  }
+
   return {
     getFeeds,
     setFeed,
@@ -44,6 +50,7 @@ export default function useFeed() {
     crateComment,
     getPost,
     setAllPost,
-    getPostsAll
+    getPostsAll,
+    search
   }
 }
