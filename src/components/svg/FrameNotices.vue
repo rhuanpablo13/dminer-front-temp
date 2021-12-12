@@ -29,7 +29,7 @@
 	</g>
 	<g>
 		<g>
-			<polygon class="frame_notices_st10" points="333.9,323.4 87.4,323.4 106.3,298.5 315,298.5 			"/>
+			<polygon class="frame_notices_st10" points="333.9,323.4 87.4,323.4 106.3,298.5 315,298.5"/>
 		</g>
 		<g>
 			<g>
@@ -303,8 +303,8 @@
       </foreignObject>
 </template>
 
-<style scope>
-.frame_notices_st0{display:none;}
+<style >
+	.frame_notices_st0{display:none;}
 	.frame_notices_st1{display:inline;fill:#AAFF48;}
 	.frame_notices_st2{display:inline;fill:none;stroke:#020202;stroke-width:1.4206;stroke-miterlimit:10;}
 	.frame_notices_st3{display:inline;fill:#AAFF48;stroke:#020202;stroke-width:1.4206;stroke-miterlimit:10;}
@@ -316,7 +316,7 @@
 	.frame_notices_st9{fill:none;stroke:#AAFF48;stroke-width:1.8941;stroke-miterlimit:10;}
 	.frame_notices_st10{fill:#9FBEC9;stroke:#231F20;stroke-width:1.1366;stroke-miterlimit:10;}
 	
-		.frame_notices_st11{clip-path:url(#SVGID_00000106826222966342049530000012557337941107700111_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
+	.frame_notices_st11{clip-path:url(#SVGID_00000106826222966342049530000012557337941107700111_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st12{fill:#4C5D5F;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st13{clip-path:url(#SVGID_00000134969777336156165270000000374036519515566986_);}
 	.frame_notices_st14{fill:none;}
@@ -325,7 +325,7 @@
 	.frame_notices_st17{fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st18{fill:none;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	
-		.frame_notices_st19{clip-path:url(#SVGID_00000001628099285554896580000015430319876800436104_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
+	.frame_notices_st19{clip-path:url(#SVGID_00000001628099285554896580000015430319876800436104_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st20{clip-path:url(#SVGID_00000120533611414694943050000002485522398554048183_);}
 	.frame_notices_st21{clip-path:url(#SVGID_00000046318839320842261770000003682538610704175029_);fill:none;}
 	.frame_notices_st22{fill:#FFFFFF;stroke:#000000;stroke-width:1.1366;stroke-miterlimit:10;}
