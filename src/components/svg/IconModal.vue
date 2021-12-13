@@ -5,7 +5,7 @@
     />
     <g>
       <linearGradient
-        id="SVGID_1_"
+        id="ICONMODALSVGID_1_"
         gradientUnits="userSpaceOnUse"
         x1="248.3185"
         y1="195.9325"
@@ -60,7 +60,7 @@
   fill: #ffffff;
 }
 .icon_modal_st1 {
-  fill: url(#SVGID_1_);
+  fill: url(#ICONMODALSVGID_1_);
 }
 .icon_modal_st2 {
   fill: #aaff48;

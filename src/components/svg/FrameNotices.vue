@@ -41,13 +41,13 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_1_" x="439" y="245.7" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_1_" x="439" y="245.7" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000163068910661398126620000015986512485260043400_">
-												<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000163068910661398126620000015986512485260043400_">
+												<use xlink:href="#NOTICESSVGID_1_"  style="overflow:visible;"/>
 											</clipPath>
 											
-												<rect x="439" y="245.7" style="clip-path:url(#SVGID_00000163068910661398126620000015986512485260043400_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;" width="59.6" height="15.9"/>
+												<rect x="439" y="245.7" style="clip-path:url(#NOTICESSVGID_00000163068910661398126620000015986512485260043400_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;" width="59.6" height="15.9"/>
 										</g>
 									</g>
 								</g>
@@ -65,12 +65,12 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_00000046331193820767097100000003963358976381549975_" x="439" y="245.7" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_00000046331193820767097100000003963358976381549975_" x="439" y="245.7" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000088837601689409169060000007787165523753717122_">
-												<use xlink:href="#SVGID_00000046331193820767097100000003963358976381549975_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000088837601689409169060000007787165523753717122_">
+												<use xlink:href="#NOTICESSVGID_00000046331193820767097100000003963358976381549975_"  style="overflow:visible;"/>
 											</clipPath>
-											<g style="clip-path:url(#SVGID_00000088837601689409169060000007787165523753717122_);">
+											<g style="clip-path:url(#NOTICESSVGID_00000088837601689409169060000007787165523753717122_);">
 												<g>
 													<line class="frame_notices_st14" x1="478" y1="261.8" x2="483.3" y2="243.9"/>
 													
@@ -145,13 +145,13 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_00000129917454610233183070000017114996665714235565_" x="439" y="245.7" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_00000129917454610233183070000017114996665714235565_" x="439" y="245.7" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000115493462991990383710000012037055992773817006_">
-												<use xlink:href="#SVGID_00000129917454610233183070000017114996665714235565_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000115493462991990383710000012037055992773817006_">
+												<use xlink:href="#NOTICESSVGID_00000129917454610233183070000017114996665714235565_"  style="overflow:visible;"/>
 											</clipPath>
 											
-												<rect x="438.2" y="245.4" style="clip-path:url(#SVGID_00000115493462991990383710000012037055992773817006_);fill:none;" width="59.6" height="15.9"/>
+												<rect x="438.2" y="245.4" style="clip-path:url(#NOTICESSVGID_00000115493462991990383710000012037055992773817006_);fill:none;" width="59.6" height="15.9"/>
 										</g>
 									</g>
 								</g>
@@ -172,13 +172,13 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_00000026126083150087079050000011997184122610031253_" x="439" y="86.1" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_00000026126083150087079050000011997184122610031253_" x="439" y="86.1" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000021113300746219794890000005599848850579829177_">
-												<use xlink:href="#SVGID_00000026126083150087079050000011997184122610031253_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000021113300746219794890000005599848850579829177_">
+												<use xlink:href="#NOTICESSVGID_00000026126083150087079050000011997184122610031253_"  style="overflow:visible;"/>
 											</clipPath>
 											
-												<rect x="439" y="86.1" style="clip-path:url(#SVGID_00000021113300746219794890000005599848850579829177_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;" width="59.6" height="15.9"/>
+												<rect x="439" y="86.1" style="clip-path:url(#NOTICESSVGID_00000021113300746219794890000005599848850579829177_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;" width="59.6" height="15.9"/>
 										</g>
 									</g>
 								</g>
@@ -196,12 +196,12 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_00000170965935357279405540000014082994663442091917_" x="439" y="86.1" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_00000170965935357279405540000014082994663442091917_" x="439" y="86.1" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000151538001441984296190000008438457912086990763_">
-												<use xlink:href="#SVGID_00000170965935357279405540000014082994663442091917_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000151538001441984296190000008438457912086990763_">
+												<use xlink:href="#NOTICESSVGID_00000170965935357279405540000014082994663442091917_"  style="overflow:visible;"/>
 											</clipPath>
-											<g style="clip-path:url(#SVGID_00000151538001441984296190000008438457912086990763_);">
+											<g style="clip-path:url(#NOTICESSVGID_00000151538001441984296190000008438457912086990763_);">
 												<g>
 													<line class="frame_notices_st14" x1="478" y1="102.2" x2="483.3" y2="84.4"/>
 													
@@ -276,13 +276,13 @@
 									<g>
 										<g>
 											<defs>
-												<rect id="SVGID_00000027567131416319954600000013389048671890405030_" x="439" y="86.1" width="59.6" height="15.9"/>
+												<rect id="NOTICESSVGID_00000027567131416319954600000013389048671890405030_" x="439" y="86.1" width="59.6" height="15.9"/>
 											</defs>
-											<clipPath id="SVGID_00000165955458145833250570000007841268982867757725_">
-												<use xlink:href="#SVGID_00000027567131416319954600000013389048671890405030_"  style="overflow:visible;"/>
+											<clipPath id="NOTICESSVGID_00000165955458145833250570000007841268982867757725_">
+												<use xlink:href="#NOTICESSVGID_00000027567131416319954600000013389048671890405030_"  style="overflow:visible;"/>
 											</clipPath>
 											
-												<rect x="438.2" y="85.9" style="clip-path:url(#SVGID_00000165955458145833250570000007841268982867757725_);fill:none;" width="59.6" height="15.9"/>
+												<rect x="438.2" y="85.9" style="clip-path:url(#NOTICESSVGID_00000165955458145833250570000007841268982867757725_);fill:none;" width="59.6" height="15.9"/>
 										</g>
 									</g>
 								</g>
@@ -316,17 +316,17 @@
 	.frame_notices_st9{fill:none;stroke:#AAFF48;stroke-width:1.8941;stroke-miterlimit:10;}
 	.frame_notices_st10{fill:#9FBEC9;stroke:#231F20;stroke-width:1.1366;stroke-miterlimit:10;}
 	
-	.frame_notices_st11{clip-path:url(#SVGID_00000106826222966342049530000012557337941107700111_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
+	.frame_notices_st11{clip-path:url(#NOTICESSVGID_00000106826222966342049530000012557337941107700111_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st12{fill:#4C5D5F;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
-	.frame_notices_st13{clip-path:url(#SVGID_00000134969777336156165270000000374036519515566986_);}
+	.frame_notices_st13{clip-path:url(#NOTICESSVGID_00000134969777336156165270000000374036519515566986_);}
 	.frame_notices_st14{fill:none;}
 	.frame_notices_st15{fill:#1F191A;}
-	.frame_notices_st16{clip-path:url(#SVGID_00000065785132898401545030000009603659601757917864_);fill:none;}
+	.frame_notices_st16{clip-path:url(#NOTICESSVGID_00000065785132898401545030000009603659601757917864_);fill:none;}
 	.frame_notices_st17{fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	.frame_notices_st18{fill:none;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
 	
-	.frame_notices_st19{clip-path:url(#SVGID_00000001628099285554896580000015430319876800436104_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
-	.frame_notices_st20{clip-path:url(#SVGID_00000120533611414694943050000002485522398554048183_);}
-	.frame_notices_st21{clip-path:url(#SVGID_00000046318839320842261770000003682538610704175029_);fill:none;}
+	.frame_notices_st19{clip-path:url(#NOTICESSVGID_00000001628099285554896580000015430319876800436104_);fill:#9FBEC9;stroke:#231F20;stroke-width:1.4029;stroke-miterlimit:10;}
+	.frame_notices_st20{clip-path:url(#NOTICESSVGID_00000120533611414694943050000002485522398554048183_);}
+	.frame_notices_st21{clip-path:url(#NOTICESSVGID_00000046318839320842261770000003682538610704175029_);fill:none;}
 	.frame_notices_st22{fill:#FFFFFF;stroke:#000000;stroke-width:1.1366;stroke-miterlimit:10;}
 </style>

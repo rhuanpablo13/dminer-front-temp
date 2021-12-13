@@ -6,7 +6,7 @@
           <g>
             <defs>
               <rect
-                id="SVGID_1_"
+                id="PUBLICATIONSVGID_1_"
                 x="442.3"
                 y="127.4"
                 width="55.3"
@@ -14,16 +14,16 @@
               />
             </defs>
             <clipPath
-              id="SVGID_00000127725241304054106620000003610987576892466081_"
+              id="PUBLICATIONSVGID_00000127725241304054106620000003610987576892466081_"
             >
-              <use xlink:href="#SVGID_1_" style="overflow: visible" />
+              <use xlink:href="#PUBLICATIONSVGID_1_" style="overflow: visible" />
             </clipPath>
 
             <rect
               x="442.3"
               y="127.4"
               style="
-                clip-path: url(#SVGID_00000127725241304054106620000003610987576892466081_);
+                clip-path: url(#PUBLICATIONSVGID_00000127725241304054106620000003610987576892466081_);
                 fill: #9fbec9;
                 stroke: #231f20;
                 stroke-width: 0.5228;
@@ -50,7 +50,7 @@
           <g>
             <defs>
               <rect
-                id="SVGID_00000008121052014873860050000015297749339879419042_"
+                id="PUBLICATIONSVGID_00000008121052014873860050000015297749339879419042_"
                 x="442.3"
                 y="127.4"
                 width="55.3"
@@ -58,16 +58,16 @@
               />
             </defs>
             <clipPath
-              id="SVGID_00000155121736198092108620000015406182015083586693_"
+              id="PUBLICATIONSVGID_00000155121736198092108620000015406182015083586693_"
             >
               <use
-                xlink:href="#SVGID_00000008121052014873860050000015297749339879419042_"
+                xlink:href="#PUBLICATIONSVGID_00000008121052014873860050000015297749339879419042_"
                 style="overflow: visible"
               />
             </clipPath>
             <g
               style="
-                clip-path: url(#SVGID_00000155121736198092108620000015406182015083586693_);
+                clip-path: url(#PUBLICATIONSVGID_00000155121736198092108620000015406182015083586693_);
               "
             >
               <g>
@@ -223,7 +223,7 @@
           <g>
             <defs>
               <rect
-                id="SVGID_00000183941109871893104180000000067433976708526763_"
+                id="PUBLICATIONSVGID_00000183941109871893104180000000067433976708526763_"
                 x="442.3"
                 y="127.4"
                 width="55.3"
@@ -231,10 +231,10 @@
               />
             </defs>
             <clipPath
-              id="SVGID_00000111890321721811037140000005531539544670813315_"
+              id="PUBLICATIONSVGID_00000111890321721811037140000005531539544670813315_"
             >
               <use
-                xlink:href="#SVGID_00000183941109871893104180000000067433976708526763_"
+                xlink:href="#PUBLICATIONSVGID_00000183941109871893104180000000067433976708526763_"
                 style="overflow: visible"
               />
             </clipPath>
@@ -243,7 +243,7 @@
               x="441.7"
               y="127.2"
               style="
-                clip-path: url(#SVGID_00000111890321721811037140000005531539544670813315_);
+                clip-path: url(#PUBLICATIONSVGID_00000111890321721811037140000005531539544670813315_);
                 fill: none;
               "
               width="55.3"
@@ -265,7 +265,7 @@
 
 <style scoped>
 .icon_publication_st0 {
-  clip-path: url(#SVGID_00000158740556573112831260000012602091070573924501_);
+  clip-path: url(#PUBLICATIONSVGID_00000158740556573112831260000012602091070573924501_);
   fill: #9fbec9;
   stroke: #231f20;
   stroke-width: 0.5228;
@@ -278,7 +278,7 @@
   stroke-miterlimit: 10;
 }
 .icon_publication_st2 {
-  clip-path: url(#SVGID_00000038399087792561685310000004203553524676680587_);
+  clip-path: url(#PUBLICATIONSVGID_00000038399087792561685310000004203553524676680587_);
 }
 .icon_publication_st3 {
   fill: none;
@@ -287,7 +287,7 @@
   fill: #1f191a;
 }
 .icon_publication_st5 {
-  clip-path: url(#SVGID_00000183936747017426217500000002067206169079256246_);
+  clip-path: url(#PUBLICATIONSVGID_00000183936747017426217500000002067206169079256246_);
   fill: none;
 }
 .icon_publication_st6 {
