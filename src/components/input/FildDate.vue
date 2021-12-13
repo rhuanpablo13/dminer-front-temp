@@ -15,6 +15,10 @@
         placeholder="Selecione a data"
         locale="pt-BR"
         inputFormat="dd-MM-yyyy"
+        selectText="selecionar"
+        cancelText="cancelar"
+        :format="dateHourFormart"
+        :previewFormat="dateHourFormart"
       ></Datepicker>
 
       <div>
@@ -34,12 +38,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
+import { dateHourFormart } from '@/util/date'
+
 import Datepicker from 'vue3-date-time-picker'
 import 'vue3-date-time-picker/dist/main.css'
-import { ref } from 'vue'
 
 export default {
   props: {
@@ -50,11 +56,11 @@ export default {
 
   setup(props) {
     const date = ref([])
-
     date.value = new Date(props.value) || new Date()
 
     return {
-      date
+      date,
+      dateHourFormart
     }
   },
   computed: {

@@ -19,6 +19,6 @@ export const fetchUpdate = async (item) => {
 }
 
 export const fetchQuizAnswer = async (id, option, login) => {
-  const response = await apiIntra.put(`${URL}/answer/${id}/${login}/${option}`)
+  const response = await apiIntra.post(`${URL}/answer/${id}/${login}/${option}`)
   return messagesFetch('update', response.status, response.data.data)
 }
