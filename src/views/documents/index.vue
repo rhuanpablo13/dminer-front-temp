@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
@@ -70,11 +72,13 @@ export default {
 
     return { getDocuments, setDocument, deleteItem, search }
   },
-  computed: {
+
+  computed: mapState({
     permissionADM() {
-      return this.$store.state.user.type === 'ADMINISTRADOR'
+      return this.$store.state.user.type !== 'ADMINISTRADOR' 
     }
-  },
+  }),
+
   components: {
     WidgetModal,
     formCrud,

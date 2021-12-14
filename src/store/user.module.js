@@ -5,7 +5,7 @@ const initialState = {
   avatar: '',
   banner: '',
   login: '',
-  permission: ''
+  type: ''
 }
 const userLocalStorage = localStorage.user
   ? JSON.parse(localStorage.user)
@@ -18,14 +18,9 @@ export const user = {
   state: userLocalStorage,
   actions: {
     setUser({ commit, state }, user) {
-      const user_ = {
-        ...state,
-        name: user.usuario,
-        login: user.login,
-        permission: user.type
-      }
+      state = user
       this.dispatch('home/search', null)
-      this.dispatch('user/avatar', user_)
+      this.dispatch('user/avatar', state)
     },
     avatar({ commit, state }, user) {
       getAvatar(user.login).then(
@@ -58,7 +53,6 @@ export const user = {
         }
       )
     },
-
     updateBanner({ commit, state }, banner) {
       updateBanner(state.login, banner).then(
         (response) => {
@@ -77,7 +71,6 @@ export const user = {
   mutations: {
     success(state, user) {
       state = user
-      
     },
     failure(state) {
       state.user = initialState
