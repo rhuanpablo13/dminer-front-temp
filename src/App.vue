@@ -13,6 +13,9 @@ export default {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn
     },
+    banner() {
+      return !!this.$store.state.user.banner
+    },
   }
 }
 </script>
@@ -20,7 +23,7 @@ export default {
   <transition name="fade" v-if="loggedIn">
     <div>
       <Sidebar />
-      <Banner />
+      <Banner :isLoading="banner"/>
 
       <Content />
     </div>
