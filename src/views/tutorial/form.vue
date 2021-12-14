@@ -9,26 +9,26 @@
 
       <div class="tutorial_form_container_text">
         <fild-input
-          :text="'Título'"
+          text="Título"
           v-model="value.title"
           :value="value.title"
           required
         />
         <fild-input
-          :text="'Conteúdo'"
+          text="Conteúdo"
           v-model="value.content"
           :value="value.content"
           required
         />
         <fild-select
-          :text="'Categoria'"
+          text="Categoria"
           v-model="value.category"
           :value="value.category"
           required
           :options="getCategories"
         />
         <fild-select
-          :text="'Permissão'"
+          text="Permissão"
           v-model="value.permission"
           :value="value.permission"
           required
@@ -84,6 +84,7 @@ export default {
 
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
+    login: (state) => state.user.login,
   }),
 
 
@@ -109,7 +110,7 @@ export default {
     },
     validForm() {
       this.value.date = dateHourFormarUs(new Date())
-      this.value.creator = this.$store.state.user.login
+      this.value.creator = this.login
       return Object.values(this.value).every((item) => !!item)
     }
   }
