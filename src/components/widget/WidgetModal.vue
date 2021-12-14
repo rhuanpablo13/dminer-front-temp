@@ -28,7 +28,7 @@
               </button>
             <section class="header__section" v-if="search">
               <form action="#" @submit.prevent="$emit('submit', inputValue)">
-                <inputDate v-model="inputValue" />
+                <fild-search v-model="inputValue" />
               </form>
             </section>
             </div>
@@ -73,7 +73,7 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconButtonClose from '@/components/svg/IconButtonClose.vue'
 import IconModalFolder from '@/components/svg/IconModalFolder.vue'
 import IconButton from '@/components/svg/IconButton.vue'
-import InputDate from '@/components/input/InputDate.vue'
+import FildSearch from '@/components/input/FildSearch.vue'
 
 export default {
   data () {
@@ -106,7 +106,7 @@ export default {
     IconModalFolder,
     IconFolderFeed,
     IconButton,
-    InputDate
+    FildSearch
   }
 }
 </script>

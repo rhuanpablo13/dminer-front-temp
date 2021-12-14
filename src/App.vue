@@ -22,7 +22,7 @@ export default {
 <template>
   <transition name="fade" v-if="loggedIn">
     <div>
-      <Sidebar />
+      <Sidebar :isLoading="banner"/>
       <Banner :isLoading="banner"/>
 
       <Content />

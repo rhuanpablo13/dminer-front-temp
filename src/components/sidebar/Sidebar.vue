@@ -57,7 +57,7 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="permissionADM" >
+      <SidebarLink to="/permissoes" icon="fas fa-image" :disabled="permissionADM && !isLoading" >
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>
@@ -104,6 +104,7 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
+  props: { isLoading: { type: Boolean, required: false, default: false}},
   components: {
     SidebarLink,
     Avatar,
