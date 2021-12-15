@@ -7,6 +7,8 @@ export default function useAuth() {
       localStorage.user = JSON.stringify(auth)
       return auth
     }
+
+     throw 400
   }
 
   const logout = () => {
