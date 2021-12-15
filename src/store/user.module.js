@@ -1,7 +1,7 @@
 import useUser from '@/composables/useUser'
 
 const initialState = {
-  name: '',
+  usuario: '',
   avatar: '',
   banner: '',
   login: '',
@@ -73,6 +73,7 @@ export const user = {
   mutations: {
     userSuccess(state, user) {
       state.type = user.type
+      state.usuario = user.usuario
     },
     success(state, user) {
       state = user
