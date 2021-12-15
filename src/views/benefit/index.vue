@@ -116,6 +116,7 @@ export default {
       }, 300)
     },
     setDoc(value) {
+      this.value = value
       this.openModal()
     },
     close() {

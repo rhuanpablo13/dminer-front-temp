@@ -91,7 +91,7 @@ export default {
     },
     validForm() {
       this.value.idUser = this.getUser
-      return Object.values(this.value).every((item) => !!item)
+     return  this.value.hasOwnProperty('notification') && this.value?.notification !== "" 
     },
     openModal() {
       this.showModal = true

@@ -11,7 +11,7 @@
       <template v-slot:footer>
         <div class="filter_button">
           <Send
-            @click="$emit('submit')"
+            @click="$emit('submit', $event)"
             type="submit"
             width="100%"
             text="Enviar"

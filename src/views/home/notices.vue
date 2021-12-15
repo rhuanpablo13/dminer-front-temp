@@ -174,7 +174,11 @@ export default {
       }
     },
     validForm() {
-      return Object.values(this.value).every((item) => !!item)
+     return  this.value.hasOwnProperty('warning') && this.value?.warning !== "" && 
+              this.value.hasOwnProperty('priority') && this.value?.priority !== 0 &&
+              this.value.hasOwnProperty('users') && this.value?.users !== "" && 
+              this.value.hasOwnProperty('creator') && this.value?.creator !== "" &&  
+              this.value.hasOwnProperty('date') && this.value?.date !== "" 
     }
   }
 }

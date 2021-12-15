@@ -10,6 +10,7 @@ export const fetchAll = async () => {
 
 export const fetchCreate = async (item) => {
   const response = await apiIntra.post(`${URL}`, item)
+  debugger
   return messagesFetch('registration', response.status, response.data.data)
 }
 

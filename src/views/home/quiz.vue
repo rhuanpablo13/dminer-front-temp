@@ -137,7 +137,10 @@ export default {
     },
     validForm() {
       this.value.date = dateHourFormarUs(this.value.date)
-      return Object.values(this.value).every((item) => !!item)
+      return  this.value.hasOwnProperty('question') && this.value?.question !== "" && 
+              this.value.hasOwnProperty('date') && this.value?.date !== "" &&
+              this.value.hasOwnProperty('optionA') && this.value?.optionA !== "" &&
+              this.value.hasOwnProperty('optionB') && this.value?.optionB !== ""
     },
     openModal() {
       this.showModal = true

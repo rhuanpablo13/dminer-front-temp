@@ -121,7 +121,8 @@ export default {
     },
     validForm() {
       this.value.login = this.getUser
-      return Object.values(this.value).every((item) => !!item)
+      return  this.value.hasOwnProperty('reminder') && this.value?.reminder !== "" && 
+              this.value.hasOwnProperty('date') && this.value?.date !== ""
     },
     openModal() {
       this.showModal = true

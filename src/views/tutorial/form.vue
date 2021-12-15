@@ -111,7 +111,11 @@ export default {
     validForm() {
       this.value.date = dateHourFormarUs(new Date())
       this.value.creator = this.login
-      return Object.values(this.value).every((item) => !!item)
+      return  this.value.hasOwnProperty('title') && this.value?.title !== "" && 
+              this.value.hasOwnProperty('content') && this.value?.content !== "" &&
+              this.value.hasOwnProperty('permission') && this.value?.permission !== 0 && 
+              this.value.hasOwnProperty('category') && this.value?.category !== 0 && 
+              this.value.hasOwnProperty('image') && this.value?.image 
     }
   }
 }

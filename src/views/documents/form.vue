@@ -2,7 +2,7 @@
   <form-modal
     :showModal="showModal"
     title="cadastro de documentos"
-    @submit="sendForm"
+    @submit="sendForm()"
   >
     <div class="form_container">
       <div class="form_container_text">
@@ -58,7 +58,7 @@ export default {
       default: {
         title: '',
         category: 0,
-        permissions: 0,
+        permission: 0,
         contentLink: ''
       }
     }
@@ -74,8 +74,7 @@ export default {
   }),
 
   methods: {
-    sendForm(e) {
-      debugger
+    sendForm() {
       this.$store.dispatch('form/setLoading')
 
       if (this.validForm()) {
@@ -95,10 +94,10 @@ export default {
       }
     },
     validForm() {
-
-      // this.value.title || this.value.category || this.value.permissions || this.value.contentLink 
-
-      return Object.values(this.value).every((item) => !!item)
+      return  this.value.hasOwnProperty('title') && this.value?.title !== "" && 
+              this.value.hasOwnProperty('category') && this.value?.category !== 0 &&
+              this.value.hasOwnProperty('permission') && this.value?.permission !== 0 && 
+              this.value.hasOwnProperty('contentLink') && this.value?.contentLink !== "" 
     }
   }
 }
