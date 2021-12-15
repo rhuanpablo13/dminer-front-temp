@@ -51,7 +51,7 @@ export default {
       value: {
         userName: '',
         userPassword: '',
-        type: 'painel'
+        // type: 'painel'
       }
     }
   },
