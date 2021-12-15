@@ -34,7 +34,7 @@ export default {
   },
   props: {
     showModal: { type: Boolean, required: true },
-    title: { type: String, required: true }
+    title: { type: String, required: true },
   }
 }
 </script>

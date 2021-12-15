@@ -65,7 +65,7 @@ import useDocument from '@/composables/useDocument'
 
 export default {
   data() {
-    return { showModalEquipe: true, showModal: false, value: {}, isEdit: false }
+    return { showModalEquipe: true, showModal: false, value: {}, isEdit: false}
   },
   setup() {
     const { getDocuments, setDocument, deleteItem, search } = useDocument()
@@ -74,9 +74,7 @@ export default {
   },
 
   computed: mapState({
-    permissionADM() {
-      return this.$store.state.user.type !== 'ADMINISTRADOR' 
-    }
+    permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
   }),
 
   components: {

@@ -19,8 +19,10 @@ export const user = {
   actions: {
     setUser({ commit, state }, user) {
       state = user
-      this.dispatch('home/search', null)
+      commit('userSuccess', user)
+
       this.dispatch('user/avatar', state)
+      this.dispatch('home/search', null)
     },
     avatar({ commit, state }, user) {
       getAvatar(user.login).then(
@@ -28,7 +30,7 @@ export const user = {
           state.avatar = response
           this.dispatch('user/banner', user)
 
-          return Promise.resolve(response)
+          // return Promise.resolve(response)
         },
         (error) => {
           console.error(error)
@@ -44,7 +46,7 @@ export const user = {
           commit('success', user)
 
 
-          return Promise.resolve(response)
+          // return Promise.resolve(response)
         },
         (error) => {
           console.error(error)
@@ -69,6 +71,9 @@ export const user = {
     }
   },
   mutations: {
+    userSuccess(state, user) {
+      state.type = user.type
+    },
     success(state, user) {
       state = user
     },

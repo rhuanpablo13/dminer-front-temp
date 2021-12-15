@@ -16,7 +16,7 @@
         'is-success': isSuccess,
         'is-error': isError
       }"
-      :style="{ width: width }"
+      :style="{ width: width}"
     >
       <svg viewBox="0 0 90.594 59.714" id="svgbtn" v-if="isSuccess">
         <polyline
@@ -155,8 +155,8 @@ export default {
 }
 
 .is-success #svgbtn {
-  width: 20%;
-  height: 20%;
+  width: 4rem;
+  height: 3rem;
 }
 
 .check {

@@ -87,9 +87,7 @@ export default {
     return { getTutorials, getPermission, setTutorial, deleteItem, search }
   },
   computed: mapState({
-    permissionADM() {
-      return this.$store.state.user.type !== 'ADMINISTRADOR' 
-    }
+    permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
   }),
   components: {
     WidgetModal,

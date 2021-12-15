@@ -2,7 +2,7 @@
   <form-modal
     :showModal="showModal"
     title="cadastro de documentos"
-    @submit="sendForm(e)"
+    @submit="sendForm"
   >
     <div class="form_container">
       <div class="form_container_text">
@@ -95,6 +95,9 @@ export default {
       }
     },
     validForm() {
+
+      // this.value.title || this.value.category || this.value.permissions || this.value.contentLink 
+
       return Object.values(this.value).every((item) => !!item)
     }
   }
