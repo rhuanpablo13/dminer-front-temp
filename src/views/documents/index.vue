@@ -11,7 +11,7 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in getDocuments" :key="key">
-            <a :href="item.content" target="_blank">
+            <a :href="item.contentLink" target="_blank">
               {{ item.title }}
             </a>
             <button class="team_btn_edit" v-if="permissionADM">
@@ -137,6 +137,8 @@ li {
 a {
   text-decoration: none;
   color: var(--color-title);
+  cursor: pointer;
+   z-index: 3;
 }
 .icon_green {
   width: 0.5rem;
@@ -162,5 +164,6 @@ a {
 .fild_container_icon {
   position: absolute;
   left: -1rem;
+  z-index: 2;
 }
 </style>
