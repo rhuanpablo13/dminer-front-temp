@@ -14,12 +14,6 @@
           :value="value.title"
           required
         />
-        <fild-input
-          text="Conteúdo"
-          v-model="value.content"
-          :value="value.content"
-          required
-        />
         <fild-select
           text="Categoria"
           v-model="value.category"
@@ -34,6 +28,13 @@
           required
           :options="dropdownPermission"
         />
+        <fild-textarea
+          text="Conteúdo"
+          v-model="value.content"
+          :value="value.content"
+          required
+        />
+
       </div>
     </div>
   </form-modal>
@@ -44,6 +45,7 @@ import { mapState } from 'vuex'
 
 import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
+import FildTextarea from '@/components/input/FildTextarea.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
@@ -57,7 +59,8 @@ export default {
     FildInput,
     FormModal,
     FildSelect,
-    UploadImage
+    UploadImage,
+    FildTextarea
   },
   props: {
     showModal: { type: Boolean, required: true },
