@@ -5,12 +5,12 @@
       title="tutorial"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      search
+      :search="isAll"
       @submit="submit"
     >
       <template v-slot:body>
-        <ul>
-          <li v-for="(item, key) in getTutorials" :key="key">
+        <ul v-if="isAll">
+          <li v-for="(item, key) in getTutorials" :key="key" @click="setItem(item)">
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
@@ -30,8 +30,9 @@
             <image-details
               :image="item.image"
               :category="item.category"
-              imageW="6rem"
-              imageH="6rem"
+              imageW="9rem"
+              imageH="9rem"
+              className="image_details_wrapper"
             >
               <template v-slot:title>{{ item.title }}</template>
               <template v-slot:content>{{ item.content }}</template>
@@ -46,6 +47,19 @@
             </icon-base>
           </li>
         </ul>
+
+        <div v-else>
+          <image-details
+            :image="doc.image"
+            :category="doc.category"
+            imageW="22rem"
+            imageH="10rem"
+            className="image_details_wrapper_grid"
+          >
+            <template v-slot:title>{{ doc.title }}</template>
+            <template v-slot:content>{{ doc.content }}</template>
+          </image-details>
+        </div>
       </template>
     </widget-modal>
   </transition>
@@ -77,7 +91,9 @@ export default {
       showModalPrimary: true,
       showModal: false,
       value: {},
-      isEdit: false
+      isEdit: false, 
+      isAll: true,
+      doc: {}
     }
   },
   setup() {
@@ -109,6 +125,10 @@ export default {
     setDoc(value) {
       this.value = value
       this.openModal()
+    },
+    setItem(item){
+      this.isAll = false
+      this.doc = item
     },
     deleteTutorial(id) {
       this.deleteItem(id)
@@ -144,6 +164,7 @@ ul {
 li {
   position: relative;
   width: 95%;
+  cursor: pointer;
 }
 
 .team_btn_edit {

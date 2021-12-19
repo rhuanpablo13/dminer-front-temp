@@ -1,11 +1,11 @@
 <template>
-  <div class="image_details_wrapper">
+  <div :class="className">
     <div
       class="image_details_image"
       :style="{
         'background-image': `url(${image})`,
         width: imageW,
-        height: imageH
+        height: imageH,
       }"
     ></div>
     <div class="image_details_content">
@@ -26,24 +26,33 @@ export default {
     image: { type: String, required: true },
     category: { type: String, required: false, default: '' },
     imageW: { type: String, required: false, default: '100%' },
-    imageH: { type: String, required: false, default: '100%' }
+    imageH: { type: String, required: false, default: '100%' },
+    className: {  type: String, required: false, default: 'image_details_wrapper' }
   }
 }
 </script>
 
 <style scoped>
+.image_details_wrapper_grid {
+  display: grid;
+  padding: 0.5rem;
+  word-wrap: break-word;
+  margin: auto;
+  justify-content: center;
+  align-content: center;
+}
 .image_details_wrapper {
   display: flex;
   margin-top: 1rem;
   padding: 0.5rem;
   word-wrap: break-word;
+  margin-left: 2rem;
 }
 
 .image_details_image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-left: 2rem;
 }
 
 .image_details_content {
@@ -53,7 +62,8 @@ export default {
   font-size: 0.5rem;
   text-overflow: ellipsis;
   padding: 0rem 1rem;
-  width: 10rem;
+  max-width: 25rem;
+  /* width: 10rem; */
 }
 
 .image_details_categorie {
