@@ -7,31 +7,29 @@
     <div class="form_container">
       <div class="form_container_text">
         <fild-input
-          :text="'Título'"
+          text="Título"
           v-model="value.title"
           :value="value.title"
           required
         />
         <fild-input
-          :text="'Link'"
+          text="Link"
           v-model="value.contentLink"
           :value="value.contentLink"
           required
         />
         <fild-select
-          :text="'Permissão'"
-          v-model="value.permission"
-          :value="value.permission"
-          required
-          :options="dropdownPermission"
-        />
-
-        <fild-select
-          :text="'Categoria'"
+          text="Categoria"
           v-model="value.category"
           :value="value.category"
           required
           :options="getCategories"
+        />
+        <fild-checkbox
+          text="Documento Interno"
+          v-model="value.permission"
+          type="checkbox"
+          @change="value.permission = !value.permission"
         />
       </div>
     </div>
@@ -43,12 +41,13 @@ import { mapState } from 'vuex'
 import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
+import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import useDocument from '@/composables/useDocument'
 import useCategory from '@/composables/useCategory'
 
 export default {
-  components: { FildInput, FormModal, FildSelect },
+  components: { FildInput, FormModal, FildSelect, FildCheckbox },
   props: {
     showModal: { type: Boolean, required: true },
     isEdit: false,

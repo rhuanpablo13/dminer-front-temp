@@ -155,6 +155,7 @@ export default {
   margin: 1rem 0;
   width: 95%;
   max-height: 330px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 .modal-body-no-overflow {
