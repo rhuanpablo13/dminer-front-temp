@@ -59,7 +59,16 @@
             <template v-slot:title>{{ doc.title }}</template>
             <template v-slot:content>{{ doc.content }}</template>
           </image-details>
+          <icon-base
+            icon-name="icon"       
+            class="back_icon"
+            @click="this.isAll = true"
+            width="1rem"
+          >
+          <icon-open/>
+          </icon-base>
         </div>
+
       </template>
     </widget-modal>
   </transition>
@@ -84,6 +93,7 @@ import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useTutorial from '@/composables/useTutorial'
 import usePermission from '@/composables/usePermission'
+import IconOpen from '../../components/svg/IconOpen.vue'
 
 export default {
   data() {
@@ -100,7 +110,7 @@ export default {
     const { getTutorials, setTutorial, deleteItem, search } = useTutorial()
     const { getPermission } = usePermission()
 
-    return { getTutorials, getPermission, setTutorial, deleteItem, search, debounce }
+    return { getTutorials, getPermission, setTutorial, deleteItem, search }
   },
   computed: mapState({
     permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
@@ -112,8 +122,9 @@ export default {
     IconBase,
     ImageDetails,
     IconLine,
-    IconTrash
-  },
+    IconTrash,
+    IconOpen
+},
   methods: {
     openModal() {
       this.showModal = true
@@ -191,5 +202,12 @@ a {
   position: absolute;
   bottom: -4.5rem;
   left: 1rem;
+}
+.back_icon {
+  position: absolute;
+  left: 5rem;
+  top: -1rem;
+  transform: rotateY(180deg);
+  cursor: pointer;
 }
 </style>
