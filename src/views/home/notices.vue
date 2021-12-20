@@ -16,21 +16,23 @@
           height="100%"
         >
           <frame-notices>
-            <Title>
-              {{ item.creator }}
-            </Title>
-            <span class="">{{ item.warning }}</span>
-            <div class="notices_footer">
-              <span>
-                <b>Prioridade:</b>
-                {{ getPriority(item.priority) }}
-              </span>
+            <div class="notices_container">
+              <Title>
+                {{ item.creator }}
+              </Title>
+              <span class="">{{ item.warning }}</span>
+              <div class="notices_footer">
+                <span>
+                  <b>Prioridade:</b>
+                  {{ getPriority(item.priority) }}
+                </span>
 
-              <br />
-              <span>
-                <b>Data:</b>
-                {{ dateHourFormart(item.date) }}
-              </span>
+                <br />
+                <span>
+                  <b>Data:</b>
+                  {{ dateHourFormart(item.date) }}
+                </span>
+              </div>
             </div>
           </frame-notices>
         </icon-base>
@@ -185,6 +187,12 @@ export default {
 </script>
 
 <style scoped>
+
+.notices_container {
+  justify-content: center;
+  display: grid;
+}
+
 .folder__notification__content {
   width: 108%;
   margin-left: -12px;
