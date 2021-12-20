@@ -27,8 +27,8 @@
                 </icon-base>
               </button>
             <section class="header__section" v-if="search">
-              <form action="#" @submit.prevent="$emit('submit', inputValue)">
-                <fild-search v-model="inputValue" />
+              <form action="#" @submit.prevent="$emit('change')">
+                <fild-search @change="$emit('change')"/>
               </form>
             </section>
             </div>

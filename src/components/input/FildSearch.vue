@@ -10,7 +10,7 @@
       <div class="container__provisorio">
         <input
           :value="value"
-          @change="$emit('update:modelValue', $event.target.value)"
+          @change="$emit('change')"
         />
       </div>
     </input-search>
@@ -28,21 +28,6 @@ export default {
     value: {
       type: String,
       required: true
-    }
-  },
-  data() {
-    return {
-      date: dateNowFormart()
-    }
-  },
-  computed: {
-    value: {
-      get() {
-        return this.modelValue
-      },
-      set(value) {
-        this.$emit('update:modelValue', value)
-      }
     }
   }
 }

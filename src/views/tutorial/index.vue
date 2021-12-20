@@ -6,7 +6,7 @@
       :onClick="setDoc"
       @close="this.$router.push('/')"
       :search="isAll"
-      @submit="submit"
+      @change="submit"
     >
       <template v-slot:body>
         <ul v-if="isAll">
@@ -100,7 +100,7 @@ export default {
     const { getTutorials, setTutorial, deleteItem, search } = useTutorial()
     const { getPermission } = usePermission()
 
-    return { getTutorials, getPermission, setTutorial, deleteItem, search }
+    return { getTutorials, getPermission, setTutorial, deleteItem, search, debounce }
   },
   computed: mapState({
     permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
@@ -140,10 +140,10 @@ export default {
       this.setTutorial()
       this.showModal = false
     },
-    submit(value) {
-      if (typeof value == "string" && value.length) {
-        this.search(value)
-      } else if(typeof value == "string" && !value.length) {
+    submit(event) {
+      if (event.target && event.target.value) {
+        this.search(event.target.value)
+      } else if(event.target.value === '') {
         this.setTutorial()
       }
     }

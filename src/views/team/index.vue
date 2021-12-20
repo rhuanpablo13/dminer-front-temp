@@ -5,7 +5,7 @@
       title="Equipe"
       @close="this.$router.push('/')"
       search
-      @submit="submit"
+      @change="submit"
     >
       <template v-slot:body>
         <ul>
@@ -96,11 +96,11 @@ export default {
       this.setAllUsers()
       this.showModal = false
     },
-    submit(value) {
-      if (typeof value == "string" && value.length) {
-        this.search(value)
-      } else if(typeof value == "string" && !value.length) {
-        this.setAllUsers()
+    submit(event) {
+      if (event.target && event.target.value) {
+        this.search(event.target.value)
+      } else if(event.target.value === '') {
+        this.setTutorial()
       }
     }
   }
