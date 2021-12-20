@@ -46,8 +46,8 @@ export const home = {
         (payload) => {
 
           this.state.home.quizList = setQuiz()
-          // commit('searchSuccess', payload)
-          return Promise.resolve(payload)
+          commit('answerSuccess', payload)
+          // return Promise.resolve(payload)
         },
         (error) => {
           console.log(error)
@@ -76,6 +76,9 @@ export const home = {
     },
     searchFailure(state) {
       state = null
+    },
+    answerSuccess(state, payload) {
+      state.quizList = payload
     }
   }
 }

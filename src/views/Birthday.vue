@@ -18,7 +18,7 @@
                   <div class="birthday_container_li">
                   <Avatar :avatar="item.avatar" isBirthday height="8rem" />
 
-                  <div class="birthday_text">
+                  <div class="birthday_text" :title="item.userName">
                     <Title>{{ item.userName  }}</Title>
                     <span>
                       <b>Data:</b>
@@ -92,7 +92,13 @@ li {
 }
 
 .birthday_text {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: start;
+}
+
+span {
+  margin-top: -1rem;
 }
 
 </style>

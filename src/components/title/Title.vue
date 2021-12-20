@@ -11,5 +11,6 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 14rem;
 }
 </style>

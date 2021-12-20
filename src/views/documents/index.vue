@@ -6,7 +6,7 @@
       :onClick="setDoc"
       @close="this.$router.push('/')"
       search
-      @submit="submit"
+      @change="submit"
     >
       <template v-slot:body>
         <ul>
@@ -104,7 +104,9 @@ export default {
       this.openModal()
     },
     close() {
-      this.setDocument()
+      setTimeout(() => {
+        this.setDocument()
+      }, 300)      
       this.showModal = false
     },
     submit(event) {

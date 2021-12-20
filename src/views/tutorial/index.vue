@@ -52,7 +52,7 @@
           <image-details
             :image="doc.image"
             :category="doc.category"
-            imageW="22rem"
+            imageW="auto"
             imageH="10rem"
             className="image_details_wrapper_grid"
           >
@@ -62,7 +62,7 @@
           <icon-base
             icon-name="icon"       
             class="back_icon"
-            @click="this.isAll = true"
+            @click="backAll"
             width="1rem"
           >
           <icon-open/>
@@ -93,7 +93,7 @@ import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useTutorial from '@/composables/useTutorial'
 import usePermission from '@/composables/usePermission'
-import IconOpen from '../../components/svg/IconOpen.vue'
+import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
   data() {
@@ -148,8 +148,16 @@ export default {
       }, 300)
     },
     close() {
-      this.setTutorial()
+      setTimeout(() => {
+        this.setTutorial()
+      }, 300)
       this.showModal = false
+    },
+    backAll() {
+      setTimeout(() => {
+        this.setTutorial()
+      }, 300)
+      this.isAll = true
     },
     submit(event) {
       if (event.target && event.target.value) {

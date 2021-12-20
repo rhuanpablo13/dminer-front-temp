@@ -120,7 +120,9 @@ export default {
       this.openModal()
     },
     close() {
-      this.setBenefit()
+      setTimeout(() => {
+        this.setBenefit()
+      }, 300)
       this.showModal = false
     },
     submit(event) {
