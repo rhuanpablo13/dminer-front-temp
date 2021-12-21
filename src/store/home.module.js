@@ -44,9 +44,13 @@ export const home = {
     answer({ commit }, {id, item }) {
       return updateCount(id, item, this.state.user.login).then(
         (payload) => {
+          const local = JSON.parse(localStorage.home)
 
           this.state.home.quizList = setQuiz()
           commit('answerSuccess', payload)
+
+          local.quizList = this.state.home.quizList
+          localStorage.home = JSON.stringify(local)
           // return Promise.resolve(payload)
         },
         (error) => {

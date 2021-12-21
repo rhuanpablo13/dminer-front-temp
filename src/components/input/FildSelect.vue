@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .container_input {
   position: relative;
   cursor: text;
@@ -157,4 +157,5 @@ export default {
 .fild_container_icon_select {
   margin-top: -1rem;
 }
+
 </style>
