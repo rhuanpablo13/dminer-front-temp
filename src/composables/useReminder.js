@@ -4,8 +4,8 @@ import { fetchAll, fetchCreate, fetchUpdate } from '@/api/reminder.js'
 export default function useReminder() {
   const getReminders = ref([])
 
-  const setReminder = async () => {
-    return  await fetchAll()
+  const setReminder = async (login) => {
+    return  await fetchAll(login)
   }
 
   const create = async (item) => {

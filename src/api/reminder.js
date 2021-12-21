@@ -3,8 +3,8 @@ import { apiIntra } from './http'
 
 const URL = '/reminder'
 
-export const fetchAll = async () => {
-  const response = await apiIntra(`${URL}/all`)
+export const fetchAll = async (login) => {
+  const response = await apiIntra(`${URL}/${login}/all`)
   return response.status === 200 ? response.data.data : []
 }
 

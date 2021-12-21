@@ -88,9 +88,9 @@ export default {
     }
   },
   setup() {
-    const { updateCount, create } = useReminder()
+    const { updateCount, create, setReminder } = useReminder()
 
-    return { dateHourFormart, updateCount, create }
+    return { dateHourFormart, updateCount, create, setReminder }
   },
     computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
@@ -111,6 +111,7 @@ export default {
         this.$store.dispatch('form/setLoading')
         if (result) {
           this.$store.dispatch('form/setSuccess').then(() => {
+            this.setReminder(this.getUser)
             this.showModal = false
           })
         }
