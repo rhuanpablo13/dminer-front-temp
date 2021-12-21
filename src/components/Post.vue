@@ -8,9 +8,9 @@
   <div class="feed_contant">
     <div class="feed_container_text"  v-if="value.content">{{ value.content }}</div>
     <div
-      v-if="value.anexos && value.anexos.length"
+      v-if="!!value.anexos"
       class="feed_container_imagem"
-      :style="{ 'background-image': `url(${value.anexos[0]})` }"
+      :style="{ 'background-image': `url(${value.anexos})` }"
     >
     </div>
       <icon-base
