@@ -84,6 +84,7 @@ export default {
 }
 .feed__content {
   overflow-y: auto;
+  height: 23rem;
 }
 
 .feed__footer {

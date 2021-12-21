@@ -18,7 +18,7 @@ export const fetchUpdate = async (item) => {
 }
 
 export const fetchCreateComment = async (item) => {
-  const response = await apiIntra.put(`${URL}`, item)
+  const response = await apiIntra.post(`${URL}`, item)
   return messagesFetch('update', response.status, response.data.data)
 }
 

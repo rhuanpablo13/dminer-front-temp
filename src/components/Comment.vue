@@ -14,7 +14,7 @@ import Avatar from '@/components/Avatar.vue'
 import FildInput from '@/components/input/Fild.vue'
 
 import useFeed from '@/composables/useFeed.js'
-import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
+import { dateHourFormarUs } from '@/util/date.js'
 
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
        value: { 
         content: '',
         login: '', 
-        date: ''
+        date: new Date()
       }
     }
   }, 
@@ -47,7 +47,7 @@ export default {
       this.value = {
         ...this.value,
         login: this.getUser,
-        date: dateHourFormarUs( this.value.date)
+        date: dateHourFormarUs(this.value.date)
       }
       let result =  this.crateComment(this.value)
 
