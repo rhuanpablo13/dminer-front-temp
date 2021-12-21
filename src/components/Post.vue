@@ -111,7 +111,7 @@ export default {
 }
 
 .feed_container_comments {
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
 }
 
 .comment_input {
