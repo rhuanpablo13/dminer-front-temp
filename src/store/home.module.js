@@ -44,14 +44,7 @@ export const home = {
     answer({ commit }, {id, item }) {
       return updateCount(id, item, this.state.user.login).then(
         (payload) => {
-          const local = JSON.parse(localStorage.home)
-
-          this.state.home.quizList = setQuiz()
-          commit('answerSuccess', payload)
-
-          local.quizList = this.state.home.quizList
-          localStorage.home = JSON.stringify(local)
-          // return Promise.resolve(payload)
+          this.dispatch('home/setQuis')
         },
         (error) => {
           console.log(error)
@@ -59,6 +52,23 @@ export const home = {
           return Promise.reject(error)
         }
       )
+    },
+    setQuis({ commit}){
+      return setQuiz().then(
+        (payload) => {
+          const local = JSON.parse(localStorage.home)
+
+          this.state.home.quizList = payload
+          commit('answerSuccess', payload)
+          local.quizList = this.state.home.quizList
+          localStorage.home = JSON.stringify(local)
+        },
+        (error) => {
+          console.log(error)
+          commit('searchFailure')
+          return Promise.reject(error)
+        }
+      )     
     },
     reminderCheck({ commit }, item) {
       return updateReminder(item).then(

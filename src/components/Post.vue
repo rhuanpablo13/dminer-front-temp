@@ -29,7 +29,7 @@
         </li>
       </ul>
       <div class="comment_input">
-       <comment :avatar="value.user.avatar" />
+       <comment :avatar="value.user.avatar" :idPost="value.id"/>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@ export default {
 .feed_contant {
   padding: 1rem 2rem;
   margin: auto;
-  overflow: auto;
+  /* overflow: auto; */
   max-height: 100%;
 }
 
@@ -122,10 +122,12 @@ export default {
 
 ul {
   width: 18rem;
+  height: 10rem;
   list-style-type: none;
 
   margin: auto;
   margin-top: 1rem;
+  overflow-y: auto;
 }
 
 li {

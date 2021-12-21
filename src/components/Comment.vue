@@ -14,6 +14,7 @@ import Avatar from '@/components/Avatar.vue'
 import FildInput from '@/components/input/Fild.vue'
 
 import useFeed from '@/composables/useFeed.js'
+import usePost from '@/composables/usePost.js'
 import { dateHourFormarUs } from '@/util/date.js'
 
 export default {
@@ -22,16 +23,19 @@ export default {
        value: { 
         content: '',
         login: '', 
-        date: new Date()
+        date: new Date(),
       }
     }
   }, 
   props: {
-    avatar: { type: String, required: true }
+    avatar: { type: String, required: true },
+    idPost: { type: String, required: true}
   },
   setup() {
     const { crateComment } = useFeed()
-    return { crateComment }
+     const { setPost } = usePost()
+
+    return { crateComment, setPost }
   },
   computed: mapState({
     getUser: (state) => state.user.login
@@ -43,19 +47,24 @@ export default {
   },
   methods: {
     send() {
+
       this.$store.dispatch('form/setLoading')
       this.value = {
         ...this.value,
         login: this.getUser,
-        date: dateHourFormarUs(this.value.date)
+        date: dateHourFormarUs(this.value.date),
+        idPost: this.idPost
       }
       let result =  this.crateComment(this.value)
 
       this.$store.dispatch('form/setLoading')
       if (result) {
-        this.$store.dispatch('form/setSuccess').then(() => {
-          this.$emit('close')
-        })
+        this.$store.dispatch('form/setSuccess')
+
+        setTimeout(() => {
+          this.setPost(this.idPost)
+          // this.$router.push(`/post/${id}`)
+        }, 1000)
       } else {
         this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')

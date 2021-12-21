@@ -172,7 +172,7 @@ a {
 
 .fild_container_icon {
   position: absolute;
-  bottom: -4.5rem;
+  bottom: -5rem;
   left: 1rem;
 }
 </style>
