@@ -40,6 +40,7 @@ import UploadImage from '@/components/UploadImage.vue'
 import useFeed from '@/composables/useFeed'
 import { dateHourFormarUs } from '@/util/date'
 
+// https://codesandbox.io/s/e7mok 
 export default {
   components: {
     FildInput,
