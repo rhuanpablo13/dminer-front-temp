@@ -16,11 +16,11 @@
           <div class="quiz_question">
             <span>{{ item.question }}</span>
           </div>
-          <div class="quiz_footer">
-            <button type="button" class="first" @click="count(item.id, 'a')">
+          <div class="quiz_footer" >
+            <button :disabled="!item.voted" type="button" class="first" @click="count(item.id, 'a')">
               <span>{{ item.optionA }}</span>
             </button>
-            <button type="button" class="second" @click="count(item.id, 'b')">
+            <button :disabled="!item.voted" type="button" class="second" @click="count(item.id, 'b')">
               <span>{{ item.optionB }}</span>
             </button>
           </div>
@@ -221,6 +221,12 @@ button {
   position: relative;
 }
 
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+
 button > span {
   position: absolute;
   left: 40%;
@@ -233,6 +239,15 @@ button > span {
   border-bottom: 44px solid #aaff48;
   cursor: pointer;
   background-color: transparent;
+}
+
+.first:disabled, .second:disabled {
+  border-top: transparent;
+  border-left: transparent;
+  border-bottom: 44px solid #ddd;
+  cursor: pointer;
+  background-color: transparent;
+  cursor: not-allowed;
 }
 
 .second {

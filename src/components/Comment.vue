@@ -48,7 +48,7 @@ export default {
   methods: {
     send() {
 
-      this.$store.dispatch('form/setLoading')
+      // this.$store.dispatch('form/setLoading')
       this.value = {
         ...this.value,
         login: this.getUser,
@@ -57,9 +57,10 @@ export default {
       }
       let result =  this.crateComment(this.value)
 
-      this.$store.dispatch('form/setLoading')
+      // this.$store.dispatch('form/setLoading')
       if (result) {
-        this.$store.dispatch('form/setSuccess')
+        // this.$store.dispatch('form/setSuccess')
+        this.$emit('submit')
 
         setTimeout(() => {
           this.setPost(this.idPost)

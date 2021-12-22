@@ -10,7 +10,7 @@
       <template v-slot:body>
         <div class="feed_container">
           <div class="feed_all_container">
-            <post :value="getPost"  v-if="isLoading" />
+            <post :value="getPost"  v-if="isLoading" @submit="commit"/>
           </div>
 
          <div>
@@ -116,6 +116,9 @@ export default {
     edit(value) {
       this.isEdit = true
       this.setDoc(value)
+    },
+    commit(){
+      debugger
     },
 
     close() {
