@@ -11,7 +11,7 @@
         <input
           :value="value"
           @change="$emit('change')"
-          placeholder="Pesquisa"
+          placeholder="PESQUISAR"
         />
       </div>
     </input-search>
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { dateNowFormart } from '@/util/date.js'
 import InputSearch from '@/components/svg/InputSearch.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 

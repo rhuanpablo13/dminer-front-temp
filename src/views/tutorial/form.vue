@@ -6,10 +6,9 @@
   >
     <div class="tutorial_form_container">
       <upload-image v-model="value.image" :propsImage="value.image" />
-
       <div class="tutorial_form_container_text">
         <fild-input
-          text="Título"
+          :text="'Título'"
           v-model="value.title"
           :value="value.title"
           required
@@ -22,20 +21,21 @@
           :options="getCategories"
         />
         <fild-select
-          text="Permissão"
+          :text="'Permissão'"
           v-model="value.permission"
           :value="value.permission"
           required
           :options="dropdownPermission"
         />
-        <fild-textarea
-          text="Conteúdo"
-          v-model="value.content"
-          :value="value.content"
-          required
-        />
-
       </div>
+    </div>
+    <div class="tutorial_textarea">
+      <fild-textarea
+        text="Conteúdo"
+        v-model="value.content"
+        :value="value.content"
+        required
+      />
     </div>
   </form-modal>
 </template>
@@ -139,7 +139,10 @@ export default {
 
 .tutorial_form_container_text {
   display: grid;
-  grid-template-columns: 45% 45%;
-  grid-gap: 10%;
+}
+
+.tutorial_textarea{
+  width: 80%;
+  margin: -2rem auto;
 }
 </style>

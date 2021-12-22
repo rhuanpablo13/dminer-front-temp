@@ -86,19 +86,17 @@ export default {
 
 .fild_container_icon {
   transform: rotateY(180deg);
-  margin-top: -30px;
+  margin-top: -2rem;
   z-index: 3;
 }
 
 .input_form {
-  /* background-color: red; */
   border: none;
-  /* border-bottom: 1px solid #231f20; */
   outline: none;
   transition: none;
   width: 100%;
   font-size: 0.4rem;
-  line-height: 0.5rem;
+  line-height: 1rem;
   color: var(--dp-text-color);
   box-sizing: border-box;
   text-overflow: ellipsis;
@@ -107,6 +105,7 @@ export default {
   padding-top: 0.5rem;
   font-size: 0.8rem;
   background-color: transparent;
+  min-height: 3rem;
 }
 
 .fild_container_error {

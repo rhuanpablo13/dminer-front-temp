@@ -47,12 +47,13 @@ export default {
 
 <style scoped>
 .container {
-  width: 11rem;
+  width: 15rem;
   background-color: #60645c6e;
   top: 0;
   height: 11rem;
   transition: 0.2s linear;
   position: relative;
+  margin: auto;
 }
 
 .imagePreviewWrapper {
@@ -76,8 +77,9 @@ export default {
   text-align: center;
   cursor: pointer;
   font-size: 0.5rem;
-
-  margin-top: 50%;
-  transform: translate(0, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 </style>
