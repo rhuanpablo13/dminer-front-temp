@@ -1,7 +1,7 @@
 <template>
   <form-modal :showModal="showModal" title="post" @submit="sendForm">
     <div class="benefit_form_container">
-      <upload-image v-model="value.anexos" :propsImage="value.anexos" />
+      <upload-image v-model="value.anexo" :propsImage="value.anexos" />
       <div class="benefit_form_container_text">
         <fild-input
           text="Tópico"
@@ -62,7 +62,7 @@ export default {
       title: '',
       content: '',
       // permissions: 0,
-      anexos: null,
+      anexo: null,
       type: typeList[0].id
     })
 

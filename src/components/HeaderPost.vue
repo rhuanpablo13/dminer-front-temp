@@ -30,13 +30,19 @@ export default {
   display: flex;
   gap: 1.5rem;
   position: absolute;
-  top: -0.2rem;
+  top: -0.5rem;
   left: 6rem;
 }
 
 .feed_header_text {
-  line-height: 0.2rem;
+  /* line-height: 0.2rem; */
   text-align: start;
   color: var(--sidebar-green-ligth);
+  margin-top: -1rem;
+}
+
+
+h3 {
+  margin-top: -2rem;
 }
 </style>

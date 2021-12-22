@@ -1,16 +1,16 @@
 <template>
   <header-post
     :avatar="value.user.avatar"
-    :username="value.user.username"
+    :username="value.user.userName"
     :text="value.title"
   />
 
   <div class="feed_contant">
     <div class="feed_container_text"  v-if="value.content">{{ value.content }}</div>
     <div
-      v-if="!!value.anexos"
+      v-if="!!value.anexo"
       class="feed_container_imagem"
-      :style="{ 'background-image': `url(${value.anexos})` }"
+      :style="{ 'background-image': `url(${value.anexo})` }"
     >
     </div>
       <icon-base

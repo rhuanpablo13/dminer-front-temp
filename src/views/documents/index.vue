@@ -11,7 +11,7 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in getDocuments" :key="key">
-            <a :href="`file:///C:{item.contentLink}`" target="_blank">
+            <a :href="`file:///C:${item.contentLink}`" target="_blank">
               {{ item.title }}
             </a>
             <button class="team_btn_edit" v-if="permissionADM">
