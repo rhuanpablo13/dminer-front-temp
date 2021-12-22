@@ -11,6 +11,7 @@
         <input
           :value="value"
           @change="$emit('change')"
+          placeholder="Pesquisa"
         />
       </div>
     </input-search>

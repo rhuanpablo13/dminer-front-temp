@@ -57,12 +57,12 @@ export default {
     )
 
     const verifyLabelIndexUsuario = Object.keys(options).filter((option) =>
-      options[option].hasOwnProperty('username')
+      options[option].hasOwnProperty('userName')
     )
 
     if (verifyLabelIndexTitle.length) title = 'title'
     if (verifyLabelIndexName.length) title = 'name'
-    if (verifyLabelIndexUsuario.length) title = 'username'
+    if (verifyLabelIndexUsuario.length) title = 'userName'
 
     return {
       value,
@@ -100,7 +100,7 @@ export default {
       // input.focus()
     },
     changeInput(e) {
-      const index = this.title === 'username' ? 'login' : 'id'
+      const index = this.title === 'userName' ? 'login' : 'id'
        this.$emit('update:modelValue', e[index])
     }
   }
