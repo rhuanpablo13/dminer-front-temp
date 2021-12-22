@@ -23,7 +23,7 @@
       </icon-base>
 
     <div class="feed_container_comments">
-      <ul>
+      <ul v-if="value.comments.length">
         <li v-for="comment in value.comments" :key="comment.id">
           <comment-post :avatar="comment.user.avatar" :text="comment.content" />
         </li>
@@ -122,11 +122,11 @@ export default {
 
 ul {
   width: 18rem;
-  height: 10rem;
+  max-height: 10rem;
   list-style-type: none;
 
   margin: auto;
-  margin-top: 1rem;
+  margin-top: -1rem;
   overflow-y: auto;
 }
 
