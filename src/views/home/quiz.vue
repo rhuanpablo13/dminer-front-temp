@@ -17,10 +17,10 @@
             <span>{{ item.question }}</span>
           </div>
           <div class="quiz_footer" >
-            <button :disabled="!item.voted" type="button" class="first" @click="count(item.id, 'a')">
+            <button :disabled="item.voted" type="button" class="first" @click="count(item.id, 'a')">
               <span>{{ item.optionA }}</span>
             </button>
-            <button :disabled="!item.voted" type="button" class="second" @click="count(item.id, 'b')">
+            <button :disabled="item.voted" type="button" class="second" @click="count(item.id, 'b')">
               <span>{{ item.optionB }}</span>
             </button>
           </div>

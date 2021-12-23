@@ -4,8 +4,8 @@ import { fetchAll, fetchQuizAnswer, fetchCreate } from '@/api/quiz.js'
 export default function useQuiz() {
   const getQuizs = ref([])
 
-  const setQuiz = async () => {
-   return await fetchAll()
+  const setQuiz = async (login) => {
+   return await fetchAll(login)
   }
 
   const updateCount = async (idQuiz, item , login) => {

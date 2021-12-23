@@ -1,25 +1,28 @@
 import useReminder from '@/composables/useReminder'
 import useQuiz from '@/composables/useQuiz'
 import useSearch from '@/composables/useSearch'
+import useFeed from '@/composables/useSearch'
 
-const initialState = {
-  noticeList: [],
-  notificationlist: [],
-  reminderList: [],
-  birthdayList: [],
-  quizList: [],
-  usersList: [],
-  feedList: []
-}
-
-const homeState = localStorage.home
-  ? JSON.parse(localStorage.home)
-  : initialState
+const initialState = [
+  'noticeList',
+  'notificationlist',
+  'reminderList',
+  'birthdayList',
+  'quizList',
+  'usersList',
+  'feedList',
+]
 
 const { getSearch } = useSearch()
 const { updateCount, setQuiz } = useQuiz()
 const { updateReminder, setReminder } = useReminder()
+const { setFeed, getFeeds } = useFeed()
 
+const homeState = []
+initialState.map(item => {
+  const store = localStorage[item] ? JSON.parse(localStorage[item]) : []
+  homeState[item] = store
+})
 
 export const home = {
   namespaced: true,
@@ -30,7 +33,16 @@ export const home = {
       return getSearch(keyword).then(
         (payload) => {
           this.state.home = payload
-          localStorage.home = JSON.stringify(payload)
+
+          try {
+            initialState.map(item => {
+              localStorage[item] = JSON.stringify(payload[item])
+            })
+          } catch (error) {
+            
+          }
+
+          // localStorage.home = JSON.stringify(payload)
           commit('searchSuccess', payload)
           return Promise.resolve(payload)
         },
@@ -54,14 +66,11 @@ export const home = {
       )
     },
     setQuis({ commit}){
-      return setQuiz().then(
+      return setQuiz(this.state.user.login).then(
         (payload) => {
-          const local = JSON.parse(localStorage.home)
-
           this.state.home.quizList = payload
           commit('answerSuccess', payload)
-          local.quizList = this.state.home.quizList
-          localStorage.home = JSON.stringify(local)
+          localStorage.quizList = JSON.stringify(payload)
         },
         (error) => {
           console.log(error)
@@ -82,7 +91,7 @@ export const home = {
           return Promise.reject(error)
         }
       )
-    } 
+    }
   },
   mutations: {
     searchSuccess(state, payload) {
