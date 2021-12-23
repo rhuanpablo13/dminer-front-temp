@@ -9,9 +9,11 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in dropdownUser" :key="key">
-            <label>{{ item.username }}</label>
+            <div class="permission_label">
+              <label>{{ item.userName }}</label>
+            </div>
             <div class="permition_select">
-              <fild-select :options="dropdownPermission" text="permitir" />
+              <fild-select :options="dropdownPermission" text="permitir" @change="change"/>
             </div>
 
             <icon-base
@@ -77,12 +79,16 @@ export default {
       this.isEdit = true
       this.value = value
       this.openModal()
+    }, 
+    change(e) {
+      console.log(e);
     }
   }
 }
 </script>
 
 <style scoped>
+
 ul {
   list-style-type: none;
   position: relative;
@@ -98,8 +104,15 @@ ul {
 li {
   width: 90%;
   display: flex;
-  align-items: center;
+  align-items: start;
   position: relative;
+  height: 7rem;
+}
+
+.permission_label {
+  display: grid;
+  align-content: center;
+  height: 4rem;
 }
 
 label {

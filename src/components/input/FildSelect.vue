@@ -102,6 +102,7 @@ export default {
     changeInput(e) {
       const index = this.title === 'userName' ? 'login' : 'id'
        this.$emit('update:modelValue', e[index])
+       this.$emit('change', e)
     }
   }
 }
@@ -115,6 +116,7 @@ export default {
 .input_label {
   text-transform: capitalize;
   text-align: start;
+  z-index: 3;
 }
 
 .fild_container_error {
@@ -140,6 +142,15 @@ export default {
 
 .vue-select-header {
   margin-top: 0.2rem;
+}
+
+.vue-dropdown {
+  background-color: #fff;
+  z-index: 4;
+}
+
+.vue-dropdown-item {
+  background-color: #fff;
 }
 
 .vue-dropdown-item.selected {
