@@ -13,7 +13,7 @@
               <label>{{ item.userName }}</label>
             </div>
             <div class="permition_select">
-              <fild-select :options="dropdownPermission" text="permitir" @change="change"/>
+              <fild-select :options="dropdownPermission" text="permitir" @change="change($event, item.login)"/>
             </div>
 
             <icon-base
@@ -47,6 +47,7 @@ import formCrud from './form.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
+import useUser from '@/composables/useUser'
 
 export default {
   data() {
@@ -58,6 +59,9 @@ export default {
     }
   },
   setup() {
+    const { updatePermission } = useUser()
+
+    return { updatePermission }
   },
   components: {
     WidgetModal,
@@ -80,8 +84,8 @@ export default {
       this.value = value
       this.openModal()
     }, 
-    change(e) {
-      console.log(e);
+    change(value, login) {
+      this.updatePermission(login, value.name)
     }
   }
 }

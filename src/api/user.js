@@ -22,6 +22,11 @@ export const fetchUpdateBanner = async (login, banner) => {
   return messagesFetch('update', response.status, response.data.data)
 }
 
+export const fetchUpdatePermission = async (login, permission) => {
+  const response = await apiIntra.put(`${URL}/permission`, { permission, login })
+  return messagesFetch('update', response.status, response.data.data)
+}
+
 export const fetchAllUser = async (token) => {
   const response = await apiIntra.post(`${URL}/all`, {token})
   return response.status === 200 ? response.data.data : []
