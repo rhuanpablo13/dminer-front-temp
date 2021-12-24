@@ -18,9 +18,8 @@
           <frame-notices>
             <div class="notices_container">
               <Title>
-                {{ item.creator }}
+                {{ item.warning }}
               </Title>
-              <span class="">{{ item.warning }}</span>
               <div class="notices_footer">
                 <span>
                   <b>Prioridade:</b>

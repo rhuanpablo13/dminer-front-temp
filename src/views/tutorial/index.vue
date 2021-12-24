@@ -128,7 +128,7 @@ export default {
     close() {
       setTimeout(() => {
         this.setTutorial()
-      }, 300)
+      }, 500)
       this.showModal = false
     },
     submit(event) {
