@@ -57,12 +57,12 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image"  >
+      <SidebarLink to="/permissoes" icon="fas fa-image"  :disabled="permissionADM">
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>
       <div @click="logout()">
-        <SidebarLink to="/power" icon="power" isPower>
+        <SidebarLink to="/power" icon="power" isPower >
           <icon-power />
         </SidebarLink>
       </div>
