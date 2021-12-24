@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetcSearch } from '@/api/tutorial.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetcSearch, fetchId } from '@/api/tutorial.js'
 
 export default function useTutorial() {
   const getTutorials = ref([])
@@ -22,9 +22,11 @@ export default function useTutorial() {
 
   const search = async (keyword) => {
     getTutorials.value = await fetcSearch(keyword)
+  }  
+  
+  const getId = async (id) => {
+    getTutorials.value = await fetchId(id)
   }
-
-  onMounted(setTutorial)
 
   return {
     getTutorials,
@@ -32,6 +34,7 @@ export default function useTutorial() {
     create,
     update,
     deleteItem,
-    search
+    search,
+    getId
   }
 }

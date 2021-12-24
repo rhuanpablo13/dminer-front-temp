@@ -2,51 +2,32 @@
   <transition name="modal">
     <widget-modal
       v-if="showModalPrimary"
-      title="tutorial"
+      :title="`tutorial ${idParam}`"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      search
-      @change="submit"
     >
       <template v-slot:body>
-        <ul>
-          <li v-for="(item, key) in getTutorials" :key="key" @click="setItem(item)">
-            <button class="team_btn_edit" v-if="permissionADM">
-              <icon-base
-                icon-name="icon"
-                class="team_icon_edit"
-                @click="edit(item)"
-              >
-                <icon-edit />
-              </icon-base>
-              <icon-base
-                icon-name="icon"
-                class="team_icon_edit"
-                @click="deleteTutorial(item.id)"
-              >
-                <icon-trash />
-              </icon-base>
-            </button>
-            <image-details
-              :image="item.image"
-              :category="item.category"
-              imageW="9rem"
-              imageH="9rem"
-              className="image_details_wrapper"
-            >
-              <template v-slot:title>{{ item.title }}</template>
-              <template v-slot:content>{{ item.content }}</template>
-            </image-details>
-            <icon-base
-              viewBox="0 0 500 58"
-              width="100%"
-              height="100%"
-              class="fild_container_icon"
-            >
-              <icon-line />
-            </icon-base>
-          </li>
-        </ul>
+        <div >
+          <image-details
+            :image="getTutorials.image"
+            :category="getTutorials.category"
+            imageW="auto"
+            imageH="10rem"
+            className="image_details_wrapper_grid"
+          >
+            <template v-slot:title>{{ getTutorials.title }}</template>
+            <template v-slot:content>{{ getTutorials.content }}</template>
+          </image-details>
+          <icon-base
+            icon-name="icon"       
+            class="back_icon"
+            @click="backAll"
+            width="1rem"
+          >
+          <icon-open/>
+          </icon-base>
+        </div>
+
       </template>
     </widget-modal>
   </transition>
@@ -60,6 +41,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { useRoute } from "vue-router";
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
@@ -71,6 +53,7 @@ import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useTutorial from '@/composables/useTutorial'
 import usePermission from '@/composables/usePermission'
+import useCategory from '@/composables/useCategory'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
@@ -80,16 +63,18 @@ export default {
       showModal: false,
       value: {},
       isEdit: false, 
-      isAll: true,
-      doc: {}
     }
   },
   setup() {
-    const { getTutorials, setTutorial, deleteItem, search } = useTutorial()
-    const { getPermission } = usePermission()
-    setTutorial()
+    const route = useRoute()
+    const idParam = route.params.id
 
-    return { getTutorials, getPermission, setTutorial, deleteItem, search }
+    const { setTutorial, deleteItem, getId, getTutorials } = useTutorial()
+    const { getPermission } = usePermission()
+
+    getId(idParam)
+
+    return { getTutorials, getPermission, setTutorial, deleteItem, idParam, route }
   },
   computed: mapState({
     permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
@@ -116,9 +101,6 @@ export default {
       this.value = value
       this.openModal()
     },
-    setItem(item){
-      this.$router.push(`/tutoriais/${item.id}`)
-    },
     deleteTutorial(id) {
       this.deleteItem(id)
       setTimeout(() => {
@@ -130,6 +112,9 @@ export default {
         this.setTutorial()
       }, 300)
       this.showModal = false
+    },
+    backAll() {
+      this.$router.push('/tutoriais')
     },
     submit(event) {
       if (event.target && event.target.value) {

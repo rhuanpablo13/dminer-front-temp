@@ -8,6 +8,11 @@ export const fetchAll = async () => {
   return response.status === 200 ? response.data.data : []
 }
 
+export const fetchId = async (id) => {
+  const response = await apiIntra(`${URL}/find/${id}`)
+  return response.status === 200 ? response.data.data : []
+}
+
 export const fetchCreate = async (item) => {
   const response = await apiIntra.post(`${URL}`, item)
   return messagesFetch('registration', response.status, response.data.data)
