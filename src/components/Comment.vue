@@ -22,8 +22,9 @@ export default {
     return {
        value: { 
         content: '',
-        login: '', 
-        date: new Date(),
+        login: this.getUser, 
+        date: dateHourFormarUs(new Date()),
+        idPost: this.idPost
       }
     }
   }, 
@@ -47,29 +48,11 @@ export default {
   },
   methods: {
     send() {
+      this.value.login = this.getUser
 
-      // this.$store.dispatch('form/setLoading')
-      this.value = {
-        ...this.value,
-        login: this.getUser,
-        date: dateHourFormarUs(this.value.date),
-        idPost: this.idPost
-      }
-      let result =  this.crateComment(this.value)
-
-      // this.$store.dispatch('form/setLoading')
-      if (result) {
-        // this.$store.dispatch('form/setSuccess')
-        this.$emit('submit')
-
-        setTimeout(() => {
-          this.setPost(this.idPost)
-          // this.$router.push(`/post/${id}`)
-        }, 1000)
-      } else {
-        this.$store.dispatch('form/setLoading')
-        this.$store.dispatch('form/setError')
-      }
+      this.$store.dispatch('post/setComment', this.value).then(()=> {
+        this.value.content = ''
+      })
     }
   }
 }

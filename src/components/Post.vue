@@ -29,7 +29,7 @@
         </li>
       </ul>
       <div class="comment_input">
-       <comment :avatar="value.user.avatar" :idPost="value.id" @submit="$emit('submit')"/>
+       <comment :avatar="value.user.avatar" :idPost="value.id"/>
       </div>
     </div>
   </div>

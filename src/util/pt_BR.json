@@ -8,6 +8,8 @@
     "ERROR_SEARCH": "Erro! Nenhum requistro encontrado.",
     "ERROR_UPDATE": "Erro! Atualização não realizada.",
     "ERROR_LOGIN": "Erro! Erro ao realizar login.",
-    "SUCCESS_LOGIN": "Sucesso! usuário logado"
+    "SUCCESS_LOGIN": "Sucesso! usuário logado",
+    "SUCCESS_COMMENT": "Sucesso! Comentário realizado",
+    "ERROR_COMMENT": "Erro! Comentário  não realizado"
   }
 }

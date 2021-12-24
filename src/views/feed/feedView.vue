@@ -10,7 +10,7 @@
       <template v-slot:body>
         <div class="feed_container">
           <div class="feed_all_container">
-            <post :value="getPost"  v-if="isLoading" @submit="commit"/>
+            <post :value="post"  v-if="post.user" />
           </div>
 
          <div>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
@@ -57,15 +57,12 @@ import { useRoute } from "vue-router";
 export default {
   data() {
     return {
-      interval: null,
-      isLoading: false,
       showModalPost: true,
       showModal: false,
-      comment: '',
       filterData: {
         date: new Date(),
         user: '',
-        id: this.route.params.id
+        id: this.idParam
       },
       isEdit: false, 
     }
@@ -73,31 +70,17 @@ export default {
   setup() {
     const route = useRoute()
     const idParam = route.params.id
+    const { dispatch } = useStore() 
 
-    const { getPost, setPost, search } = usePost()
+    dispatch('post/getPostView', idParam)
+    const {search } = usePost()
 
-    setPost(idParam)
-
-    return { getPost, search, route}
-  },
-
-  created() {
-    if (this.filterData.id) {
-      this.interval = setInterval(() => { 
-        if (this.getPost.user.avatar) {
-          this.isLoading = true
-          clearInterval( this.interval)
-        }
-       }, 1000)
-    }
-  },
-
-  unmounted() {
-     clearInterval( this.interval)
+    return {search, idParam}
   },
 
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
+    post: (state) => state.post.post
   }),
 
   components: {
@@ -113,14 +96,6 @@ export default {
     openModal() {
       this.showModal = true
     },
-    edit(value) {
-      this.isEdit = true
-      this.setDoc(value)
-    },
-    commit(){
-      debugger
-    },
-
     close() {
       this.showModal = false
     },

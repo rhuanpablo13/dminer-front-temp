@@ -1,7 +1,7 @@
 <template>
   <form-modal :showModal="showModal" title="post" @submit="sendForm">
     <div class="tutorial_form_container">
-      <upload-image v-model="value.image" :propsImage="value.image" />
+      <upload-image v-model="value.anexo" :propsImage="value.anexo" />
       <div class="tutorial_form_container_text">
         <fild-input
           text="Tópico"
@@ -100,7 +100,9 @@ export default {
       this.value.date = dateHourFormarUs(new Date())
       this.value.login = this.getUser
 
-      return Object.values(this.value).every((item) => !!item)
+      return this.value.hasOwnProperty('content') && this.value?.content !== "" &&
+             this.value.hasOwnProperty('title') && this.value?.title &&
+             this.value.hasOwnProperty('type') && this.value?.type
     }
   }
 }
