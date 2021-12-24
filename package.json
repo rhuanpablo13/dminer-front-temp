@@ -28,7 +28,7 @@
     "serve-static": "^1.14.1",
     "v-calendar": "^3.0.0-alpha.6",
     "vite-svg-loader": "^3.0.0",
-    "vue": "^3.2.16",
+    "vue": "^3.2.20",
     "vue-axios": "^3.4.0",
     "vue-axios-cors": "^1.0.1",
     "vue-draggable-next": "^2.1.1",
