@@ -63,7 +63,7 @@ export default {
   text-overflow: ellipsis;
   padding: 0rem 1rem;
   max-width: 25rem;
-  /* width: 10rem; */
+  width: 100%;
 }
 
 .image_details_categorie {
