@@ -22,7 +22,7 @@ export const user = {
       commit('userSuccess', user)
 
       this.dispatch('user/avatar', state)
-      this.dispatch('home/search', null)
+      // this.dispatch('home/search', null)
     },
     avatar({ commit, state }, user) {
       getAvatar(user.login).then(
