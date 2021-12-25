@@ -6,7 +6,7 @@
 	C286.5,307.1,287.1,306.4,287.9,306.4z"/>
 <path class="icon_count_quiz_st1" d="M291.5,328h46c0.8,0,1.4,0.6,1.4,1.4v17.4c0,0.8-0.6,1.4-1.4,1.4h-46c-0.8,0-1.4-0.6-1.4-1.4v-17.4
 	C290,328.7,290.7,328,291.5,328z"/>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="303.1626" y1="566.9073" x2="304.3613" y2="-0.1051">
+<linearGradient id="ICON_COUNT_QUIZSVGID_1_" gradientUnits="userSpaceOnUse" x1="303.1626" y1="566.9073" x2="304.3613" y2="-0.1051">
 	<stop  offset="0" style="stop-color:#EBFCD0"/>
 	<stop  offset="0.5" style="stop-color:#CAFC88"/>
 	<stop  offset="0.9988" style="stop-color:#AAFF48"/>
@@ -19,21 +19,21 @@
 <line class="icon_count_quiz_st3" x1="356.3" y1="290.3" x2="330.2" y2="264.1"/>
 <g>
 	
-		<linearGradient id="SVGID_00000106114644816427995130000009376156433787758219_" gradientUnits="userSpaceOnUse" x1="306.1519" y1="52.9019" x2="303.7548" y2="374.1259">
+		<linearGradient id="ICON_COUNT_QUIZSVGID_00000106114644816427995130000009376156433787758219_" gradientUnits="userSpaceOnUse" x1="306.1519" y1="52.9019" x2="303.7548" y2="374.1259">
 		<stop  offset="0" style="stop-color:#4C4C4C"/>
 		<stop  offset="0.5" style="stop-color:#282823"/>
 		<stop  offset="1" style="stop-color:#0B0B0B"/>
 	</linearGradient>
 	
-		<rect x="268.3" y="69.5" style="fill:url(#SVGID_00000106114644816427995130000009376156433787758219_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;" width="74.9" height="74.9"/>
+		<rect x="268.3" y="69.5" style="fill:url(#ICON_COUNT_QUIZSVGID_00000106114644816427995130000009376156433787758219_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;" width="74.9" height="74.9"/>
 	
-		<linearGradient id="SVGID_00000165914519341814471040000004295744844202407832_" gradientUnits="userSpaceOnUse" x1="306.859" y1="52.9071" x2="304.4618" y2="374.1312">
+		<linearGradient id="ICON_COUNT_QUIZSVGID_00000165914519341814471040000004295744844202407832_" gradientUnits="userSpaceOnUse" x1="306.859" y1="52.9071" x2="304.4618" y2="374.1312">
 		<stop  offset="0" style="stop-color:#4C4C4C"/>
 		<stop  offset="0.5" style="stop-color:#282823"/>
 		<stop  offset="1" style="stop-color:#0B0B0B"/>
 	</linearGradient>
 	
-		<rect x="268.3" y="164.2" style="fill:url(#SVGID_00000165914519341814471040000004295744844202407832_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;" width="74.9" height="74.9"/>
+		<rect x="268.3" y="164.2" style="fill:url(#ICON_COUNT_QUIZSVGID_00000165914519341814471040000004295744844202407832_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;" width="74.9" height="74.9"/>
 </g>
 <path class="icon_count_quiz_st6" d="M130.5,462.8"/>
 <polyline class="icon_count_quiz_st6" points="142.2,462.7 147.1,474.9 158.1,480.9 152.7,461.2 168,458.7 171.8,486.6 188.7,491.5 181.9,448.2 
@@ -54,11 +54,11 @@
 <style scoped>
 	.icon_count_quiz_st0{fill:#9FBEC9;stroke:#231F20;stroke-width:1.7147;stroke-miterlimit:10;}
 	.icon_count_quiz_st1{fill:#4C5D5F;stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
-	.icon_count_quiz_st2{fill:url(#SVGID_1_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
+	.icon_count_quiz_st2{fill:url(#ICON_COUNT_QUIZSVGID_1_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
 	.icon_count_quiz_st3{fill:none;stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
 	
-		.icon_count_quiz_st4{fill:url(#SVGID_00000073705593158036337640000011787206287095898027_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
+		.icon_count_quiz_st4{fill:url(#ICON_COUNT_QUIZSVGID_00000073705593158036337640000011787206287095898027_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
 	
-		.icon_count_quiz_st5{fill:url(#SVGID_00000000941076728359838930000010542111480067468460_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
+		.icon_count_quiz_st5{fill:url(#ICON_COUNT_QUIZSVGID_00000000941076728359838930000010542111480067468460_);stroke:#231F20;stroke-width:3.4293;stroke-miterlimit:10;}
 	.icon_count_quiz_st6{fill:none;stroke:#231F20;stroke-width:1.7147;stroke-miterlimit:10;}
 </style>
