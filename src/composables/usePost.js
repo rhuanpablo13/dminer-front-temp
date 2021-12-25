@@ -23,7 +23,7 @@ export default function usePost() {
   }
 
   const search = async (data) => {
-    getPost.value =  await fetchSearch(data.id, dateHourFormarUs(data.date), data.user)
+    getPost.value =  await fetchSearch(data.id, data.date ? dateHourFormarUs(data.date) : data.date, data.user)
   }
 
 

@@ -51,7 +51,6 @@ import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 import formCrud from './form.vue'
 
-import usePost from '@/composables/usePost'
 import { useRoute } from "vue-router";
 
 export default {
@@ -60,7 +59,7 @@ export default {
       showModalPost: true,
       showModal: false,
       filterData: {
-        date: new Date(),
+        date: '',
         user: '',
         id: this.idParam
       },
@@ -73,9 +72,8 @@ export default {
     const { dispatch } = useStore() 
 
     dispatch('post/getPostView', idParam)
-    const {search } = usePost()
 
-    return {search, idParam}
+    return { idParam, dispatch }
   },
 
   computed: mapState({
@@ -108,9 +106,14 @@ export default {
       this.$router.push(`/feed/${id}`)
     },
     filter() {
-      if (this.filterData ) {
-        this.search(this.filterData)
+      if (this.validForm()) {
+        this.dispatch('post/goSearchView', this.filterData)
+      } else {
+        this.dispatch('form/setError')
       }
+    },
+    validForm() {
+      return this.filterData.date !== "" || this.filterData.user !== ""
     }
   }
 }

@@ -31,14 +31,20 @@ export const post = {
         }
       )
     },
-    goSearch({ commit }, value) {
+    goSearchView({ commit }, value) {
+      this.dispatch('form/setLoading')
       return search(value).then(
         (payload) => {
           commit('successPost', getPost.value)
-          // return Promise.resolve(payload)
+          this.dispatch('form/setLoading')
+          this.dispatch('form/setSuccess')
+
         },
         (error) => {
           console.log(error)
+          this.dispatch('form/setLoading')
+          this.dispatch('form/setError')
+
           commit('error')
           return Promise.reject(error)
         }
@@ -56,7 +62,7 @@ export const post = {
     setComment({ commit }, value) {
       return crateComment(value).then(
         (payload) => {
-         // this.dispatch('post/getPostView', value.idPost)
+         this.dispatch('post/getPostView', value.idPost)
         },
         (error) => {
           messagesFetch('comment', 400, [])
