@@ -110,8 +110,9 @@ export default {
 
         this.$store.dispatch('form/setLoading')
         if (result) {
+          const login = this.getUser
           this.$store.dispatch('form/setSuccess').then(() => {
-            this.setReminder(this.getUser)
+            this.setReminder(login)
             this.showModal = false
           })
         }
