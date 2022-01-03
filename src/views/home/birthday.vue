@@ -3,6 +3,7 @@
     layout="icon-folder"
     title="aniversário"
     classContent="folder__birthday__content"
+    :onClick="() => $router.push('/birthday')"
   >
     <ul>
       <li v-for="(item, key) in birthdayList" :key="key">
