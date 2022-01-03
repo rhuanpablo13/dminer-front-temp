@@ -131,7 +131,7 @@ export default {
   display: flex;
   height: 2rem;
   font-size: 0.3rem;
-  justify-content: end;
+  justify-content: center;
   align-content: center;
   gap: 0.5rem;
 }
