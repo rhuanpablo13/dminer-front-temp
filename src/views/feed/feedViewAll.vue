@@ -134,7 +134,7 @@ export default {
 <style>
 
 .feed_all_container {
-  overflow-y: auto;
+  overflow: hidden !important;
   width: 90%;
   margin-left: 1rem;
   margin-top: -2rem;
@@ -146,7 +146,6 @@ export default {
   gap: 1rem;
   list-style-type: none;
   max-height: 358px;
-  overflow-y: auto;
 }
 
 .feed_all_widget {
