@@ -13,7 +13,7 @@
             <ul class="post_container" >
               <li
                 class="feed_container_li"
-                v-for="item in getPostsAll"
+                v-for="item in posts"
                 :key="item.id"
               >
                 <widget-layout-home
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import formCrud from './form.vue'
@@ -66,8 +66,6 @@ import FildDate from '@/components/input/FildDate.vue'
 import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
-
-import useFeed from '@/composables/useFeed'
 
 export default {
   data() {
@@ -82,10 +80,11 @@ export default {
     }
   },
   setup() {
-    const {  getPostsAll, setAllPost, search } = useFeed()
-    setAllPost()
+    const { dispatch } = useStore() 
 
-    return { getPostsAll, search }
+    dispatch('post/getPostViewAll')
+
+    return { dispatch }
   },
 
   components: {
@@ -100,17 +99,13 @@ export default {
 
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
+    posts: (state) => state.post.posts
   }),
 
   methods: {
     openModal() {
       this.showModal = true
     },
-    edit(value) {
-      this.isEdit = true
-      this.setDoc(value)
-    },
-
     close() {
       this.showModal = false
     },
@@ -124,7 +119,7 @@ export default {
     },
     filter() {
       if (this.filterData ) {
-        this.search(this.filterData)
+        this.dispatch('post/goSearchViewAll', this.filterData)
       }
     }
   }

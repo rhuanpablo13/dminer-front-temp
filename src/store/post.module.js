@@ -6,10 +6,11 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
-  post: {}
+  post: {},
+  posts: []
 }
 
-const { crateComment } = useFeed()
+const { crateComment, setAllPost, getPostsAll, searchAll } = useFeed()
 const { getPost, setPost, search } = usePost()
 
 
@@ -18,6 +19,19 @@ export const post = {
   state: initialState,
 
   actions: {
+    getPostViewAll({ commit }) {
+      return setAllPost().then(
+        (payload) => {
+          commit('successPosts', getPostsAll.value)
+          // return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },
     getPostView({ commit }, idParam) {
       return setPost(idParam).then(
         (payload) => {
@@ -26,6 +40,25 @@ export const post = {
         },
         (error) => {
           console.log(error)
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },
+    goSearchViewAll({ commit }, value) {
+      this.dispatch('form/setLoading')
+      return searchAll(value).then(
+        (payload) => {
+          commit('successPosts', getPostsAll.value)
+          this.dispatch('form/setLoading')
+          this.dispatch('form/setSuccess')
+
+        },
+        (error) => {
+          console.log(error)
+          this.dispatch('form/setLoading')
+          this.dispatch('form/setError')
+
           commit('error')
           return Promise.reject(error)
         }
@@ -62,7 +95,8 @@ export const post = {
     setComment({ commit }, value) {
       return crateComment(value).then(
         (payload) => {
-         this.dispatch('post/getPostView', value.idPost)
+          this.dispatch('post/getPostViewAll')
+          this.dispatch('post/getPostView', value.idPost)
         },
         (error) => {
           messagesFetch('comment', 400, [])
@@ -76,6 +110,9 @@ export const post = {
   mutations: {
     loading(state) {
       state.isLoading = !state.isLoading
+    },
+    successPosts(state, payload) {
+      state.posts = payload
     },
     successPost(state, payload) {
       state.post = payload

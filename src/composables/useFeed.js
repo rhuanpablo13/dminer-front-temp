@@ -34,7 +34,7 @@ export default function useFeed() {
     getPostsAll.value =  await fetchAllPost()
   }
 
-  const search = async (data) => {
+  const searchAll = async (data) => {
     getPostsAll.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
   }
 
@@ -46,6 +46,6 @@ export default function useFeed() {
     crateComment,
     setAllPost,
     getPostsAll,
-    search
+    searchAll
   }
 }
