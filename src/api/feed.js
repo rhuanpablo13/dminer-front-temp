@@ -12,6 +12,11 @@ export const fetchCreate = async (item) => {
   return messagesFetch('registration', response.status, response.data.data)
 }
 
+export const fetchLike = async (id, login) => {
+  const response = await apiIntra.put(`${URL}/like/${id}/${login}`)
+  return response.status === 200 ? response.data.data : []
+}
+
 export const fetchUpdate = async (item) => {
   const response = await apiIntra.put(`${URL}`, item)
   return messagesFetch('update', response.status, response.data.data)

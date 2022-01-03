@@ -4,7 +4,8 @@ import {
   fetchUpdate,
   fetchCreateComment,
   fetchPost,
-  fetchSearch
+  fetchSearch,
+  fetchLike
 } from '@/api/feed.js'
 
 export default function usePost() {
@@ -26,12 +27,16 @@ export default function usePost() {
     getPost.value =  await fetchSearch(data.id, data.date ? dateHourFormarUs(data.date) : data.date, data.user)
   }
 
+  const like = async (id, login) => {
+    return await fetchLike(id, login)
+  }
 
   return {
     update,
     crateComment,
     setPost,
     getPost,
-    search
+    search,
+    like
   }
 }

@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const { crateComment, setAllPost, getPostsAll, searchAll } = useFeed()
-const { getPost, setPost, search } = usePost()
+const { getPost, setPost, search, like } = usePost()
 
 
 export const post = {
@@ -77,6 +77,21 @@ export const post = {
           console.log(error)
           this.dispatch('form/setLoading')
           this.dispatch('form/setError')
+
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },
+    setLike({ commit }, {id, login}) {
+      debugger
+      return like(id, login).then(
+        (payload) => {
+          this.dispatch('post/getPostViewAll')
+          this.dispatch('post/getPostView', value.idPost)        
+        },
+        (error) => {
+          console.log(error)
 
           commit('error')
           return Promise.reject(error)

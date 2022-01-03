@@ -57,7 +57,7 @@
         <icon-tutoriais />
         TUTORIAIS
       </SidebarLink>
-      <SidebarLink to="/permissoes" icon="fas fa-image" >
+      <SidebarLink to="/permissoes" icon="fas fa-image"  :disabled="permissionADM">
         <icon-permissions />
         PERMISSÕES
       </SidebarLink>

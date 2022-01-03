@@ -13,6 +13,10 @@
       :style="{ 'background-image': `url(${value.anexo})` }"
     >
     </div>
+    <div class="feed_container_likes">
+      <Title v-show="value.likes.length > 0">{{value.likes.length}}</Title>
+      <button @click="like" :disabled="value.likes.indexOf($store.state.user.login) !== -1"> Like </button>
+    </div>
       <icon-base
         viewBox="0 0 500 58"
         width="80%"
@@ -42,6 +46,7 @@ import FildDate from '@/components/input/FildDate.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconLineMult from '@/components/svg/IconLineMult.vue'
 import Comment from '@/components/Comment.vue'
+import Title from '@/components/title/Title.vue'
 
 export default {
   props: {
@@ -53,7 +58,15 @@ export default {
     FildDate,
     IconBase,
     IconLineMult,
-    Comment
+    Comment,
+    Title
+  }, 
+  methods: {
+    like() {
+      const login = this.$store.state.user.login
+      this.value.likes.push(login)
+      this.$emit('like', {id: this.value.id, login})
+    }
   }
 }
 </script>
@@ -112,6 +125,15 @@ export default {
 
 .feed_container_comments {
     /* margin-top: 3rem; */
+}
+
+.feed_container_likes {
+  display: flex;
+  height: 2rem;
+  font-size: 0.3rem;
+  justify-content: end;
+  align-content: center;
+  gap: 0.5rem;
 }
 
 .comment_input {

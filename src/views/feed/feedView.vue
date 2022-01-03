@@ -10,7 +10,7 @@
       <template v-slot:body>
         <div class="feed_container">
           <div class="feed_all_container">
-            <post :value="post"  v-if="post.user" />
+            <post :value="post"  v-if="post.user" @like="dispatch('post/setLike', {id: $event, login })"/>
           </div>
 
          <div>
@@ -78,7 +78,8 @@ export default {
 
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    post: (state) => state.post.post
+    post: (state) => state.post.post,
+    login: (state) => state.user.login
   }),
 
   components: {
