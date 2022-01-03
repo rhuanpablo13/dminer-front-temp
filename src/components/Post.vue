@@ -62,7 +62,7 @@ export default {
 .feed_contant {
   padding: 1rem 2rem;
   margin: auto;
-  /* overflow: auto; */
+  overflow: auto;
   max-height: 100%;
 }
 
