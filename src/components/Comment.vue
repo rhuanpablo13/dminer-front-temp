@@ -4,6 +4,12 @@
       <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
 
       <fild-input text="Comentar" v-model="value.content" :value="value.content" required />
+      <send
+        @click="send"
+        type="submit"
+        width="100%"
+        text="Enviar"
+      ></send>
     </div>
   </form>
 </template>
@@ -16,6 +22,7 @@ import FildInput from '@/components/input/Fild.vue'
 import useFeed from '@/composables/useFeed.js'
 import usePost from '@/composables/usePost.js'
 import { dateHourFormarUs } from '@/util/date.js'
+import Send from './button/Send.vue'
 
 export default {
   data() {
@@ -44,8 +51,9 @@ export default {
 
   components: {
     Avatar,
-    FildInput
-  },
+    FildInput,
+    Send
+},
   methods: {
     send() {
       this.value.login = this.getUser
