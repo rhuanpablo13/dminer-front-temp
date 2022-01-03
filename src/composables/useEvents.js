@@ -9,8 +9,8 @@ import {
 export default function useEvents() {
   const getEvents = ref([])
 
-  const setEvents = async () => {
-    getEvents.value = await fetchEvents()
+  const setEvents = async (login) => {
+    getEvents.value = await fetchEvents(login)
   }
 
   const createEvent = (event) => {
@@ -25,7 +25,7 @@ export default function useEvents() {
     destroyEvent(id)
   }
 
-  onMounted(setEvents)
+  // onMounted(setEvents)
 
   return {
     getEvents,

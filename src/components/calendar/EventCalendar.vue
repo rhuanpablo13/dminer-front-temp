@@ -6,12 +6,15 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
-import useEvents from '@/composables/useEvents'
 import moment from 'moment'
+import useEvents from '@/composables/useEvents'
+import { useStore } from 'vuex'
 
 const id = ref(10)
+const store = useStore()
 
-const { getEvents, createEvent, updateEvent, deleteEvent } = useEvents()
+const { getEvents, createEvent, updateEvent, deleteEvent, setEvents } = useEvents()
+setEvents(store.state.user.login)
 
 const options = reactive({
   plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],

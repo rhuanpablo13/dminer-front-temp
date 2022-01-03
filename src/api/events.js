@@ -1,7 +1,7 @@
 const baseURL = 'https://dminer-api.herokuapp.com/api/full-calendar'
 
-export const fetchEvents = async () => {
-  const response = await fetch(`${baseURL}/all`)
+export const fetchEvents = async (login) => {
+  const response = await fetch(`${baseURL}/all/${login}`)
   const json = await response.json()
   return json.data
 }
