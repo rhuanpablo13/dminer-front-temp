@@ -13,49 +13,61 @@
 
   <transition name="modal">
     <widget-modal
-      layout="icon-modal"
-      viewbox="0 0 500 350"
       v-if="showModal"
       @close="showModal = false"
       classButton="modal-default-button-calendar"
-      width="300px"
+      width="80%"
     >
-      <template v-slot:left>
-        <fild-input
-          :text="'Título'"
-          v-model="event.title"
-          :value="event.title"
-          required
-          :isError="isError && !event.title"
-        />
-
-        <fild-date
-          :text="'Início'"
-          v-model="event.start"
-          :value="event.start"
-          required
-          :isError="isError && !event.start"
-        />
-        <fild-date
-          :text="'Fim'"
-          v-model="event.end"
-          :value="event.end"
-          required
-          :isError="isError && !event.end"
-        />
-
-        <div>
-          <send
-            :isLoading="isLoading"
-            :isSuccess="isSuccess"
-            :isError="isError"
-            @click="sendEvent"
-            width="100%"
-          ></send>
-        </div>
-      </template>
       <template v-slot:body>
-        <EventCalendar :events="events" />
+        <div class="calendar_container">
+          <div class="form_calendar_container">
+            <div class="form_calendar">
+              <fild-input
+                text="Título"
+                v-model="eventCalendar.title"
+                :value="eventCalendar.title"
+                required
+                :isError="isError && !eventCalendar.title"
+              />
+
+              <fild-date
+                text="Início"
+                v-model="eventCalendar.start"
+                :value="eventCalendar.start"
+                required
+                :isError="isError && !eventCalendar.start"
+              />
+              <fild-date
+                text="Fim"
+                v-model="eventCalendar.end"
+                :value="eventCalendar.end"
+                required
+                :isError="isError && !eventCalendar.end"
+              />
+              <fild-select
+                text="Usuários"
+                v-model="eventCalendar.users"
+                :value="eventCalendar.users"
+                required
+                :options="dropdownUser"
+                :multiple="true"
+              />
+
+              <div>
+                <div class="calendar_form_button"> 
+                  <send
+                    :isLoading="isLoading"
+                    :isSuccess="isSuccess"
+                    :isError="isError"
+                    @click="sendEvent"
+                    width="100%"
+                  ></send>
+                </div>
+              </div>
+            </div>
+          </div>
+          <EventCalendar :events="events" />
+        </div>
       </template>
     </widget-modal>
   </transition>
@@ -63,6 +75,7 @@
 
 <script>
 import { reactive, ref } from 'vue'
+import { mapState } from 'vuex'
 
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
@@ -71,11 +84,9 @@ import FildInput from '@/components/input/Fild.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import Calendar from '@/components/calendar/Calendar.vue'
 import EventCalendar from '@/components/calendar/EventCalendar.vue'
+import FildSelect from '@/components/input/FildSelect.vue'
 
-import useEvents from '@/composables/useEvents'
 import { dateHourFormarUs } from '@/util/date.js'
-
-const { createEvent, getEvents } = useEvents()
 
 export default {
   data() {
@@ -91,15 +102,17 @@ export default {
   },
   setup(props) {
     const calendar = ref([])
-    const event = reactive({
+    const eventCalendar = reactive({
       start: new Date(),
       end: new Date(),
       title: '',
-      allDay: true
+      allDay: true,
+      users: [],
+      creator: '', 
     })
 
     return {
-      event,
+      eventCalendar,
       calendar
     }
   },
@@ -111,8 +124,13 @@ export default {
     EventCalendar,
     Send,
     FildInput,
-    FildDate
+    FildDate,
+    FildSelect
   },
+  computed: mapState({
+    dropdownUser: (state) => state.dropdown.user,
+    login: (state) => state.user.login
+  }),
   methods: {
     clickCalendar() {
       this.showModal = true
@@ -120,32 +138,14 @@ export default {
     setShowDate(d) {
       this.showDate = d
     },
-    async sendEvent() {
-      this.isLoading = true
-
-      const result = await createEvent({
-        ...this.event,
-        start: dateHourFormarUs(this.event.start),
-        end: dateHourFormarUs(this.event.end)
+    sendEvent() {
+      this.dispatch('calendar/create', {
+        ...this.eventCalendar,
+        creator: this.login,
+        start: dateHourFormarUs(this.eventCalendar.start),
+        end: dateHourFormarUs(this.eventCalendar.end),
+        users: this.eventCalendar.users.length ? [this.eventCalendar.users] : this.eventCalendar.users
       })
-
-      if (result.errors.length === 0) {
-        this.isLoading = false
-        this.isSuccess = true
-
-        setTimeout(() => {
-          this.isSuccess = false
-        }, 3000)
-
-        this.calendar.value.events = getEvents.value
-      } else {
-        this.isLoading = false
-        this.isError = true
-
-        setTimeout(() => {
-          this.isError = false
-        }, 3000)
-      }
     }
   }
 }
@@ -158,5 +158,29 @@ export default {
 
 .vc-container {
   border-color: none;
+}
+
+.calendar_container {
+  display: grid;
+  grid-template-columns: 10rem auto;
+  gap: 1rem;
+}
+
+.form_calendar_container {
+  position: relative;
+}
+
+.form_calendar {
+  font-size: 0.6rem;
+  position: absolute;
+  top: -50%;
+  transform: translate(0, 50%);
+  height: 18rem;
+}
+
+.calendar_form_button{
+  width: 50%;
+  margin: auto;
+  margin-top: -1rem;
 }
 </style>

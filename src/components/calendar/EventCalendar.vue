@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { ref, reactive, watch } from 'vue'
+<script >
+import { ref, reactive, watchEffect } from 'vue'
 import '@fullcalendar/core/vdom'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -7,91 +7,98 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
 import moment from 'moment'
-import useEvents from '@/composables/useEvents'
 import { useStore } from 'vuex'
 
-const id = ref(10)
-const store = useStore()
+export default {
+  setup() {
+    const id = ref(10)
+    const { state, dispatch } = useStore()
+    const login = state.user.login
 
-const { getEvents, createEvent, updateEvent, deleteEvent, setEvents } = useEvents()
-setEvents(store.state.user.login)
+    dispatch('calendar/setEventsAll')
 
-const options = reactive({
-  plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-  initialView: 'dayGridMonth',
-  headerToolbar: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'dayGridMonth,dayGridWeek,listDay'
-  },
-  buttonText: {
-    today: 'hoje',
-    month: 'mês',
-    week: 'semana',
-    day: 'dia',
-    list: 'lista'
-  },
-  locale: 'pt-BR',
-  editable: true,
-  selectable: true,
-  weekends: true,
-
-  select: (arg) => {
-    id.value = id.value + 1
-
-    const cal = arg.view.calendar
-    cal.unselect()
-    cal.addEvent({
-      id: `${id.value}`,
-      title: `New event ${id.value}`,
-      start: arg.start,
-      end: arg.end,
-      allDay: true
-    })
-  },
-  eventClick: (arg) => {
-    if (arg.event) {
-      arg.event.remove()
-    }
-  },
-  events: [],
-  eventAdd: (arg) => {
-    const formatStart = moment(arg.start).format('YYYY-MM-DD hh:mm:ss')
-    const formatEnd = moment(arg.end).format('YYYY-MM-DD hh:mm:ss')
-
-    createEvent({
-      id: arg.event.id,
-      title: arg.event.title,
-      start: formatStart,
-      end: formatEnd,
-      allDay: arg.event.allDay
-    })
-  },
-  eventChange: (arg) => {
-    updateEvent(
-      {
-        id: arg.event.id,
-        title: arg.event.title,
-        start: arg.event.start,
-        end: arg.event.end,
-        allDay: arg.event.allDay
+    const options = reactive({
+      plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,listDay'
       },
-      arg.event.id
-    )
-  },
-  eventRemove: (arg) => {
-    deleteEvent(arg.event.id)
+      buttonText: {
+        today: 'hoje',
+        month: 'mês',
+        week: 'semana',
+        day: 'dia',
+        list: 'lista'
+      },
+      locale: 'pt-BR',
+      editable: true,
+      selectable: true,
+      weekends: true,
+
+      select: (arg) => {
+        id.value = id.value + 1
+
+        const cal = arg.view.calendar
+        cal.unselect()
+        cal.addEvent({
+          id: `${id.value}`,
+          title: `New event ${id.value}`,
+          start: arg.start,
+          end: arg.end,
+          allDay: true
+        })
+      },
+      eventClick: (arg) => {
+        if (arg.event) {
+          arg.event.remove()
+        }
+      },
+      events: state.calendar.events || [] ,
+      eventAdd: (arg) => {
+        const formatStart = moment(arg.start).format('YYYY-MM-DD hh:mm:ss')
+        const formatEnd = moment(arg.end).format('YYYY-MM-DD hh:mm:ss')
+
+        dispatch('calendar/create', {
+          id: arg.event.id,
+          title: arg.event.title,
+          start: formatStart,
+          end: formatEnd,
+          allDay: arg.event.allDay,
+          users:  arg.event.users || [],
+          creator: login
+        })
+      },
+      eventChange: (arg) => {
+        dispatch('calendar/update',
+          {
+            id: arg.event.id,
+            title: arg.event.title,
+            start: arg.event.start,
+            end: arg.event.end,
+            allDay: arg.event.allDay,
+            users:  arg.event.users|| [],
+            creator: login
+          },
+          arg.event.id
+        )
+      },
+      eventRemove: (arg) => {
+        dispatch('calendar/delete', arg.event.id)
+      }
+    })
+
+    watchEffect(() => {
+      options.events = state.calendar.events
+    })
+
+    return { options }
+  }, 
+  components: {
+    FullCalendar
   }
-})
-
-options.events = getEvents.value
-watch(getEvents, () => {
-  options.events = getEvents.value
-})
-
-defineExpose({
-  options
-})
+}
 </script>
 
 <template>
@@ -165,5 +172,17 @@ table[style] {
     var(--fc-event-border-color, var(--sidebar-green-dark));
   border-radius: 4px;
   border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);
+}
+
+.fc-h-event .fc-event-title {
+  display: inline-block;
+  vertical-align: top;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 0.4rem;
+  color: black;
+  font-family: var(--font-family--text);
 }
 </style>

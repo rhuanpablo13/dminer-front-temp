@@ -6,6 +6,7 @@ import { home } from './home.module'
 import { form } from './form.module'
 import { dropdown } from './dropdown.module'
 import { post } from './post.module'
+import { calendar } from './calendar.module'
 
 const store = createStore({
   modules: {
@@ -15,7 +16,8 @@ const store = createStore({
     home,
     dropdown,
     form,
-    post
+    post,
+    calendar
   }
 })
 
