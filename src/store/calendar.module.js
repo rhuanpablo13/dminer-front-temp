@@ -31,7 +31,6 @@ export const calendar = {
         () => {
          this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
-         this.dispatch('calendar/setSuccess')
         },
         (error) => {
           console.log(error)
@@ -50,7 +49,6 @@ export const calendar = {
         () => {
          this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
-         this.dispatch('calendar/setSuccess')
 
         },
         (error) => {
