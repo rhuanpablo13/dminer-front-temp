@@ -52,6 +52,7 @@
                 :options="dropdownUser"
                 :multiple="true"
               />
+              <fild-color text="Cor" v-model="eventCalendar.color" ></fild-color>
 
               <div>
                 <div class="calendar_form_button"> 
@@ -82,11 +83,13 @@ import WidgetModal from '@/components/widget/WidgetModal.vue'
 import Send from '@/components/button/Send.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildDate from '@/components/input/FildDate.vue'
+import FildColor from '@/components/input/FildColor.vue'
 import Calendar from '@/components/calendar/Calendar.vue'
 import EventCalendar from '@/components/calendar/EventCalendar.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 
 import { dateHourFormarUs } from '@/util/date.js'
+
 
 export default {
   data() {
@@ -95,9 +98,6 @@ export default {
       showDate: new Date(),
       events: [],
       buttonComponent: 'icon-button-send',
-      isLoading: false,
-      isSuccess: false,
-      isError: false
     }
   },
   setup(props) {
@@ -109,6 +109,7 @@ export default {
       allDay: true,
       users: [],
       creator: '', 
+      color: '', 
     })
 
     return {
@@ -125,7 +126,8 @@ export default {
     Send,
     FildInput,
     FildDate,
-    FildSelect
+    FildSelect,
+    FildColor
   },
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
@@ -139,7 +141,7 @@ export default {
       this.showDate = d
     },
     sendEvent() {
-      this.dispatch('calendar/create', {
+      this.$store.dispatch('calendar/create', {
         ...this.eventCalendar,
         creator: this.login,
         start: dateHourFormarUs(this.eventCalendar.start),

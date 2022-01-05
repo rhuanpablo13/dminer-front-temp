@@ -26,42 +26,61 @@ export const calendar = {
       )
     },
     create({ commit }, value) {
+      this.dispatch('form/setLoading')
       return createEvent(value).then(
         () => {
          this.dispatch('calendar/setEventsAll')
+         this.dispatch('calendar/setSuccess')
+         this.dispatch('form/setLoading')
+
          messagesFetch('registration', 200, null)
         },
         (error) => {
           console.log(error)
           commit('failure')
+          this.dispatch('form/setLoading')
+          this.dispatch('calendar/setError')
+
           messagesFetch('registration', 400, null)
           return Promise.reject(error)
         }
       )
     },
     update({ commit }, value) {
+      this.dispatch('form/setLoading')
       return updateEvent(value, value.id).then(
         () => {
          this.dispatch('calendar/setEventsAll')
+         this.dispatch('form/setLoading')
+         this.dispatch('calendar/setSuccess')
+
          messagesFetch('update', 200, null)
         },
         (error) => {
           console.log(error)
           commit('failure')
           messagesFetch('update', 400, null)
+          this.dispatch('form/setLoading')
+          this.dispatch('calendar/setError')
           return Promise.reject(error)
         }
       )
     },
     delete({ commit }, id) {
+      this.dispatch('form/setLoading')
       return deleteEvent(id).then(
         () => {
          this.dispatch('calendar/setEventsAll')
+         this.dispatch('form/setLoading')
+         this.dispatch('calendar/setSuccess')
+
          messagesFetch('delete', 200, null)
         },
         (error) => {
           console.log(error)
           commit('failure')
+          this.dispatch('form/setLoading')
+          this.dispatch('calendar/setError')
           messagesFetch('delete', 400, null)
           return Promise.reject(error)
         }
