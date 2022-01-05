@@ -76,7 +76,7 @@ export default {
   padding: 1rem 2rem;
   margin: auto;
   overflow: auto;
-  max-height: 100%;
+  max-height: 85%;
 }
 
 /* .feed_container_imagem {
