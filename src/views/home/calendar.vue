@@ -42,7 +42,7 @@
                 text="Fim"
                 v-model="eventCalendar.end"
                 :value="eventCalendar.end"
-                required
+                :required="false"
                 :isError="isError && !eventCalendar.end"
               />
               <fild-select
@@ -52,9 +52,10 @@
                 required
                 :options="dropdownUser"
                 :multiple="true"
+                v-if="permissionADM"
               />
 
-              <fild-color text="Cor" v-model="eventCalendar.backgroundColor" ></fild-color>
+              <fild-color text="Cor" v-model="eventCalendar.backgroundColor" :required="false"></fild-color>
 
               <div>
                 <fild-checkbox
@@ -116,8 +117,8 @@ export default {
   setup(props) {
     const calendar = ref([])
     const eventCalendar = reactive({
-      start: new Date(),
-      end: new Date(),
+      start: null,
+      end: null,
       title: '',
       allDay: false,
       users: [],
@@ -146,7 +147,8 @@ export default {
   },
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    login: (state) => state.user.login
+    login: (state) => state.user.login,
+    permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
   }),
   methods: {
     clickCalendar() {
@@ -156,15 +158,23 @@ export default {
       this.showDate = d
     },
     sendEvent() {
-      this.$store.dispatch('calendar/create', {
-        ...this.eventCalendar,
-        creator: this.login,
-        allDay: this.eventCalendar.allDay === 'on',
-        start: dateHourFormarUs(this.eventCalendar.start),
-        end: dateHourFormarUs(this.eventCalendar.end),
-        borderColor: this.eventCalendar.backgroundColor,
-        users: this.eventCalendar.users.length ? [this.eventCalendar.users] : this.eventCalendar.users
-      })
+      if(this.validForm()) {
+        this.$store.dispatch('calendar/create', {
+          ...this.eventCalendar,
+          creator: this.login,
+          allDay: this.eventCalendar.allDay === 'on',
+          start: dateHourFormarUs(this.eventCalendar.start),
+          end: dateHourFormarUs(this.eventCalendar.end || this.eventCalendar.start),
+          borderColor: this.eventCalendar.backgroundColor,
+          users: this.eventCalendar.users.length ? [this.eventCalendar.users] : this.eventCalendar.users
+        })
+      } else {
+        this.$store.dispatch('form/setError')
+      }
+    },
+    validForm() {
+      return  this.eventCalendar.hasOwnProperty('title') && this.eventCalendar?.title !== "" && 
+              this.eventCalendar.hasOwnProperty('start') && this.eventCalendar?.start !== null
     }
   }
 }

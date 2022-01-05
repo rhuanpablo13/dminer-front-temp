@@ -60,7 +60,7 @@ export default {
 	},
 	computed: {
     isError() {
-      const error = this.$store.state.form.isError && !this.value
+      const error = this.$store.state.form.isError && !this.value && this.required
 
       const circle = document.querySelector(
         `.container_color_${this.text} .icon__line > .st1`

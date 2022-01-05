@@ -50,11 +50,11 @@ export default {
       //     allDay: true
       //   })
       // },
-      // eventClick: (arg) => {
-      //   if (arg.event) {
-      //     arg.event.remove()
-      //   }
-      // },
+      eventClick: (arg) => {
+        if (arg.event) {
+          arg.event.remove()
+        }
+      },
       events: state.calendar.events || [] ,
       eventAdd: (arg) => {
         const formatStart = moment(arg.start).format('YYYY-MM-DD hh:mm:ss')
