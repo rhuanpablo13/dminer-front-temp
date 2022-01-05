@@ -9,12 +9,14 @@
       }"
     ></div>
     <div class="image_details_content">
-      <h2>
-        <slot name="title" />
+      <div class="image_details_texts">
+        <h2>
+          <slot name="title" />
+        </h2>
         <div class="image_details_categorie" v-if="category">
           {{ category }}
         </div>
-      </h2>
+      </div>
       <span><slot name="content" /></span>
     </div>
   </div>
@@ -67,13 +69,11 @@ export default {
 }
 
 .image_details_categorie {
-  position: absolute;
-  top: 0;
-  right: 0;
   background: #aaff48;
   padding: 0.2rem;
   border-radius: 0.2rem;
   font-size: 0.4rem;
+  height: 0.5rem;
 
   text-transform: uppercase;
 }
@@ -84,7 +84,14 @@ h2 {
   font-weight: 300;
 
   text-transform: capitalize;
-  position: relative;
+
+}
+
+.image_details_texts{
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 1080px) {
