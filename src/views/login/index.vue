@@ -3,7 +3,7 @@
     <div class="login_img">
       <div class="login_logo_completa"></div>
     </div>
-    <filter-vue @submit="sendForm" text="Entrar" isLogin>
+    <filter-vue @submit="sendForm" text="Entrar" isLogin  @keyup.enter="sendForm">
       <div class="login_form">
         <div class="login_form_container">
           <div class="login_logo"></div>
@@ -43,16 +43,16 @@ export default {
   data() {
     return {
       reminderPassword: false,
-      // value: {
-      //   userName: 'matheus.ribeiro1',
-      //   userPassword: '#Matheus97',
-      //   type: 'painel'
-      // }
       value: {
-        userName: '',
-        userPassword: '',
+        userName: 'matheus.ribeiro1',
+        userPassword: '#Matheus97',
         // type: 'painel'
       }
+      // value: {
+      //   userName: '',
+      //   userPassword: '',
+      //   // type: 'painel'
+      // }
     }
   },
   computed: {

@@ -32,9 +32,9 @@
               </form>
             </section>
             </div>
-            <div class="modal-left">
+            <!-- <div class="modal-left">
               <slot name="left" />
-            </div>
+            </div> -->
             <div
               :class="{
                 'modal-body': overflow,
@@ -140,8 +140,10 @@ export default {
 }
 
 .modal-container {
-  margin-left: auto;
-  margin-right: 3rem;
+  /* margin-left: auto;
+  margin-right: 3rem; */
+  display: grid;
+  margin: auto;
   position: relative;
   margin-top: 3.5rem;
 }
@@ -166,7 +168,7 @@ export default {
   overflow-y: hidden;
 }
 
-.modal-left {
+/* .modal-left {
   position: absolute;
   left: -8rem;
   display: grid;
@@ -177,7 +179,7 @@ export default {
   border-radius: 3px;
   grid-gap: 0.3rem;
   width: 5rem;
-}
+} */
 
 .modal-default-button {
   display: block;

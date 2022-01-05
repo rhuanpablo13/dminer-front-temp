@@ -23,8 +23,7 @@
           viewBox="0 0 500 58"
           width="100%"
           height="100%"
-          class="fild_container_icon_select"
-          :class="`container_input_${text}`"
+          :class="`fild_container_icon_select container_input_${text}`"
         >
           <icon-line></icon-line>
         </icon-base>
