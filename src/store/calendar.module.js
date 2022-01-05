@@ -29,11 +29,9 @@ export const calendar = {
       this.dispatch('form/setLoading')
       return createEvent(value).then(
         () => {
+         this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
          this.dispatch('calendar/setSuccess')
-         this.dispatch('form/setLoading')
-
-         messagesFetch('registration', 200, null)
         },
         (error) => {
           console.log(error)
@@ -50,16 +48,14 @@ export const calendar = {
       this.dispatch('form/setLoading')
       return updateEvent(value, value.id).then(
         () => {
-         this.dispatch('calendar/setEventsAll')
          this.dispatch('form/setLoading')
+         this.dispatch('calendar/setEventsAll')
          this.dispatch('calendar/setSuccess')
 
-         messagesFetch('update', 200, null)
         },
         (error) => {
           console.log(error)
           commit('failure')
-          messagesFetch('update', 400, null)
           this.dispatch('form/setLoading')
           this.dispatch('calendar/setError')
           return Promise.reject(error)
@@ -70,11 +66,9 @@ export const calendar = {
       this.dispatch('form/setLoading')
       return deleteEvent(id).then(
         () => {
+          this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
-         this.dispatch('form/setLoading')
          this.dispatch('calendar/setSuccess')
-
-         messagesFetch('delete', 200, null)
         },
         (error) => {
           console.log(error)

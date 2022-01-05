@@ -1,36 +1,24 @@
-const baseURL = 'https://dminer-api.herokuapp.com/api/full-calendar'
+import { messagesFetch } from '@/util/toast.js'
+import { apiIntra } from './http'
+
+const URL = 'full-calendar'
 
 export const fetchEvents = async (login) => {
-  const response = await fetch(`${baseURL}/all/${login}`)
-  const json = await response.json()
-  return json.data
+  const response = await apiIntra(`${URL}/all/${login}`)
+  return response.status === 200 ? response.data.data : []
 }
 
-export const storeEvent = async (event) => {
-  const response = await fetch(`${baseURL}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(event)
-  })
-
-  const json = await response.json()
-  return json
+export const storeEvent = async (item) => {
+  const response = await apiIntra.post(`${URL}`, item)
+  return messagesFetch('registration', response.status, response.data.data)
 }
 
 export const mutateEvent = async (event, id) => {
-  return await fetch(`${baseURL}/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(event)
-  })
+  const response = await apiIntra.put(`${URL}`, event)
+  return messagesFetch('update', response.status, response.data.data)
 }
 
 export const destroyEvent = async (id) => {
-  return await fetch(`${baseURL}/delete/${id}`, {
-    method: 'DELETE'
-  })
+  const response = await apiIntra.delete(`${URL}/${id}`)
+  return messagesFetch('delete', response.status, [])
 }

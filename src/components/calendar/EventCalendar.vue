@@ -36,6 +36,12 @@ export default {
       editable: true,
       selectable: true,
       weekends: true,
+      dayMaxEventRows: true,
+      views: {
+        timeGrid: {
+          dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+        }
+      },
 
       // select: (arg) => {
       //   id.value = id.value + 1
