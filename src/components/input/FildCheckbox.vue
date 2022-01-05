@@ -1,5 +1,5 @@
 <template>
-  <div class="container_input" @click="focus($event)">
+  <div class="container_input" @click="changeInput">
     <div class="input_text" :title="text">
       <input
         :id="`container_input_${text}`"
@@ -27,10 +27,6 @@ export default {
   },
 
   methods: {
-    focus(e) {
-      const input = document.getElementById(`container_input_${this.text}`)
-      input.focus()
-    },
     changeInput(e) {
       this.$emit('update:modelValue', e.target.value)
     }
@@ -55,7 +51,7 @@ export default {
 .input_label {
   text-transform: capitalize;
   text-align: start;
-  width: 20rem;
+  max-width: 20rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

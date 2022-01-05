@@ -37,24 +37,24 @@ export default {
       selectable: true,
       weekends: true,
 
-      select: (arg) => {
-        id.value = id.value + 1
+      // select: (arg) => {
+      //   id.value = id.value + 1
 
-        const cal = arg.view.calendar
-        cal.unselect()
-        cal.addEvent({
-          id: `${id.value}`,
-          title: `New event ${id.value}`,
-          start: arg.start,
-          end: arg.end,
-          allDay: true
-        })
-      },
-      eventClick: (arg) => {
-        if (arg.event) {
-          arg.event.remove()
-        }
-      },
+      //   const cal = arg.view.calendar
+      //   cal.unselect()
+      //   cal.addEvent({
+      //     id: `${id.value}`,
+      //     title: `New event ${id.value}`,
+      //     start: arg.start,
+      //     end: arg.end,
+      //     allDay: true
+      //   })
+      // },
+      // eventClick: (arg) => {
+      //   if (arg.event) {
+      //     arg.event.remove()
+      //   }
+      // },
       events: state.calendar.events || [] ,
       eventAdd: (arg) => {
         const formatStart = moment(arg.start).format('YYYY-MM-DD hh:mm:ss')
@@ -94,7 +94,7 @@ export default {
     })
 
     return { options }
-  }, 
+  },
   components: {
     FullCalendar
   }
@@ -157,8 +157,8 @@ table[style] {
 
 .fc-h-event {
   display: block;
-  border: 1px solid var(--sidebar-green-dark);
-  background-color: var(--sidebar-green-dark);
+  /* border: 1px solid var(--sidebar-green-dark);
+  background-color: var(--sidebar-green-dark); */
   color: #000;
 }
 
@@ -167,9 +167,7 @@ table[style] {
   box-sizing: content-box;
   width: 0;
   height: 0;
-  border: 4px solid var(--sidebar-green-dark);
-  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid
-    var(--fc-event-border-color, var(--sidebar-green-dark));
+  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid;
   border-radius: 4px;
   border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);
 }

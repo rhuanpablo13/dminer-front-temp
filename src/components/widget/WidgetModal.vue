@@ -143,8 +143,8 @@ export default {
   /* margin-left: auto;
   margin-right: 3rem; */
   display: grid;
-  margin: auto;
   position: relative;
+  margin: auto;
   margin-top: 3.5rem;
 }
 

@@ -16,7 +16,7 @@
       v-if="showModal"
       @close="showModal = false"
       classButton="modal-default-button-calendar"
-      width="80%"
+      width="90%"
     >
       <template v-slot:body>
         <div class="calendar_container">
@@ -52,7 +52,16 @@
                 :options="dropdownUser"
                 :multiple="true"
               />
-              <fild-color text="Cor" v-model="eventCalendar.color" ></fild-color>
+
+              <fild-color text="Cor" v-model="eventCalendar.backgroundColor" ></fild-color>
+
+              <div>
+                <fild-checkbox
+                  text="Dia inteiro"
+                  v-model="eventCalendar.allDay"
+                  type="checkbox"
+                />
+              </div>
 
               <div>
                 <div class="calendar_form_button"> 
@@ -67,7 +76,10 @@
               </div>
             </div>
           </div>
+          <div>
+            
           <EventCalendar :events="events" />
+          </div>
         </div>
       </template>
     </widget-modal>
@@ -87,6 +99,7 @@ import FildColor from '@/components/input/FildColor.vue'
 import Calendar from '@/components/calendar/Calendar.vue'
 import EventCalendar from '@/components/calendar/EventCalendar.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
+import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import { dateHourFormarUs } from '@/util/date.js'
 
@@ -106,10 +119,11 @@ export default {
       start: new Date(),
       end: new Date(),
       title: '',
-      allDay: true,
+      allDay: false,
       users: [],
       creator: '', 
-      color: '', 
+      borderColor: '', 
+      backgroundColor: '', 
     })
 
     return {
@@ -127,7 +141,8 @@ export default {
     FildInput,
     FildDate,
     FildSelect,
-    FildColor
+    FildColor,
+    FildCheckbox
   },
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
@@ -144,8 +159,10 @@ export default {
       this.$store.dispatch('calendar/create', {
         ...this.eventCalendar,
         creator: this.login,
+        allDay: this.eventCalendar.allDay === 'on',
         start: dateHourFormarUs(this.eventCalendar.start),
         end: dateHourFormarUs(this.eventCalendar.end),
+        borderColor: this.eventCalendar.backgroundColor,
         users: this.eventCalendar.users.length ? [this.eventCalendar.users] : this.eventCalendar.users
       })
     }
@@ -166,6 +183,7 @@ export default {
   display: grid;
   grid-template-columns: 10rem auto;
   gap: 1rem;
+  margin-left: 3.5rem;
 }
 
 .form_calendar_container {
