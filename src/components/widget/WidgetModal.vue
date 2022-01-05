@@ -193,12 +193,12 @@ export default {
   border: none;
 }
 
-.modal-default-button-calendar {
+.modal_calendar_button {
   display: block;
-  margin-top: -2rem;
+  margin-top: -2.5rem;
   position: absolute;
-  right: -1rem;
-  width: 1.5rem;
+  right: 2rem;
+  width: 2rem;
   padding: 0rem;
   cursor: pointer;
   background: transparent;

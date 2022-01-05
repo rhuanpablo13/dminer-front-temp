@@ -34,7 +34,7 @@
               viewBox="0 0 500 58"
               width="100%"
               height="100%"
-              class="fild_container_icon"
+              class="fild_container_icon_document"
             >
               <icon-line />
             </icon-base>
@@ -163,9 +163,10 @@ a {
   height: 1rem;
 }
 
-.fild_container_icon {
+.fild_container_icon_document {
   position: absolute;
   left: -1rem;
   z-index: 2;
+  bottom: -2rem;
 }
 </style>

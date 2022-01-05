@@ -15,8 +15,9 @@
     <widget-modal
       v-if="showModal"
       @close="showModal = false"
-      classButton="modal-default-button-calendar"
-      width="90%"
+      width="100%"
+      classButton="modal_calendar_button"
+      :overflow="false"
     >
       <template v-slot:body>
         <div class="calendar_container">
@@ -76,9 +77,8 @@
               </div>
             </div>
           </div>
-          <div>
-            
-          <EventCalendar :events="events" />
+          <div class="container_calendar">
+            <EventCalendar :events="events" />
           </div>
         </div>
       </template>
@@ -184,6 +184,7 @@ export default {
   grid-template-columns: 10rem auto;
   gap: 1rem;
   margin-left: 3.5rem;
+  margin-top: 2rem;
 }
 
 .form_calendar_container {
@@ -191,7 +192,7 @@ export default {
 }
 
 .form_calendar {
-  font-size: 0.6rem;
+  font-size: 0.4rem;
   position: absolute;
   top: -50%;
   transform: translate(0, 50%);
@@ -203,4 +204,9 @@ export default {
   margin: auto;
   margin-top: -1rem;
 }
+
+.container_calendar{
+  margin-top:-2rem;
+}
+
 </style>

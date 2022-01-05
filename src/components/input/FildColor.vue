@@ -82,7 +82,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .container_color {
   position: relative;
   cursor: text;
@@ -115,5 +115,17 @@ export default {
   color: red;
   text-align: start;
   margin-top: -0.4rem;
+}
+
+.vc-color-wrap.round {
+  width: 1rem !important;
+  height: 1rem !important;
+  border-radius: 50% !important;
+  border: none !important;
+  margin-bottom: 0.2rem;
+}
+
+.vc-color-wrap{
+  box-shadow: none!important;
 }
 </style>

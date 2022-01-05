@@ -69,7 +69,7 @@ export default {
   color: var(--sidebar-green-ligth);
   box-sizing: border-box;
   text-overflow: ellipsis;
-  z-index: 4;
+  z-index: 2;
   padding: 0;
   padding-top: 0.5rem;
   font-size: 0.8rem;
@@ -93,19 +93,19 @@ input[type='checkbox']:before {
   content: '';
   display: block;
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   top: 0;
   left: 0;
-  border: 2px solid #555555;
+  border: 1px solid #555555;
   border-radius: 3px;
   background-color: white;
 }
 input[type='checkbox']:checked:after {
   content: '';
   display: block;
-  width: 5px;
-  height: 10px;
+  width: 0.5rem;
+  height: 0.7rem;
   border: solid var(--sidebar-green-ligth);
 
   border-width: 0 2px 2px 0;
@@ -113,7 +113,7 @@ input[type='checkbox']:checked:after {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   position: absolute;
-  top: 2px;
-  left: 6px;
+  top: -1px;
+  left: 4px;
 }
 </style>
