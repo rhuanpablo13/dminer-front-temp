@@ -11,8 +11,7 @@ const initialState = {
 }
 
 const { crateComment, setAllPost, getPostsAll, searchAll } = useFeed()
-const { getPost, setPost, search, like } = usePost()
-
+const { getPost, setPost, search, setReact } = usePost()
 
 export const post = {
   namespaced: true,
@@ -84,11 +83,10 @@ export const post = {
       )
     },
     setLike({ commit }, {id, login}) {
-      debugger
-      return like(id, login).then(
+      return setReact(id.id, login, id.reacts).then(
         (payload) => {
           this.dispatch('post/getPostViewAll')
-          this.dispatch('post/getPostView', value.idPost)        
+          this.dispatch('post/getPostView', id.id)        
         },
         (error) => {
           console.log(error)

@@ -13,10 +13,11 @@
       :style="{ 'background-image': `url(${value.anexo})` }"
     >
     </div>
-    <div class="feed_container_likes">
-      <Title v-show="value.likes.length > 0">{{value.likes.length}}</Title>
-      <button @click="like" :disabled="value.likes.indexOf($store.state.user.login) !== -1"> Like </button>
-    </div>
+      <ul class="feed_container_likes">
+        <li v-for="(react_value, key) in value.reacts" :key="key" @click="!disabledReact && like(key)">
+          <React :layout="key" :reacts="react_value.length" :disabled="disabledReact"/>
+        </li>
+      </ul>
       <icon-base
         viewBox="0 0 500 58"
         width="80%"
@@ -40,6 +41,8 @@
 </template>
 
 <script>
+import { mapState, useStore } from 'vuex'
+
 import HeaderPost from '@/components/HeaderPost.vue'
 import CommentPost from '@/components/CommentPost.vue'
 import FildDate from '@/components/input/FildDate.vue'
@@ -47,10 +50,25 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconLineMult from '@/components/svg/IconLineMult.vue'
 import Comment from '@/components/Comment.vue'
 import Title from '@/components/title/Title.vue'
+import React from './React.vue'
 
 export default {
   props: {
     value: { type: Object, required: true }
+  },
+  setDoc(props) {
+    const store = useStore()
+
+    let disabledReact = false;
+    Object.value(props.value).map(item => {
+      if (item.reacts.indexOf(store.user.login) !== -1) {
+        disabledReact = true
+      }
+    })
+
+    return {
+      disabledReact
+    }
   },
   components: {
     HeaderPost,
@@ -59,13 +77,19 @@ export default {
     IconBase,
     IconLineMult,
     Comment,
-    Title
+    Title,
+    React
   }, 
+  computed: mapState({
+    login: (state) => state.user.login,
+  }),
+
   methods: {
-    like() {
+    like(reacts) {
       const login = this.$store.state.user.login
-      this.value.likes.push(login)
-      this.$emit('like', {id: this.value.id, login})
+      this.value.reacts[reacts].push(login)
+      this.disabledReact = true
+      this.$emit('like', {id: this.value.id, login, reacts: reacts})
     }
   }
 }
@@ -129,11 +153,14 @@ export default {
 
 .feed_container_likes {
   display: flex;
-  height: 2rem;
+  /* height: 10rem; */
   font-size: 0.3rem;
   justify-content: center;
-  align-content: center;
-  gap: 0.5rem;
+  align-content: flex-start;
+  gap: 1.5rem;
+  text-align: center;
+  margin-top: 1rem;
+  width: 23rem;
 }
 
 .comment_input {
@@ -154,7 +181,7 @@ ul {
 
 li {
   margin-left: -1.5rem;
-  height: 2rem;
+  /* height: 2rem; */
   margin-top: -1rem;
 }
 </style>

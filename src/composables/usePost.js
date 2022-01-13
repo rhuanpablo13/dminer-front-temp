@@ -27,8 +27,12 @@ export default function usePost() {
     getPost.value =  await fetchSearch(data.id, data.date ? dateHourFormarUs(data.date) : data.date, data.user)
   }
 
-  const like = async (id, login) => {
-    return await fetchLike(id, login)
+  const setReact = async (id, login, _react) => {
+    return await fetchLike(id, login, _react)
+  }
+
+  const setDropdownReact = async () => {
+    return fetchDropdownReact()
   }
 
   return {
@@ -37,6 +41,7 @@ export default function usePost() {
     setPost,
     getPost,
     search,
-    like
+    setReact,
+    setDropdownReact
   }
 }

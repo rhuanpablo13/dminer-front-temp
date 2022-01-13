@@ -12,8 +12,8 @@ export const fetchCreate = async (item) => {
   return messagesFetch('registration', response.status, response.data.data)
 }
 
-export const fetchLike = async (id, login) => {
-  const response = await apiIntra.put(`${URL}/like/${id}/${login}`)
+export const fetchLike = async (id, login, react) => {
+  const response = await apiIntra.put(`${URL}/like/${id}/${login}/${react}`)
   return response.status === 200 ? response.data.data : []
 }
 
@@ -44,5 +44,10 @@ export const fetchSearch = async (id, date, user) => {
 
 export const fetchSearchAll = async (date, user) => {
   const response = await apiIntra(`${URL}/search/all?date=${date}&user=${user}`)
+  return response.status === 200 ? response.data.data : []
+}
+
+export const fetchDropdownReact = async () => {
+  const response = await apiIntra(`${URL}/react/dropdown`)
   return response.status === 200 ? response.data.data : []
 }

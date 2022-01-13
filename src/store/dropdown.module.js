@@ -1,6 +1,7 @@
 
 import useUser from '@/composables/useUser'
 import usePermission from '@/composables/usePermission'
+import usePost from '@/composables/usePost'
 
 const initialState = {
   user: [],
@@ -12,6 +13,7 @@ const dropdownInit = localStorage.dropdown
   : initialState
 
 const { setDropdownUser } = useUser()
+const { setDropdownReact } = usePost()
 const { setPermission } = usePermission()
 
 export const dropdown = {
@@ -46,7 +48,21 @@ export const dropdown = {
           return Promise.reject(error)
         }
       )
-    }
+    },
+    getDropdownReact({ commit }) {
+      return setDropdownReact().then(
+        (payload) => {
+          this.state.dropdown.react = payload
+          commit('dropdownSuccess', this.state.dropdown)
+          return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('dropdownFailure')
+          return Promise.reject(error)
+        }
+      )
+    },
   },
   mutations: {
     dropdownSuccess(state, payload) {
