@@ -92,7 +92,7 @@ export default {
     return { getTutorials, getPermission, setTutorial, deleteItem, search }
   },
   computed: mapState({
-    permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),
   components: {
     WidgetModal,

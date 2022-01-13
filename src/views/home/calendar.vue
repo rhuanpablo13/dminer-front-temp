@@ -148,7 +148,7 @@ export default {
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
     login: (state) => state.user.login,
-    permissionADM: (state) => state.user.type  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),
   methods: {
     clickCalendar() {

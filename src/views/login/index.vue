@@ -43,16 +43,16 @@ export default {
   data() {
     return {
       reminderPassword: false,
-      // value: {
-      //   userName: 'matheus.ribeiro1',
-      //   userPassword: '#Matheus97',
-      //   // type: 'painel'
-      // }
       value: {
-        userName: '',
-        userPassword: '',
-        // type: 'painel'
+        userName: 'matheus.ribeiro1',
+        userPassword: '#Matheus97',
+        type: 'intranet'
       }
+      // value: {
+      //   userName: '',
+      //   userPassword: '',
+      //   // type: 'intranet'
+      // }
     }
   },
   computed: {

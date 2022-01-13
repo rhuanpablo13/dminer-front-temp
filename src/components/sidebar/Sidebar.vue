@@ -125,7 +125,7 @@ export default {
     user: (state) => state.user,
     collapsed: (state) => state.sidebar.collapsed,
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
-    permissionADM: (state) => state.user.type  !== 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  !== 'ADMINISTRADOR'
   }),
 
   methods: {

@@ -22,7 +22,7 @@ export const auth = {
         (error) => {
           console.log(error)
           commit('loginFailure')
-          // messagesFetch('login', 400, null)
+          //messagesFetch('login', 400, null)
           return Promise.reject(error)
         }
       )

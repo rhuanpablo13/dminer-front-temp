@@ -5,7 +5,7 @@ const initialState = {
   avatar: '',
   banner: '',
   login: '',
-  type: ''
+  adminUser: 'COMUM'
 }
 const userLocalStorage = localStorage.user
   ? JSON.parse(localStorage.user)
@@ -72,7 +72,7 @@ export const user = {
   },
   mutations: {
     userSuccess(state, user) {
-      state.type = user.type
+      state.type = user.adminUser
       state.usuario = user.usuario
     },
     success(state, user) {
