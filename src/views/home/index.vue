@@ -6,7 +6,7 @@
       </form>
     </section>
     <section class="container__section">
-      <draggable :list="listComponents" :move="log">
+      <draggable :list="listComponents" @end="log">
         <div v-for="(folder, key) in listComponents" :key="key">
           <component :is="folder"></component>
         </div>
@@ -45,17 +45,17 @@ export default {
       this.listComponents = JSON.parse(localStorage.position_components_home)
     } else {
       this.listComponents = [
-        notification,
-        calendar,
-        birthday,
-        notices,
-        reminder,
-        quiz
+        'notification',
+        'calendar',
+        'birthday',
+        'notices',
+        'reminder',
+        'quiz'
       ]
 
-      // localStorage.position_components_home = JSON.stringify(
-      //   this.listComponents
-      // )
+      localStorage.position_components_home = JSON.stringify(
+        this.listComponents
+      )
 
       this.$store.dispatch('home/search', null)
       this.$store.dispatch('dropdown/getDropdownUser')
@@ -79,14 +79,19 @@ export default {
 
   components: {
     InputDate,
-    draggable: VueDraggableNext
+    draggable: VueDraggableNext,
+    notification,
+    calendar,
+    birthday,
+    notices,
+    reminder,
+    quiz
   },
   methods: {
     log(event) {
-      //TODO: salvar a posição dos folders
-      // localStorage.position_components_home = JSON.stringify(
-      //   this.listComponents
-      // )
+      localStorage.position_components_home = JSON.stringify(
+        this.listComponents
+      )
     },
     submit(event) {
       this.$store
