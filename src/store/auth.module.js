@@ -1,6 +1,7 @@
 import useAuth from '@/composables/useAuth'
 import { messagesFetch } from '@/util/toast.js'
 import { setupAxiosToken } from '@/api/http'
+import { useRoute } from "vue-router";
 
 const userLocalStorage = localStorage.user && JSON.parse(localStorage.user)
 
@@ -9,6 +10,7 @@ const initialState = userLocalStorage
   : { status: { loggedIn: false } }
 
 const { login, logout } = useAuth()
+const route = useRoute()
 
 export const auth = {
   namespaced: true,
@@ -46,6 +48,7 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false
       this.commit('user/success', null)
+      route.push('/login')
     },
     registerSuccess(state) {
       state.status.loggedIn = false

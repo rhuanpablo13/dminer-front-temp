@@ -75,6 +75,11 @@ export default {
           () => {
             this.$store.dispatch('form/setLoading')
             this.$router.push('/')
+
+            const timeout = setInterval(() => {
+              this.$store.dispatch('auth/logout')
+              clearInterval(timeout)
+            },  1800000) // 1800000 = 30m
           },
           (error) => {
             this.$store.dispatch('form/setLoading')
