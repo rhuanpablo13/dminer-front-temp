@@ -18,6 +18,12 @@ import dmais from '@/components/svg/IconDmais.vue'
 import dslumbrado from '@/components/svg/IconDslumbrado.vue'
 import dsacreditado from '@/components/svg/IconSacreditado.vue'
 
+import dterminadoDsabled from '@/components/svg/IconDterminadoDsabled.vue'
+import dvertidoDsabled from '@/components/svg/IconDvertidoDsabled.vue'
+import dmaisDsabled from '@/components/svg/IconDmaisDsabled.vue'
+import dslumbradoDsabled from '@/components/svg/IconDslumbradoDsabled.vue'
+import dsacreditadoDsabled from '@/components/svg/IconSacreditadoDsabled.vue'
+
 export default {
     props: {
       layout: { type: String, required: true },
@@ -32,6 +38,11 @@ export default {
       "D-SLUMBRADO": dslumbrado,
       "D-SACREDITADO": dsacreditado, 
       "D-IVERTIDO": dvertido,
+      "D-TERMINADO-D": dterminadoDsabled,
+      "D-MAIS-D": dmaisDsabled,
+      "D-SLUMBRADO-D": dslumbradoDsabled,
+      "D-SACREDITADO-D": dsacreditadoDsabled,
+      "D-IVERTIDO-D": dvertidoDsabled,
     }
 }
 </script>

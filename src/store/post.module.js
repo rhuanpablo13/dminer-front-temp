@@ -82,11 +82,11 @@ export const post = {
         }
       )
     },
-    setLike({ commit }, {id, login}) {
-      return setReact(id.id, login, id.reacts).then(
+    setLike({ commit }, value) {
+      return setReact(value).then(
         (payload) => {
           this.dispatch('post/getPostViewAll')
-          this.dispatch('post/getPostView', id.id)        
+          this.dispatch('post/getPostView', value.id)        
         },
         (error) => {
           console.log(error)

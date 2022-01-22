@@ -14,8 +14,8 @@
     >
     </div>
       <ul class="feed_container_likes">
-        <li v-for="(react_value, key) in value.reacts" :key="key" @click="!disabledReact && like(key)">
-          <React :layout="key" :reacts="react_value.length" :disabled="disabledReact"/>
+        <li v-for="(react_value, key) in value.reacts" :key="key" @click="like(key)">
+          <React :layout="disabledReact && reactActive !== key ? `${key}-D` : key" :reacts="react_value.length" :disabled="disabledReact && reactActive !== key"/>
         </li>
       </ul>
       <icon-base
@@ -59,15 +59,20 @@ export default {
   setDoc(props) {
     const store = useStore()
 
-    let disabledReact = false;
+
+    let disabledReact = false
+    let reactActive = ''
     Object.value(props.value).map(item => {
-      if (item.reacts.indexOf(store.user.login) !== -1) {
+      const index = item.reacts.indexOf(store.user.login)
+      if (index !== -1) {
         disabledReact = true
+        reactActive = item.reacts[index]
       }
     })
 
     return {
-      disabledReact
+      disabledReact,
+      reactActive,
     }
   },
   components: {
@@ -85,11 +90,21 @@ export default {
   }),
 
   methods: {
+    hasUserIndex(reacts) {
+      return this.value.reacts[reacts].indexOf(this.login) 
+    },
     like(reacts) {
-      const login = this.$store.state.user.login
-      this.value.reacts[reacts].push(login)
-      this.disabledReact = true
-      this.$emit('like', {id: this.value.id, login, reacts: reacts})
+      const index = this.hasUserIndex(reacts)
+      if (index === -1) {
+        this.value.reacts[reacts].push(this.login)
+        this.disabledReact = true
+        this.reactActive = reacts
+      }else {
+        this.value.reacts[reacts].splice(index, 1)
+        this.disabledReact = false
+        this.reactActive = ''
+      }
+      this.$store.dispatch('post/setLike', {id: this.value.id, login: this.login, reacts: reacts, toggle: this.disabledReact })
     }
   }
 }
@@ -161,6 +176,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   width: 23rem;
+  overflow: hidden;
 }
 
 .comment_input {

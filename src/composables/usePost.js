@@ -27,8 +27,8 @@ export default function usePost() {
     getPost.value =  await fetchSearch(data.id, data.date ? dateHourFormarUs(data.date) : data.date, data.user)
   }
 
-  const setReact = async (id, login, _react) => {
-    return await fetchLike(id, login, _react)
+  const setReact = async (value) => {
+    return await fetchLike(value)
   }
 
   const setDropdownReact = async () => {

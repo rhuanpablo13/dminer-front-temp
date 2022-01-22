@@ -10,7 +10,7 @@
       <template v-slot:body>
         <div class="feed_container">
           <div class="feed_all_container">
-            <post :value="post"  v-if="post.user" @like="dispatch('post/setLike', {id: $event, login })"/>
+            <post :value="post"  v-if="post.user" />
           </div>
 
          <div>

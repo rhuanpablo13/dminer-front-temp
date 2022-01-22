@@ -12,8 +12,8 @@ export const fetchCreate = async (item) => {
   return messagesFetch('registration', response.status, response.data.data)
 }
 
-export const fetchLike = async (id, login, react) => {
-  const response = await apiIntra.put(`${URL}/like/${id}/${login}/${react}`)
+export const fetchLike = async ({id, login, reacts, toggle}) => {
+  const response = await apiIntra.put(`${URL}/like/${id}/${login}/${reacts}/${toggle}`)
   return response.status === 200 ? response.data.data : []
 }
 
