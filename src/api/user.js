@@ -27,8 +27,8 @@ export const fetchUpdatePermission = async (login, permission) => {
   return messagesFetch('update', response.status, response.data.data)
 }
 
-export const fetchAllUser = async (token) => {
-  const response = await apiIntra.post(`${URL}/all`, {token})
+export const fetchAllUser = async () => {
+  const response = await apiIntra.post(`${URL}/all`)
   return response.status === 200 ? response.data.data : []
 }
 
@@ -54,8 +54,8 @@ export const fetchCreateUser = async (user) => {
 }
 
 
-export const fetchDropdownUser = async (token) => {
-  const response = await apiIntra.post(`${URL}/dropdown`, {token})
+export const fetchDropdownUser = async () => {
+  const response = await apiIntra.post(`${URL}/dropdown`)
   return response.status === 200 ? response.data.data : []
 }
 

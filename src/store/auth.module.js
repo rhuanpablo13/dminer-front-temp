@@ -1,5 +1,6 @@
 import useAuth from '@/composables/useAuth'
 import { messagesFetch } from '@/util/toast.js'
+import { setupAxiosToken } from '@/api/http'
 
 const userLocalStorage = localStorage.user && JSON.parse(localStorage.user)
 
@@ -35,6 +36,7 @@ export const auth = {
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true
+      setupAxiosToken(user.baererAuthentication)
       this.dispatch('user/setUser', user)
     },
     loginFailure(state) {

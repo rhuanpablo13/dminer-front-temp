@@ -22,3 +22,18 @@ export const apiIntra = axios.create({
     'Content-Type': 'application/json'
   }
 })
+
+export const setupAxiosToken = (token) => {
+  apiIntra.interceptors.request.use(
+    (config) => {
+      if (token) {
+        // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
+        config.headers["x-access-token"] = token; // for Node.js Express back-end
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  )
+}

@@ -5,8 +5,7 @@ export default function usePermission() {
   const getPermission = ref([])
 
   const setPermission = async () => {
-    const user = JSON.parse(localStorage.user)
-    return await fetchDropdownPermissions(user.baererAuthentication)
+    return await fetchDropdownPermissions()
   }
 
   const create = async (item) => {

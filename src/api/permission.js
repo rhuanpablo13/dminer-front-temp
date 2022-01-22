@@ -3,8 +3,8 @@ import { apiIntra } from './http'
 
 const URL = '/permission'
 
-export const fetchAll = async (token) => {
-  const response = await apiIntra.post(`${URL}/all`, {token})
+export const fetchAll = async () => {
+  const response = await apiIntra.post(`${URL}/all`)
   return response.status === 200 ? response.data.data : []
 }
 
@@ -18,7 +18,7 @@ export const fetchUpdate = async (item) => {
   return messagesFetch('update', response.status, response.data.data)
 }
 
-export const fetchDropdownPermissions = async (token) => {
-  const response = await apiIntra.post(`${URL}/dropdown`, {token})
+export const fetchDropdownPermissions = async () => {
+  const response = await apiIntra.post(`${URL}/dropdown`)
   return response.status === 200 ? response.data.data : []
 }
