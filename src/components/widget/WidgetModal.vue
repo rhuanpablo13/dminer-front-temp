@@ -47,16 +47,7 @@
           <div class="modal-footer">
             <slot name="footer"></slot>
           </div>
-          <div class="folder__footer" >
-            <icon-base
-              :onClick="$store.dispatch('post/setFavorite')"
-              width="70"
-              height="70"
-              v-if="favorite !== ''"
-            >
-             <component :is="favorite" />
-            </icon-base>
-
+          <div class="folder__footer" v-if="onClick">
             <icon-base
               viewBox="0 0 1024 1024"
               icon-name="icon"
@@ -64,7 +55,6 @@
               width="70"
               height="70"
               :styles="onClick && 'cursor: pointer;'"
-              v-if="onClick"
             >
               <icon-button />
             </icon-base>
@@ -83,8 +73,6 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconButtonClose from '@/components/svg/IconButtonClose.vue'
 import IconModalFolder from '@/components/svg/IconModalFolder.vue'
 import IconButton from '@/components/svg/IconButton.vue'
-import IconFavorite from '@/components/svg/IconFavorite.vue'
-import IconFavoriteDsabled from '@/components/svg/IconFavoriteDsabled.vue'
 import FildSearch from '@/components/input/FildSearch.vue'
 
 export default {
@@ -93,7 +81,6 @@ export default {
   },
   props: {
     layout: { type: String, required: false, default: 'icon-modal-folder' },
-    favorite: { type: String, required: false, default: '' },
     width: { type: String, required: false, default: '100%' },
     viewbox: { type: String, required: false, default: '0 0 700 500' },
     title: { type: String, required: true, default: '' },
@@ -119,9 +106,7 @@ export default {
     IconModalFolder,
     IconFolderFeed,
     IconButton,
-    FildSearch,
-    IconFavorite,
-    IconFavoriteDsabled
+    FildSearch
   }
 }
 </script>

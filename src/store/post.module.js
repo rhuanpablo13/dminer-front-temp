@@ -109,8 +109,8 @@ export const post = {
         }
       )
     },    
-    setFavorite({ commit }, value) {
-      return favorite(value).then(
+    setFavorite({ commit }, id) {
+      return favorite({idPost: id, login: this.state.user.login }).then(
         (payload) => {
           // commit('successPosts', getPostsAll.value)
         },

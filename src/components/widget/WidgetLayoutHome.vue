@@ -15,9 +15,17 @@
         </div>
         <div class="notices__footer" v-if="hasButton">
           <icon-base
+            :onClick="()=> $store.dispatch('post/setFavorite',  id)"
+            width="70"
+            height="70"
+            class="icons"
+          >
+            <component :is="favorite"  />
+          </icon-base>
+          <icon-base
             viewBox="0 0 1024 1024"
             icon-name="icon"
-            class="edit-icon"
+            class="edit-icon icons"
             :onClick="onClick"
             width="70"
             height="70"
@@ -39,6 +47,8 @@ import IconFolderReminder from '@/components/svg/IconFolderReminder.vue'
 import IconSidebar from '@/components/svg/IconSidebar.vue'
 import IconFolder from '@/components/svg/IconFolder.vue'
 import IconFolderFeed from '@/components/svg/IconFolderFeed.vue'
+import IconFavorite from '@/components/svg/IconFavorite.vue'
+import IconFavoriteDsabled from '@/components/svg/IconFavoriteDsabled.vue'
 
 export default {
   props: {
@@ -48,7 +58,9 @@ export default {
     classContent: { type: String, required: false },
     id: { type: String, required: false },
     hasButton: { type: Boolean, required: false, default: true },
-    layout: { type: String, required: true }
+    layout: { type: String, required: true },
+    favorite: { type: String, required: false, default: 'icon-favorite-dsabled' },
+    isFavorite: { type: Boolean, required: false, default: true },
   },
   components: {
     IconBase,
@@ -57,7 +69,9 @@ export default {
     IconFolderReminder,
     IconSidebar,
     IconFolderFeed,
-    IconFolder
+    IconFolder,
+    IconFavorite,
+    IconFavoriteDsabled
   }
 }
 </script>
@@ -87,15 +101,21 @@ export default {
 }
 
 .notices__footer {
-  display: flex;
-  justify-content: flex-end;
+  display: contents;
+  /* justify-content: flex-end;
   align-items: end;
-  margin-top: 5px;
+  margin-top: 5px; */
 }
 
 h2 {
   font-family: var(--font-family--title);
   color: var(--color-title);
   font-weight: 300;
+}
+
+.icons {
+  justify-self: right;
+  margin-top: -1rem;
+  cursor: pointer;
 }
 </style>

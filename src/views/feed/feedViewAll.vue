@@ -20,7 +20,10 @@
                   classContent="feed_all_widget"
                   layout="icon-folder-feed"
                   isExpanded
+                  isFavorite
+                  favorite="icon-favorite"
                   :onClick="() => clickView(item.id)"
+                  :id="item.id"
                 >
                   <post :value="item" />
                 </widget-layout-home>
