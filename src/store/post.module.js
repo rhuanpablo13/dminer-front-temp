@@ -10,7 +10,7 @@ const initialState = {
   posts: []
 }
 
-const { crateComment, setAllPost, getPostsAll, searchAll } = useFeed()
+const { crateComment, setAllPost, getPostsAll, searchAll, getFavorites, favorite } = useFeed()
 const { getPost, setPost, search, setReact } = usePost()
 
 export const post = {
@@ -87,6 +87,32 @@ export const post = {
         (payload) => {
           this.dispatch('post/getPostViewAll')
           this.dispatch('post/getPostView', value.id)        
+        },
+        (error) => {
+          console.log(error)
+
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },    
+    getFavorite({ commit }) {
+      return getFavorites(this.state.user.login).then(
+        (payload) => {
+          commit('successPosts', getPostsAll.value)
+        },
+        (error) => {
+          console.log(error)
+
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },    
+    setFavorite({ commit }, value) {
+      return favorite(value).then(
+        (payload) => {
+          // commit('successPosts', getPostsAll.value)
         },
         (error) => {
           console.log(error)

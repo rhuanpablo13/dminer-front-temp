@@ -12,17 +12,23 @@
         :text="text"
         :class="{ login_button: isLogin, filter_button: !isLogin }"
       ></Send>
+      <Favorite
+        text="Favorito"
+        v-if="favorite"
+      ></Favorite>
     </div>
   </form>
 </template>
 <script>
 import Send from '@/components/button/Send.vue'
+import Favorite from '@/components/button/Favorite.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildDate from '@/components/input/FildDate.vue'
 
 export default {
   props: {
     filterData: { type: Object, required: true, default: false },
+    favorite: { type: Boolean, required: false, default: false },
     text: { type: String, required: false, default: 'Enviar' },
     isLogin: { type: Boolean, required: false, default: false }
   },
@@ -31,7 +37,7 @@ export default {
       this.$emit('submit')
     }
   },
-  components: { Send, FildInput, FildDate }
+  components: { Send, FildInput, FildDate, Favorite }
 }
 </script>
 <style scoped>
@@ -49,8 +55,11 @@ export default {
 }
 
 .filter_button {
-  width: 6rem;
+  width: 8rem;
   margin: auto;
   margin-top: 0;
+  display: grid;
+  justify-content: center;
+  gap: 0.5rem;
 }
 </style>

@@ -33,6 +33,7 @@
             @submit="filter"
             class="feed_view_filter"
             text="Filtrar"
+            favorite
           >
             <fild-date
               text="Filtrar por data"
