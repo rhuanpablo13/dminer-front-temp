@@ -13,6 +13,7 @@
         :class="{ login_button: isLogin, filter_button: !isLogin }"
       ></Send>
       <Favorite
+       class="favorite"
         text="Favorito"
         v-if="favorite"
       ></Favorite>
@@ -61,5 +62,10 @@ export default {
   display: grid;
   justify-content: center;
   gap: 0.5rem;
+  height: 10rem;
+}
+
+.favorite {
+  margin-top: -3rem;
 }
 </style>
