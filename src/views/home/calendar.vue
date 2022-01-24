@@ -52,7 +52,6 @@
                 required
                 :options="dropdownUser"
                 :multiple="true"
-                v-if="permissionADM"
               />
 
               <fild-color text="Cor" v-model="eventCalendar.backgroundColor" :required="false"></fild-color>
