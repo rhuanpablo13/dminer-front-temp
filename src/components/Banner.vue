@@ -38,7 +38,7 @@ export default {
     return { fileInput }
   },
   updated() {
-    if (this.isLoading) {
+    if (this.isLoading && this.update) {
       this.previewImage =  this.$store.state.user.banner
     }
   },
@@ -53,6 +53,7 @@ export default {
 
   methods: {
     selectImage() {
+      this.update = false
       this.fileInput.click()
     },
     pickFile() {
@@ -61,7 +62,6 @@ export default {
       if (file && file[0]) {
         let reader = new FileReader()
         reader.onload = (e) => {
-          this.update = false
           this.previewImage = e.target.result
           this.$store.dispatch('user/updateBanner', reader.result)
         }

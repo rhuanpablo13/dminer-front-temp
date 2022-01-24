@@ -18,7 +18,7 @@ export const fetchBanner = async (login) => {
 }
 
 export const fetchUpdateBanner = async (login, banner) => {
-  const response = await apiIntra.post(`${URL}`, { banner, login })
+  const response = await apiIntra.put(`${URL}`, { banner, login })
   return messagesFetch('update', response.status, response.data.data)
 }
 
