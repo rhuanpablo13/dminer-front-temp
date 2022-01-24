@@ -13,7 +13,7 @@
         :class="{ login_button: isLogin, filter_button: !isLogin }"
       ></Send>
       <Favorite
-       class="favorite"
+        class="favorite"
         text="Favorito"
         v-if="favorite"
       ></Favorite>

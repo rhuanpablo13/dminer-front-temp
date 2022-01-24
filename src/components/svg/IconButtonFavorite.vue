@@ -17,12 +17,20 @@
 					l-1-6l-3.6-20.7l15-14.7l4.4-4.3l-6-0.9l-20.8-3L123,22.8L120.2,17.3L120.2,17.3z"/>
 			</g>
 		</g>
-		<text transform="matrix(1 0 0 1 173.4639 76.9829)" class="button-favorite-st4 button-favorite-st5">Favoritos</text>
 	</g>
-	<polyline class="button-favorite-st6" points="411.2,98.7 451.3,98.7 476.3,54.1 451.3,11.2 411.2,11.2 	"/>
-	<polyline class="button-favorite-st6" points="90.7,11.2 50.6,11.2 25.5,55.8 50.6,98.7 90.7,98.7 	"/>
-	<polyline class="button-favorite-st7" points="483.2,78 495.8,54.1 483.2,32.6 	"/>
-	<polyline class="button-favorite-st7" points="16.8,78 4.2,54.1 16.8,32.6 	"/>
+	<polyline class="button-favorite-st4" points="411.2,98.7 451.3,98.7 476.3,54.1 451.3,11.2 411.2,11.2 	"/>
+	<polyline class="button-favorite-st4" points="90.7,11.2 50.6,11.2 25.5,55.8 50.6,98.7 90.7,98.7 	"/>
+	<polyline class="button-favorite-st5" points="483.2,78 495.8,54.1 483.2,32.6 	"/>
+	<polyline class="button-favorite-st5" points="16.8,78 4.2,54.1 16.8,32.6 	"/>
+		<foreignObject
+      y="1.5rem"
+      x="2rem"
+      width="100%"
+      height="100%"
+      style="font-size: 3.5rem"
+    >
+      <slot />
+	</foreignObject>
 </g>
 </template>
 <style scoped>
@@ -30,8 +38,6 @@
 	.button-favorite-st1{fill:#9FBECB;}
 	.button-favorite-st2{fill:#AAFF48;}
 	.button-favorite-st3{fill:#637A82;}
-	.button-favorite-st4{font-family:'Swiss721BT-LightExtended';}
-	.button-favorite-st5{font-size:52.0349px;}
-	.button-favorite-st6{fill:none;stroke:#000000;stroke-width:7.7089;stroke-miterlimit:10;}
-	.button-favorite-st7{fill:none;stroke:#000000;stroke-width:1.9272;stroke-miterlimit:10;}
+	.button-favorite-st4{fill:none;stroke:#000000;stroke-width:7.7089;stroke-miterlimit:10;}
+	.button-favorite-st5{fill:none;stroke:#000000;stroke-width:1.9272;stroke-miterlimit:10;}
 </style>
