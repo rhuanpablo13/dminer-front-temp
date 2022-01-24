@@ -63,9 +63,11 @@ export default {
   justify-content: center;
   gap: 0.5rem;
   height: 10rem;
+  z-index: 1;
 }
 
 .favorite {
   margin-top: -3rem;
+  z-index: 2;
 }
 </style>

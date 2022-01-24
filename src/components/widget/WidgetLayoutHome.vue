@@ -26,7 +26,7 @@
           <icon-base
             viewBox="0 0 1024 1024"
             icon-name="icon"
-            class="edit-icon icons"
+            :class="{'icons': isFavorite, 'icon': !isFavorite}"
             :onClick="onClick"
             width="70"
             height="70"
@@ -119,5 +119,11 @@ h2 {
   margin-top: -1rem;
   cursor: pointer;
   /* margin-right: -1rem; */
+}
+
+.icon {
+  justify-self: right;
+  margin-right: -1rem;
+  cursor: pointer;
 }
 </style>
