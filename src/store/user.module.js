@@ -73,6 +73,7 @@ export const user = {
   mutations: {
     userSuccess(state, user) {
       state.adminUser = user.adminUser
+      state.login = user.login
       state.usuario = user.usuario
     },
     success(state, user) {
