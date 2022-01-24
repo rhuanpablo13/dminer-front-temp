@@ -15,10 +15,11 @@
         </div>
         <div class="notices__footer" v-if="hasButton">
           <icon-base
-            :onClick="()=> $store.dispatch('post/setFavorite',  id)"
+            :onClick="()=>this.$emit('favoriteAction')"
             width="70"
             height="70"
             class="icons"
+            v-if="isFavorite"
           >
             <component :is="favorite"  />
           </icon-base>
@@ -60,7 +61,7 @@ export default {
     hasButton: { type: Boolean, required: false, default: true },
     layout: { type: String, required: true },
     favorite: { type: String, required: false, default: 'icon-favorite-dsabled' },
-    isFavorite: { type: Boolean, required: false, default: true },
+    isFavorite: { type: Boolean, required: false, default: false },
   },
   components: {
     IconBase,
@@ -117,5 +118,6 @@ h2 {
   justify-self: right;
   margin-top: -1rem;
   cursor: pointer;
+  /* margin-right: -1rem; */
 }
 </style>

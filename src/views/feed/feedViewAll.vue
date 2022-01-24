@@ -21,9 +21,10 @@
                   layout="icon-folder-feed"
                   isExpanded
                   isFavorite
-                  favorite="icon-favorite"
+                  :favorite="hasUserIndex(item) ? 'icon-favorite-dsabled' : 'icon-favorite'"
                   :onClick="() => clickView(item.id)"
                   :id="item.id"
+                  @favoriteAction="favoriteAction(item)"
                 >
                   <post :value="item" />
                 </widget-layout-home>
@@ -103,7 +104,8 @@ export default {
 
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    posts: (state) => state.post.posts
+    posts: (state) => state.post.posts,
+    login: (state) => state.user.login,
   }),
 
   methods: {
@@ -125,7 +127,14 @@ export default {
       if (this.filterData ) {
         this.dispatch('post/goSearchViewAll', this.filterData)
       }
-    }
+    },
+    favoriteAction(post) {
+      const toggle = this.hasUserIndex(post)
+      this.$store.dispatch('post/setFavorite',  { idPost: post.id, toggle: toggle})
+    },
+    hasUserIndex(post) {
+      return post.favorites.indexOf(this.login) === -1
+    },
   }
 }
 </script>

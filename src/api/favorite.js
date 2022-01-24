@@ -10,5 +10,5 @@ export const fetchAllFavorites = async (login) => {
 
 export const fetchCreateFavorite = async (item) => {
   const response = await apiIntra.post(`${URL}`, item)
-  return messagesFetch('registration', response.status, response.data.data)
+  return messagesFetch('favorite', response.status, response.data.data)
 }
