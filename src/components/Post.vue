@@ -15,7 +15,7 @@
     </div>
       <ul class="feed_container_likes">
         <li v-for="(react_value, key) in value.reacts" :key="key" @click="like(key)">
-          <React :layout="disabledReact && reactActive !== key ? `${key}-D` : key" :reacts="react_value.length" :disabled="disabledReact && reactActive !== key"/>
+          <React :layout="key" :reacts="react_value.length" :disabled="disabledReact && reactActive !== key" :reactActive="reactActive"/>
         </li>
       </ul>
       <icon-base

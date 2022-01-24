@@ -1,7 +1,7 @@
 <template>
   <button :disabled="disabled">
     <icon-base viewBox="0 0 500 500" height="100%">
-      <component :is="layout"> </component>
+      <component :is="disabled && reactActive !== layout ? `${layout}-D` : layout"> </component>
     </icon-base>
     <Title>{{layout}}</Title>
     <span> {{ reacts }} </span>
@@ -27,6 +27,7 @@ import dsacreditadoDsabled from '@/components/svg/IconSacreditadoDsabled.vue'
 export default {
     props: {
       layout: { type: String, required: true },
+      reactActive: { type: String, required: true },
       reacts: { type: Number, required: false },
       disabled: { type: Boolean, required: false, default: false},
     },
