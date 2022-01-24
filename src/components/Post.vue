@@ -56,17 +56,16 @@ export default {
   props: {
     value: { type: Object, required: true }
   },
-  setDoc(props) {
+  setup(props) {
     const store = useStore()
-
 
     let disabledReact = false
     let reactActive = ''
-    Object.value(props.value).map(item => {
-      const index = item.reacts.indexOf(store.user.login)
+    Object.keys(props.value.reacts).map(key => {
+      const index = props.value.reacts[key].indexOf(store.state.user.login)
       if (index !== -1) {
         disabledReact = true
-        reactActive = item.reacts[index]
+        reactActive = key
       }
     })
 
