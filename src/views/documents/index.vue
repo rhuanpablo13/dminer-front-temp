@@ -130,11 +130,16 @@ export default {
         //  img.src = url.toString()       
         //  document.getElementById('container').appendChild(img)     
         // window.open(url, '_blank')
-      // } else {       // se não for uma imagem, usamos um iframe   
-          var oReq = new XMLHttpRequest();
-          oReq.onload = this.reqListener;
-          oReq.open("get", url, true);
-          oReq.send();
+      // } else {       // se não for uma imagem, usamos um iframe 
+      try {
+        var oReq = new XMLHttpRequest();
+        oReq.onload = this.reqListener;
+        oReq.open("get", url, true);
+        oReq.send();
+        
+      } catch (error) {
+        onToast(translation.MESSAGE['ERROR_URL_DOC'], 'danger')
+      }  
         // let iframe = document.createElement('iframe')       
         // iframe.src = url.toString()       
         // document.getElementById('container').appendChild(iframe)
