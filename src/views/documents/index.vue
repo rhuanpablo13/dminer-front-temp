@@ -11,7 +11,7 @@
       <template v-slot:body>
         <ul>
           <li v-for="(item, key) in getDocuments" :key="key">
-            <a :href="`file:///C:${item.contentLink}`" target="_blank" download>
+            <a href="#"   @click="appendTheFile(item.contentLink)">
               {{ item.title }}
             </a>
             <button class="team_btn_edit" v-if="permissionADM">
@@ -62,6 +62,8 @@ import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useDocument from '@/composables/useDocument'
+import { onToast } from '@/util/toast.js'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
@@ -115,6 +117,32 @@ export default {
       } else if(event.target.value === '') {
         this.setDocument()
       }
+    },
+    appendTheFile (url) {    
+      url = new URL(url)     // se for uma imagem, adicionamos uma imagem     
+      if (url.pathname.match(/\.(jpe?g|png|svg|webp|gif)/)) {       
+        //  let img = document.createElement('img')       
+        //  img.src = url.toString()       
+        //  document.getElementById('container').appendChild(img)     
+        window.open(url, '_blank')
+      } else {       // se não for uma imagem, usamos um iframe   
+        var oReq = new XMLHttpRequest();
+        oReq.onload = this.reqListener;
+        oReq.open("get", url.pathname, true);
+
+        if (oReq.hasOwnProperty('send')) {
+          oReq.send();
+        } else {
+          onToast(translation.MESSAGE['ERROR_URL_DOC'], 'danger')
+        }
+
+        // let iframe = document.createElement('iframe')       
+        // iframe.src = url.toString()       
+        // document.getElementById('container').appendChild(iframe)
+      }    
+    },
+    reqListener(e) {
+      window.open(e.target.responseURL, '_blank')
     }
   }
 }

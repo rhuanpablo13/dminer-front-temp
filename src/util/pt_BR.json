@@ -11,6 +11,7 @@
     "SUCCESS_LOGIN": "Sucesso! usuário logado",
     "SUCCESS_COMMENT": "Sucesso! Comentário realizado",
     "ERROR_COMMENT": "Erro! Comentário  não realizado",
+    "ERROR_URL_DOC": "Erro! Documento não encontrado ou caminho cadastrado errado",
     "SUCCESS_FAVORITE": "Sucesso! Marcou/desmarcou um post como favorito"
   }
 }
