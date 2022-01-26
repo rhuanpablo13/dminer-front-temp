@@ -118,28 +118,27 @@ export default {
         this.dispatch('list/getList', 'documents')
       }
     },
-    appendTheFile (url) {    
-      url = new URL(url)     // se for uma imagem, adicionamos uma imagem     
-      if (url.pathname.match(/\.(jpe?g|png|svg|webp|gif)/)) {       
+    appendTheFile (url) { 
+      // try {
+      //   url = new URL(url)     // se for uma imagem, adicionamos uma imagem     
+      // } catch (error) {
+      //   onToast(translation.MESSAGE['ERROR_URL_DOC'], 'danger')
+      // }
+
+      // if (url.pathname.match(/\.(jpe?g|png|svg|webp|gif)/)) {       
         //  let img = document.createElement('img')       
         //  img.src = url.toString()       
         //  document.getElementById('container').appendChild(img)     
-        window.open(url, '_blank')
-      } else {       // se não for uma imagem, usamos um iframe   
-        var oReq = new XMLHttpRequest();
-        oReq.onload = this.reqListener;
-        oReq.open("get", url, true);
-
-        if (oReq.hasOwnProperty('send')) {
+        // window.open(url, '_blank')
+      // } else {       // se não for uma imagem, usamos um iframe   
+          var oReq = new XMLHttpRequest();
+          oReq.onload = this.reqListener;
+          oReq.open("get", url, true);
           oReq.send();
-        } else {
-          onToast(translation.MESSAGE['ERROR_URL_DOC'], 'danger')
-        }
-
         // let iframe = document.createElement('iframe')       
         // iframe.src = url.toString()       
         // document.getElementById('container').appendChild(iframe)
-      }    
+      // }    
     },
     reqListener(e) {
       window.open(e.target.responseURL, '_blank')
