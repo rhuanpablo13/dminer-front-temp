@@ -10,7 +10,7 @@
     >
       <template v-slot:body>
         <ul>
-          <li v-for="(item, key) in getDocuments" :key="key">
+          <li v-for="(item, key) in list" :key="key">
             <a href="#"   @click="appendTheFile(item.contentLink)">
               {{ item.title }}
             </a>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
@@ -61,7 +61,6 @@ import formCrud from '@/views/documents/form.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
-import useDocument from '@/composables/useDocument'
 import { onToast } from '@/util/toast.js'
 import * as translation from '@/util/pt_BR.json'
 
@@ -70,13 +69,17 @@ export default {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false}
   },
   setup() {
-    const { getDocuments, setDocument, deleteItem, search } = useDocument()
+    const store = useStore()
+    store.dispatch('list/getList', 'documents')
 
-    return { getDocuments, setDocument, deleteItem, search }
+    return {
+      dispatch: store.dispatch
+    }
   },
 
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => state.list.list
   }),
 
   components: {
@@ -96,26 +99,23 @@ export default {
       this.setDoc(value)
     },
     deleteDoc(id) {
-      this.deleteItem(id)
-      setTimeout(() => {
-        this.setDocument()
-      }, 300)
+      this.dispatch('list/deleteItemList', {typeList:'documents', id})
     },
     setDoc(value) {
       this.value = value
       this.openModal()
     },
     close() {
-      setTimeout(() => {
-        this.setDocument()
-      }, 300)      
+      this.dispatch('list/getList', 'documents')
       this.showModal = false
     },
     submit(event) {
+      if (!event) return;
+
       if (event.target && event.target.value) {
-        this.search(event.target.value)
+        this.dispatch('list/searchItemList', {typeList:'documents', value: event.target.value})
       } else if(event.target.value === '') {
-        this.setDocument()
+        this.dispatch('list/getList', 'documents')
       }
     },
     appendTheFile (url) {    
@@ -128,7 +128,7 @@ export default {
       } else {       // se não for uma imagem, usamos um iframe   
         var oReq = new XMLHttpRequest();
         oReq.onload = this.reqListener;
-        oReq.open("get", url.pathname, true);
+        oReq.open("get", url, true);
 
         if (oReq.hasOwnProperty('send')) {
           oReq.send();
