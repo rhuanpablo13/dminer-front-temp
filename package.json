@@ -1,6 +1,6 @@
 {
   "name": "d-miner-intranet",
-  "version": "0.5.25",
+  "version": "0.6.03",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
