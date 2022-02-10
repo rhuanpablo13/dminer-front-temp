@@ -4,11 +4,11 @@
 
 <script>
 import { DatePicker } from 'v-calendar'
+import 'v-calendar/dist/style.css';
+
 export default {
   data() {
     return {
-      notificationList: ['Teste 1', 'Teste 2', 'Teste 3'],
-      positionNotification: 'right',
       date: new Date()
     }
   },

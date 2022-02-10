@@ -4,6 +4,7 @@
     title="lembrete"
     classContent="folder__reminder__content"
     :onClick="openModal"
+    hasButton
   >
     <ul>
       <li

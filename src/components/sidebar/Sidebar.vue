@@ -175,6 +175,8 @@ export default {
 .username {
   font-size: 3rem;
   margin-bottom: 2rem;
+  text-align: center;
+  margin-left: 5%;
 }
 
 .collapse_icon {
