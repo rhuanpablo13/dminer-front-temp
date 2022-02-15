@@ -1,4 +1,6 @@
 <script>
+import { mapState, useStore } from 'vuex'
+
 import Sidebar from '@/components/sidebar/Sidebar.vue'
 import Banner from '@/components/Banner.vue'
 import Content from '@/components/Content.vue'
@@ -6,7 +8,25 @@ import Avatar from '@/components/Avatar.vue'
 
 import Login from '@/views/login/index.vue'
 
+import { diffDate } from '@/util/date'
+
 export default {
+  setup(){
+    const store = useStore() 
+
+    if (sessionStorage.getItem('timeout')) {
+      const timeout = sessionStorage.getItem('timeout');
+
+      const date = new Date(timeout)
+      const now = new Date() 
+
+      const diff = diffDate(now, date)
+
+      if (diff >= 1800000 ) {
+        store.dispatch('auth/logout')
+      }
+    }
+  },
   components: { Sidebar, Banner, Content, Avatar, Login },
 
   computed: {

@@ -19,3 +19,5 @@ export const dayMounthFormart = (date) => moment(date).format('DD/MM')
 
 export const dateHourFormarUs = (date) =>
   moment(date).format('YYYY-MM-DD hh:mm:ss')
+
+export const diffDate = (date1, date2) =>  moment(date2,"DD/MM/YYYY HH:mm:ss").diff(moment(date1,"DD/MM/YYYY HH:mm:ss"))

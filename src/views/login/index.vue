@@ -75,6 +75,7 @@ export default {
           () => {
             this.$store.dispatch('form/setLoading')
             this.$router.push('/')
+            sessionStorage.setItem('timeout', new Date());
 
             const timeout = setInterval(() => {
               this.$store.dispatch('auth/logout')

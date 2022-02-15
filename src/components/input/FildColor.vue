@@ -9,14 +9,22 @@
       </div>
 			<div class="color_container_colorpicker">
 				{{ currentColor?.state?.pureColor }}	
-				<color-picker 
+				<!-- <color-picker 
 					ref="currentColor" 
 					v-model:pureColor="color"  
 					format="hex" 
 					shape="circle" 
 					pickerType="chrome"
 					@update:pureColor="changeInput"
-				/>
+				/> -->
+        <color-picker v-model:pureColor="pureColor" 
+          ref="currentColor" 
+					format="hex" 
+					shape="circle" 
+					pickerType="chrome"
+					@update:pureColor="changeInput"
+        />
+
 			</div>
 
     </div>
@@ -35,8 +43,7 @@
 
 <script>
 import { ref } from 'vue'
-import { ColorPicker } from "vue3-colorpicker";
-import "vue3-colorpicker/style.css";
+import { ColorInputWithoutInstance } from "tinycolor2";
 
 import IconBase from '@/components/svg/IconBase.vue'
 import IconLine from '@/components/svg/IconLine.vue'
@@ -50,14 +57,15 @@ export default {
   },
 
   components: {
-    ColorPicker,
+    ColorPicker: ColorInputWithoutInstance,
 		IconLine, 
 		IconBase 
   },
-	setup(props, context) {
-		const currentColor = ref();
-		return { currentColor }
-	},
+  setup() {
+    const pureColor = ref<ColorInputWithoutInstance>("red");
+
+    return { pureColor }
+  },
 	computed: {
     isError() {
       const error = this.$store.state.form.isError && !this.value && this.required

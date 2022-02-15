@@ -47,6 +47,8 @@ export const auth = {
     },
     logout(state) {
       state.status.loggedIn = false
+      sessionStorage.removeItem('timeout');
+
       this.commit('user/success', null)
       route.push('/login')
     },
