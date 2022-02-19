@@ -7,7 +7,7 @@
         :type="type"
         @change="changeInput"
         :required="required"
-        :value="value"
+        v-model="value"
       />
       <div v-if="text" class="input_label">
         {{ text }}
@@ -20,12 +20,11 @@
 export default {
   props: {
     text: { type: String, required: false },
-    value: { type: String, required: false },
+    value: { type: Boolean, required: false },
     required: { type: Boolean, required: false, default: false },
     isError: { type: Boolean, required: false, default: false },
     type: { type: String, required: false, default: 'text' }
   },
-
   methods: {
     changeInput(e) {
       this.$emit('update:modelValue', e.target.value)
