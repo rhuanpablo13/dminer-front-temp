@@ -11,12 +11,7 @@ export default function useAuth() {
      throw 400
   }
 
-  const logout = () => {
-    localStorage.clear()
-  }
-
   return {
     login,
-    logout
   }
 }

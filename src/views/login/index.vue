@@ -26,6 +26,7 @@
             v-model="reminderPassword"
             :value="reminderPassword"
             type="checkbox"
+            @change="changeCheckbox()"
           />
         </div>
       </div>
@@ -61,12 +62,38 @@ export default {
     }
   },
   created() {
+    const reminderPassword =  this.localStorageVerify()
+    if (reminderPassword && localStorage.userReminder) {
+
+      this.reminderPassword = true
+      const user = JSON.parse(localStorage.userReminder)
+      this.value = {
+        userName: user.userName,
+        userPassword: user.userPassword,
+        type: 'intranet'
+      }
+    }
+
     if (this.loggedIn) {
       this.$router.push('/')
     }
   },
 
   methods: {
+    localStorageVerify() {
+      return localStorage?.reminderPassword ? JSON.parse(localStorage.reminderPassword) : false
+    },
+    changeCheckbox() {
+      const reminderPassword =  this.localStorageVerify()
+
+      if (!reminderPassword && (this.value.userName || this.value.userPassword)) {
+        localStorage.reminderPassword = true
+        localStorage.userReminder = JSON.stringify(this.value)
+      } else if(reminderPassword) {
+        localStorage.reminderPassword = false
+        localStorage.userReminder = null
+      }
+    },
     sendForm() {
       this.$store.dispatch('form/setLoading')
 

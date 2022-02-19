@@ -31,7 +31,6 @@ export const auth = {
       )
     },
     logout({ commit }) {
-      logout()
       commit('logout')
     }
   },
@@ -47,6 +46,20 @@ export const auth = {
     },
     logout(state) {
       state.status.loggedIn = false
+      
+      let user = {}
+      let reminderPassword = localStorage.reminderPassword
+      if (reminderPassword) {
+        user = JSON.parse(localStorage.user)
+      }
+
+      localStorage.clear()
+
+      if (reminderPassword) {
+        localStorage.reminderPassword = reminderPassword
+        localStorage.user = JSON.stringify(user)
+      }
+      
       sessionStorage.removeItem('timeout');
 
       this.commit('user/success', null)

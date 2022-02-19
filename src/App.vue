@@ -27,6 +27,17 @@ export default {
       }
     }
   },
+  created() {
+    window.addEventListener('beforeunload', (event) => {
+      // Cancel the event as stated by the standard.
+      event.preventDefault();
+      sessionStorage.removeItem('timeout');
+      // localStorage.clear();
+
+      //Para customizar o texto, e é necessário para funcionar no Safari e Chrome, IE e Firefox anterior a versão 4
+      event.returnValue = '';
+    });
+  },
   components: { Sidebar, Banner, Content, Avatar, Login },
 
   computed: {
