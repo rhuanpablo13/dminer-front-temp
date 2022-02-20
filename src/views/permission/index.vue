@@ -3,7 +3,6 @@
     <widget-modal
       v-if="showModalPrimary"
       title="permissão"
-      :onClick="openModal"
       @close="this.$router.push('/')"
     >
       <template v-slot:body>
