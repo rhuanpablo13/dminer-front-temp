@@ -8,7 +8,7 @@
         :
       </div>
 			<div class="color_container_colorpicker">
-				<span> {{ color }}	 </span>
+				<span class="color_container_span"> {{ color }}	 </span>
         <color-input v-model="color" @change="changeInput" />
 			</div>
 
@@ -74,7 +74,7 @@ export default {
 
 <style >
 
-span {
+.color_container_span {
   font-family: var(--font-family--text);
   font-weight: var(-  --font-weight--text);
   font-size: 0.8rem;
