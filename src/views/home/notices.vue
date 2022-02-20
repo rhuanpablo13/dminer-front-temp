@@ -167,6 +167,7 @@ export default {
 
         this.$store.dispatch('form/setLoading')
         if (result) {
+          this.$store.dispatch('home/search', null)
           this.$store.dispatch('form/setSuccess')
           this.showModal = false
         }
