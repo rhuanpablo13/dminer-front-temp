@@ -28,6 +28,7 @@
         <fild-checkbox
           text="Documento Interno"
           v-model="value.permission"
+          :value="value.permission"
           type="checkbox"
           @change="value.permission = !value.permission"
         />
