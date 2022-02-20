@@ -70,9 +70,7 @@
               >
                 <icon-trash />
               </icon-base>
-
             </button>
-
           </div>
           <div style="display: flex">
             <span> {{itemView.creator  }} | {{dateHourFormart(itemView.date)}}</span>
@@ -209,6 +207,7 @@ export default {
   },
   methods: {
     openAddNotices() {
+       this.value = {}
       this.showModal = true
     },
     getPriority(id) {

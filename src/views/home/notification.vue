@@ -4,7 +4,7 @@
     class="mt-3 cursor-move"
     title="notificações"
     classContent="folder__notification__content"
-    :onClick="openModal"
+    :onClick="permissionADM ? () => openModal() : null"
   >
     <ul>
       <li @click="setDoc(item)" v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
@@ -32,6 +32,29 @@
     >
       <template v-slot:body>
         <div class="item_view">
+          <div style="display: flex"> 
+            <button class="team_btn_edit" style="margin-left: auto;" v-if="permissionADM">
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="edit(itemView)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-edit />
+              </icon-base>
+
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteBenefit(itemView.id)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-trash />
+              </icon-base>
+            </button>
+          </div>
           <span> {{itemView.login }}</span>
           <Title>
             {{itemView.notification }}
@@ -43,7 +66,7 @@
 
   <form-modal
     :showModal="showModal"
-    title="cadastro de enquete"
+    title="cadastro de notificação"
     @submit="sendForm"
     @close="showModal = false"
   >
@@ -68,7 +91,8 @@ import FildInput from '@/components/input/Fild.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import Title from '@/components/title/Title.vue'
 import FrameNotification from '@/components/svg/FrameNotification.vue'
-
+import IconEdit from '@/components/svg/IconEdit.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 import useNotification from '@/composables/useNotification'
 
 export default {
@@ -87,11 +111,12 @@ export default {
     }
   },
   setup() {
-    const { create } = useNotification()
-    return { create }
+    const { create, deleteItem, update } = useNotification()
+    return { create, deleteItem, update }
   },
   computed: mapState({
-    getUser: (state) => state.user.login
+    getUser: (state) => state.user.login,
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
   }),
   methods: {
     sendForm() {
@@ -118,11 +143,22 @@ export default {
      return  this.value.hasOwnProperty('notification') && this.value?.notification !== "" 
     },
     openModal() {
+      this.value = {}
       this.showModal = true
     },
     setDoc(_item) {
       this.showModalView = true
       this.itemView = _item
+    },
+    edit(value) {
+      this.isEdit = true
+      this.value = value
+      this.showModal = true
+    },
+    deleteBenefit(id) {
+      this.deleteItem(id)
+      this.$store.dispatch('home/search', null)
+      this.showModalView = false
     },
   },
   components: {
@@ -132,7 +168,9 @@ export default {
     FormModal,
     FildInput,
     FrameNotification,
-    WidgetModal
+    WidgetModal,
+    IconEdit,
+    IconTrash
   }
 }
 </script>
@@ -187,5 +225,11 @@ h2 {
   text-overflow: ellipsis;
   max-width: 20rem;
   margin-left: 2rem;;
+}
+
+.team_btn_edit {
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 </style>
