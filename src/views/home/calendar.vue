@@ -37,7 +37,7 @@
                 :value="eventCalendar.start"
                 required
                 :isError="isError && !eventCalendar.start"
-                :minDate="new Date()"
+                :minDate="minDateNow()"
               />
               <fild-date
                 text="Fim"
@@ -102,7 +102,7 @@ import EventCalendar from '@/components/calendar/EventCalendar.vue'
 import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
-import { dateHourFormarUs } from '@/util/date.js'
+import { dateHourFormarUs, minDateNow } from '@/util/date.js'
 
 
 export default {
@@ -129,7 +129,8 @@ export default {
 
     return {
       eventCalendar,
-      calendar
+      calendar,
+      minDateNow
     }
   },
 
@@ -172,7 +173,7 @@ export default {
           start: dateHourFormarUs(this.eventCalendar.start),
           end: dateHourFormarUs(this.eventCalendar.end || this.eventCalendar.start),
           borderColor: this.eventCalendar.backgroundColor,
-          users: this.eventCalendar.users.length ? [this.eventCalendar.users] : this.eventCalendar.users
+          users: this.eventCalendar.users
         })
       } else {
         this.$store.dispatch('form/setError')
@@ -186,7 +187,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .container__calendar {
   padding: 0 1.5rem;
 }
@@ -197,26 +198,29 @@ export default {
 
 .calendar_container {
   display: grid;
-  grid-template-columns: 10rem auto;
+  grid-template-columns: 13rem auto;
   gap: 1rem;
   margin-left: 3.5rem;
   margin-top: 2rem;
 }
 
 .form_calendar_container {
-  position: relative;
+  overflow-y: auto;
+  width: 13rem;
+  margin-top: -2rem;
+  font-size: 0.4rem;
 }
 
 .form_calendar {
-  font-size: 0.4rem;
+  /* font-size: 0.4rem;
   position: absolute;
-  top: -50%;
+  top: -59%;
   transform: translate(0, 50%);
-  height: 18rem;
-  overflow-y: scroll;
-  width: 12rem;
+  max-height: 25rem;
+  overflow-y: auto;
+  width: 11.5rem;
   left: -1rem;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 .multiselect-tag {
@@ -276,6 +280,10 @@ export default {
 
 .container_calendar{
   margin-top:-2rem;
+}
+
+#send > foreignObject > span {
+  font-size: 6rem !important;
 }
 
 </style>

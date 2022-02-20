@@ -162,7 +162,7 @@ export default {
   height: 20rem
 }
 .modal-body-no-overflow {
-  margin: 20px 0;
+  margin: 5px 0;
   width: 95%;
 
   overflow-y: hidden;

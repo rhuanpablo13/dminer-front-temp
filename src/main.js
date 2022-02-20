@@ -16,6 +16,7 @@ createApp(App)
   .use(router)
   .use(Vue3Resize)
   .use(moshaToast)
+
   .use(VueAxios, axios)
   .use(store)
   .component('vue-select', VueSelect)

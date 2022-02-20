@@ -8,23 +8,8 @@
         :
       </div>
 			<div class="color_container_colorpicker">
-				{{ currentColor?.state?.pureColor }}	
-				<!-- <color-picker 
-					ref="currentColor" 
-					v-model:pureColor="color"  
-					format="hex" 
-					shape="circle" 
-					pickerType="chrome"
-					@update:pureColor="changeInput"
-				/> -->
-        <color-picker v-model:pureColor="pureColor" 
-          ref="currentColor" 
-					format="hex" 
-					shape="circle" 
-					pickerType="chrome"
-					@update:pureColor="changeInput"
-        />
-
+				<span> {{ color }}	 </span>
+        <color-input v-model="color" @change="changeInput" />
 			</div>
 
     </div>
@@ -42,29 +27,27 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { ColorInputWithoutInstance } from "tinycolor2";
+import ColorInput from 'vue-color-input'
 
 import IconBase from '@/components/svg/IconBase.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
 export default {
+  data() {
+    return {
+      color: '#43df94'
+    }
+  },
 	props: {
     text: { type: String, required: false },
-    value: { type: String, required: false },
     required: { type: Boolean, required: false, default: false },
-		color: { type: String, required: false, default: '#43df94' },
+		// color: { type: String, required: false, default: '#43df94' },
   },
 
   components: {
-    ColorPicker: ColorInputWithoutInstance,
+    ColorInput,
 		IconLine, 
 		IconBase 
-  },
-  setup() {
-    const pureColor = ref<ColorInputWithoutInstance>("red");
-
-    return { pureColor }
   },
 	computed: {
     isError() {
@@ -81,16 +64,22 @@ export default {
       return error
     }
   },
-
 	methods: {
-    changeInput(color) {
-      this.$emit('update:modelValue', color)
+    changeInput() {
+      this.$emit('update:modelValue', this.color)
     }
   }
 }
 </script>
 
 <style >
+
+span {
+  font-family: var(--font-family--text);
+  font-weight: var(-  --font-weight--text);
+  font-size: 0.8rem;
+}
+
 .container_color {
   position: relative;
   cursor: text;
@@ -107,9 +96,19 @@ export default {
 }
 
 .color_container_colorpicker {
-	display: grid;
-	justify-content: space-between;
-	grid-template-columns: auto 2rem;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.color-input .box {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.2s, background-color 0.05s 0.15s;
 }
 
 .fild_container_icon {
