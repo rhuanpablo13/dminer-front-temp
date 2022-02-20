@@ -5,11 +5,11 @@
       title="benefícios"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      search
+      :search="getBenefits.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul>
+        <ul v-if="getBenefits.length">
           <li v-for="(item, key) in getBenefits" :key="key">
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
@@ -48,6 +48,7 @@
             </icon-base>
           </li>
         </ul>
+        <NoRegistry v-else />
       </template>
     </widget-modal>
   </transition>
@@ -69,6 +70,7 @@ import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 import useBenefit from '@/composables/useBenefit'
 
@@ -98,7 +100,8 @@ export default {
     IconBase,
     ImageDetails,
     IconLine,
-    IconTrash
+    IconTrash,
+    NoRegistry
   },
   methods: {
     openModal() {

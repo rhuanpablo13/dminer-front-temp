@@ -5,11 +5,11 @@
       title="tutorial"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      search
+      :search="getTutorials.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul>
+        <ul v-if="getTutorials.length">
           <li v-for="(item, key) in getTutorials" :key="key" @click="setItem(item)">
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
@@ -47,6 +47,7 @@
             </icon-base>
           </li>
         </ul>
+        <no-registry v-else />
       </template>
     </widget-modal>
   </transition>
@@ -68,6 +69,7 @@ import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 import useTutorial from '@/composables/useTutorial'
 import usePermission from '@/composables/usePermission'
@@ -102,7 +104,8 @@ export default {
     ImageDetails,
     IconLine,
     IconTrash,
-    IconOpen
+    IconOpen,
+    NoRegistry
 },
   methods: {
     openModal() {

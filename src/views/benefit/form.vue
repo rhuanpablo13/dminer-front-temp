@@ -77,7 +77,6 @@ export default {
   methods: {
     sendForm() {
       this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
         let result = this.isEdit
           ? this.update(this.value)
@@ -99,7 +98,7 @@ export default {
       this.value.creator = this.$store.state.user.login
       return  this.value.hasOwnProperty('title') && this.value?.title !== "" && 
               this.value.hasOwnProperty('content') && this.value?.content !== "" &&
-              this.value.hasOwnProperty('permission') && this.value?.permission !== 0 && 
+              this.value.hasOwnProperty('permission') && 
               this.value.hasOwnProperty('image') && this.value?.image
     }
   }

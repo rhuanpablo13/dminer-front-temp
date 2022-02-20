@@ -5,11 +5,11 @@
       title="d-guide"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      search
+      :search="list.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul>
+        <ul v-if="list.length">
           <li v-for="(item, key) in list" :key="key">
             <a href="#"   @click="appendTheFile(item.contentLink)">
               {{ item.title }}
@@ -40,6 +40,7 @@
             </icon-base>
           </li>
         </ul>
+        <NoRegistry v-else />
       </template>
     </widget-modal>
   </transition>
@@ -60,6 +61,7 @@ import IconBase from '@/components/svg/IconBase.vue'
 import formCrud from '@/views/documents/form.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 import { onToast } from '@/util/toast.js'
 import * as translation from '@/util/pt_BR.json'
@@ -89,6 +91,7 @@ export default {
     IconBase,
     IconLine,
     IconTrash,
+    NoRegistry,
   },
   methods: {
     openModal() {

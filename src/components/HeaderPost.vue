@@ -2,7 +2,7 @@
   <div class="feed_header">
     <Avatar :avatar="avatar" width="4rem" height="4rem"></Avatar>
     <div class="feed_header_text">
-      <Title>{{ username }}</Title>
+      <h1>{{ username }}</h1>
       <h3>{{ text }}</h3>
     </div>
   </div>
@@ -10,7 +10,6 @@
 
 <script>
 import Avatar from '@/components/Avatar.vue'
-import Title from '@/components/title/Title.vue'
 
 export default {
   props: {
@@ -20,7 +19,6 @@ export default {
   },
   components: {
     Avatar,
-    Title
   }
 }
 </script>
@@ -41,8 +39,18 @@ export default {
   margin-top: -1rem;
 }
 
-
 h3 {
   margin-top: -2rem;
+}
+
+h1 {
+  font-family: var(--font-family--title);
+  color: var(--color-title);
+  font-weight: 300;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 14rem;
 }
 </style>

@@ -4,11 +4,11 @@
       v-if="showModalEquipe"
       title="Equipe"
       @close="this.$router.push('/')"
-      search
+      :search="getAllUsers.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul>
+        <ul v-if="getAllUsers.length">
           <li v-for="(item, key) in getAllUsers" :key="key">
             <icon-base
               viewBox="0 0 500 200"
@@ -54,6 +54,7 @@
             </icon-base>
           </li>
         </ul>
+        <no-registry v-else />
       </template>
     </widget-modal>
   </transition>
@@ -72,6 +73,7 @@ import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameTeam from '@/components/svg/FrameTeam.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 import useAllUsers from '@/composables/useAllUsers'
 
@@ -89,7 +91,8 @@ export default {
     Avatar,
     IconEdit,
     IconBase,
-    FrameTeam
+    FrameTeam,
+    NoRegistry
   },
   methods: {
     close() {
