@@ -7,7 +7,7 @@
     :onClick="openModal"
   >
     <ul>
-      <li v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
+      <li @click="setDoc(item)" v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
         <icon-base
           viewBox="0 0 500 85.1"
           icon-name="icon"
@@ -15,14 +15,31 @@
           height="100%"
         >
           <frame-notification>
-            <Title>
-              {{ item.notification }}
-            </Title>
+            <h2>
+              {{item.notification}}
+            </h2>
           </frame-notification>
         </icon-base>
       </li>
     </ul>
   </widget-layout-home>
+
+  <transition name="modal">
+    <widget-modal
+      v-if="showModalView"
+      title="Notificação"
+      @close="showModalView = false"
+    >
+      <template v-slot:body>
+        <div class="item_view">
+          <span> {{itemView.login }}</span>
+          <Title>
+            {{itemView.notification }}
+          </Title>
+        </div>
+      </template>
+    </widget-modal>
+  </transition>
 
   <form-modal
     :showModal="showModal"
@@ -46,6 +63,7 @@ import { mapState } from 'vuex'
 
 import FormModal from '@/components/FormModal.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
+import WidgetModal from '@/components/widget/WidgetModal.vue'
 import FildInput from '@/components/input/Fild.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import Title from '@/components/title/Title.vue'
@@ -57,9 +75,14 @@ export default {
   data() {
     return {
       showModal: false,
+      showModalView: false,
       value: {
         notification: '',
         idUser: this.getUser
+      },
+      itemView: {
+        notification: '',
+        user: ''
       }
     }
   },
@@ -96,7 +119,11 @@ export default {
     },
     openModal() {
       this.showModal = true
-    }
+    },
+    setDoc(_item) {
+      this.showModalView = true
+      this.itemView = _item
+    },
   },
   components: {
     Title,
@@ -104,7 +131,8 @@ export default {
     IconBase,
     FormModal,
     FildInput,
-    FrameNotification
+    FrameNotification,
+    WidgetModal
   }
 }
 </script>
@@ -121,7 +149,8 @@ ul {
 }
 
 li {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .form_container {
@@ -141,5 +170,22 @@ li {
   display: grid;
   grid-template-columns: 45% 45%;
   grid-gap: 10%;
+}
+
+.item_view {
+  margin-left: 5rem;
+  text-align: left;
+}
+
+h2 {
+  font-family: var(--font-family--title);
+  color: var(--color-title);
+  font-weight: 300;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20rem;
+  margin-left: 2rem;;
 }
 </style>
