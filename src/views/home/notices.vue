@@ -208,6 +208,7 @@ export default {
       }
     },
     validForm() {
+      this.value.creator =  this.getUser
      return  this.value.hasOwnProperty('warning') && this.value?.warning !== "" && 
               this.value.hasOwnProperty('priority') &&
               this.value.hasOwnProperty('users') && this.value?.users !== "" && 
