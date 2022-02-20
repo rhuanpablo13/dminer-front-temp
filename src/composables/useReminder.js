@@ -1,5 +1,5 @@
 import { ref, onMounted } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate } from '@/api/reminder.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete } from '@/api/reminder.js'
 
 export default function useReminder() {
   const getReminders = ref([])
@@ -16,11 +16,15 @@ export default function useReminder() {
     return await fetchUpdate(item)
   }
 
+  const deleteItem = async (id) => {
+    return await fetchDelete(id)
+  }
 
   return {
     getReminders,
     setReminder,
     create,
-    updateReminder
+    updateReminder,
+    deleteItem
   }
 }

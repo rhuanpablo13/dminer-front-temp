@@ -82,7 +82,7 @@ export const home = {
     reminderCheck({ commit }, item) {
       return updateReminder(item).then(
         (payload) => {
-          this.state.home.quizList = setReminder()
+          this.state.home.quizList = setReminder(this.state.user.login)
           return Promise.resolve(payload)
         },
         (error) => {

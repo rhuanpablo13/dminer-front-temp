@@ -35,6 +35,55 @@
     </ul>
   </widget-layout-home>
 
+  <transition name="modal">
+    <widget-modal
+      v-if="showModalView"
+      title="Lembrete"
+      @close="showModalView = false"
+    >
+      <template v-slot:body>
+        <div class="item_view">
+          <div style="display: flex"> 
+            <button class="team_btn_edit" style="margin-left: auto;" v-if="permissionADM">
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="edit(itemView)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-edit />
+              </icon-base>
+
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteBenefit(itemView.id)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-trash />
+              </icon-base>
+            </button>
+          </div>
+          <div style="display: flex">
+            <span> {{itemView.login  }} | {{dateHourFormart(itemView.date)}}</span>
+          </div>
+
+          <div class="reminder">
+              <fild-checkbox
+                :text="itemView.reminder"
+                v-model="itemView.active"
+                :value="itemView.active"
+                type="checkbox"
+                @change="change(itemView)"
+              />
+            </div>
+        </div>
+      </template>
+    </widget-modal>
+  </transition>
+
   <form-modal
     :showModal="showModal"
     title="cadastro de lembrete"
@@ -73,6 +122,10 @@ import FildInput from '@/components/input/Fild.vue'
 import FrameNotification from '@/components/svg/FrameNotification.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
+import IconEdit from '@/components/svg/IconEdit.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
+import WidgetModal from '@/components/widget/WidgetModal.vue'
+import Title from '@/components/title/Title.vue'
 
 import useReminder from '@/composables/useReminder.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
@@ -81,6 +134,8 @@ export default {
   data() {
     return {
       showModal: false,
+      isEdit: false,
+      showModalView: false,
       value: {
         date: new Date(),
         reminder: '',
@@ -89,13 +144,14 @@ export default {
     }
   },
   setup() {
-    const { updateCount, create, setReminder } = useReminder()
+    const { updateCount, create, setReminder, deleteItem } = useReminder()
 
-    return { dateHourFormart, updateCount, create, setReminder }
+    return { dateHourFormart, updateCount, create, setReminder, deleteItem }
   },
     computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    getUser: (state) => state.user.login
+    getUser: (state) => state.user.login,
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
   }),
   methods: {
     sendForm() {
@@ -132,7 +188,21 @@ export default {
     change(item) {
       item.active = !item.active
       this.$store.dispatch('home/reminderCheck', item)
-    }
+    },
+    setDoc(_item) {
+      this.showModalView = true
+      this.itemView = _item
+    },
+    edit(value) {
+      this.isEdit = true
+      this.value = value
+      this.showModal = true
+    },
+    deleteBenefit(id) {
+      this.deleteItem(id)
+      this.$store.dispatch('home/search', null)
+      this.showModalView = false
+    },
   },
   components: {
     WidgetLayoutHome,
@@ -142,7 +212,11 @@ export default {
     FildSelect,
     FrameNotification,
     IconBase,
-    FildCheckbox
+    FildCheckbox,
+    IconEdit,
+    IconTrash,
+    WidgetModal,
+    Title
   }
 }
 </script>
@@ -160,6 +234,7 @@ ul {
 
 li {
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .reminder_footer {
@@ -192,5 +267,16 @@ li {
   word-wrap: break-word;
   width: 25rem;
   height: 100%;
+}
+
+.item_view {
+  margin-left: 3rem;
+  text-align: left;
+}
+
+.team_btn_edit {
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 </style>
