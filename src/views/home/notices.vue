@@ -1,3 +1,4 @@
+
 <template>
   <widget-layout-home
     layout="icon-folder"
@@ -48,6 +49,31 @@
     >
       <template v-slot:body>
         <div class="item_view">
+          <div style="display: flex"> 
+            <button class="team_btn_edit" style="margin-left: auto;" v-if="permissionADM">
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="edit(itemView)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-edit />
+              </icon-base>
+
+              <icon-base
+                icon-name="icon"
+                class="team_icon_edit"
+                @click="deleteBenefit(itemView.id)"
+                width="1rem"
+                heigth="1rem"
+              >
+                <icon-trash />
+              </icon-base>
+
+            </button>
+
+          </div>
           <div style="display: flex">
             <span> {{itemView.creator  }} | {{dateHourFormart(itemView.date)}}</span>
             <span style="margin-left: auto;"> 
@@ -119,6 +145,8 @@ import FildSelect from '@/components/input/FildSelect.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameNotices from '@/components/svg/FrameNotices.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
+import IconEdit from '@/components/svg/IconEdit.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useNotice from '@/composables/useNotice.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
@@ -127,6 +155,7 @@ export default {
   data() {
     return {
       showModal: false,
+      isEdit: false,
       showModalView: false,
       lastScrollTop: 0,
       priorityList: [
@@ -162,8 +191,8 @@ export default {
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
   }),
   setup() {
-    const { getNotices, create } = useNotice()
-    return { getNotices, create, dateHourFormart }
+    const { getNotices, create, deleteItem, update } = useNotice()
+    return { getNotices, create, deleteItem, update, dateHourFormart }
   },
   components: {
     Title,
@@ -174,7 +203,9 @@ export default {
     FildSelect,
     IconBase,
     FrameNotices,
-    WidgetModal
+    WidgetModal,
+    IconEdit,
+    IconTrash
   },
   methods: {
     openAddNotices() {
@@ -218,6 +249,16 @@ export default {
     setDoc(_item) {
       this.showModalView = true
       this.itemView = _item
+    },
+    edit(value) {
+      this.isEdit = true
+      this.value = value
+      this.showModal = true
+    },
+    deleteBenefit(id) {
+      this.deleteItem(id)
+      this.$store.dispatch('home/search', null)
+      this.showModalView = false
     },
   }
 }
@@ -274,4 +315,9 @@ li {
   text-align: left;
 }
 
+.team_btn_edit {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 </style>
