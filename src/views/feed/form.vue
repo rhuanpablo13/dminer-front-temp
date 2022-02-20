@@ -87,6 +87,7 @@ export default {
 
         this.$store.dispatch('form/setLoading')
         if (result) {
+          this.$store.dispatch('post/getPostViewAll')
           this.$store.dispatch('form/setSuccess').then(() => {
             this.$emit('close')
           })
