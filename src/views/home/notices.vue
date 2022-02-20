@@ -9,7 +9,7 @@
     :onClick="permissionADM ? () => openAddNotices() : null"
   >
     <ul>
-      <li @click="setDoc(item)" v-for="item in $store.state.home.noticeList" :key="item.id">
+      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in $store.state.home.noticeList" :key="item.id">
         <icon-base
           viewBox="0 0 500 347.7"
           icon-name="icon"
@@ -282,7 +282,6 @@ li {
   margin-top: -1.3rem;
   margin-bottom: 2rem;
   margin-right: -1rem;
-  cursor: pointer;
 }
 
 .notices_footer {

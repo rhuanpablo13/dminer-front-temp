@@ -9,7 +9,7 @@
         :required="required"
         v-model="value"
       />
-      <div v-if="text" class="input_label">
+      <div v-if="text" class="input_label" :style="{'max-width': full ? '100%': '20rem'}">
         {{ text }}
       </div>
     </div>
@@ -21,6 +21,7 @@ export default {
   props: {
     text: { type: String, required: false },
     value: { type: Boolean, required: false },
+    full: { type: Boolean, required: false },
     required: { type: Boolean, required: false, default: false },
     isError: { type: Boolean, required: false, default: false },
     type: { type: String, required: false, default: 'text' }
@@ -53,7 +54,6 @@ export default {
 .input_label {
   text-transform: capitalize;
   text-align: start;
-  max-width: 20rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

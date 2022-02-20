@@ -12,6 +12,7 @@
         v-for="(item, key) in $store.state.home.reminderList"
         :key="key"
         :id="`reminder_li_${key}`"
+        :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)"
       >
         <icon-base
           viewBox="0 0 500 85.1"
@@ -76,7 +77,8 @@
                 v-model="itemView.active"
                 :value="itemView.active"
                 type="checkbox"
-                @change="change(itemView)"
+                @change="change(itemView, true)"
+                full
               />
             </div>
         </div>
@@ -185,9 +187,13 @@ export default {
     openModal() {
       this.showModal = true
     }, 
-    change(item) {
+    change(item, local) {
+ 
       item.active = !item.active
       this.$store.dispatch('home/reminderCheck', item)
+      if (local) {
+        this.itemView.active = !this.itemView.active
+      }
     },
     setDoc(_item) {
       this.showModalView = true
@@ -234,7 +240,6 @@ ul {
 
 li {
   margin-bottom: 1rem;
-  cursor: pointer;
 }
 
 .reminder_footer {
@@ -279,4 +284,6 @@ li {
   background: transparent;
   cursor: pointer;
 }
+
+
 </style>

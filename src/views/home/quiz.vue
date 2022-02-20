@@ -13,7 +13,7 @@
         :id="`user_li_${key}`"
       >
         <div class="container_quiz">
-          <div class="quiz_question">
+          <div class="quiz_question" :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && edit(item)"> 
             <span>{{ item.question }}</span>
           </div>
           <div class="quiz_footer" >
@@ -51,6 +51,20 @@
     @close="showModal = false"
   >
     <div class="form_container">
+      <div style="display: flex; justify-self: right;" v-if="isEdit"> 
+        <button class="team_btn_edit"  v-if="permissionADM">
+          <icon-base
+            icon-name="icon"
+            class="team_icon_edit"
+            @click="deleteBenefit(itemView.id)"
+            width="1rem"
+            heigth="1rem"
+          >
+            <icon-trash />
+          </icon-base>
+        </button>
+      </div>
+
       <div class="form_container_text">
         <fild-input
           :text="'Pergunta'"
@@ -85,12 +99,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import FormModal from '@/components/FormModal.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconCountQuiz from '@/components/svg/IconCountQuiz.vue'
+import IconTrash from '@/components/svg/IconTrash.vue'
 
 import useQuiz from '@/composables/useQuiz'
 import { dateHourFormarUs } from '@/util/date.js'
@@ -99,6 +116,7 @@ export default {
   data() {
     return {
       showModal: false,
+      isEdit: false,
       value: {
         question: '',
         date: new Date() + 1,
@@ -108,9 +126,12 @@ export default {
     }
   },
   setup() {
-    const { updateCount, create } = useQuiz()
-    return { updateCount, create }
+    const { updateCount, create, deleteItem, update } = useQuiz()
+    return { updateCount, create, deleteItem, update }
   },
+  computed: mapState({
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+  }),
 
   methods: {
     count(id, item) {
@@ -144,7 +165,16 @@ export default {
     },
     openModal() {
       this.showModal = true
-    }
+    },
+    edit(value) {
+      this.isEdit = true
+      this.value = value
+      this.showModal = true
+    },
+    deleteBenefit(id) {
+      this.deleteItem(id)
+      this.$store.dispatch('home/search', null)
+    },
   },
   components: {
     WidgetLayoutHome,
@@ -152,7 +182,8 @@ export default {
     IconCountQuiz,
     FormModal,
     FildInput,
-    FildDate
+    FildDate,
+    IconTrash
   }
 }
 </script>
@@ -277,5 +308,16 @@ button > span {
   display: grid;
   grid-template-columns: 45% 45%;
   grid-gap: 10%;
+}
+
+.item_view {
+  margin-left: 3rem;
+  text-align: left;
+}
+
+.team_btn_edit {
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 </style>

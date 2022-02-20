@@ -7,7 +7,7 @@
     :onClick="permissionADM ? () => openModal() : null"
   >
     <ul>
-      <li @click="setDoc(item)" v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
+      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
         <icon-base
           viewBox="0 0 500 85.1"
           icon-name="icon"
@@ -188,7 +188,6 @@ ul {
 
 li {
   margin-bottom: 1rem;
-  cursor: pointer;
 }
 
 .form_container {
