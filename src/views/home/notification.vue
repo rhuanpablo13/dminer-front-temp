@@ -230,5 +230,7 @@ h2 {
   border: none;
   background: transparent;
   cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
