@@ -37,6 +37,7 @@
                 :value="eventCalendar.start"
                 required
                 :isError="isError && !eventCalendar.start"
+                :minDate="new Date()"
               />
               <fild-date
                 text="Fim"
@@ -44,6 +45,7 @@
                 :value="eventCalendar.end"
                 :required="false"
                 :isError="isError && !eventCalendar.end"
+                :minDate="eventCalendar.start"
               />
               <fild-select
                 text="Usuários"

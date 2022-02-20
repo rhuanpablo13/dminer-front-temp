@@ -19,6 +19,7 @@
         cancelText="cancelar"
         :format="dateHourFormart"
         :previewFormat="dateHourFormart"
+        :minDate="minDate"
       ></Datepicker>
 
       <div>
@@ -51,6 +52,7 @@ export default {
   props: {
     text: { type: String, required: false },
     value: { type: String, required: false },
+    minDate: { type: String, required: false },
     required: { type: Boolean, required: false, default: false }
   },
 
