@@ -135,7 +135,7 @@ export default {
         // window.open(url, '_blank')
       // } else {       // se não for uma imagem, usamos um iframe 
       try {
-        var _url = url.myString.split("/");
+        var _url = url.split("/");
         var index = _url.length - 1
 
         var oReq = new XMLHttpRequest();
