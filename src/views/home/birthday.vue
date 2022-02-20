@@ -18,7 +18,7 @@
                <Avatar :avatar="item.avatar" isBirthday height="8rem" />
 
               <div class="birthday_text" :title="item.userName">
-                <Title>{{ item.userName  }}</Title>
+                <h1>{{ item.userName  }}</h1>
                 <span>
                   <b>Data:</b>
                   {{item.birthDate}}
@@ -36,7 +36,6 @@
 import { mapState } from 'vuex'
 
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
-import Title from '@/components/title/Title.vue'
 import Avatar from '@/components/Avatar.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameTeam from '@/components/svg/FrameTeam.vue'
@@ -48,7 +47,6 @@ export default {
 
   components: {
     WidgetLayoutHome,
-    Title,
     Avatar,
     IconBase,
     FrameTeam
@@ -86,5 +84,16 @@ li {
 
 span {
   margin-top: -1rem;
+}
+
+h1 {
+  font-family: var(--font-family--title);
+  color: var(--color-title);
+  font-weight: 300;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 14rem;
 }
 </style>
