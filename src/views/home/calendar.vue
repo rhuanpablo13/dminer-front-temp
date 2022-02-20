@@ -47,13 +47,12 @@
                 :isError="isError && !eventCalendar.end"
                 :minDate="eventCalendar.start"
               />
-              <fild-select
+              <fild-multi-select
                 text="Usuários"
                 v-model="eventCalendar.users"
                 :value="eventCalendar.users"
                 required
                 :options="dropdownUser"
-                :multiple="true"
               />
 
               <fild-color text="Cor" v-model="eventCalendar.backgroundColor" :required="false"></fild-color>
@@ -100,7 +99,7 @@ import FildDate from '@/components/input/FildDate.vue'
 import FildColor from '@/components/input/FildColor.vue'
 import Calendar from '@/components/calendar/Calendar.vue'
 import EventCalendar from '@/components/calendar/EventCalendar.vue'
-import FildSelect from '@/components/input/FildSelect.vue'
+import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import { dateHourFormarUs } from '@/util/date.js'
@@ -142,12 +141,18 @@ export default {
     Send,
     FildInput,
     FildDate,
-    FildSelect,
+    FildMultiSelect,
     FildColor,
     FildCheckbox
   },
   computed: mapState({
-    dropdownUser: (state) => state.dropdown.user,
+    dropdownUser: (state) =>  state.dropdown.user.map(us => {
+      return {
+        value: us.login,
+        name: us.userName,
+        image: us.avatar
+      }
+    }),
     login: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),
@@ -208,6 +213,59 @@ export default {
   top: -50%;
   transform: translate(0, 50%);
   height: 18rem;
+  overflow-y: scroll;
+  width: 12rem;
+  left: -1rem;
+  overflow-x: hidden;
+}
+
+.multiselect-tag {
+  background: var(--ms-tag-bg,#10b981);
+  color: var(--ms-tag-color,#fff);
+  font-size: 0.5rem !important;
+  line-height: var(--ms-tag-line-height,1.25rem);
+  font-family: var(--font-family--text) !important;
+  padding: 0.1rem;
+  padding-left: 0.3rem !important;
+  border-radius: var(--ms-tag-radius,4px);
+  margin-right: var(--ms-tag-mx,.25rem);
+  margin-bottom: var(--ms-tag-my,.25rem);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.multiselect-option {
+  padding: var(--ms-option-py,.5rem) var(--ms-option-px,.75rem);
+  font-size: 0.6rem !important;
+  line-height: var(--ms-option-line-height,1.375);
+  cursor: pointer;
+  display: flex;
+  box-sizing: border-box;
+  text-decoration: none;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.multiselect-dropdown {
+  position: absolute;
+  left: calc(var(--ms-border-width, 1px)*-1);
+  right: calc(var(--ms-border-width, 1px)*-1);
+  bottom: 0;
+  transform: translateY(100%);
+  border: var(--ms-dropdown-border-width,1px) solid var(--ms-dropdown-border-color,#d1d5db);
+  margin-top: calc(var(--ms-border-width, 1px)*-1);
+  max-height: 15rem;
+  overflow-y: scroll;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  z-index: 100;
+  background: var(--ms-dropdown-bg,#fff);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0 var(--ms-dropdown-radius,4px) var(--ms-dropdown-radius,4px);
+  outline: none;
 }
 
 .calendar_form_button{

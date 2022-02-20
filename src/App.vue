@@ -183,4 +183,17 @@ input:-internal-autofill-selected {
   background-color: transparent !important;
   color: -internal-light-dark(black, white) !important;
 }
+
+.multiselect-option {
+  padding: var(--ms-option-py,.5rem) var(--ms-option-px,.75rem);
+  font-size: 0.5rem !important;
+  line-height: var(--ms-option-line-height,1.375);
+  cursor: pointer;
+  display: flex;
+  box-sizing: border-box;
+  text-decoration: none;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
 </style>

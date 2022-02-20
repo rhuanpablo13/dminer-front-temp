@@ -96,35 +96,35 @@
   >
     <div class="form_container">
       <div class="form_container_text">
+
+        <fild-date
+          text="Data"
+          v-model="value.date"
+          :value="value.date"
+          required
+        />
+
         <fild-input
-          :text="'Título'"
+          text="Título"
           v-model="value.warning"
           :value="value.warning"
           required
         />
 
         <fild-select
-          :text="'Prioridade'"
+          text="Prioridade"
           v-model="value.priority"
           :value="value.priority"
           required
           :options="priorityList"
         />
 
-        <fild-select
-          :text="'Usuários'"
+        <fild-multi-select
+          text="Usuários"
           v-model="value.users"
           :value="value.users"
           required
           :options="dropdownUser"
-          :multiple="true"
-        />
-
-        <fild-date
-          :text="'Data'"
-          v-model="value.date"
-          :value="value.date"
-          required
         />
       </div>
     </div>
@@ -140,6 +140,7 @@ import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FildDate from '@/components/input/FildDate.vue'
 import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
+import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameNotices from '@/components/svg/FrameNotices.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
@@ -184,7 +185,13 @@ export default {
     }
   },
   computed: mapState({
-    dropdownUser: (state) => state.dropdown.user,
+    dropdownUser: (state) =>  state.dropdown.user.map(us => {
+      return {
+        value: us.login,
+        name: us.userName,
+        image: us.avatar
+      }
+    }),    
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
   }),
@@ -199,6 +206,7 @@ export default {
     FildInput,
     FildDate,
     FildSelect,
+    FildMultiSelect,
     IconBase,
     FrameNotices,
     WidgetModal,
