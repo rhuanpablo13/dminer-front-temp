@@ -23,8 +23,8 @@
             <div class="reminder">
               <fild-checkbox
                 :text="item.reminder"
-                v-model="value.active"
-                :value="!!value.active"
+                v-model="item.active"
+                :value="item.active"
                 type="checkbox"
                 @change="change(item)"
               />

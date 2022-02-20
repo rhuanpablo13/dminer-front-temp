@@ -25,6 +25,9 @@ export default {
     isError: { type: Boolean, required: false, default: false },
     type: { type: String, required: false, default: 'text' }
   },
+  created() {
+    console.log(this.value);
+    },
   methods: {
     changeInput(e) {
       this.$emit('update:modelValue', e.target.value)
