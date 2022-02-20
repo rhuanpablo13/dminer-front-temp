@@ -5,7 +5,7 @@
     title="avisos"
     classContent="folder__notification__content"
     id="folder_notices"
-    :onClick="openAddNotices"
+    :onClick="permissionADM ? () => openAddNotices() : null"
   >
     <ul>
       <li v-for="item in $store.state.home.noticeList" :key="item.id">
@@ -128,7 +128,8 @@ export default {
   },
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    getUser: (state) => state.user.login
+    getUser: (state) => state.user.login,
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
   }),
   setup() {
     const { getNotices, create } = useNotice()
