@@ -47,17 +47,17 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false
       
-      let user = {}
+      let userReminder = {}
       let reminderPassword = localStorage.reminderPassword
       if (reminderPassword) {
-        user = JSON.parse(localStorage.user)
+        userReminder = JSON.parse(localStorage.userReminder)
       }
 
       localStorage.clear()
 
       if (reminderPassword) {
         localStorage.reminderPassword = reminderPassword
-        localStorage.user = JSON.stringify(user)
+        localStorage.userReminder = JSON.stringify(userReminder)
       }
       
       sessionStorage.removeItem('timeout');
