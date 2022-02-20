@@ -8,7 +8,7 @@
     :onClick="permissionADM ? () => openAddNotices() : null"
   >
     <ul>
-      <li v-for="item in $store.state.home.noticeList" :key="item.id">
+      <li @click="setDoc(item)" v-for="item in $store.state.home.noticeList" :key="item.id">
         <icon-base
           viewBox="0 0 500 347.7"
           icon-name="icon"
@@ -39,6 +39,30 @@
 
     </ul>
   </widget-layout-home>
+
+  <transition name="modal">
+    <widget-modal
+      v-if="showModalView"
+      title="Avisos"
+      @close="showModalView = false"
+    >
+      <template v-slot:body>
+        <div class="item_view">
+          <div style="display: flex">
+            <span> {{itemView.creator  }} | {{dateHourFormart(itemView.date)}}</span>
+            <span style="margin-left: auto;"> 
+              <b>Prioridade:</b>
+              {{ getPriority(itemView.priority) }}
+            </span>
+          </div>
+
+          <Title>
+            {{itemView.warning }}
+          </Title>
+        </div>
+      </template>
+    </widget-modal>
+  </transition>
 
   <form-modal
     :showModal="showModal"
@@ -94,6 +118,7 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameNotices from '@/components/svg/FrameNotices.vue'
+import WidgetModal from '@/components/widget/WidgetModal.vue'
 
 import useNotice from '@/composables/useNotice.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
@@ -102,6 +127,7 @@ export default {
   data() {
     return {
       showModal: false,
+      showModalView: false,
       lastScrollTop: 0,
       priorityList: [
         {
@@ -123,6 +149,10 @@ export default {
         priority: 'Média',
         users: [],
         creator: this.getUser
+      },
+      itemView: {
+        notices: '',
+        user: ''
       }
     }
   },
@@ -143,7 +173,8 @@ export default {
     FildDate,
     FildSelect,
     IconBase,
-    FrameNotices
+    FrameNotices,
+    WidgetModal
   },
   methods: {
     openAddNotices() {
@@ -178,11 +209,15 @@ export default {
     },
     validForm() {
      return  this.value.hasOwnProperty('warning') && this.value?.warning !== "" && 
-              this.value.hasOwnProperty('priority') && this.value?.priority !== 0 &&
+              this.value.hasOwnProperty('priority') &&
               this.value.hasOwnProperty('users') && this.value?.users !== "" && 
               this.value.hasOwnProperty('creator') && this.value?.creator !== "" &&  
               this.value.hasOwnProperty('date') && this.value?.date !== "" 
-    }
+    },
+    setDoc(_item) {
+      this.showModalView = true
+      this.itemView = _item
+    },
   }
 }
 </script>
@@ -203,9 +238,10 @@ ul {
   list-style-type: none;
 }
 li {
- margin-top: -1.3rem;
- margin-bottom: 2rem;
- margin-right: -1rem;
+  margin-top: -1.3rem;
+  margin-bottom: 2rem;
+  margin-right: -1rem;
+  cursor: pointer;
 }
 
 .notices_footer {
@@ -231,4 +267,10 @@ li {
   grid-template-columns: 45% 45%;
   grid-gap: 10%;
 }
+
+.item_view {
+  margin-left: 3rem;
+  text-align: left;
+}
+
 </style>
