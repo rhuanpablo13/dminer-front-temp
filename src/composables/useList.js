@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetcSearch,fetchDropdown } from '@/api/request.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind } from '@/api/request.js'
 
 export default function useList() {
   const getListItem = ref([])
@@ -21,11 +21,11 @@ export default function useList() {
   } 
   
   const search = async (URL,keyword) => {
-    getListItem.value = await fetcSearch(URL,keyword)
+    getListItem.value = await fetchSearch(URL,keyword)
   }
 
   const getId = async (URL,id) => {
-    getListItem.value = await fetcSearch(URL,id)
+    getListItem.value = await fetchFind(URL,id)
   }
 
   const getDropdown = async (URL) => {

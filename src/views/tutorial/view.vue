@@ -9,14 +9,14 @@
       <template v-slot:body>
         <div >
           <image-details
-            :image="getTutorials.image"
-            :category="getTutorials.category"
+            :image="item.image"
+            :category="item.category"
             imageW="auto"
             imageH="10rem"
             className="image_details_wrapper_grid"
           >
-            <template v-slot:title>{{ getTutorials.title }}</template>
-            <template v-slot:content>{{ getTutorials.content }}</template>
+            <template v-slot:title>{{ item.title }}</template>
+            <template v-slot:content>{{ item.content }}</template>
           </image-details>
           <icon-base
             icon-name="icon"       
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 import { useRoute } from "vue-router";
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
@@ -50,10 +50,6 @@ import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
-
-import useTutorial from '@/composables/useTutorial'
-import usePermission from '@/composables/usePermission'
-import useCategory from '@/composables/useCategory'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
@@ -69,15 +65,12 @@ export default {
     const route = useRoute()
     const idParam = route.params.id
 
-    const { setTutorial, deleteItem, getId, getTutorials } = useTutorial()
-    const { getPermission } = usePermission()
-
-    getId(idParam)
-
-    return { getTutorials, getPermission, setTutorial, deleteItem, idParam, route }
+    const store = useStore()
+    store.dispatch('list/getItem', {typeList: 'tutorials', id: idParam})
+    return { idParam }
   },
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
+    item: (state) => state.list.item
   }),
   components: {
     WidgetModal,
@@ -102,25 +95,22 @@ export default {
       this.openModal()
     },
     deleteTutorial(id) {
-      this.deleteItem(id)
-      setTimeout(() => {
-        this.setTutorial()
-      }, 300)
+      this.dispatch('list/deleteItemList', {typeList:'tutoriais', id})
     },
     close() {
-      setTimeout(() => {
-        this.setTutorial()
-      }, 300)
+      this.dispatch('list/getList', 'tutoriais')
       this.showModal = false
     },
     backAll() {
       this.$router.push('/tutoriais')
     },
     submit(event) {
+      if (!event) return;
+
       if (event.target && event.target.value) {
-        this.search(event.target.value)
+        this.dispatch('list/searchItemList', {typeList:'tutoriais', value: event.target.value})
       } else if(event.target.value === '') {
-        this.setTutorial()
+        this.dispatch('list/getList', 'tutoriais')
       }
     }
   }

@@ -3,9 +3,10 @@ import useList from '@/composables/useList'
 
 const initialState = {
   list: [],
+  item: {}
 }
 
-const { getListItem, setList, deleteItem, search, create, update } = useList()
+const { getListItem, setList, deleteItem, search, create, update, getId } = useList()
 
 export const list = {
   namespaced: true,
@@ -17,8 +18,8 @@ export const list = {
       commit('success', getListItem.value )
     },
     getItem: async ({ commit }, {typeList, id}) => {
-      await fetchId(typeList, id)
-      commit('success', getListItem.value )
+      await getId(typeList, id)
+      commit('ItemSuccess', getListItem.value)
     },
     searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
       dispatch('form/setLoading')
@@ -59,6 +60,11 @@ export const list = {
       this.dispatch('form/setLoading')
       state.list = payload
       this.dispatch('form/setSuccess')
-    }
+    },
+    ItemSuccess(state, payload) {
+      this.dispatch('form/setLoading')
+      state.item = payload
+      this.dispatch('form/setSuccess')
+    },
   }
 }
