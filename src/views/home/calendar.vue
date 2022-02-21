@@ -68,6 +68,7 @@
               <div>
                 <div class="calendar_form_button"> 
                   <send
+                     id="sendCalensar"
                     :isLoading="isLoading"
                     :isSuccess="isSuccess"
                     :isError="isError"
@@ -205,7 +206,7 @@ export default {
 }
 
 .form_calendar_container {
-  overflow-y: auto;
+  overflow-y: hidden;
   width: 13rem;
   margin-top: -2rem;
   font-size: 0.4rem;
@@ -282,7 +283,7 @@ export default {
   margin-top:-2rem;
 }
 
-#send > foreignObject > span {
+#sendCalensar > foreignObject > span {
   font-size: 6rem !important;
 }
 

@@ -116,6 +116,27 @@ export default {
   z-index: 3;
 }
 
+.color-input .picker-popup {
+  position: revert !important;
+  z-index: 99999999999999999;
+  width: auto;
+  min-width: 165px;
+  background-color: #fbfbfb;
+  box-shadow: 0px 5px 10px rgb(15 15 15 / 40%);
+  margin: 7px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  /* user-select: none; */
+  color: #0f0f0f;
+  transform: translate(-100%, 0);
+}
+
+.color-input .saturation-area {
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+
 .fild_container_error {
   position: absolute;
   font-size: 0.5rem;

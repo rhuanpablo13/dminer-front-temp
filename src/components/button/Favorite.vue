@@ -13,7 +13,7 @@
       id="send"
       class="send"
       :class="{
-        'is-loading': isLoading,
+        'is-loading': isLoadingFavorite,
         'is-success': isSuccess,
         'is-error': isError
       }"
@@ -29,7 +29,7 @@
           points="1.768,23.532 34.415,56.179 88.826,1.768"
         />
       </svg>
-      <span v-if="!isLoading && !isSuccess && !isError">{{ text }}</span>
+      <span v-if="!isLoadingFavorite && !isSuccess && !isError">{{ text }}</span>
       <div class="out" v-if="isError">
         <icon-base
           viewBox="0 0 32 32"
@@ -42,7 +42,7 @@
         </icon-base>
       </div>
 
-      <div class="lds-ellipsis" v-if="isLoading">
+      <div class="lds-ellipsis" v-if="isLoadingFavorite">
         <div></div>
         <div></div>
         <div></div>
@@ -66,7 +66,7 @@ export default {
     text: { type: String, default: 'Enviar', required: false }
   },
   computed: mapState({
-    isLoading: (state) => state.form.isLoading,
+    isLoadingFavorite: (state) => state.form.isLoadingFavorite,
     isError: (state) => state.form.isError,
     isSuccess: (state) => state.form.isSuccess
   }),

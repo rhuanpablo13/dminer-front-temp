@@ -1,7 +1,8 @@
 const initialState = {
   isLoading: false,
   isSuccess: false,
-  isError: false
+  isError: false,
+  isLoadingFavorite: false,
 }
 
 export const form = {
@@ -11,6 +12,9 @@ export const form = {
   actions: {
     setLoading({ commit }) {
       commit('loading')
+    },
+    setLoadingFavorite({ commit }) {
+      commit('loadingFavorite')
     },
     setError({ commit }) {
       commit('error')
@@ -22,6 +26,9 @@ export const form = {
   mutations: {
     loading(state) {
       state.isLoading = !state.isLoading
+    },
+    loadingFavorite(state) {
+      state.isLoadingFavorite = !state.isLoadingFavorite
     },
     error(state) {
       state.isError = true

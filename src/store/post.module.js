@@ -97,18 +97,16 @@ export const post = {
       )
     },    
     getFavorite({ commit }) {
-      this.dispatch('form/setLoading')
+      this.dispatch('form/setLoadingFavorite')
 
       return getFavorites(this.state.user.login).then(
         (payload) => {
           commit('successPosts', getPostsAll.value)
-          this.dispatch('form/setLoading')
-          this.dispatch('form/setSuccess')
+          this.dispatch('form/setLoadingFavorite')
         },
         (error) => {
           console.log(error)
-          this.dispatch('form/setLoading')
-          this.dispatch('form/setError')
+          this.dispatch('form/setLoadingFavorite')
           commit('error')
           return Promise.reject(error)
         }
