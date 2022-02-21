@@ -10,7 +10,7 @@ const initialState = {
   posts: []
 }
 
-const { crateComment, setAllPost, getPostsAll, searchAll, getFavorites, favorite } = useFeed()
+const { create, update, crateComment, setAllPost, getPostsAll, searchAll, getFavorites, favorite } = useFeed()
 const { getPost, setPost, search, setReact } = usePost()
 
 export const post = {
@@ -18,11 +18,46 @@ export const post = {
   state: initialState,
 
   actions: {
+    createPost({ commit, dispatch }, value) {
+      dispatch('form/setLoading')
+      return create(value).then(
+        (payload) => {
+          this.state.post.posts.unshift(payload)
+          commit('successPosts', this.state.post.posts)
+          dispatch('form/setLoading')
+          dispatch('form/setSuccess')
+        },
+        (error) => {
+          console.log(error)
+          dispatch('form/setLoading')
+          dispatch('form/setError')
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },
+    updatePost({ commit, dispatch }, value) {
+      dispatch('form/setLoading')
+      return update(value).then(
+        (payload) => {
+          this.state.post.posts.unshift(payload)
+          commit('successPosts', this.state.post.posts)
+          dispatch('form/setLoading')
+          dispatch('form/setSuccess')
+        },
+        (error) => {
+          console.log(error)
+          dispatch('form/setLoading')
+          dispatch('form/setError')
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },
     getPostViewAll({ commit }) {
       return setAllPost().then(
         (payload) => {
           commit('successPosts', getPostsAll.value)
-          // return Promise.resolve(payload)
         },
         (error) => {
           console.log(error)

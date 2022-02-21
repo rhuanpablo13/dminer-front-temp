@@ -39,7 +39,6 @@ import FildSelect from '@/components/input/FildSelect.vue'
 import UploadImage from '@/components/UploadImage.vue'
 import FildTextarea from '@/components/input/FildTextarea.vue'
 
-import useFeed from '@/composables/useFeed'
 import { dateHourFormarUs } from '@/util/date'
 
 // https://codesandbox.io/s/e7mok 
@@ -69,9 +68,7 @@ export default {
       type: typeList[0].id
     })
 
-    const { create, update } = useFeed()
-
-    return { create, typeList, update, value }
+    return { typeList, value }
   },
   computed: mapState({
     getUser: (state) => state.user.login
@@ -79,21 +76,10 @@ export default {
 
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('post/getPostViewAll')
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
-        }
+        this.$store.dispatch(this.isEdit ? 'post/updatePost' : 'post/createPost', this.value)
+        this.$emit('close')
       } else {
-        this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
       }
     },
