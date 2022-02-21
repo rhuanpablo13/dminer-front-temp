@@ -10,7 +10,7 @@
     >
       <template v-slot:body>
         <ul v-if="list.length">
-          <li v-for="(item, key) in list" :key="key" @click="setItem(item)">
+          <li v-for="(item, key) in list" :key="key" >
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
@@ -28,6 +28,7 @@
               </icon-base>
             </button>
             <image-details
+              @click="setItem(item)"
               :image="item.image"
               :category="item.category"
               imageW="9rem"
