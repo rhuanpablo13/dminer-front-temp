@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
@@ -46,21 +46,17 @@ import formCrud from './form.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
-import useUser from '@/composables/useUser'
-
 export default {
-  data() {
+  setup() {
+    const { dispatch } = useStore()
+    dispatch('dropdown/getDropdownUser')
+
     return {
       showModalPrimary: true,
       showModal: false,
       value: {},
       isEdit: false
     }
-  },
-  setup() {
-    const { updatePermission } = useUser()
-
-    return { updatePermission }
   },
   components: {
     WidgetModal,
@@ -84,7 +80,11 @@ export default {
       this.openModal()
     }, 
     change(value, login) {
-      this.updatePermission(login, value.name)
+      this.$store.dispatch(
+        'list/updateItemList', 
+        {typeList: 'user/permission', 
+        value: {login , permission: value.name}}
+      )
     }
   }
 }

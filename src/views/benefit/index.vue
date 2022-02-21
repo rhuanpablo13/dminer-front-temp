@@ -5,12 +5,12 @@
       title="benefícios"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      :search="getBenefits.length"
+      :search="list.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul v-if="getBenefits.length">
-          <li v-for="(item, key) in getBenefits" :key="key">
+        <ul v-if="list.length">
+          <li v-for="(item, key) in list" :key="key">
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
@@ -42,7 +42,7 @@
               viewBox="0 0 500 58"
               width="100%"
               height="100%"
-              class="fild_container_icon"
+              class="fild_container_icon_benefit"
             >
               <icon-line />
             </icon-base>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
@@ -71,8 +71,6 @@ import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 import NoRegistry from '@/components/NoRegistry.vue'
-
-import useBenefit from '@/composables/useBenefit'
 
 export default {
   data() {
@@ -84,13 +82,18 @@ export default {
     }
   },
   setup() {
-    const { getBenefits, setBenefit, deleteItem, search } = useBenefit()
+    const store = useStore()
+    store.dispatch('list/getList', 'benefits')
 
-    return { getBenefits, setBenefit, deleteItem, search }
+    return {
+      dispatch: store.dispatch
+    }
   },
-
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => {
+      return state.list.list
+    }
   }),
 
   components: {
@@ -113,28 +116,25 @@ export default {
       this.setDoc(value)
     },
     deleteBenefit(id) {
-      this.deleteItem(id)
-      setTimeout(() => {
-        this.setBenefit()
-      }, 300)
+      this.dispatch('list/deleteItemList', {typeList:'benefits', id})
     },
     setDoc(value) {
       this.value = value
       this.openModal()
     },
     close() {
-      setTimeout(() => {
-        this.setBenefit()
-      }, 300)
+      this.dispatch('list/getList', 'benefits')
       this.showModal = false
     },
     submit(event) {
+      if (!event) return;
+
       if (event.target && event.target.value) {
-        this.search(event.target.value)
+        this.dispatch('list/searchItemList', {typeList:'benefits', value: event.target.value})
       } else if(event.target.value === '') {
-        this.setBenefit()
+        this.dispatch('list/getList', 'benefits')
       }
-    }
+    },
   }
 }
 </script>
@@ -173,9 +173,9 @@ a {
   text-decoration: none;
 }
 
-.fild_container_icon {
+.fild_container_icon_benefit {
   position: absolute;
-  bottom: -5rem;
+  bottom: -4rem;
   left: 1rem;
 }
 </style>

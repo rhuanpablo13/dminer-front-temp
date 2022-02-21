@@ -90,7 +90,7 @@
 
 <script>
 import { reactive, ref } from 'vue'
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
@@ -116,6 +116,9 @@ export default {
     }
   },
   setup(props) {
+    const { dispatch } = useStore()
+    dispatch('dropdown/getDropdownUser')
+
     const calendar = ref([])
     const eventCalendar = reactive({
       start: null,

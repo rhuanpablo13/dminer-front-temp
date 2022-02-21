@@ -1,13 +1,11 @@
 import { messagesFetch } from '@/util/toast'
-import useDocument from '@/composables/useDocument'
-
+import useList from '@/composables/useList'
 
 const initialState = {
   list: [],
 }
 
-const { getDocuments, setDocument, deleteItem, search } = useDocument()
-
+const { getListItem, setList, deleteItem, search, create, update } = useList()
 
 export const list = {
   namespaced: true,
@@ -15,39 +13,52 @@ export const list = {
 
   actions: {
     getList: async ({ commit }, typeList) => {
-      switch (typeList) { 
-        case 'documents': 
-          await setDocument()
-          if (getDocuments.value.length) {
-            commit('success', getDocuments.value )
-          }
-          break
+      await setList(typeList)
+      commit('success', getListItem.value )
+    },
+    getItem: async ({ commit }, {typeList, id}) => {
+      await fetchId(typeList, id)
+      commit('success', getListItem.value )
+    },
+    searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
+      dispatch('form/setLoading')
+      await search(typeList, value)
+      if (getListItem.value.length) {
+        commit('success', getListItem.value )
       }
     },
-    searchItemList: async ({ commit }, {typeList, value}) => {
-      switch (typeList) { 
-        case 'documents': 
-          await search(value)
-          if (getDocuments.value.length) {
-            commit('success', getDocuments.value )
-          }
-          break
-      }
-    },
-
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
-      switch (typeList) { 
-        case 'documents': 
-          await deleteItem(id)
-          break
-        }
-        dispatch('getList', typeList)
+      await deleteItem(typeList, id)
+      dispatch('getList', typeList)
     },
-  
+    createItemList: async ({ commit, dispatch, state}, {typeList, value}) => {
+      dispatch('form/setLoading')
+      await create(typeList, value)
+      // if (getListItem.value.length) {
+      //   commit('success', getListItem.value)
+      // }
+      if (state.list.length) {
+        state.list.unshift(value)
+        commit('success', state.list)
+      }
+    },
+    updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
+      dispatch('form/setLoading')
+      await update(typeList, value)
+      // if (getListItem.value.length) {
+      //   commit('success', getListItem.value)
+      // }
+      if (state.list.length) {
+       state.list.unshift(value)
+        commit('success', this.state.list)
+      }
+    },
   },
   mutations: {
     success(state, payload) {
+      this.dispatch('form/setLoading')
       state.list = payload
+      this.dispatch('form/setSuccess')
     }
   }
 }

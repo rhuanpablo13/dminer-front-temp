@@ -44,9 +44,6 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
-import useDocument from '@/composables/useDocument'
-import useCategory from '@/composables/useCategory'
-
 export default {
   components: { FildInput, FormModal, FildSelect, FildCheckbox },
   props: {
@@ -63,31 +60,19 @@ export default {
       }
     }
   },
-  setup() {
-    const { create, update } = useDocument()
-    const { getCategories } = useCategory()
-
-    return { create, getCategories, update }
-  },
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
   }),
 
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
+          {typeList: 'document', 
+          value: this.value}
+        )
+        this.$emit('close')
       } else {
         this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')

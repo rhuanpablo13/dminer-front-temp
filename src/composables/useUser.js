@@ -1,11 +1,7 @@
-import { ref, onMounted} from 'vue'
-import { fetchAvatar, fetchBanner, fetchUpdateBanner, fetchDropdownUser, fetchUpdatePermission } from '@/api/user'
+import { fetchAvatar, fetchBanner, fetchUpdateBanner } from '@/api/user'
 import { getBase64 } from '@/util/convertBase64'
-import { useStore } from 'vuex'
 
 export default function useUser() {
-  const store = useStore()
-
   const getAvatar = async (id) => {
     const user = JSON.parse(localStorage.user)
 
@@ -41,21 +37,9 @@ export default function useUser() {
     return banner
   }
 
-  const setDropdownUser = async () => {
-    const user = JSON.parse(localStorage.user)
-    return fetchDropdownUser(user.baererAuthentication)
-  }
-
-  const updatePermission = async (login, permission) => {
-    return fetchUpdatePermission(login, permission)
-  }
-
-
   return {
     getAvatar,
     getBanner,
     updateBanner,
-    setDropdownUser,
-    updatePermission
   }
 }

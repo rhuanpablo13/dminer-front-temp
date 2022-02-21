@@ -1,20 +1,16 @@
 
-import useUser from '@/composables/useUser'
-import usePermission from '@/composables/usePermission'
-import usePost from '@/composables/usePost'
+import useList from '@/composables/useList'
 
 const initialState = {
-  user: [],
   permissions: [],
+  react: []
 }
 
 const dropdownInit = localStorage.dropdown
   ? JSON.parse(localStorage.dropdown)
   : initialState
 
-const { setDropdownUser } = useUser()
-const { setDropdownReact } = usePost()
-const { setPermission } = usePermission()
+const { getDropdown } = useList()
 
 export const dropdown = {
   namespaced: true,
@@ -22,10 +18,9 @@ export const dropdown = {
 
   actions: {
     getDropdownUser({ commit }) {
-      return setDropdownUser().then(
+      return getDropdown('user').then(
         (payload) => {
-          this.state.dropdown.user = payload
-          commit('dropdownSuccess', this.state.dropdown)
+          commit('dropdownUserSuccess', payload)
           return Promise.resolve(payload)
         },
         (error) => {
@@ -36,10 +31,9 @@ export const dropdown = {
       )
     },
     getDropdownPermission({ commit }) {
-      return setPermission().then(
+      return getDropdown('permission').then(
         (payload) => {
-          this.state.dropdown.permissions = payload
-          commit('dropdownSuccess', this.state.dropdown)
+          commit('dropdownSuccess', {type: 'permissions', payload: payload})
           return Promise.resolve(payload)
         },
         (error) => {
@@ -50,10 +44,9 @@ export const dropdown = {
       )
     },
     getDropdownReact({ commit }) {
-      return setDropdownReact().then(
+      return getDropdown('post/react').then(
         (payload) => {
-          this.state.dropdown.react = payload
-          commit('dropdownSuccess', this.state.dropdown)
+          commit('dropdownSuccess', {type: 'react', payload: payload})
           return Promise.resolve(payload)
         },
         (error) => {
@@ -65,9 +58,14 @@ export const dropdown = {
     },
   },
   mutations: {
-    dropdownSuccess(state, payload) {
-      localStorage.dropdown = JSON.stringify(payload)
-      state = payload
+    dropdownSuccess(state, {type, payload}) {
+      const dropdown = localStorage.dropdown  ? JSON.parse(localStorage.dropdown) : initialState
+      state = {...dropdown, [type]: payload}
+
+      localStorage.dropdown = JSON.stringify(state)
+    },
+    dropdownUserSuccess(state, payload) {
+      state.user = payload
     },
     dropdownFailure(state) {
       state = null

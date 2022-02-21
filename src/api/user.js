@@ -53,12 +53,6 @@ export const fetchCreateUser = async (user) => {
   return messagesFetch('registration', response.status, response.data.data)
 }
 
-
-export const fetchDropdownUser = async () => {
-  const response = await apiIntra.post(`${URL}/dropdown`)
-  return response.status === 200 ? response.data.data : []
-}
-
 export const fetcSearch = async (keyword) => {
   const response = await apiIntra(`${URL}/search/${keyword}`)
   return response.status === 200 ? response.data.data : []

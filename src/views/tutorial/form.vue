@@ -18,7 +18,7 @@
           v-model="value.category"
           :value="value.category"
           required
-          :options="getCategories"
+          :options="dropdownCategory"
         />
         <fild-select
           :text="'Permissão'"
@@ -49,9 +49,6 @@ import FildTextarea from '@/components/input/FildTextarea.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
-import useTutorial from '@/composables/useTutorial'
-import usePermission from '@/composables/usePermission'
-import useCategory from '@/composables/useCategory'
 import { dateHourFormarUs } from '@/util/date'
 
 export default {
@@ -77,35 +74,21 @@ export default {
       }
     }
   },
-  setup() {
-    const { create, update } = useTutorial()
-    const { getPermission } = usePermission()
-    const { getCategories } = useCategory()
-
-    return { create, getPermission, getCategories, update }
-  },
-
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
+    dropdownCategory: (state) => state.dropdown.categories,
     login: (state) => state.user.login,
   }),
 
-
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
+          {typeList: 'tutorials', 
+          value: this.value}
+        )
+        this.$emit('close')
       } else {
         this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')

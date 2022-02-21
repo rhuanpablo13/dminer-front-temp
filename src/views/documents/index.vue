@@ -72,7 +72,7 @@ export default {
   },
   setup() {
     const store = useStore()
-    store.dispatch('list/getList', 'documents')
+    store.dispatch('list/getList', 'document')
 
     return {
       dispatch: store.dispatch
@@ -102,23 +102,23 @@ export default {
       this.setDoc(value)
     },
     deleteDoc(id) {
-      this.dispatch('list/deleteItemList', {typeList:'documents', id})
+      this.dispatch('list/deleteItemList', {typeList:'document', id})
     },
     setDoc(value) {
       this.value = value
       this.openModal()
     },
     close() {
-      this.dispatch('list/getList', 'documents')
+      this.dispatch('list/getList', 'document')
       this.showModal = false
     },
     submit(event) {
       if (!event) return;
 
       if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:'documents', value: event.target.value})
+        this.dispatch('list/searchItemList', {typeList:'document', value: event.target.value})
       } else if(event.target.value === '') {
-        this.dispatch('list/getList', 'documents')
+        this.dispatch('list/getList', 'document')
       }
     },
     appendTheFile (url) { 

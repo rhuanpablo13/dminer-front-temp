@@ -5,12 +5,12 @@
       title="tutorial"
       :onClick="setDoc"
       @close="this.$router.push('/')"
-      :search="getTutorials.length"
+      :search="list.length"
       @change="submit"
     >
       <template v-slot:body>
-        <ul v-if="getTutorials.length">
-          <li v-for="(item, key) in getTutorials" :key="key" @click="setItem(item)">
+        <ul v-if="list.length">
+          <li v-for="(item, key) in list" :key="key" @click="setItem(item)">
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
@@ -70,9 +70,6 @@ import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 import NoRegistry from '@/components/NoRegistry.vue'
-
-import useTutorial from '@/composables/useTutorial'
-import usePermission from '@/composables/usePermission'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
@@ -87,14 +84,18 @@ export default {
     }
   },
   setup() {
-    const { getTutorials, setTutorial, deleteItem, search } = useTutorial()
-    const { getPermission } = usePermission()
-    setTutorial()
+    const store = useStore()
+    store.dispatch('list/getList', 'tutorials')
 
-    return { getTutorials, getPermission, setTutorial, deleteItem, search }
+    return {
+      dispatch: store.dispatch
+    }
   },
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => {
+      return state.list.list
+    }
   }),
   components: {
     WidgetModal,

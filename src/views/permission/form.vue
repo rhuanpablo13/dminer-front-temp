@@ -1,50 +1,29 @@
 <template>
-  <transition name="modal">
-    <widget-modal
-      v-if="showModal"
-      layout="icon-modal-folder"
-      :title="'cadastro de perfil'"
-    >
-      <template v-slot:body>
-        <div class="permission_form_container">
-          <div class="permission_form_container_text">
-            <fild-input
-              :text="'Permissão'"
-              v-model="value.title"
-              :value="value.title"
-              required
-              :isError="isError && !value.title"
-            />
-          </div>
-        </div>
-      </template>
-      <template v-slot:footer>
-        <send
-          :isLoading="isLoading"
-          :isSuccess="isSuccess"
-          :isError="isError"
-          @click="sendForm"
-        ></send>
-      </template>
-    </widget-modal>
-  </transition>
+  <form-modal
+    :showModal="showModal"
+    title="cadastro de perfil"
+    @submit="sendForm"
+  >
+    <div class="benefit_form_container">
+      <div class="benefit_form_container_text">
+          <fild-input
+            text="Permissão"
+            v-model="value.title"
+            :value="value.title"
+            required
+          />
+      </div>
+    </div>
+  </form-modal>
 </template>
+
 <script>
 import FildInput from '@/components/input/Fild.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import Send from '@/components/button/Send.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 
-import usePermission from '@/composables/usePermission.js'
-
 export default {
-  data() {
-    return {
-      isLoading: false,
-      isSuccess: false,
-      isError: false
-    }
-  },
   components: { FildInput, IconBase, Send, WidgetModal },
   props: {
     showModal: { type: Boolean, required: true },
@@ -57,37 +36,18 @@ export default {
       }
     }
   },
-  setup() {
-    const { create } = usePermission()
-
-    return { create }
-  },
-
   methods: {
     sendForm() {
-      this.isLoading = true
       if (this.validForm()) {
-        let result
-        if (this.isEdit) {
-          result = this.create(this.value)
-        } else {
-          result = this.create(this.value)
-        }
-
-        this.isLoading = false
-        if (result) {
-          this.isSuccess = true
-          setTimeout(() => {
-            this.isSuccess = false
-            this.$emit('close')
-          }, 3000)
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
+          {typeList: 'permission', 
+          value: this.value}
+        )
+        this.$emit('close')
       } else {
-        this.isLoading = false
-        this.isError = true
-        setTimeout(() => {
-          this.isError = false
-        }, 3000)
+        this.$store.dispatch('form/setLoading')
+        this.$store.dispatch('form/setError')
       }
     },
     validForm() {

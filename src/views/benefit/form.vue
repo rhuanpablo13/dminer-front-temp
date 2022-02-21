@@ -40,7 +40,6 @@ import FildInput from '@/components/input/Fild.vue'
 import FildSelect from '@/components/input/FildSelect.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
-import useBenefit from '@/composables/useBenefit'
 import { dateHourFormarUs } from '@/util/date'
 
 export default {
@@ -64,30 +63,19 @@ export default {
       }
     }
   },
-  setup() {
-    const { create, update } = useBenefit()
-
-    return { create, update }
-  },
-
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
   }),
 
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.$emit('close')
-          })
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
+          {typeList: 'benefits', 
+          value: this.value}
+        )
+        this.$emit('close')
       } else {
         this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
