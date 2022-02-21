@@ -9,6 +9,7 @@ import Avatar from '@/components/Avatar.vue'
 import Login from '@/views/login/index.vue'
 
 import { diffDate } from '@/util/date'
+import { setupAxiosToken } from '@/api/http'
 
 export default {
   setup(){
@@ -39,15 +40,16 @@ export default {
     });
   },
   components: { Sidebar, Banner, Content, Avatar, Login },
-
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn
+  computed: mapState({
+    loggedIn: (state) => {
+      if (state.auth.status.loggedIn) {
+        const user = JSON.parse(localStorage?.user)
+        setupAxiosToken(user.baererAuthentication)
+      }
+      return state.auth.status.loggedIn
     },
-    banner() {
-      return !!this.$store.state.user.banner
-    },
-  }
+    banner: (state) => !!state.user.banner,
+  }),
 }
 </script>
 <template>

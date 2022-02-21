@@ -148,9 +148,21 @@ export const post = {
       )
     },    
     setFavorite({ commit }, value) {
-      return favorite({...value, login: this.state.user.login}).then(
+      const login = this.state.user.login
+      return favorite({...value, login}).then(
         (payload) => {
-          this.dispatch('post/getPostViewAll')
+          this.state.post.posts.map(post => {
+            if (post.id === value.idPost) {
+              const index = post.favorites.indexOf(login)
+              if (index === -1) {
+                post.favorites.push(login)
+              } else {
+                post.favorites.splice(index, 1);
+              }
+            }
+          })
+
+          commit('successPost', this.state.post.posts)
         },
         (error) => {
           console.log(error)
