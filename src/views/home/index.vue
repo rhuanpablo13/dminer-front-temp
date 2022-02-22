@@ -24,7 +24,7 @@ import calendar from '@/views/home/calendar.vue'
 import notification from '@/views/home/notification.vue'
 import notices from '@/views/home/notices.vue'
 import reminder from '@/views/home/reminder.vue'
-import quiz from '@/views/home/quiz.vue'
+import survey from '@/views/home/survey.vue'
 
 import { VueDraggableNext } from 'vue-draggable-next'
 
@@ -50,7 +50,7 @@ export default {
         'birthday',
         'notices',
         'reminder',
-        'quiz'
+        'survey'
       ]
 
       localStorage.position_components_home = JSON.stringify(
@@ -73,7 +73,6 @@ export default {
       handleSuubmit(e) {
         setSearch(search.value)
         const result = getSearch
-        console.log(result)
       }
     }
   },
@@ -86,7 +85,7 @@ export default {
     birthday,
     notices,
     reminder,
-    quiz
+    survey
   },
   methods: {
     log(event) {

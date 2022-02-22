@@ -47,7 +47,7 @@
   <form-modal
     :showModal="showModal"
     title="cadastro de enquete"
-    @submit="sendForm"
+    @submit="()=> this.sendForm()"
     @close="showModal = false"
   >
     <div class="form_container">
@@ -56,7 +56,7 @@
           <icon-base
             icon-name="icon"
             class="team_icon_edit"
-            @click="deleteBenefit(itemView.id)"
+            @click="deleteBenefit(value.id)"
             width="1rem"
             heigth="1rem"
           >
@@ -117,6 +117,7 @@ export default {
       typeList: 'survey',
       showModal: false,
       isEdit: false,
+      isDelete: false,
       value: {
         question: '',
         date: new Date() + 1,
@@ -127,7 +128,8 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.home.surveyList
+    list: (state) => state.home.surveyList,
+    getUser: (state) => state.user.login,
   }),
 
   methods: {
@@ -135,11 +137,15 @@ export default {
       this.$store.dispatch('home/answer',{ id, item})
     },
     sendForm() {
-      if (this.validForm()) {
+      if (this.validForm() && !this.isDelete) {
         this.$store.dispatch(
           this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
-          {typeList: this.typeList, 
-          value: this.value}
+          {
+            typeList: this.typeList, 
+            value: this.value,
+            hasLogin: true,
+            login: this.getUser
+          }
         )
         this.showModal = false
       } else {
@@ -156,14 +162,16 @@ export default {
     openModal() {
       this.showModal = true
     },
-    edit(value) {
+    edit(_value) {
       this.isEdit = true
-      this.value = value
+      this.isDelete = false
+      this.value = _value
       this.showModal = true
     },
     deleteBenefit(id) {
+      this.isDelete = true
       this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id})
-      this.showModalView = false
+      this.showModal = false
     },
   },
   components: {

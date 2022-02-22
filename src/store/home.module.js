@@ -49,18 +49,19 @@ export const home = {
         }
       )
     },
-    getList: async ({ commit }, { typeList, hasLogin}) => {
-      const url = hasLogin ? `${typeList}/${this.state.user.login}` : typeList
+    getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
+      const url = hasLogin ? `${typeList}/${login}` : typeList
 
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )
-
+          dispatch('form/setLoading')
           return Promise.resolve(payload)
         },
         (error) => {
           console.log(error)
           commit('searchFailure')
+          dispatch('form/setLoading')
           return Promise.reject(error)
         }
       )
@@ -110,19 +111,19 @@ export const home = {
     deleteItemList: async ({ commit, dispatch }, {typeList, id, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await deleteItem(url, id)
-      dispatch('getList', {typeList, hasLogin})
+      dispatch('getList', {typeList, hasLogin, login})
     },
     createItemList: async ({ commit, dispatch}, {typeList, value, hasLogin, login }) => {
       dispatch('form/setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await create(url, value)
-      dispatch('getList', {typeList, hasLogin})
+      dispatch('getList', {typeList, hasLogin, login})
     },
     updateItemList: async ({ commit, dispatch }, {typeList, value, hasLogin,  login}) => {
       dispatch('form/setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await update(url, value)
-      dispatch('getList', {typeList, hasLogin})
+      dispatch('getList', {typeList, hasLogin, login})
     },
 
   },
