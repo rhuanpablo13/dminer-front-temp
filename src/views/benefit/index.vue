@@ -114,9 +114,10 @@ export default {
     openModal() {
       this.showModal = true
     },
-    edit(value) {
+    async edit(value) {
       this.isEdit = true
-      this.value = { ...value, permission: this.getPermission(value.permission)}
+      const permission = await this.getPermission(value.permission)
+      this.value =  { ...value, permission: permission}
       this.setDoc(this.value)
     },
     deleteBenefit(id) {
