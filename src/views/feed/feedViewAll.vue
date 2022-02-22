@@ -6,6 +6,8 @@
       :onClick="openModal"
       @close="closeModalFeed"
       :overflow="false"
+      :search="posts.length"
+      @change="submit"
     >
       <template v-slot:body>
         <div class="feed_container">
@@ -135,6 +137,15 @@ export default {
     hasUserIndex(post) {
       return post.favorites.indexOf(this.login) === -1
     },
+    submit(event) {
+      if (!event) return;
+
+      if (event.target && event.target.value) {
+        this.dispatch('list/searchItemList', {typeList:'post', value: event.target.value})
+      } else if(event.target.value === '') {
+        this.dispatch('list/getList', 'post')
+      }
+    },
   }
 }
 </script>
@@ -168,7 +179,7 @@ export default {
 }
 
 .feed_container {
-  height: 365px;
+  height: 330px;
   /* width: 90%; */
   margin: auto;
 
