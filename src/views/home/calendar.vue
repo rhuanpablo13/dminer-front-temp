@@ -158,7 +158,7 @@ export default {
         name: us.userName,
         image: us.avatar
       }
-    }),
+    }) || [],
     login: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),

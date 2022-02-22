@@ -61,12 +61,9 @@ export const calendar = {
       )
     },
     delete({ commit }, id) {
-      this.dispatch('form/setLoading')
       return deleteEvent(id).then(
         () => {
-          this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
-         this.dispatch('calendar/setSuccess')
         },
         (error) => {
           console.log(error)
