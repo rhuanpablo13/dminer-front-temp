@@ -296,4 +296,14 @@ export default {
   height: 20rem;
 }
 
+.fc .fc-popover {
+    position: absolute;
+    z-index: 999999999999999;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
+}
+
+div[id^="fc-dom-"]{
+  top: 0 !important;
+  left: 0 !important;
+}
 </style>
