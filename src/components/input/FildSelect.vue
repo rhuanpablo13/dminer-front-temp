@@ -12,7 +12,7 @@
         :options="options"
         close-on-select
         placeholder=""
-        :value="value"
+        v-model="value"
         @update:modelValue="changeInput"
         :reduce="(item) => item.id"
         :label-by="title"
@@ -44,7 +44,7 @@ import 'vue-next-select/dist/index.min.css'
 export default {
   setup(props) {
     let title = 'title'
-    const value = reactive({})
+    // const value = reactive({})
     const options = reactive(props.options)
 
     const verifyLabelIndexTitle = Object.keys(options).filter((option) =>
@@ -64,7 +64,7 @@ export default {
     if (verifyLabelIndexUsuario.length) title = 'userName'
 
     return {
-      value,
+      // value,
       options,
       title: title
 
@@ -83,6 +83,9 @@ export default {
 
       return error
     }
+  },
+  created() {
+    console.log(this.value);
   },
   components: { IconLine, IconBase, VueSelect },
   props: {

@@ -34,7 +34,7 @@ export const dropdown = {
     getDropdownCategory({ commit }) {
       return getDropdown('category').then(
         (payload) => {
-          commit('dropdownCategorySuccess', payload)
+          commit('dropdownSuccess', {type: 'category', payload: payload})
           return Promise.resolve(payload)
         },
         (error) => {
@@ -80,9 +80,6 @@ export const dropdown = {
     },
     dropdownUserSuccess(state, payload) {
       state.user = payload
-    },
-    dropdownCategorySuccess(state, payload) {
-      state.category = payload
     },
     dropdownFailure(state) {
       state = null

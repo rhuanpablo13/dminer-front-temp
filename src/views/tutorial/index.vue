@@ -93,6 +93,8 @@ export default {
     }
   },
   computed: mapState({
+    dropdownPermission: (state) => state.dropdown.permissions,
+    dropdownCategory: (state) => state.dropdown.category,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => {
       return state.list.list
@@ -110,6 +112,12 @@ export default {
     NoRegistry
 },
   methods: {
+    getPermission(id) {
+      return this.dropdownPermission.filter(permission => permission.id == id)[0]
+    },
+    getCategory(title) {
+      return this.dropdownCategory.filter(category => category.title == title)[0]
+    },
     openModal() {
       this.showModal = true
     },
@@ -118,29 +126,26 @@ export default {
       this.setDoc(value)
     },
     setDoc(value) {
-      this.value = value
+      this.value = { ...value, permission: this.getPermission(value.permission), category: this.getCategory(value.category)}
       this.openModal()
     },
     setItem(item){
       this.$router.push(`/tutoriais/${item.id}`)
     },
     deleteTutorial(id) {
-      this.deleteItem(id)
-      setTimeout(() => {
-        this.setTutorial()
-      }, 300)
+      this.dispatch('list/deleteItemList', {typeList:'benefits', id})
     },
     close() {
-      setTimeout(() => {
-        this.setTutorial()
-      }, 500)
+      this.dispatch('list/getList', 'benefits')
       this.showModal = false
     },
     submit(event) {
+      if (!event) return;
+
       if (event.target && event.target.value) {
-        this.search(event.target.value)
+        this.dispatch('list/searchItemList', {typeList:'benefits', value: event.target.value})
       } else if(event.target.value === '') {
-        this.setTutorial()
+        this.dispatch('list/getList', 'benefits')
       }
     }
   }

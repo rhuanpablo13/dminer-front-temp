@@ -91,6 +91,7 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    dropdownPermission: (state) => state.dropdown.permissions,
     list: (state) => {
       return state.list.list
     }
@@ -107,13 +108,16 @@ export default {
     NoRegistry
   },
   methods: {
+    getPermission(id) {
+      return this.dropdownPermission.filter(permission => permission.id === id)[0]
+    },
     openModal() {
       this.showModal = true
     },
     edit(value) {
       this.isEdit = true
-      this.value = {...value, permission: value.permission.id }
-      this.setDoc(value)
+      this.value = { ...value, permission: this.getPermission(value.permission)}
+      this.setDoc(this.value)
     },
     deleteBenefit(id) {
       this.dispatch('list/deleteItemList', {typeList:'benefits', id})

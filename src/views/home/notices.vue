@@ -219,6 +219,9 @@ export default {
     IconTrash
   },
   methods: {
+    getPriorityId(id) {
+      return this.priorityList.filter(priority => priority.id == id)[0]
+    },
     openAddNotices() {
       this.value = {}
       this.showModal = true
@@ -256,7 +259,7 @@ export default {
     },
     edit(value) {
       this.isEdit = true
-      this.value = value
+      this.value = {...value, priority: this.getPriorityId(value.priority)}
       this.showModal = true
     },
     deleteBenefit(id) {
