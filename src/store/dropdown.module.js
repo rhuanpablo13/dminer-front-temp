@@ -3,7 +3,8 @@ import useList from '@/composables/useList'
 
 const initialState = {
   permissions: [],
-  react: []
+  react: [],
+  category: []
 }
 
 const dropdownInit = localStorage.dropdown
@@ -21,6 +22,19 @@ export const dropdown = {
       return getDropdown('user').then(
         (payload) => {
           commit('dropdownUserSuccess', payload)
+          return Promise.resolve(payload)
+        },
+        (error) => {
+          console.log(error)
+          commit('dropdownFailure')
+          return Promise.reject(error)
+        }
+      )
+    },
+    getDropdownCategory({ commit }) {
+      return getDropdown('category').then(
+        (payload) => {
+          commit('dropdownCategorySuccess', payload)
           return Promise.resolve(payload)
         },
         (error) => {
@@ -66,6 +80,9 @@ export const dropdown = {
     },
     dropdownUserSuccess(state, payload) {
       state.user = payload
+    },
+    dropdownCategorySuccess(state, payload) {
+      state.category = payload
     },
     dropdownFailure(state) {
       state = null

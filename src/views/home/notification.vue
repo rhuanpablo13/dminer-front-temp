@@ -7,7 +7,7 @@
     :onClick="permissionADM ? () => openModal() : null"
   >
     <ul>
-      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in $store.state.home.notificationlist" :key="item.id" :title="item.notification">
+      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id" :title="item.notification">
         <icon-base
           viewBox="0 0 500 85.1"
           icon-name="icon"
@@ -93,16 +93,16 @@ import Title from '@/components/title/Title.vue'
 import FrameNotification from '@/components/svg/FrameNotification.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
-import useNotification from '@/composables/useNotification'
 
 export default {
   data() {
     return {
+      typeList: 'notification',
       showModal: false,
       showModalView: false,
       value: {
         notification: '',
-        idUser: this.getUser
+        idUser: ''
       },
       itemView: {
         notification: '',
@@ -110,37 +110,27 @@ export default {
       }
     }
   },
-  setup() {
-    const { create, deleteItem, update } = useNotification()
-    return { create, deleteItem, update }
-  },
   computed: mapState({
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => state.home.notificationList
   }),
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('home/search', null)
-          this.$store.dispatch('form/setSuccess').then(() => {
-            this.showModal = false
-          })
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
+          {typeList: this.typeList, 
+          value: this.value}
+        )
+        this.showModal = false
       } else {
-        this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
       }
     },
     validForm() {
       this.value.idUser = this.getUser
-     return  this.value.hasOwnProperty('notification') && this.value?.notification !== "" 
+      return  this.value.hasOwnProperty(this.typeList) && this.value?.notification !== "" 
     },
     openModal() {
       this.value = {}
@@ -156,8 +146,7 @@ export default {
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.deleteItem(id)
-      this.$store.dispatch('home/search', null)
+      this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id})
       this.showModalView = false
     },
   },

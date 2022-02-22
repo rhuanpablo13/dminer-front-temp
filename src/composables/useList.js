@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind } from '@/api/request.js'
+import { fetchQuizAnswer } from '@/api/survey.js'
 
 export default function useList() {
   const getListItem = ref([])
@@ -32,6 +33,10 @@ export default function useList() {
     return await fetchDropdown(URL)
   }
 
+  const updateCount = async (idQuiz, item , login) => {
+    return  fetchQuizAnswer(idQuiz, item, login)
+  }
+
   return {
     getListItem,
     setList,
@@ -40,6 +45,7 @@ export default function useList() {
     deleteItem,
     search,
     getId,
-    getDropdown
+    getDropdown,
+    updateCount
   }
 }

@@ -9,7 +9,7 @@
     :onClick="permissionADM ? () => openAddNotices() : null"
   >
     <ul>
-      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in $store.state.home.noticeList" :key="item.id">
+      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id">
         <icon-base
           viewBox="0 0 500 347.7"
           icon-name="icon"
@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import Title from '@/components/title/Title.vue'
 import FormModal from '@/components/FormModal.vue'
@@ -147,7 +147,6 @@ import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
-import useNotice from '@/composables/useNotice.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
 
 export default {
@@ -156,6 +155,14 @@ export default {
       showModal: false,
       isEdit: false,
       showModalView: false,
+    }
+  },
+  setup() {
+    const { dispatch } = useStore()
+
+    return {
+      dispatch,
+      dateHourFormart,
       lastScrollTop: 0,
       priorityList: [
         {
@@ -176,12 +183,13 @@ export default {
         date: new Date(),
         priority: 'Média',
         users: [],
-        creator: this.getUser
+        creator: ''
       },
       itemView: {
         notices: '',
         user: ''
-      }
+      },
+      typeList: 'notice',
     }
   },
   computed: mapState({
@@ -194,11 +202,8 @@ export default {
     }),    
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => state.home.noticeList
   }),
-  setup() {
-    const { getNotices, create, deleteItem, update } = useNotice()
-    return { getNotices, create, deleteItem, update, dateHourFormart }
-  },
   components: {
     Title,
     WidgetLayoutHome,
@@ -215,39 +220,31 @@ export default {
   },
   methods: {
     openAddNotices() {
-       this.value = {}
+      this.value = {}
       this.showModal = true
     },
     getPriority(id) {
-     const priority = this.priorityList.filter(item => item.id === id);
-
+      const priority = this.priorityList.filter(item => item.id === id);
       return priority[0].title
     },
     sendForm() {
-      this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
-        this.value.users = [this.value.users]
-        this.value.date  =  dateHourFormarUs( this.value.date)
+        this.value.users = this.value.users
+        this.value.date  =  dateHourFormarUs(this.value.date)
 
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('home/search', null)
-          this.$store.dispatch('form/setSuccess')
-          this.showModal = false
-        }
+        this.dispatch(
+          this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
+          {typeList: this.typeList, 
+          value: this.value}
+        )
+        this.showModal = false
       } else {
-        this.$store.dispatch('form/setLoading')
-        this.$store.dispatch('form/setError')
+        this.dispatch('form/setError')
       }
     },
     validForm() {
       this.value.creator =  this.getUser
-     return  this.value.hasOwnProperty('warning') && this.value?.warning !== "" && 
+      return  this.value.hasOwnProperty('warning') && this.value?.warning !== "" && 
               this.value.hasOwnProperty('priority') &&
               this.value.hasOwnProperty('users') && this.value?.users !== "" && 
               this.value.hasOwnProperty('creator') && this.value?.creator !== "" &&  
@@ -263,8 +260,7 @@ export default {
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.deleteItem(id)
-      this.$store.dispatch('home/search', null)
+      this.dispatch('home/deleteItemList', {typeList:this.typeList, id})
       this.showModalView = false
     },
   }

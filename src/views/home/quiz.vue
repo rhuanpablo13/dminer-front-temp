@@ -3,12 +3,12 @@
     layout="icon-folder"
     title="enquete"
     classContent="folder__user__content"
-    :onClick="openModal"
+   :onClick="permissionADM ? () => openModal() : null"
   >
     <ul>
       <li
         class="user_li"
-        v-for="(item, key) in $store.state.home.quizList"
+        v-for="(item, key) in list"
         :key="key"
         :id="`user_li_${key}`"
       >
@@ -109,12 +109,12 @@ import IconBase from '@/components/svg/IconBase.vue'
 import IconCountQuiz from '@/components/svg/IconCountQuiz.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
-import useQuiz from '@/composables/useQuiz'
 import { dateHourFormarUs } from '@/util/date.js'
 
 export default {
   data() {
     return {
+      typeList: 'survey',
       showModal: false,
       isEdit: false,
       value: {
@@ -125,12 +125,9 @@ export default {
       }
     }
   },
-  setup() {
-    const { updateCount, create, deleteItem, update } = useQuiz()
-    return { updateCount, create, deleteItem, update }
-  },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => state.home.surveyList
   }),
 
   methods: {
@@ -138,21 +135,14 @@ export default {
       this.$store.dispatch('home/answer',{ id, item})
     },
     sendForm() {
-      this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          this.$store.dispatch('home/search', null)
-          this.$store.dispatch('form/setSuccess')
-          this.$emit('close')
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
+          {typeList: this.typeList, 
+          value: this.value}
+        )
+        this.showModal = false
       } else {
-        this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
       }
     },
@@ -172,8 +162,8 @@ export default {
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.deleteItem(id)
-      this.$store.dispatch('home/search', null)
+      this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id})
+      this.showModalView = false
     },
   },
   components: {

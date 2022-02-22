@@ -1,4 +1,3 @@
-import { messagesFetch } from '@/util/toast.js'
 import { apiIntra } from './http'
 
 const URL = '/search'

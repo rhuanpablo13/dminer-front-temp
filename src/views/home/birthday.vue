@@ -6,7 +6,7 @@
     :onClick="() => $router.push('/birthday')"
   >
     <ul>
-      <li v-for="(item, key) in birthdayList" :key="key"  @click="setDoc(item)">
+      <li v-for="(item, key) in list" :key="key"  @click="setDoc(item)">
           <icon-base
             viewBox="0 0 500 200"
             icon-name="icon"
@@ -98,14 +98,14 @@ import FrameTeam from '@/components/svg/FrameTeam.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 
 export default {
-    data() {
+  data() {
     return {
       showModalView: false,
       itemView: {}
     }
   },
   computed: mapState({
-    birthdayList: (state) => state.home.birthdayList
+    list: (state) => state.home.birthdayList,
   }),
   methods: {
     setDoc(_item) {

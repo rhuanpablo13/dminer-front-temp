@@ -59,6 +59,8 @@ export default {
 
       this.$store.dispatch('home/search', null)
       this.$store.dispatch('dropdown/getDropdownPermission')
+      this.$store.dispatch('dropdown/getDropdownCategory')
+
     }
   },
 

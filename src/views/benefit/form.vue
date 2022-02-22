@@ -77,7 +77,6 @@ export default {
         )
         this.$emit('close')
       } else {
-        this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
       }
     },

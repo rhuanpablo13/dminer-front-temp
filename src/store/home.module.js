@@ -1,22 +1,19 @@
-import useReminder from '@/composables/useReminder'
-import useQuiz from '@/composables/useQuiz'
 import useSearch from '@/composables/useSearch'
-import useFeed from '@/composables/useSearch'
+
+import useList from '@/composables/useList'
 
 const initialState = [
   'noticeList',
-  'notificationlist',
+  'notificationList',
   'reminderList',
   'birthdayList',
-  'quizList',
+  'surveyList',
   'usersList',
   'feedList',
 ]
 
 const { getSearch } = useSearch()
-const { updateCount, setQuiz } = useQuiz()
-const { updateReminder, setReminder } = useReminder()
-const { setFeed, getFeeds } = useFeed()
+const { setList, getListItem, deleteItem, create, update, updateCount } = useList()
 
 const homeState = []
 initialState.map(item => {
@@ -42,7 +39,6 @@ export const home = {
             
           }
 
-          // localStorage.home = JSON.stringify(payload)
           commit('searchSuccess', payload)
           return Promise.resolve(payload)
         },
@@ -53,36 +49,13 @@ export const home = {
         }
       )
     },
-    answer({ commit }, {id, item }) {
-      return updateCount(id, item, this.state.user.login).then(
+    getList: async ({ commit }, { typeList, hasLogin}) => {
+      const url = hasLogin ? `${typeList}/${this.state.user.login}` : typeList
+
+      return setList(url).then(
         (payload) => {
-          this.dispatch('home/setQuis')
-        },
-        (error) => {
-          console.log(error)
-          commit('searchFailure')
-          return Promise.reject(error)
-        }
-      )
-    },
-    setQuis({ commit}){
-      return setQuiz(this.state.user.login).then(
-        (payload) => {
-          this.state.home.quizList = payload
-          commit('answerSuccess', payload)
-          localStorage.quizList = JSON.stringify(payload)
-        },
-        (error) => {
-          console.log(error)
-          commit('searchFailure')
-          return Promise.reject(error)
-        }
-      )     
-    },
-    reminderCheck({ commit }, item) {
-      return updateReminder(item).then(
-        (payload) => {
-          this.state.home.quizList = setReminder(this.state.user.login)
+          commit('success', { typeList, payload: getListItem} )
+
           return Promise.resolve(payload)
         },
         (error) => {
@@ -91,11 +64,74 @@ export const home = {
           return Promise.reject(error)
         }
       )
-    }
+
+    },
+    answer({ commit }, {id, item }) {
+      const login  = this.state.user.login
+      return updateCount(id, item, login).then(
+        (payload) => {
+          this.dispatch('getList', {typeList, hasLogin: true, login})
+        },
+        (error) => {
+          console.log(error)
+          commit('searchFailure')
+          return Promise.reject(error)
+        }
+      )
+    },
+    // setQuis({ commit}){
+    //   return setQuiz(this.state.user.login).then(
+    //     (payload) => {
+    //       this.state.home.quizList = payload
+    //       commit('answerSuccess', payload)
+    //       localStorage.quizList = JSON.stringify(payload)
+    //     },
+    //     (error) => {
+    //       console.log(error)
+    //       commit('searchFailure')
+    //       return Promise.reject(error)
+    //     }
+    //   )     
+    // },
+    // reminderCheck({ commit }, item) {
+    //   return updateReminder(item).then(
+    //     (payload) => {
+    //       this.state.home.quizList = setReminder(this.state.user.login)
+    //       return Promise.resolve(payload)
+    //     },
+    //     (error) => {
+    //       console.log(error)
+    //       commit('searchFailure')
+    //       return Promise.reject(error)
+    //     }
+    //   )
+    // },
+
+    deleteItemList: async ({ commit, dispatch }, {typeList, id, hasLogin, login}) => {
+      const url = hasLogin ? `${typeList}/${login}` : typeList
+      await deleteItem(url, id)
+      dispatch('getList', {typeList, hasLogin})
+    },
+    createItemList: async ({ commit, dispatch}, {typeList, value, hasLogin, login }) => {
+      dispatch('form/setLoading')
+      const url = hasLogin ? `${typeList}/${login}` : typeList
+      await create(url, value)
+      dispatch('getList', {typeList, hasLogin})
+    },
+    updateItemList: async ({ commit, dispatch }, {typeList, value, hasLogin,  login}) => {
+      dispatch('form/setLoading')
+      const url = hasLogin ? `${typeList}/${login}` : typeList
+      await update(url, value)
+      dispatch('getList', {typeList, hasLogin})
+    },
+
   },
   mutations: {
     searchSuccess(state, payload) {
       state = payload
+    },
+    success(state, {typeList, payload}) {
+      state[`${typeList}List`] = payload
     },
     searchFailure(state) {
       state = null

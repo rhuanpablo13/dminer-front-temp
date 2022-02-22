@@ -9,7 +9,7 @@
     <ul>
       <li
         class="reminder_li"
-        v-for="(item, key) in $store.state.home.reminderList"
+        v-for="(item, key) in list"
         :key="key"
         :id="`reminder_li_${key}`"
         :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)"
@@ -68,7 +68,7 @@
             </button>
           </div>
           <div style="display: flex">
-            <span> {{itemView.login  }} | {{dateHourFormart(itemView.date)}}</span>
+            <span> {{ itemView.login }} | {{dateHourFormart(itemView.date)}}</span>
           </div>
 
           <div class="reminder">
@@ -129,31 +129,30 @@ import IconTrash from '@/components/svg/IconTrash.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import Title from '@/components/title/Title.vue'
 
-import useReminder from '@/composables/useReminder.js'
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
 
 export default {
   data() {
     return {
+      typeList: 'reminder',
       showModal: false,
       isEdit: false,
       showModalView: false,
       value: {
         date: new Date(),
         reminder: '',
-        login: this.getUser
+        login: ''
       }
     }
   },
   setup() {
-    const { updateCount, create, setReminder, deleteItem } = useReminder()
-
-    return { dateHourFormart, updateCount, create, setReminder, deleteItem }
+    return { dateHourFormart }
   },
-    computed: mapState({
+  computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    list: (state) => state.home.reminderList
   }),
   methods: {
     sendForm() {
@@ -163,19 +162,17 @@ export default {
         this.value.date  =  dateHourFormarUs(this.value.date)
         this.value.action  = false
 
-        let result = this.isEdit
-          ? this.update(this.value)
-          : this.create(this.value)
-
-        this.$store.dispatch('form/setLoading')
-        if (result) {
-          const login = this.getUser
-          this.$store.dispatch('home/search', null)
-          this.$store.dispatch('form/setSuccess')
-          this.showModal = false
-        }
+        this.$store.dispatch(
+          this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
+          {
+            typeList: this.typeList, 
+            value: this.value,
+            hasLogin: true,
+            login: this.getUser
+          }
+        )
+        this.showModal = false
       } else {
-        this.$store.dispatch('form/setLoading')
         this.$store.dispatch('form/setError')
       }
     },
@@ -188,9 +185,14 @@ export default {
       this.showModal = true
     }, 
     change(item, local) {
- 
       item.active = !item.active
-      this.$store.dispatch('home/reminderCheck', item)
+      this.$store.dispatch('home/updateItemList',           
+      {
+        typeList: this.typeList, 
+        value: item,
+        hasLogin: true,
+        login: this.getUser
+      })
       if (local) {
         this.itemView.active = !this.itemView.active
       }
@@ -205,8 +207,7 @@ export default {
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.deleteItem(id)
-      this.$store.dispatch('home/search', null)
+      this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id, login: this.getUser})
       this.showModalView = false
     },
   },

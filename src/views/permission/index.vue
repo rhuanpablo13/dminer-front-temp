@@ -28,12 +28,6 @@
       </template>
     </widget-modal>
   </transition>
-  <form-crud
-    :showModal="showModal"
-    @close="showModal = false"
-    :value="value"
-    :isEdit="isEdit"
-  />
 </template>
 
 <script>
