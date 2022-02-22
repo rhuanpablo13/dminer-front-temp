@@ -207,7 +207,12 @@ export default {
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id, login: this.getUser})
+      this.$store.dispatch('home/deleteItemList', {
+        typeList:this.typeList, 
+        id, 
+        hasLogin: true,
+        login: this.getUser
+      })
       this.showModalView = false
     },
   },

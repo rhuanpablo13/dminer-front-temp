@@ -67,11 +67,11 @@ export const home = {
       )
 
     },
-    answer({ commit }, {id, item }) {
+    answer({ commit, dispatch }, {id, item, typeList, hasLogin }) {
       const login  = this.state.user.login
       return updateCount(id, item, login).then(
         (payload) => {
-          this.dispatch('getList', {typeList, hasLogin: true, login})
+          dispatch('getList', {typeList, hasLogin, login})
         },
         (error) => {
           console.log(error)
@@ -80,20 +80,7 @@ export const home = {
         }
       )
     },
-    // setQuis({ commit}){
-    //   return setQuiz(this.state.user.login).then(
-    //     (payload) => {
-    //       this.state.home.quizList = payload
-    //       commit('answerSuccess', payload)
-    //       localStorage.quizList = JSON.stringify(payload)
-    //     },
-    //     (error) => {
-    //       console.log(error)
-    //       commit('searchFailure')
-    //       return Promise.reject(error)
-    //     }
-    //   )     
-    // },
+
     // reminderCheck({ commit }, item) {
     //   return updateReminder(item).then(
     //     (payload) => {
@@ -138,8 +125,5 @@ export const home = {
     searchFailure(state) {
       state = null
     },
-    answerSuccess(state, payload) {
-      state.quizList = payload
-    }
   }
 }

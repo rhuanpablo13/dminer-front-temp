@@ -3,7 +3,7 @@
     layout="icon-folder"
     title="enquete"
     classContent="folder__user__content"
-   :onClick="permissionADM ? () => openModal() : null"
+    :onClick="permissionADM ? () => openModal() : null"
   >
     <ul>
       <li
@@ -134,7 +134,13 @@ export default {
 
   methods: {
     count(id, item) {
-      this.$store.dispatch('home/answer',{ id, item})
+      this.$store.dispatch('home/answer',
+      { 
+        id, item,
+        typeList: this.typeList, 
+        hasLogin: true,
+        login: this.getUser,
+      })
     },
     sendForm() {
       if (this.validForm() && !this.isDelete) {
@@ -170,7 +176,15 @@ export default {
     },
     deleteBenefit(id) {
       this.isDelete = true
-      this.$store.dispatch('home/deleteItemList', {typeList:this.typeList, id})
+      this.$store.dispatch('home/deleteItemList', 
+        {
+          typeList: this.typeList, 
+          value: this.value,
+          hasLogin: true,
+          login: this.getUser,
+          id
+        }
+      )
       this.showModal = false
     },
   },
