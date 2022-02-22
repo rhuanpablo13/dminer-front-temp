@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 
 import FormModal from '@/components/FormModal.vue'
 import FildInput from '@/components/input/Fild.vue'
@@ -52,6 +52,13 @@ import UploadImage from '@/components/UploadImage.vue'
 import { dateHourFormarUs } from '@/util/date'
 
 export default {
+  setup() {
+    const store = useStore()
+    store.dispatch('dropdown/getDropdownPermission')
+    store.dispatch('dropdown/getDropdownCategory')
+
+    return { dispatch: store.dispatch }
+  },
   components: {
     FildInput,
     FormModal,
@@ -83,7 +90,7 @@ export default {
   methods: {
     sendForm() {
       if (this.validForm()) {
-        this.$store.dispatch(
+        this.dispatch(
           this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
           {
             typeList: 'tutorials', 
@@ -92,8 +99,8 @@ export default {
         )
         this.$emit('close')
       } else {
-        this.$store.dispatch('form/setLoading')
-        this.$store.dispatch('form/setError')
+        this.dispatch('form/setLoading')
+        this.dispatch('form/setError')
       }
     },
     validForm() {

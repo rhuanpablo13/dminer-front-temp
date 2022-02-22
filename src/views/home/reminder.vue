@@ -141,7 +141,8 @@ export default {
       value: {
         date: new Date(),
         reminder: '',
-        login: ''
+        login: '',
+        active: false
       }
     }
   },
@@ -168,7 +169,7 @@ export default {
             typeList: this.typeList, 
             value: this.value,
             hasLogin: true,
-            login: this.getUser
+            login: this.getUser,
           }
         )
         this.showModal = false

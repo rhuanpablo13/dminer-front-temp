@@ -45,18 +45,18 @@ export default {
   setup(props) {
     let title = 'title'
     const model = {}
-    const options = reactive(props.options)
+    const optionsSelect = reactive(props.options)
 
-    const verifyLabelIndexTitle = Object.keys(options).filter((option) =>
-      options[option].hasOwnProperty('title')
+    const verifyLabelIndexTitle = Object.keys(optionsSelect).filter((option) =>
+      optionsSelect[option].hasOwnProperty('title')
     )
 
-    const verifyLabelIndexName = Object.keys(options).filter((option) =>
-      options[option].hasOwnProperty('name')
+    const verifyLabelIndexName = Object.keys(optionsSelect).filter((option) =>
+      optionsSelect[option].hasOwnProperty('name')
     )
 
-    const verifyLabelIndexUsuario = Object.keys(options).filter((option) =>
-      options[option].hasOwnProperty('userName')
+    const verifyLabelIndexUsuario = Object.keys(optionsSelect).filter((option) =>
+      optionsSelect[option].hasOwnProperty('userName')
     )
 
     if (verifyLabelIndexTitle.length) title = 'title'
@@ -65,7 +65,7 @@ export default {
 
     return {
       model,
-      options,
+      optionsSelect,
       title: title
 
     }
