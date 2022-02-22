@@ -57,10 +57,9 @@ export default {
         this.listComponents
       )
 
-      this.$store.dispatch('home/search', null)
+      this.$store.dispatch('home/search')
       this.$store.dispatch('dropdown/getDropdownPermission')
       this.$store.dispatch('dropdown/getDropdownCategory')
-
     }
   },
 

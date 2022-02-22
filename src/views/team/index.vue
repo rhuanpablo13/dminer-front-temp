@@ -4,12 +4,13 @@
       v-if="showModalEquipe"
       title="Equipe"
       @close="this.$router.push('/')"
-      :search="getAllUsers.length"
+      :search="list.length"
       @change="submit"
+      :noRegistry="!list.length"
     >
       <template v-slot:body>
-        <ul v-if="getAllUsers.length">
-          <li v-for="(item, key) in getAllUsers" :key="key">
+        <ul v-if="list.length">
+          <li v-for="(item, key) in list" :key="key">
             <icon-base
               viewBox="0 0 500 200"
               icon-name="icon"
@@ -54,36 +55,34 @@
             </icon-base>
           </li>
         </ul>
-        <no-registry v-else />
       </template>
     </widget-modal>
   </transition>
-  <form-user
-    :showModal="showModal"
-    @close="close"
-    :value="value"
-    :isEdit="isEdit"
-  />
 </template>
 
 <script>
+import { mapState, useStore } from 'vuex'
+
 import Title from '@/components/title/Title.vue'
 import Avatar from '@/components/Avatar.vue'
 import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import FrameTeam from '@/components/svg/FrameTeam.vue'
-import NoRegistry from '@/components/NoRegistry.vue'
-
-import useAllUsers from '@/composables/useAllUsers'
 
 export default {
   data() {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false }
   },
   setup() {
-     const { getAllUsers, setAllUsers,  search } = useAllUsers()
-    return { getAllUsers, setAllUsers,  search}
+    const  typeList =  'user'
+    const store = useStore()
+    store.dispatch('list/getList', typeList)
+
+    return {
+      dispatch: store.dispatch,
+      typeList
+    }
   },
   components: {
     WidgetModal,
@@ -92,18 +91,22 @@ export default {
     IconEdit,
     IconBase,
     FrameTeam,
-    NoRegistry
   },
+  computed: mapState({
+    list: (state) => state.list.list.user || []
+  }),
   methods: {
     close() {
-      this.setAllUsers()
+      this.dispatch('list/getList', this.typeList)
       this.showModal = false
     },
     submit(event) {
+      if (!event) return;
+
       if (event.target && event.target.value) {
-        this.search(event.target.value)
+        this.dispatch('list/searchItemList', {typeList:this.typeList, value: event.target.value})
       } else if(event.target.value === '') {
-        this.setTutorial()
+        this.dispatch('list/getList', this.typeList)
       }
     }
   }

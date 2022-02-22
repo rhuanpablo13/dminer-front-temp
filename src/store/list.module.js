@@ -3,7 +3,8 @@ import useList from '@/composables/useList'
 
 const initialState = {
   list: [],
-  item: {}
+  item: {},
+  isLoading: false,
 }
 
 const { getListItem, setList, deleteItem, search, create, update, getId } = useList()
@@ -13,19 +14,23 @@ export const list = {
   state: initialState,
 
   actions: {
-    getList: async ({ commit }, typeList) => {
+    getList: async ({ commit, dispatch}, typeList) => {
+      dispatch('setLoading')
       await setList(typeList)
-      commit('success', getListItem.value )
+      commit('success', { payload: getListItem.value, typeList} )
+      dispatch('setLoading')
     },
     getItem: async ({ commit }, {typeList, id}) => {
       await getId(typeList, id)
       commit('ItemSuccess', getListItem.value)
+      dispatch('setLoading')
     },
     searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       await search(typeList, value)
       if (getListItem.value.length) {
-        commit('success', getListItem.value )
+        commit('success', { payload: getListItem.value, typeList} )
+        dispatch('setLoading')
       }
     },
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
@@ -33,39 +38,60 @@ export const list = {
       dispatch('getList', typeList)
     },
     createItemList: async ({ commit, dispatch, state}, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       await create(typeList, value)
       // if (getListItem.value.length) {
-      //   commit('success', getListItem.value)
+      //   commit('success', { payload: getListItem.value, typeList})
       // }
       if (state.list.length) {
         state.list.unshift(value)
-        dispatch('form/setLoading')
+        dispatch('setLoading')
         commit('success', state.list)
       }
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       await update(typeList, value)
       // if (getListItem.value.length) {
-      //   commit('success', getListItem.value)
+      //   commit('success', { payload: getListItem.value, typeList})
       // }
       if (state.list.length) {
         // state.list.unshift(value)
-        dispatch('form/setLoading')
+        dispatch('setLoading')
         commit('success', state.list)
       }
     },
+    setLoading({ commit }) {
+      commit('loading')
+    },
+    setError({ commit }) {
+      commit('error')
+    },
+    setSuccess({ commit }) {
+      commit('success')
+    }
   },
   mutations: {
-    success(state, payload) {
-      state.list = payload
-      this.dispatch('form/setSuccess')
+    success(state, { payload, typeList }) {
+      state.list[typeList] = payload
     },
     ItemSuccess(state, payload) {
-      this.dispatch('form/setLoading')
       state.item = payload
-      this.dispatch('form/setSuccess')
     },
+    loading(state) {
+      state.isLoading = !state.isLoading
+    },
+    error(state) {
+      state.isError = true
+      setTimeout(() => {
+        state.isError = false
+      }, 3000)
+    },
+    // success(state) {
+    //   state.isSuccess = true
+    //   setTimeout(() => {
+    //     state.isSuccess = false
+    //   }, 3000)
+    // }
   }
 }

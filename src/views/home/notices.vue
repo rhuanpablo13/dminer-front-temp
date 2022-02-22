@@ -7,6 +7,7 @@
     classContent="folder__notification__content"
     id="folder_notices"
     :onClick="permissionADM ? () => openAddNotices() : null"
+    :noRegistry="!list.length"
   >
     <ul>
       <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id">
@@ -160,7 +161,6 @@ export default {
   setup() {
     const { dispatch } = useStore()
 
-    dispatch('dropdown/getDropdownPriority')
 
     return {
       dispatch,
@@ -181,7 +181,6 @@ export default {
     }
   },
   computed: mapState({
-    dropdownPriority: (state) => state.dropdown.priority,
     dropdownUser: (state) =>  state.dropdown.user.map(us => {
       return {
         value: us.login,
@@ -191,7 +190,23 @@ export default {
     }),    
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.home.noticeList
+    list: (state) => state.home.noticeList,
+    dropdownPriority: (state) =>  {
+      return  [
+        {
+          id: 1,
+          name: 'Alta'
+        },
+        {
+          id: 2,
+          name: 'Média'
+        },
+        {
+          id: 3,
+          name: 'Baixa'
+        }
+      ]
+    }
   }),
   components: {
     Title,

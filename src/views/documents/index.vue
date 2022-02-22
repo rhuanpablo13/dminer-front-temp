@@ -1,12 +1,12 @@
 <template>
-  <transition name="modal">
+  <transition name="modal"  v-if="showModalEquipe"> 
     <widget-modal
-      v-if="showModalEquipe"
       title="d-guide"
       :onClick="setDoc"
       @close="this.$router.push('/')"
       :search="list.length"
-      @change="submit"
+      @change="submit && submit"
+      :noRegistry="!list.length"
     >
       <template v-slot:body>
         <ul v-if="list.length">
@@ -40,11 +40,11 @@
             </icon-base>
           </li>
         </ul>
-        <NoRegistry v-else />
       </template>
     </widget-modal>
   </transition>
   <form-crud
+    v-if="showModal"
     :showModal="showModal"
     @close="close"
     :value="value"
@@ -61,7 +61,6 @@ import IconBase from '@/components/svg/IconBase.vue'
 import formCrud from '@/views/documents/form.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
-import NoRegistry from '@/components/NoRegistry.vue'
 
 import { onToast } from '@/util/toast.js'
 import * as translation from '@/util/pt_BR.json'
@@ -83,7 +82,7 @@ export default {
 
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.list.list,
+    list: (state) => state.list.list.document || [],
   }),
 
   components: {
@@ -93,7 +92,6 @@ export default {
     IconBase,
     IconLine,
     IconTrash,
-    NoRegistry,
   },
   methods: {
     openModal() {

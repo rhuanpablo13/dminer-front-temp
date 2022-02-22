@@ -4,6 +4,7 @@
     title="enquete"
     classContent="folder__user__content"
     :onClick="permissionADM ? () => openModal() : null"
+    :noRegistry="!list.length"
   >
     <ul>
       <li

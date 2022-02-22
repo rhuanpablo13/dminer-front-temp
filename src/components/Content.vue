@@ -13,28 +13,33 @@
     <!-- Right content -->
     <div class="container__right">
       <feed>
-        <publication
-          v-for="(post, key) in feedList"
-          :key="key"
-          :content="post.content"
-          :title="post.title"
-          :onClick="() => openFeedView(post.idPost)"
-        />
+
+        <loading v-if="isLoading && !list.length"/>
+        <no-registry v-if="!isLoading && !list.length" style="text-align: revert; margin: auto; font-size: 0.6rem;"/>
+        <div  v-if="!isLoading && list.length">
+          <publication
+            v-for="(post, key) in list.length"
+            :key="key"
+            :content="post.content"
+            :title="post.title"
+            :onClick="() => openFeedView(post.idPost)"
+          />
+        </div>
       </feed>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, useStore } from 'vuex'
+
 import Feed from '@/components/Feed.vue'
 import Publication from '@/components/Publication.vue'
 import useFeed from '@/composables/useFeed.js'
-
-import { useStore } from 'vuex'
+import Loading from '@/components/Loading.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 export default {
-  components: { Feed, Publication },
-
   setup() {
     const store = useStore()
     const { getFeeds } = useFeed()
@@ -52,14 +57,17 @@ export default {
       }
     }
   },
-  computed: {
-    sidebarWidth() {
-      return this.$store.state.sidebar.sidebarWidth
-    },
-    feedList() {
-      return this.$store.state.home.feedList
-    }
+  components: { 
+    Feed, 
+    Publication,
+    Loading,
+    NoRegistry 
   },
+  computed: mapState({
+    sidebarWidth: (state) => state.sidebar.sidebarWidth,
+    list: (state) => state.home.feedList,
+    isLoading: (state) => state.list.isLoading,
+  }),
   methods: {
     openFeedView(id) {
       this.$router.push(`/post/${id}`)

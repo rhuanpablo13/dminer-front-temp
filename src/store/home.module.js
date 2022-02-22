@@ -3,20 +3,21 @@ import useSearch from '@/composables/useSearch'
 import useList from '@/composables/useList'
 
 const initialState = [
-  'noticeList',
-  'notificationList',
-  'reminderList',
-  'birthdayList',
-  'surveyList',
-  'usersList',
-  'feedList',
+  'notice',
+  'notification',
+  'reminder',
+  'birthday',
+  'survey',
+  'users',
+  'feed',
 ]
 
 const { getSearch } = useSearch()
-const { setList, getListItem, deleteItem, create, update, updateCount } = useList()
+const { setList, getListItem, deleteItem, create, update, updateCount, getSearchItem } = useList()
 
 const homeState = []
-initialState.map(item => {
+initialState.map(name => {
+  const item = `${name}List`
   const store = localStorage[item] ? JSON.parse(localStorage[item]) : []
   homeState[item] = store
 })
@@ -26,28 +27,14 @@ export const home = {
   state: homeState,
 
   actions: {
-    search({ commit }, keyword) {
-      return getSearch(keyword).then(
-        (payload) => {
-          this.state.home = payload
-
-          try {
-            initialState.map(item => {
-              localStorage[item] = JSON.stringify(payload[item])
-            })
-          } catch (error) {
-            
-          }
-
-          commit('searchSuccess', payload)
-          return Promise.resolve(payload)
-        },
-        (error) => {
-          console.log(error)
-          commit('searchFailure')
-          return Promise.reject(error)
-        }
-      )
+    search: async ({ commit, dispatch },  keyword = null ) => {
+      dispatch('setLoading')
+      initialState.map(async item => {
+        const response = await getSearchItem(item, keyword)
+        localStorage[`${item}List`] = JSON.stringify(response)
+        commit('searchSuccess', response)
+      })
+      dispatch('setLoading')
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
@@ -55,13 +42,13 @@ export const home = {
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )
-          dispatch('form/setLoading')
+          dispatch('setLoading')
           return Promise.resolve(payload)
         },
         (error) => {
           console.log(error)
           commit('searchFailure')
-          dispatch('form/setLoading')
+          dispatch('setLoading')
           return Promise.reject(error)
         }
       )
@@ -101,18 +88,26 @@ export const home = {
       dispatch('getList', {typeList, hasLogin, login})
     },
     createItemList: async ({ commit, dispatch}, {typeList, value, hasLogin, login }) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await create(url, value)
       dispatch('getList', {typeList, hasLogin, login})
     },
     updateItemList: async ({ commit, dispatch }, {typeList, value, hasLogin,  login}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await update(url, value)
       dispatch('getList', {typeList, hasLogin, login})
     },
-
+    setLoading({ commit }) {
+      commit('loading')
+    },
+    setError({ commit }) {
+      commit('error')
+    },
+    setSuccess({ commit }) {
+      commit('success')
+    }
   },
   mutations: {
     searchSuccess(state, payload) {
@@ -124,6 +119,15 @@ export const home = {
     },
     searchFailure(state) {
       state = null
+    },
+    loading(state) {
+      state.isLoading = !state.isLoading
+    },
+    error(state) {
+      state.isError = true
+      setTimeout(() => {
+        state.isError = false
+      }, 3000)
     },
   }
 }

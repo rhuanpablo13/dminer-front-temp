@@ -26,16 +26,18 @@
                   <icon-button-close></icon-button-close>
                 </icon-base>
               </button>
-            <section class="header__section" v-if="search">
+            <section class="header__section" v-if="search && !isLoading">
               <form action="#" @submit.prevent="$emit('change')">
                 <fild-search @change="$emit('change')"/>
               </form>
             </section>
             </div>
-            <!-- <div class="modal-left">
-              <slot name="left" />
-            </div> -->
+
+            <loading v-if="isLoading && noRegistry"/>
+            <no-registry v-if="!isLoading && noRegistry" style="text-align: revert; margin: auto;"/>
+
             <div
+               v-if="!isLoading && !noRegistry"
               :class="{
                 'modal-body': overflow,
                 'modal-body-no-overflow': !overflow
@@ -43,6 +45,7 @@
             >
               <slot name="body"></slot>
             </div>
+
           </div>
           <div class="modal-footer">
             <slot name="footer"></slot>
@@ -66,6 +69,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import IconModal from '@/components/svg/IconModal.vue'
 import IconFolder from '@/components/svg/IconFolder.vue'
 import IconFolderFeed from '@/components/svg/IconFolderFeed.vue'
@@ -74,6 +79,8 @@ import IconButtonClose from '@/components/svg/IconButtonClose.vue'
 import IconModalFolder from '@/components/svg/IconModalFolder.vue'
 import IconButton from '@/components/svg/IconButton.vue'
 import FildSearch from '@/components/input/FildSearch.vue'
+import Loading from '@/components/Loading.vue'
+import NoRegistry from '@/components/NoRegistry.vue'
 
 export default {
   data () {
@@ -86,6 +93,7 @@ export default {
     title: { type: String, required: true, default: '' },
     onClick: { type: Function, required: false, default: '' },
     overflow: { type: Boolean, required: false, default: true },
+    noRegistry: { type: Boolean, required: false, default: false },
     search: { type: Boolean, required: false, default: false },
     classButton: {
       type: String,
@@ -93,11 +101,10 @@ export default {
       default: 'modal-default-button'
     }
   },
-  computed: {
-    sidebarWidth() {
-      return this.$store.state.sidebar.sidebarWidth
-    }
-  },
+  computed: mapState({
+    sidebarWidth: (state) => state.sidebar.sidebarWidth,
+    isLoading: (state) => state.list.isLoading,
+  }),
   components: {
     IconBase,
     IconModal,
@@ -106,8 +113,10 @@ export default {
     IconModalFolder,
     IconFolderFeed,
     IconButton,
-    FildSearch
-  }
+    FildSearch,
+    Loading,
+    NoRegistry
+}
 }
 </script>
 

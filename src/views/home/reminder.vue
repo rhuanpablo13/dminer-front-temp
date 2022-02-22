@@ -5,6 +5,7 @@
     classContent="folder__reminder__content"
     :onClick="openModal"
     hasButton
+    :noRegistry="!list.length"
   >
     <ul>
       <li

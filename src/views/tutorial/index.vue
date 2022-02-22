@@ -7,6 +7,7 @@
       @close="this.$router.push('/')"
       :search="list.length"
       @change="submit"
+      :noRegistry="!list.length"
     >
       <template v-slot:body>
         <ul v-if="list.length">
@@ -48,7 +49,6 @@
             </icon-base>
           </li>
         </ul>
-        <no-registry v-else />
       </template>
     </widget-modal>
   </transition>
@@ -70,7 +70,6 @@ import formCrud from './form.vue'
 import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
-import NoRegistry from '@/components/NoRegistry.vue'
 import IconOpen from '@/components/svg/IconOpen.vue'
 
 export default {
@@ -96,9 +95,7 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => {
-      return state.list.list
-    }
+    list: (state) => state.list.list.tutorials || []
   }),
   components: {
     WidgetModal,
@@ -109,7 +106,6 @@ export default {
     IconLine,
     IconTrash,
     IconOpen,
-    NoRegistry
 },
   methods: {
     openModal() {
