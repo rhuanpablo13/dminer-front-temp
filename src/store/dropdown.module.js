@@ -4,7 +4,8 @@ import useList from '@/composables/useList'
 const initialState = {
   permissions: [],
   react: [],
-  category: []
+  category: [],
+  priority: []
 }
 
 const dropdownInit = localStorage.dropdown
@@ -69,6 +70,23 @@ export const dropdown = {
           return Promise.reject(error)
         }
       )
+    },
+    getDropdownPriority({ commit }) {
+      const payload = [
+        {
+          id: 1,
+          name: 'Alta'
+        },
+        {
+          id: 2,
+          name: 'Média'
+        },
+        {
+          id: 3,
+          name: 'Baixa'
+        }
+      ]
+      commit('dropdownSuccess', {type: 'priority', payload: payload})
     },
   },
   mutations: {

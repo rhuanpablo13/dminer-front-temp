@@ -116,7 +116,7 @@
           v-model="value.priority"
           :value="value.priority"
           required
-          :options="priorityList"
+          :options="dropdownPriority"
         />
 
         <fild-multi-select
@@ -160,24 +160,12 @@ export default {
   setup() {
     const { dispatch } = useStore()
 
+    dispatch('dropdown/getDropdownPriority')
+
     return {
       dispatch,
       dateHourFormart,
       lastScrollTop: 0,
-      priorityList: [
-        {
-          id: 1,
-          title: 'Alta'
-        },
-        {
-          id: 2,
-          title: 'Média'
-        },
-        {
-          id: 3,
-          title: 'Baixa'
-        }
-      ],
       value: {
         warning: '',
         date: new Date(),
@@ -193,6 +181,7 @@ export default {
     }
   },
   computed: mapState({
+    dropdownPriority: (state) => state.dropdown.priority,
     dropdownUser: (state) =>  state.dropdown.user.map(us => {
       return {
         value: us.login,
@@ -219,16 +208,13 @@ export default {
     IconTrash
   },
   methods: {
-    getPriorityId(id) {
-      return this.priorityList.filter(priority => priority.id == id)[0]
-    },
     openAddNotices() {
       this.value = {}
       this.showModal = true
     },
     getPriority(id) {
-      const priority = this.priorityList.filter(item => item.id === id);
-      return priority[0].title
+      const priority = this.dropdownPriority.filter(item => item.id === id);
+      return priority[0].name
     },
     sendForm() {
       if (this.validForm()) {
@@ -259,7 +245,7 @@ export default {
     },
     edit(value) {
       this.isEdit = true
-      this.value = {...value, priority: this.getPriorityId(value.priority)}
+      this.value = value
       this.showModal = true
     },
     deleteBenefit(id) {
