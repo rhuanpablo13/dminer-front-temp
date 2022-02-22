@@ -23,46 +23,47 @@
         <div class="calendar_container">
           <div class="form_calendar_container">
             <div class="form_calendar">
-              <fild-input
-                text="Título"
-                v-model="eventCalendar.title"
-                :value="eventCalendar.title"
-                required
-                :isError="isError && !eventCalendar.title"
-              />
-
-              <fild-date
-                text="Início"
-                v-model="eventCalendar.start"
-                :value="eventCalendar.start"
-                required
-                :isError="isError && !eventCalendar.start"
-                :minDate="minDateNow()"
-              />
-              <fild-date
-                text="Fim"
-                v-model="eventCalendar.end"
-                :value="eventCalendar.end"
-                :required="false"
-                :isError="isError && !eventCalendar.end"
-                :minDate="eventCalendar.start"
-              />
-              <fild-multi-select
-                text="Usuários"
-                v-model="eventCalendar.users"
-                :value="eventCalendar.users"
-                required
-                :options="dropdownUser"
-              />
-
-              <fild-color text="Cor" v-model="eventCalendar.backgroundColor" :required="false"></fild-color>
-
-              <div>
-                <fild-checkbox
-                  text="Dia inteiro"
-                  v-model="eventCalendar.allDay"
-                  type="checkbox"
+              <div class="calendar_fild">
+                <fild-input
+                  text="Título"
+                  v-model="eventCalendar.title"
+                  :value="eventCalendar.title"
+                  required
+                  :isError="isError && !eventCalendar.title"
                 />
+                <fild-date
+                  text="Início"
+                  v-model="eventCalendar.start"
+                  :value="eventCalendar.start"
+                  required
+                  :isError="isError && !eventCalendar.start"
+                  :minDate="minDateNow()"
+                />
+                <fild-date
+                  text="Fim"
+                  v-model="eventCalendar.end"
+                  :value="eventCalendar.end"
+                  :required="false"
+                  :isError="isError && !eventCalendar.end"
+                  :minDate="eventCalendar.start"
+                />
+                <fild-multi-select
+                  text="Usuários"
+                  v-model="eventCalendar.users"
+                  :value="eventCalendar.users"
+                  required
+                  :options="dropdownUser"
+                />
+
+                <fild-color text="Cor" v-model="eventCalendar.backgroundColor" :required="false"></fild-color>
+
+                <div>
+                  <fild-checkbox
+                    text="Dia inteiro"
+                    v-model="eventCalendar.allDay"
+                    type="checkbox"
+                  />
+                </div>
               </div>
 
               <div>
@@ -288,6 +289,11 @@ export default {
 
 #sendCalensar > foreignObject > span {
   font-size: 6rem !important;
+}
+
+.calendar_fild {
+  overflow-y: auto;
+  height: 20rem;
 }
 
 </style>
