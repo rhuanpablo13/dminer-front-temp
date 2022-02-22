@@ -85,16 +85,16 @@ export default {
     }
   },
   setup() {
+    const  typeList =  'tutorials'
     const store = useStore()
-    store.dispatch('list/getList', 'tutorials')
+    store.dispatch('list/getList', typeList)
 
     return {
-      dispatch: store.dispatch
+      dispatch: store.dispatch,
+      typeList
     }
   },
   computed: mapState({
-    dropdownPermission: (state) => state.dropdown.permissions,
-    dropdownCategory: (state) => state.dropdown.category,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => {
       return state.list.list
@@ -112,12 +112,6 @@ export default {
     NoRegistry
 },
   methods: {
-    getPermission(id) {
-      return this.dropdownPermission.filter(permission => permission.id == id)[0]
-    },
-    getCategory(title) {
-      return this.dropdownCategory.filter(category => category.title == title)[0]
-    },
     openModal() {
       this.showModal = true
     },
@@ -126,26 +120,26 @@ export default {
       this.setDoc(value)
     },
     setDoc(value) {
-      this.value = { ...value, permission: this.getPermission(value.permission), category: this.getCategory(value.category)}
+      this.value = value
       this.openModal()
     },
     setItem(item){
       this.$router.push(`/tutoriais/${item.id}`)
     },
     deleteTutorial(id) {
-      this.dispatch('list/deleteItemList', {typeList:'benefits', id})
+      this.dispatch('list/deleteItemList', {typeList:this.typeList, id})
     },
     close() {
-      this.dispatch('list/getList', 'benefits')
+      this.dispatch('list/getList', this.typeList)
       this.showModal = false
     },
     submit(event) {
       if (!event) return;
 
       if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:'benefits', value: event.target.value})
+        this.dispatch('list/searchItemList', {typeList:this.typeList, value: event.target.value})
       } else if(event.target.value === '') {
-        this.dispatch('list/getList', 'benefits')
+        this.dispatch('list/getList', this.typeList)
       }
     }
   }

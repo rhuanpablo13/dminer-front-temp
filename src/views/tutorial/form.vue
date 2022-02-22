@@ -76,7 +76,7 @@ export default {
   },
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
-    dropdownCategory: (state) => state.dropdown.categories,
+    dropdownCategory: (state) => state.dropdown.category,
     login: (state) => state.user.login,
   }),
 
@@ -85,8 +85,10 @@ export default {
       if (this.validForm()) {
         this.$store.dispatch(
           this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
-          {typeList: 'tutorials', 
-          value: this.value}
+          {
+            typeList: 'tutorials', 
+            value: this.value
+          }
         )
         this.$emit('close')
       } else {

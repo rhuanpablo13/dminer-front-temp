@@ -31,7 +31,8 @@ export default {
     },
   methods: {
     changeInput(e) {
-      this.$emit('update:modelValue', e.target.value)
+      const resul = e.target.value || e.target.value === 'on'  ? true : false
+      this.$emit('update:modelValue', resul)
     }
   }
 }

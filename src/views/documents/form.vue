@@ -23,14 +23,13 @@
           v-model="value.category"
           :value="value.category"
           required
-          :options="getCategories"
+          :options="dropdownCategory"
         />
         <fild-checkbox
           text="Documento Interno"
           v-model="value.permission"
           :value="value.permission"
           type="checkbox"
-          @change="value.permission = !value.permission"
         />
       </div>
     </div>
@@ -55,13 +54,14 @@ export default {
       default: {
         title: '',
         category: 0,
-        permission: 0,
+        permission: false,
         contentLink: ''
       }
     }
   },
   computed: mapState({
     dropdownPermission: (state) => state.dropdown.permissions,
+    dropdownCategory: (state) => state.dropdown.category,
   }),
 
   methods: {

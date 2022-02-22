@@ -51,9 +51,9 @@ export const list = {
       //   commit('success', getListItem.value)
       // }
       if (state.list.length) {
-       state.list.unshift(value)
-       dispatch('form/setLoading')
-        commit('success', this.state.list)
+        // state.list.unshift(value)
+        dispatch('form/setLoading')
+        commit('success', state.list)
       }
     },
   },

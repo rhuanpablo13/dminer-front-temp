@@ -75,6 +75,7 @@ import NoRegistry from '@/components/NoRegistry.vue'
 export default {
   data() {
     return {
+      typeList: 'benefits',
       showModalPrimary: true,
       showModal: false,
       value: {},
@@ -91,7 +92,6 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    dropdownPermission: (state) => state.dropdown.permissions,
     list: (state) => {
       return state.list.list
     }
@@ -108,36 +108,32 @@ export default {
     NoRegistry
   },
   methods: {
-    getPermission(id) {
-      return this.dropdownPermission.filter(permission => permission.id === id)[0]
-    },
     openModal() {
       this.showModal = true
     },
     async edit(value) {
       this.isEdit = true
-      const permission = await this.getPermission(value.permission)
-      this.value =  { ...value, permission: permission}
+      this.value =  value 
       this.setDoc(this.value)
     },
     deleteBenefit(id) {
-      this.dispatch('list/deleteItemList', {typeList:'benefits', id})
+      this.dispatch('list/deleteItemList', {typeList: this.typeList, id})
     },
     setDoc(value) {
       this.value = value
       this.openModal()
     },
     close() {
-      this.dispatch('list/getList', 'benefits')
+      this.dispatch('list/getList', this.typeList)
       this.showModal = false
     },
     submit(event) {
       if (!event) return;
 
       if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:'benefits', value: event.target.value})
+        this.dispatch('list/searchItemList', {typeList:this.typeList, value: event.target.value})
       } else if(event.target.value === '') {
-        this.dispatch('list/getList', 'benefits')
+        this.dispatch('list/getList', this.typeList)
       }
     },
   }

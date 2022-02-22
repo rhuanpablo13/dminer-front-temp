@@ -71,17 +71,19 @@ export default {
     return { showModalEquipe: true, showModal: false, value: {}, isEdit: false}
   },
   setup() {
+    const typeList =  'document'
     const store = useStore()
-    store.dispatch('list/getList', 'document')
+    store.dispatch('list/getList', typeList)
 
     return {
-      dispatch: store.dispatch
+      dispatch: store.dispatch,
+      typeList
     }
   },
 
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.list.list
+    list: (state) => state.list.list,
   }),
 
   components: {
@@ -102,23 +104,23 @@ export default {
       this.setDoc(value)
     },
     deleteDoc(id) {
-      this.dispatch('list/deleteItemList', {typeList:'document', id})
+      this.dispatch('list/deleteItemList', {typeList:this.typeList, id})
     },
     setDoc(value) {
       this.value = value
       this.openModal()
     },
     close() {
-      this.dispatch('list/getList', 'document')
+      this.dispatch('list/getList', this.typeList)
       this.showModal = false
     },
     submit(event) {
       if (!event) return;
 
       if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:'document', value: event.target.value})
+        this.dispatch('list/searchItemList', {typeList:this.typeList, value: event.target.value})
       } else if(event.target.value === '') {
-        this.dispatch('list/getList', 'document')
+        this.dispatch('list/getList', this.typeList)
       }
     },
     appendTheFile (url) { 
