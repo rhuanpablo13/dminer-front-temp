@@ -73,7 +73,7 @@
             </button>
           </div>
           <div style="display: flex">
-            <span> {{itemView.creator  }} | {{dateHourFormart(itemView.date)}}</span>
+            <span> {{ itemView.creator  }} | {{ dateHourFormart(itemView.date) }}</span>
             <span style="margin-left: auto;"> 
               <b>Prioridade:</b>
               {{ getPriority(itemView.priority) }}

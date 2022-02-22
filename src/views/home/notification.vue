@@ -55,7 +55,7 @@
               </icon-base>
             </button>
           </div>
-          <span> {{itemView.login }}</span>
+          <span> {{ itemView.login }} | {{dateHourFormart(itemView.date)}}</span>
           <Title>
             {{itemView.notification }}
           </Title>
@@ -94,6 +94,8 @@ import FrameNotification from '@/components/svg/FrameNotification.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
+import { dateHourFormart } from '@/util/date.js'
+
 export default {
   data() {
     return {
@@ -107,7 +109,8 @@ export default {
       itemView: {
         notification: '',
         user: ''
-      }
+      },
+      dateHourFormart
     }
   },
   computed: mapState({

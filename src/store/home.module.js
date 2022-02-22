@@ -54,7 +54,7 @@ export const home = {
 
       return setList(url).then(
         (payload) => {
-          commit('success', { typeList, payload: getListItem} )
+          commit('success', { typeList, payload: getListItem.value} )
 
           return Promise.resolve(payload)
         },
@@ -131,6 +131,7 @@ export const home = {
       state = payload
     },
     success(state, {typeList, payload}) {
+      localStorage[`${typeList}List`] = JSON.stringify(payload)
       state[`${typeList}List`] = payload
     },
     searchFailure(state) {
