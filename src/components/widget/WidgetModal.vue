@@ -93,7 +93,7 @@ export default {
     title: { type: String, required: true, default: '' },
     onClick: { type: Function, required: false, default: '' },
     overflow: { type: Boolean, required: false, default: true },
-    noRegistry: { type: Boolean, required: false, default: false },
+    // noRegistry: { type: Boolean, required: false, default: false },
     search: { type: Boolean, required: false, default: false },
     classButton: {
       type: String,
@@ -104,6 +104,7 @@ export default {
   computed: mapState({
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
     isLoading: (state) => state.list.isLoading,
+    noRegistry: (state) => state.list.noRegistry,
   }),
   components: {
     IconBase,

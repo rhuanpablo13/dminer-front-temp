@@ -4,6 +4,7 @@ import useList from '@/composables/useList'
 const initialState = {
   item: {},
   isLoading: false,
+  noRegistry: true
 }
 
 const { getListItem, setList, deleteItem, search, create, update, getId } = useList()
@@ -15,21 +16,32 @@ export const list = {
   actions: {
     getList: async ({ commit, dispatch}, typeList) => {
       dispatch('setLoading')
+      commit('successNoRegistry', true)
+
       await setList(typeList)
       commit('success', { payload: getListItem.value, typeList} )
       dispatch('setLoading')
+      commit('successNoRegistry', !getListItem.value.length)
+
     },
     getItem: async ({ commit }, {typeList, id}) => {
+      commit('successNoRegistry', true)
+
       await getId(typeList, id)
       commit('ItemSuccess', getListItem.value)
       dispatch('setLoading')
+      commit('successNoRegistry', !getListItem.value.length)
+
     },
     searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
       dispatch('setLoading')
+      commit('successNoRegistry', true)
+
       await search(typeList, value)
       if (getListItem.value.length) {
         commit('success', { payload: getListItem.value, typeList} )
         dispatch('setLoading')
+        commit('successNoRegistry', !getListItem.value.length)
       }
     },
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
@@ -68,6 +80,9 @@ export const list = {
     },
     setSuccess({ commit }) {
       commit('success')
+    },
+    setNoRegistry({ commit }, value) {
+      commit('successNoRegistry', value)
     }
   },
   mutations: {
@@ -85,6 +100,9 @@ export const list = {
       setTimeout(() => {
         state.isError = false
       }, 3000)
+    },
+    successNoRegistry(state, payload) {
+      state.noRegistry = payload
     },
     // success(state) {
     //   state.isSuccess = true
