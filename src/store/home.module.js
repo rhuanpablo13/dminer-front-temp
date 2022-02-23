@@ -39,10 +39,10 @@ export const home = {
       initialState.map(async item => {
         const payload = await getSearchItem(item, keyword, login)
         
-        if (payload.length) {
+        // if (payload.length) {
           localStorage[`${item}List`] = JSON.stringify(payload)
           commit('success', {typeList: item, payload})
-        }
+        // }
       })
 
       dispatch('setLoading')

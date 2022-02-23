@@ -103,7 +103,8 @@ export default {
   data() {
     return {
       showModalView: false,
-      itemView: {}
+      itemView: {},
+      typeList: 'birthday'
     }
   },
   computed: mapState({
