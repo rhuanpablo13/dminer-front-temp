@@ -5,6 +5,7 @@
     title="calendário"
     id="show-modal"
     :onClick="() => clickCalendar()"
+    :typeList="typeList"
   >
     <div class="container__calendar">
       <calendar :ref="calendar" />

@@ -5,6 +5,7 @@
     classContent="folder__user__content"
     :onClick="permissionADM ? () => openModal() : null"
     :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li

@@ -6,6 +6,7 @@
     :onClick="openModal"
     hasButton
     :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li

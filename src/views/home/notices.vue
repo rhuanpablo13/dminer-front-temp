@@ -8,6 +8,7 @@
     id="folder_notices"
     :onClick="permissionADM ? () => openAddNotices() : null"
     :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id">

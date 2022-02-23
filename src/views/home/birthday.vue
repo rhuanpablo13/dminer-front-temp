@@ -5,6 +5,7 @@
     classContent="folder__birthday__content"
     :onClick="() => $router.push('/birthday')"
     :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li v-for="(item, key) in list" :key="key"  @click="setDoc(item)">

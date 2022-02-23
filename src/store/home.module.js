@@ -30,16 +30,21 @@ initialHomeState.map(item => {
 
 export const home = {
   namespaced: true,
-  state: homeState,
+  state: {...homeState, noRegistry: true, isLoading: false},
 
   actions: {
     search: async ({ commit, dispatch },  { keyword, login  }) => {
       dispatch('setLoading')
+      const home = []
       initialState.map(async item => {
         const payload = await getSearchItem(item, keyword, login)
-        localStorage[`${item}List`] = JSON.stringify(payload)
-        commit('success', { typeList: `${item}List`, payload })
+        
+        if (payload.length) {
+          localStorage[`${item}List`] = JSON.stringify(payload)
+          commit('success', {typeList: item, payload})
+        }
       })
+
       dispatch('setLoading')
     },
     searchItem: async ({ commit, dispatch },  { keyword, login, typeList  }) => {
@@ -51,6 +56,7 @@ export const home = {
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
+      dispatch('setLoading')
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )
@@ -68,7 +74,6 @@ export const home = {
     },
     answer({ commit, dispatch }, {id, item, typeList, hasLogin }) {
       const login  = this.state.user.login
-      dispatch('setLoading')
       return updateCount(id, item, login).then(
         (payload) => {
           dispatch('getList', {typeList, hasLogin, login})
@@ -96,19 +101,16 @@ export const home = {
     // },
 
     deleteItemList: async ({ commit, dispatch }, {typeList, id, hasLogin, login}) => {
-      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await deleteItem(url, id)
       dispatch('getList', {typeList, hasLogin, login})
     },
     createItemList: async ({ commit, dispatch}, {typeList, value, hasLogin, login }) => {
-      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await create(url, value)
       dispatch('getList', {typeList, hasLogin, login})
     },
     updateItemList: async ({ commit, dispatch }, {typeList, value, hasLogin,  login}) => {
-      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await update(url, value)
       dispatch('getList', {typeList, hasLogin, login})
@@ -125,7 +127,7 @@ export const home = {
   },
   mutations: {
     searchSuccess(state, payload) {
-      state = payload
+      state.home = payload
     },
     success(state, {typeList, payload}) {
       localStorage[`${typeList}List`] = JSON.stringify(payload)
@@ -136,6 +138,9 @@ export const home = {
     },
     loading(state) {
       state.isLoading = !state.isLoading
+    },
+    setNoRegistry(state, value) {
+      state.noRegistry = value
     },
     error(state) {
       state.isError = true

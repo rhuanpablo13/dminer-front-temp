@@ -6,6 +6,7 @@
     classContent="folder__notification__content"
     :onClick="permissionADM ? () => openModal() : null"
     :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id" :title="item.notification">
