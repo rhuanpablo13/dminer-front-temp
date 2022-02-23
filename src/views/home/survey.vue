@@ -171,6 +171,7 @@ export default {
       this.showModal = true
     },
     edit(_value) {
+      this.$store.dispatch('list/setNoRegistry', false)
       this.isEdit = true
       this.isDelete = false
       this.value = _value

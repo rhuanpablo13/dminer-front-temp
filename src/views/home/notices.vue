@@ -242,6 +242,7 @@ export default {
               this.value.hasOwnProperty('date') && this.value?.date !== "" 
     },
     setDoc(_item) {
+      this.dispatch('list/setNoRegistry', false)
       this.showModalView = true
       this.itemView = _item
     },

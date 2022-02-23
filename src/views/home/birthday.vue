@@ -111,6 +111,7 @@ export default {
   }),
   methods: {
     setDoc(_item) {
+     this.$store.dispatch('list/setNoRegistry', false)
       this.showModalView = true
       this.itemView = _item
     },
