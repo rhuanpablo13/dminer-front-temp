@@ -1,8 +1,9 @@
 <template>
   <div class="conatiner">
-    <img src="icon-loading.gif">
+    <img src="@/assets/icon-loading.gif">
   </div>
 </template>
+
 
 <style scoped>
   .conatiner {
