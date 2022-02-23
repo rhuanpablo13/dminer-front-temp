@@ -14,7 +14,7 @@
           <loading v-if="isLoading && !noRegistry"/>
           <no-registry v-if="!isLoading && noRegistry" style="text-align: revert; margin: auto;"/>
 
-          <slot  v-if="!isLoading && !noRegistry"/>
+          <slot  v-if="!noRegistry"/>
         </div>
         <div class="notices__footer" v-if="hasButton">
           <icon-base

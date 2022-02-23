@@ -51,7 +51,6 @@ export const home = {
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
-      dispatch('setLoading')
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )
@@ -69,6 +68,7 @@ export const home = {
     },
     answer({ commit, dispatch }, {id, item, typeList, hasLogin }) {
       const login  = this.state.user.login
+      dispatch('setLoading')
       return updateCount(id, item, login).then(
         (payload) => {
           dispatch('getList', {typeList, hasLogin, login})
@@ -96,6 +96,7 @@ export const home = {
     // },
 
     deleteItemList: async ({ commit, dispatch }, {typeList, id, hasLogin, login}) => {
+      dispatch('setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await deleteItem(url, id)
       dispatch('getList', {typeList, hasLogin, login})
@@ -127,8 +128,8 @@ export const home = {
       state = payload
     },
     success(state, {typeList, payload}) {
-      localStorage[typeList] = JSON.stringify(payload)
-      state[typeList] = payload
+      localStorage[`${typeList}List`] = JSON.stringify(payload)
+      state[`${typeList}List`] = payload
     },
     searchFailure(state) {
       state = null
