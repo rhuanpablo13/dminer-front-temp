@@ -9,8 +9,8 @@ export default function useList() {
     getListItem.value = await fetchAll(URL)
   }
 
-  const getSearchItem = async (URL, keyword) => {
-    return await fetchSearchItem(URL, keyword)
+  const getSearchItem = async (URL, keyword, login) => {
+    return await fetchSearchItem(URL, keyword, login)
   }
 
   const create = async (URL, doc) => {

@@ -31,8 +31,8 @@ export const fetchSearch = async (URL, keyword) => {
   return response.status === 200 ? response.data.data : []
 }
 
-export const fetchSearchItem = async (URL, keyword) => {
-  const response = await apiIntra(`${URL}/search/${keyword}`)
+export const fetchSearchItem = async (URL, keyword, login) => {
+  const response = await apiIntra(`${URL}/search/${login}/${keyword}`)
   return response.status === 200 ? response.data.data : []
 }
 

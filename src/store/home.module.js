@@ -27,10 +27,10 @@ export const home = {
   state: homeState,
 
   actions: {
-    search: async ({ commit, dispatch },  keyword = null ) => {
+    search: async ({ commit, dispatch },  { keyword, login  }) => {
       dispatch('setLoading')
       initialState.map(async item => {
-        const response = await getSearchItem(item, keyword)
+        const response = await getSearchItem(item, keyword, login)
         localStorage[`${item}List`] = JSON.stringify(response)
         commit('searchSuccess', response)
       })

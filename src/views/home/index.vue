@@ -17,8 +17,9 @@
 
 <script>
 import { ref } from 'vue'
-import InputDate from '@/components/input/InputDate.vue'
+import { mapState } from 'vuex'
 
+import InputDate from '@/components/input/InputDate.vue'
 import birthday from '@/views/home/birthday.vue'
 import calendar from '@/views/home/calendar.vue'
 import notification from '@/views/home/notification.vue'
@@ -27,8 +28,6 @@ import reminder from '@/views/home/reminder.vue'
 import survey from '@/views/home/survey.vue'
 
 import { VueDraggableNext } from 'vue-draggable-next'
-
-import useSearch from '@/composables/useSearch'
 
 export default {
   data() {
@@ -40,6 +39,9 @@ export default {
       update: false
     }
   },
+  computed: mapState({
+    login: (state) => state.user.login,
+  }),
   mounted() {
     if (localStorage.position_components_home) {
       this.listComponents = JSON.parse(localStorage.position_components_home)
@@ -57,7 +59,8 @@ export default {
         this.listComponents
       )
 
-      this.$store.dispatch('home/search')
+      const data = { keyword: null, login: this.login }
+      this.$store.dispatch('home/search', data)
       this.$store.dispatch('dropdown/getDropdownPermission')
       this.$store.dispatch('dropdown/getDropdownCategory')
     }
@@ -65,14 +68,8 @@ export default {
 
   setup() {
     const search = ref('')
-    const { getSearch, setSearch } = useSearch()
-
     return {
-      search,
-      handleSuubmit(e) {
-        setSearch(search.value)
-        const result = getSearch
-      }
+      search
     }
   },
 
@@ -93,8 +90,9 @@ export default {
       )
     },
     submit(event) {
+      const data = { keyword: this.inputValue || null, login: this.login }
       this.$store
-        .dispatch('home/search', this.inputValue || null)
+        .dispatch('home/search', data )
         .then((result) => {
           this.update = true
         })
