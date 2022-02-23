@@ -160,8 +160,6 @@ export default {
   },
   setup() {
     const { dispatch } = useStore()
-
-
     return {
       dispatch,
       dateHourFormart,

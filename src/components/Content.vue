@@ -18,8 +18,8 @@
         <no-registry v-if="!isLoading && !list.length" style="text-align: revert; margin: auto; font-size: 0.6rem;"/>
         <div  v-if="!isLoading && list.length">
           <publication
-            v-for="(post, key) in list.length"
-            :key="key"
+            v-for="post in list"
+            :key="post.idPost"
             :content="post.content"
             :title="post.title"
             :onClick="() => openFeedView(post.idPost)"
@@ -59,7 +59,9 @@ export default {
   },
   computed: mapState({
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
-    list: (state) => state.home.feedList,
+    list: (state) => {
+      return state.home.feedList
+    },
     isLoading: (state) => state.home.isLoading,
   }),
   methods: {

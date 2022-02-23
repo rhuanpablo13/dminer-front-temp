@@ -1,5 +1,3 @@
-import useSearch from '@/composables/useSearch'
-
 import useList from '@/composables/useList'
 
 const initialState = [
@@ -8,16 +6,24 @@ const initialState = [
   'reminder',
   'birthday',
   'survey',
-  'users',
+  'user',
   'feed',
 ]
 
-const { getSearch } = useSearch()
+const initialHomeState = [
+  'noticeList',
+  'notificationList',
+  'reminderList',
+  'birthdayList',
+  'surveyList',
+  'userList',
+  'feedList',
+]
+
 const { setList, getListItem, deleteItem, create, update, updateCount, getSearchItem } = useList()
 
-const homeState = []
-initialState.map(name => {
-  const item = `${name}List`
+const homeState = {}
+initialHomeState.map(item => {
   const store = localStorage[item] ? JSON.parse(localStorage[item]) : []
   homeState[item] = store
 })
@@ -30,10 +36,17 @@ export const home = {
     search: async ({ commit, dispatch },  { keyword, login  }) => {
       dispatch('setLoading')
       initialState.map(async item => {
-        const response = await getSearchItem(item, keyword, login)
-        localStorage[`${item}List`] = JSON.stringify(response)
-        commit('searchSuccess', response)
+        const payload = await getSearchItem(item, keyword, login)
+        localStorage[`${item}List`] = JSON.stringify(payload)
+        commit('success', { typeList: `${item}List`, payload })
       })
+      dispatch('setLoading')
+    },
+    searchItem: async ({ commit, dispatch },  { keyword, login, typeList  }) => {
+      dispatch('setLoading')
+      const response = await getSearchItem(typeList, keyword, login)
+      localStorage[`${typeList}List`] = JSON.stringify(response)
+      commit('success', { typeList , payload: response })
       dispatch('setLoading')
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
@@ -114,8 +127,8 @@ export const home = {
       state = payload
     },
     success(state, {typeList, payload}) {
-      localStorage[`${typeList}List`] = JSON.stringify(payload)
-      state[`${typeList}List`] = payload
+      localStorage[typeList] = JSON.stringify(payload)
+      state[typeList] = payload
     },
     searchFailure(state) {
       state = null
