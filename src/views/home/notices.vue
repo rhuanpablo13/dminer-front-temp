@@ -189,7 +189,9 @@ export default {
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => state.home.noticeList,
-    dropdownPriority: (state) =>  state.dropdown.priority
+    dropdownPriority: (state) =>  {
+      return state.dropdown.priority
+    }
   }),
   components: {
     Title,
