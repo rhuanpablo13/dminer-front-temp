@@ -46,8 +46,8 @@ import FildCheckbox from '@/components/input/FildCheckbox.vue'
 export default {
   setup() {
     const store = useStore()
-    store.dispatch('dropdown/getDropdownPermission')
-    store.dispatch('dropdown/getDropdownCategory')
+    // store.dispatch('dropdown/getDropdownPermission')
+    // store.dispatch('dropdown/getDropdownCategory')
 
     return { dispatch: store.dispatch }
   },
