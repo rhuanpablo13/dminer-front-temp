@@ -37,7 +37,8 @@ export const auth = {
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true
-      setupAxiosToken(user.baererAuthentication, user.login, user.adminUser)
+      const adminUser = user.adminUser === "USUÁRIO-INTRANET" ? 0 : 1
+      setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       this.dispatch('user/setUser', user)
     },
     loginFailure(state) {

@@ -51,7 +51,7 @@ export const home = {
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
-
+      dispatch('setLoading')
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )

@@ -44,7 +44,8 @@ export default {
     loggedIn: (state) => {
       if (state.auth.status.loggedIn) {
         const user = JSON.parse(localStorage?.user)
-        setupAxiosToken(user.baererAuthentication, user.login, user.adminUser)
+        const adminUser = user.adminUser === "USUÁRIO-INTRANET" ? 0 : 1
+        setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       }
       return state.auth.status.loggedIn
     },
