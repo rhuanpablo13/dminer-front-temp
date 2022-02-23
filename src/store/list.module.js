@@ -2,7 +2,6 @@ import { messagesFetch } from '@/util/toast'
 import useList from '@/composables/useList'
 
 const initialState = {
-  list: [],
   item: {},
   isLoading: false,
 }
@@ -44,9 +43,9 @@ export const list = {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
       if (state.list.length) {
-        state.list.unshift(value)
+        state[typeList].unshift(value)
         dispatch('setLoading')
-        commit('success', state.list)
+        commit('success', { typeList, payload: state[typeList] })
       }
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
@@ -55,10 +54,10 @@ export const list = {
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
-      if (state.list.length) {
+      if (state[typeList].length) {
         // state.list.unshift(value)
         dispatch('setLoading')
-        commit('success', state.list)
+        commit('success', { typeList, payload: state[typeList] })
       }
     },
     setLoading({ commit }) {
@@ -73,7 +72,7 @@ export const list = {
   },
   mutations: {
     success(state, { payload, typeList }) {
-      state.list[typeList] = payload
+      state[typeList] = payload
     },
     ItemSuccess(state, payload) {
       state.item = payload

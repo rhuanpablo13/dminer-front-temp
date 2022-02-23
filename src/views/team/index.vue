@@ -93,7 +93,7 @@ export default {
     FrameTeam,
   },
   computed: mapState({
-    list: (state) => state.list.list.user || []
+    list: (state) => state.list.user || []
   }),
   methods: {
     close() {

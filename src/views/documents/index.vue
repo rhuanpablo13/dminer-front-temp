@@ -82,7 +82,7 @@ export default {
 
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.list.list.document || [],
+    list: (state) => state.list.document || [],
   }),
 
   components: {

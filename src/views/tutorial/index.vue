@@ -95,7 +95,7 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.list.list.tutorials || []
+    list: (state) => state.list.tutorials || []
   }),
   components: {
     WidgetModal,

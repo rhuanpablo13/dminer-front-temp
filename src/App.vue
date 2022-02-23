@@ -44,7 +44,7 @@ export default {
     loggedIn: (state) => {
       if (state.auth.status.loggedIn) {
         const user = JSON.parse(localStorage?.user)
-        setupAxiosToken(user.baererAuthentication)
+        setupAxiosToken(user.baererAuthentication, user.login, user.adminUser)
       }
       return state.auth.status.loggedIn
     },

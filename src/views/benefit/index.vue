@@ -91,7 +91,7 @@ export default {
   },
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.list.list.benefits || []
+    list: (state) => state.list.benefits || []
   }),
 
   components: {
