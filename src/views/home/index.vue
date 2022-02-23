@@ -63,6 +63,7 @@ export default {
       this.$store.dispatch('home/search', data)
       this.$store.dispatch('dropdown/getDropdownPermission')
       this.$store.dispatch('dropdown/getDropdownCategory')
+      this.$store.dispatch('dropdown/getDropdownPriority')
     }
   },
 

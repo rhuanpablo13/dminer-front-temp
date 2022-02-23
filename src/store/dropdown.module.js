@@ -72,21 +72,17 @@ export const dropdown = {
       )
     },
     getDropdownPriority({ commit }) {
-      const payload = [
-        {
-          id: 1,
-          name: 'Alta'
+      return getDropdown('priority').then(
+        (payload) => {
+          commit('dropdownSuccess', {type: 'priority', payload: payload})
+          return Promise.resolve(payload)
         },
-        {
-          id: 2,
-          name: 'Média'
-        },
-        {
-          id: 3,
-          name: 'Baixa'
+        (error) => {
+          console.log(error)
+          commit('dropdownFailure')
+          return Promise.reject(error)
         }
-      ]
-      commit('dropdownSuccess', {type: 'priority', payload: payload})
+      )
     },
   },
   mutations: {

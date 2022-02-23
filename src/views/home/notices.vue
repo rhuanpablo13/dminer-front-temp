@@ -189,22 +189,7 @@ export default {
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => state.home.noticeList,
-    dropdownPriority: (state) =>  {
-      return  [
-        {
-          id: 1,
-          name: 'Alta'
-        },
-        {
-          id: 2,
-          name: 'Média'
-        },
-        {
-          id: 3,
-          name: 'Baixa'
-        }
-      ]
-    }
+    dropdownPriority: (state) =>  state.dropdown.priority
   }),
   components: {
     Title,
@@ -226,6 +211,7 @@ export default {
       this.showModal = true
     },
     getPriority(id) {
+      if ( this.dropdownPriority.length === 0 ) return 
       const priority = this.dropdownPriority.filter(item => item.id === id);
       return priority[0].name
     },
