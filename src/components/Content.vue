@@ -35,19 +35,13 @@ import { mapState, useStore } from 'vuex'
 
 import Feed from '@/components/Feed.vue'
 import Publication from '@/components/Publication.vue'
-import useFeed from '@/composables/useFeed.js'
 import Loading from '@/components/Loading.vue'
 import NoRegistry from '@/components/NoRegistry.vue'
 
 export default {
   setup() {
     const store = useStore()
-    const { getFeeds } = useFeed()
-
-    const PostList = getFeeds
-
     return {
-      PostList,
       handleResize({ width }) {
         if (width < 1080) {
           store.dispatch('sidebar/openSidebar')
@@ -66,7 +60,7 @@ export default {
   computed: mapState({
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
     list: (state) => state.home.feedList,
-    isLoading: (state) => state.list.isLoading,
+    isLoading: (state) => state.home.isLoading,
   }),
   methods: {
     openFeedView(id) {
