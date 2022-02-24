@@ -7,6 +7,8 @@
     classContent="folder__notification__content"
     id="folder_notices"
     :onClick="permissionADM ? () => openAddNotices() : null"
+    :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id">
@@ -159,9 +161,6 @@ export default {
   },
   setup() {
     const { dispatch } = useStore()
-
-    dispatch('dropdown/getDropdownPriority')
-
     return {
       dispatch,
       dateHourFormart,
@@ -181,7 +180,6 @@ export default {
     }
   },
   computed: mapState({
-    dropdownPriority: (state) => state.dropdown.priority,
     dropdownUser: (state) =>  state.dropdown.user.map(us => {
       return {
         value: us.login,
@@ -191,7 +189,10 @@ export default {
     }),    
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
-    list: (state) => state.home.noticeList
+    list: (state) => state.home.noticeList,
+    dropdownPriority: (state) =>  {
+      return state.dropdown.priority
+    }
   }),
   components: {
     Title,
@@ -209,10 +210,13 @@ export default {
   },
   methods: {
     openAddNotices() {
+      this.dispatch('list/setNoRegistry', false)
+
       this.value = {}
       this.showModal = true
     },
     getPriority(id) {
+      if ( this.dropdownPriority.length === 0 ) return 
       const priority = this.dropdownPriority.filter(item => item.id === id);
       return priority[0].name
     },
@@ -240,6 +244,7 @@ export default {
               this.value.hasOwnProperty('date') && this.value?.date !== "" 
     },
     setDoc(_item) {
+      this.dispatch('list/setNoRegistry', false)
       this.showModalView = true
       this.itemView = _item
     },

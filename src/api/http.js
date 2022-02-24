@@ -23,12 +23,14 @@ export const apiIntra = axios.create({
   }
 })
 
-export const setupAxiosToken = (token) => {
+export const setupAxiosToken = (token, login, adminUser) => {
   apiIntra.interceptors.request.use(
     (config) => {
       if (token) {
         // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
         config.headers["x-access-token"] = token; // for Node.js Express back-end
+        config.headers["x-access-login"] = login; 
+        config.headers["x-access-adminUser"] = adminUser; 
       }
       return config;
     },

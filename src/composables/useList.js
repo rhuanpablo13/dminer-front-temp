@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind } from '@/api/request.js'
+import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind, fetchSearchItem} from '@/api/request.js'
 import { fetchQuizAnswer } from '@/api/survey.js'
 
 export default function useList() {
@@ -7,6 +7,10 @@ export default function useList() {
 
   const setList = async (URL) => {
     getListItem.value = await fetchAll(URL)
+  }
+
+  const getSearchItem = async (URL, keyword, login) => {
+    return await fetchSearchItem(URL, keyword, login)
   }
 
   const create = async (URL, doc) => {
@@ -40,6 +44,7 @@ export default function useList() {
   return {
     getListItem,
     setList,
+    getSearchItem,
     create,
     update,
     deleteItem,

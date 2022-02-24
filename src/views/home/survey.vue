@@ -4,6 +4,8 @@
     title="enquete"
     classContent="folder__user__content"
     :onClick="permissionADM ? () => openModal() : null"
+    :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li
@@ -166,9 +168,11 @@ export default {
               this.value.hasOwnProperty('optionB') && this.value?.optionB !== ""
     },
     openModal() {
+      this.$store.dispatch('list/setNoRegistry', false)
       this.showModal = true
     },
     edit(_value) {
+      this.$store.dispatch('list/setNoRegistry', false)
       this.isEdit = true
       this.isDelete = false
       this.value = _value

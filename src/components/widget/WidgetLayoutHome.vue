@@ -11,7 +11,10 @@
           :style="{ 'max-height': !isExpanded && '18rem' }"
           :id="id"
         >
-          <slot />
+          <loading v-if="isLoading"/>
+          <has-registry v-if="!isLoading && lengthList" style="text-align: revert; margin: auto;"/>
+
+          <slot  v-if="!lengthList"/>
         </div>
         <div class="notices__footer" v-if="hasButton">
           <icon-base
@@ -41,6 +44,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import IconButton from '@/components/svg/IconButton.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconFolderNotification from '@/components/svg/IconFolderNotification.vue'
@@ -50,6 +55,8 @@ import IconFolder from '@/components/svg/IconFolder.vue'
 import IconFolderFeed from '@/components/svg/IconFolderFeed.vue'
 import IconFavorite from '@/components/svg/IconFavorite.vue'
 import IconFavoriteDsabled from '@/components/svg/IconFavoriteDsabled.vue'
+import Loading from '@/components/Loading.vue'
+import HasRegistry from '@/components/NoRegistry.vue'
 
 export default {
   props: {
@@ -62,6 +69,18 @@ export default {
     layout: { type: String, required: true },
     favorite: { type: String, required: false, default: 'icon-favorite-dsabled' },
     isFavorite: { type: Boolean, required: false, default: false },
+    noRegistry: { type: Boolean, required: false, default: false },
+    typeList: { type: String, required: false, default: '' },
+  },
+  created(){
+    console.log(this.noRegistry);
+  },
+  computed: {
+    isLoading() { return this.$store.state.home.isLoading},
+    lengthList() {
+      if (this.typeList === "") return 
+      return this.$store.state.home[`${this.typeList}List`].length <= 0
+    }
   },
   components: {
     IconBase,
@@ -72,7 +91,9 @@ export default {
     IconFolderFeed,
     IconFolder,
     IconFavorite,
-    IconFavoriteDsabled
+    IconFavoriteDsabled,
+    Loading,
+    HasRegistry
   }
 }
 </script>

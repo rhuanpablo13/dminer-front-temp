@@ -4,6 +4,7 @@
       v-if="showModalPrimary"
       title="permissão"
       @close="this.$router.push('/')"
+      :noRegistry="!dropdownUser.length"
     >
       <template v-slot:body>
         <ul>

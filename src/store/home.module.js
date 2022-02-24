@@ -1,67 +1,72 @@
-import useSearch from '@/composables/useSearch'
-
 import useList from '@/composables/useList'
 
 const initialState = [
+  'notice',
+  'notification',
+  'reminder',
+  'birthday',
+  'survey',
+  'user',
+  'feed',
+]
+
+const initialHomeState = [
   'noticeList',
   'notificationList',
   'reminderList',
   'birthdayList',
   'surveyList',
-  'usersList',
+  'userList',
   'feedList',
 ]
 
-const { getSearch } = useSearch()
-const { setList, getListItem, deleteItem, create, update, updateCount } = useList()
+const { setList, getListItem, deleteItem, create, update, updateCount, getSearchItem } = useList()
 
-const homeState = []
-initialState.map(item => {
+const homeState = {}
+initialHomeState.map(item => {
   const store = localStorage[item] ? JSON.parse(localStorage[item]) : []
   homeState[item] = store
 })
 
 export const home = {
   namespaced: true,
-  state: homeState,
+  state: {...homeState, noRegistry: true, isLoading: false},
 
   actions: {
-    search({ commit }, keyword) {
-      return getSearch(keyword).then(
-        (payload) => {
-          this.state.home = payload
+    search: async ({ commit, dispatch },  { keyword, login  }) => {
+      dispatch('setLoading')
+      const home = []
+      initialState.map(async item => {
+        const payload = await getSearchItem(item, keyword, login)
+        
+        // if (payload.length) {
+          localStorage[`${item}List`] = JSON.stringify(payload)
+          commit('success', {typeList: item, payload})
+        // }
+      })
 
-          try {
-            initialState.map(item => {
-              localStorage[item] = JSON.stringify(payload[item])
-            })
-          } catch (error) {
-            
-          }
-
-          commit('searchSuccess', payload)
-          return Promise.resolve(payload)
-        },
-        (error) => {
-          console.log(error)
-          commit('searchFailure')
-          return Promise.reject(error)
-        }
-      )
+      dispatch('setLoading')
+    },
+    searchItem: async ({ commit, dispatch },  { keyword, login, typeList  }) => {
+      dispatch('setLoading')
+      const response = await getSearchItem(typeList, keyword, login)
+      localStorage[`${typeList}List`] = JSON.stringify(response)
+      commit('success', { typeList , payload: response })
+      dispatch('setLoading')
     },
     getList: async ({ commit, dispatch }, { typeList, hasLogin, login}) => {
       const url = hasLogin ? `${typeList}/${login}` : typeList
-
+      dispatch('setLoading')
       return setList(url).then(
         (payload) => {
           commit('success', { typeList, payload: getListItem.value} )
-          dispatch('form/setLoading')
+          dispatch('setLoading')
           return Promise.resolve(payload)
         },
         (error) => {
           console.log(error)
           commit('searchFailure')
-          dispatch('form/setLoading')
+          dispatch('setLoading')
           return Promise.reject(error)
         }
       )
@@ -101,22 +106,28 @@ export const home = {
       dispatch('getList', {typeList, hasLogin, login})
     },
     createItemList: async ({ commit, dispatch}, {typeList, value, hasLogin, login }) => {
-      dispatch('form/setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await create(url, value)
       dispatch('getList', {typeList, hasLogin, login})
     },
     updateItemList: async ({ commit, dispatch }, {typeList, value, hasLogin,  login}) => {
-      dispatch('form/setLoading')
       const url = hasLogin ? `${typeList}/${login}` : typeList
       await update(url, value)
       dispatch('getList', {typeList, hasLogin, login})
     },
-
+    setLoading({ commit }) {
+      commit('loading')
+    },
+    setError({ commit }) {
+      commit('error')
+    },
+    setSuccess({ commit }) {
+      commit('success')
+    }
   },
   mutations: {
     searchSuccess(state, payload) {
-      state = payload
+      state.home = payload
     },
     success(state, {typeList, payload}) {
       localStorage[`${typeList}List`] = JSON.stringify(payload)
@@ -124,6 +135,18 @@ export const home = {
     },
     searchFailure(state) {
       state = null
+    },
+    loading(state) {
+      state.isLoading = !state.isLoading
+    },
+    setNoRegistry(state, value) {
+      state.noRegistry = value
+    },
+    error(state) {
+      state.isError = true
+      setTimeout(() => {
+        state.isError = false
+      }, 3000)
     },
   }
 }

@@ -8,6 +8,7 @@
       :overflow="false"
       :search="posts.length"
       @change="submit"
+      :noRegistry="!posts.length"
     >
       <template v-slot:body>
         <div class="feed_container">
@@ -132,7 +133,7 @@ export default {
     },
     favoriteAction(post) {
       const toggle = this.hasUserIndex(post)
-      this.$store.dispatch('post/setFavorite',  { idPost: post.id, toggle: toggle})
+      this.dispatch('post/setFavorite',  { idPost: post.id, toggle: toggle})
     },
     hasUserIndex(post) {
       return post.favorites.indexOf(this.login) === -1

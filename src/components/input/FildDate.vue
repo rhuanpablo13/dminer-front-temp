@@ -11,7 +11,7 @@
         :id="`container_input_${text}`"
         class="input_form"
         @update:modelValue="changeInput"
-        :value="value"
+        v-model="value"
         placeholder="Selecione a data"
         locale="pt-BR"
         inputFormat="dd-MM-yyyy"

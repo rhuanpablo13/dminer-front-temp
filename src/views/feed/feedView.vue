@@ -6,6 +6,7 @@
       :onClick="openModal"
       @close="closeModalFeed"
       :overflow="false"
+      :noRegistry="!post"
     >
       <template v-slot:body>
         <div class="feed_container">

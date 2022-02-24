@@ -5,6 +5,8 @@
     classContent="folder__reminder__content"
     :onClick="openModal"
     hasButton
+    :noRegistry="!list.length"
+    :typeList="typeList"
   >
     <ul>
       <li
@@ -24,8 +26,8 @@
             <div class="reminder">
               <fild-checkbox
                 :text="item.reminder"
-                v-model="item.active"
-                :value="item.active"
+                v-model="item.checked"
+                :value="item.checked"
                 type="checkbox"
                 @change="change(item)"
               />
@@ -74,8 +76,8 @@
           <div class="reminder">
               <fild-checkbox
                 :text="itemView.reminder"
-                v-model="itemView.active"
-                :value="itemView.active"
+                v-model="itemView.checked"
+                :value="itemView.checked"
                 type="checkbox"
                 @change="change(itemView, true)"
                 full
@@ -142,7 +144,7 @@ export default {
         date: new Date(),
         reminder: '',
         login: '',
-        active: false
+        checked: false
       }
     }
   },
@@ -183,10 +185,12 @@ export default {
               this.value.hasOwnProperty('date') && this.value?.date !== ""
     },
     openModal() {
+      this.$store.dispatch('list/setNoRegistry', false)
+
       this.showModal = true
     }, 
     change(item, local) {
-      item.active = !item.active
+      item.checked = !item.checked
       this.$store.dispatch('home/updateItemList',           
       {
         typeList: this.typeList, 
@@ -195,10 +199,11 @@ export default {
         login: this.getUser
       })
       if (local) {
-        this.itemView.active = !this.itemView.active
+        this.itemView.checked = !this.itemView.checked
       }
     },
     setDoc(_item) {
+      this.$store.dispatch('list/setNoRegistry', false)
       this.showModalView = true
       this.itemView = _item
     },

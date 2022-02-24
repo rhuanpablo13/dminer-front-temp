@@ -5,6 +5,7 @@
     title="calendário"
     id="show-modal"
     :onClick="() => clickCalendar()"
+    :typeList="typeList"
   >
     <div class="container__calendar">
       <calendar :ref="calendar" />
@@ -133,6 +134,7 @@ export default {
     })
 
     return {
+      dispatch,
       eventCalendar,
       calendar,
       minDateNow
@@ -158,12 +160,14 @@ export default {
         name: us.userName,
         image: us.avatar
       }
-    }),
+    }) || [],
     login: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),
   methods: {
     clickCalendar() {
+      this.dispatch('list/setNoRegistry', false)
+
       this.showModal = true
     },
     setShowDate(d) {
@@ -296,4 +300,14 @@ export default {
   height: 20rem;
 }
 
+.fc .fc-popover {
+    position: absolute;
+    z-index: 999999999999999;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
+}
+
+div[id^="fc-dom-"]{
+  top: 0 !important;
+  left: 0 !important;
+}
 </style>

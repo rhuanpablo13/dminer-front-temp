@@ -2,8 +2,9 @@ import { messagesFetch } from '@/util/toast'
 import useList from '@/composables/useList'
 
 const initialState = {
-  list: [],
-  item: {}
+  item: {},
+  isLoading: false,
+  noRegistry: true
 }
 
 const { getListItem, setList, deleteItem, search, create, update, getId } = useList()
@@ -13,19 +14,34 @@ export const list = {
   state: initialState,
 
   actions: {
-    getList: async ({ commit }, typeList) => {
+    getList: async ({ commit, dispatch}, typeList) => {
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+
       await setList(typeList)
-      commit('success', getListItem.value )
+      commit('success', { payload: getListItem.value, typeList} )
+      dispatch('setLoading')
+      commit('successNoRegistry', !getListItem.value.length)
+
     },
     getItem: async ({ commit }, {typeList, id}) => {
+      commit('successNoRegistry', true)
+
       await getId(typeList, id)
       commit('ItemSuccess', getListItem.value)
+      dispatch('setLoading')
+      commit('successNoRegistry', !getListItem.value.length)
+
     },
     searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+
       await search(typeList, value)
       if (getListItem.value.length) {
-        commit('success', getListItem.value )
+        commit('success', { payload: getListItem.value, typeList} )
+        dispatch('setLoading')
+        commit('successNoRegistry', !getListItem.value.length)
       }
     },
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
@@ -33,39 +49,66 @@ export const list = {
       dispatch('getList', typeList)
     },
     createItemList: async ({ commit, dispatch, state}, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       await create(typeList, value)
       // if (getListItem.value.length) {
-      //   commit('success', getListItem.value)
+      //   commit('success', { payload: getListItem.value, typeList})
       // }
       if (state.list.length) {
-        state.list.unshift(value)
-        dispatch('form/setLoading')
-        commit('success', state.list)
+        state[typeList].unshift(value)
+        dispatch('setLoading')
+        commit('success', { typeList, payload: state[typeList] })
       }
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
-      dispatch('form/setLoading')
+      dispatch('setLoading')
       await update(typeList, value)
       // if (getListItem.value.length) {
-      //   commit('success', getListItem.value)
+      //   commit('success', { payload: getListItem.value, typeList})
       // }
-      if (state.list.length) {
+      if (state[typeList].length) {
         // state.list.unshift(value)
-        dispatch('form/setLoading')
-        commit('success', state.list)
+        dispatch('setLoading')
+        commit('success', { typeList, payload: state[typeList] })
       }
     },
+    setLoading({ commit }) {
+      commit('loading')
+    },
+    setError({ commit }) {
+      commit('error')
+    },
+    setSuccess({ commit }) {
+      commit('success')
+    },
+    setNoRegistry({ commit }, value) {
+      commit('successNoRegistry', value)
+    }
   },
   mutations: {
-    success(state, payload) {
-      state.list = payload
-      this.dispatch('form/setSuccess')
+    success(state, { payload, typeList }) {
+      state[typeList] = payload
     },
     ItemSuccess(state, payload) {
-      this.dispatch('form/setLoading')
       state.item = payload
-      this.dispatch('form/setSuccess')
     },
+    loading(state) {
+      state.isLoading = !state.isLoading
+    },
+    error(state) {
+      state.isError = true
+      setTimeout(() => {
+        state.isError = false
+      }, 3000)
+    },
+    successNoRegistry(state, payload) {
+      state.noRegistry = payload
+    },
+    // success(state) {
+    //   state.isSuccess = true
+    //   setTimeout(() => {
+    //     state.isSuccess = false
+    //   }, 3000)
+    // }
   }
 }
