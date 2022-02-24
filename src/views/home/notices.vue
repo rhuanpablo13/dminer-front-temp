@@ -210,6 +210,8 @@ export default {
   },
   methods: {
     openAddNotices() {
+      this.dispatch('list/setNoRegistry', false)
+
       this.value = {}
       this.showModal = true
     },

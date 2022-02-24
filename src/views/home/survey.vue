@@ -168,6 +168,7 @@ export default {
               this.value.hasOwnProperty('optionB') && this.value?.optionB !== ""
     },
     openModal() {
+      this.$store.dispatch('list/setNoRegistry', false)
       this.showModal = true
     },
     edit(_value) {

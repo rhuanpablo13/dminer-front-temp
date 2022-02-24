@@ -138,6 +138,8 @@ export default {
       return  this.value.hasOwnProperty(this.typeList) && this.value?.notification !== "" 
     },
     openModal() {
+      this.$store.dispatch('list/setNoRegistry', false)
+
       this.value = {}
       this.showModal = true
     },

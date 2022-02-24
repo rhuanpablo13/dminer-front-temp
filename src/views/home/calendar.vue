@@ -134,6 +134,7 @@ export default {
     })
 
     return {
+      dispatch,
       eventCalendar,
       calendar,
       minDateNow
@@ -165,6 +166,8 @@ export default {
   }),
   methods: {
     clickCalendar() {
+      this.dispatch('list/setNoRegistry', false)
+
       this.showModal = true
     },
     setShowDate(d) {

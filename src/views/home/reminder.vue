@@ -185,6 +185,8 @@ export default {
               this.value.hasOwnProperty('date') && this.value?.date !== ""
     },
     openModal() {
+      this.$store.dispatch('list/setNoRegistry', false)
+
       this.showModal = true
     }, 
     change(item, local) {
