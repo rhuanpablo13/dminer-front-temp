@@ -24,13 +24,14 @@ export const list = {
       commit('successNoRegistry', !getListItem.value.length)
 
     },
-    getItem: async ({ commit }, {typeList, id}) => {
+    getItem: async ({ commit, dispatch}, {typeList, id}) => {
+      dispatch('setLoading')
       commit('successNoRegistry', true)
 
       await getId(typeList, id)
       commit('ItemSuccess', getListItem.value)
       dispatch('setLoading')
-      commit('successNoRegistry', !getListItem.value.length)
+      commit('successNoRegistry', !Object.keys(getListItem.value).length)
 
     },
     searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
@@ -38,11 +39,9 @@ export const list = {
       commit('successNoRegistry', true)
 
       await search(typeList, value)
-      if (getListItem.value.length) {
         commit('success', { payload: getListItem.value, typeList} )
         dispatch('setLoading')
         commit('successNoRegistry', !getListItem.value.length)
-      }
     },
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
       await deleteItem(typeList, id)
@@ -54,11 +53,9 @@ export const list = {
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
-      if (state.list.length) {
         state[typeList].unshift(value)
         dispatch('setLoading')
         commit('success', { typeList, payload: state[typeList] })
-      }
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
       dispatch('setLoading')
@@ -66,11 +63,9 @@ export const list = {
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
-      if (state[typeList].length) {
         // state.list.unshift(value)
         dispatch('setLoading')
         commit('success', { typeList, payload: state[typeList] })
-      }
     },
     setLoading({ commit }) {
       commit('loading')

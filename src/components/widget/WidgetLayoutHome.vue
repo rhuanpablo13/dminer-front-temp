@@ -27,6 +27,7 @@
             <component :is="favorite"  />
           </icon-base>
           <icon-base
+           v-if="onClick"
             viewBox="0 0 1024 1024"
             icon-name="icon"
             :class="{'icons': isFavorite, 'icon': !isFavorite}"

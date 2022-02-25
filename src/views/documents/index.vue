@@ -2,10 +2,10 @@
   <transition name="modal"  v-if="showModalEquipe"> 
     <widget-modal
       title="d-guide"
-      :onClick="setDoc"
+      :onClick="permissionADM ? () => setDoc() : null"
       @close="this.$router.push('/')"
       :search="list.length"
-      @change="submit && submit"
+      @change="submit"
       :noRegistry="!list.length"
     >
       <template v-slot:body>
@@ -105,6 +105,7 @@ export default {
       this.dispatch('list/deleteItemList', {typeList:this.typeList, id})
     },
     setDoc(value) {
+      this.dispatch('list/setNoRegistry', false)
       this.value = value
       this.openModal()
     },

@@ -33,7 +33,7 @@
             </section>
             </div>
 
-            <loading v-if="isLoading && noRegistry"/>
+            <loading v-if="isLoading"/>
             <no-registry v-if="!isLoading && noRegistry" style="text-align: revert; margin: auto;"/>
 
             <div
