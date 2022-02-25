@@ -3,7 +3,7 @@
     <widget-modal
       v-if="showModalPrimary"
       title="tutorial"
-      :onClick="setDoc"
+      :onClick="permissionADM ? () => setDoc() : null"
       @close="this.$router.push('/')"
       :search="list.length"
       @change="submit"
@@ -112,6 +112,7 @@ export default {
       this.showModal = true
     },
     edit(value) {
+      this.dispatch('list/setNoRegistry', false)
       this.isEdit = true
       this.setDoc(value)
     },

@@ -3,7 +3,7 @@
     <widget-modal
       v-if="showModalPrimary"
       title="benefícios"
-      :onClick="setDoc"
+      :onClick="permissionADM ? () => setDoc() : null "
       @close="this.$router.push('/')"
       :search="list.length"
       @change="submit"
@@ -116,6 +116,7 @@ export default {
       this.dispatch('list/deleteItemList', {typeList: this.typeList, id})
     },
     setDoc(value) {
+      this.dispatch('list/setNoRegistry', false)
       this.value = value
       this.openModal()
     },
