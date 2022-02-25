@@ -14,6 +14,9 @@
             <a href="#"   @click="appendTheFile(item.contentLink)">
               {{ item.title }}
             </a>
+            <div class="image_details_categorie" v-if="item.category">
+             {{  getCategory(item.category) }}
+            </div>
             <button class="team_btn_edit" v-if="permissionADM">
               <icon-base
                 icon-name="icon"
@@ -73,6 +76,7 @@ export default {
     const typeList =  'document'
     const store = useStore()
     store.dispatch('list/getList', typeList)
+    store.dispatch('dropdown/category', typeList)
 
     return {
       dispatch: store.dispatch,
@@ -83,6 +87,7 @@ export default {
   computed: mapState({
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => state.list.document || [],
+    dropdownCategory: (state) => state.dropdown.category,
   }),
 
   components: {
@@ -96,6 +101,9 @@ export default {
   methods: {
     openModal() {
       this.showModal = true
+    },
+    getCategory(id) {
+      return this.dropdownCategory.filter(_category => _category.id === id)[0].name
     },
     edit(value) {
       this.isEdit = true
@@ -193,7 +201,7 @@ a {
   right: -1rem;
   width: 24%;
   height: 1rem;
-  top: 0.6rem;
+  top: -0.4rem;
   background: transparent;
   cursor: pointer;
 }
@@ -207,5 +215,16 @@ a {
   left: -1rem;
   z-index: 2;
   bottom: -2rem;
+}
+
+.image_details_categorie {
+  background: #aaff48;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  font-size: 0.4rem;
+  height: 0.5rem;
+  margin-left: auto;
+
+  text-transform: uppercase;
 }
 </style>
