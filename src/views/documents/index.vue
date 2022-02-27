@@ -7,6 +7,7 @@
       :search="list.length"
       @change="submit"
       :noRegistry="!list.length"
+      :type="typeList"
     >
       <template v-slot:body>
         <ul v-if="list.length">
@@ -76,7 +77,7 @@ export default {
     const typeList =  'document'
     const store = useStore()
     store.dispatch('list/getList', typeList)
-    store.dispatch('dropdown/category', typeList)
+    store.dispatch('dropdown/getDropdownCategory')
 
     return {
       dispatch: store.dispatch,

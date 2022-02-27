@@ -9,10 +9,11 @@
     <input-search>
       <div class="container__provisorio">
         <input
-          :value="value"
+          v-model="input"
           @change="$emit('change')"
           placeholder="PESQUISAR"
         />
+        <span class="clear" @click="clear">X</span>
       </div>
     </input-search>
   </icon-base>
@@ -23,13 +24,27 @@ import InputSearch from '@/components/svg/InputSearch.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 
 export default {
-  components: { InputSearch, IconBase },
+  data () {
+    return {
+      input: ''
+    }
+  },
+  created() {
+    this.input = this.value || ''
+  },
   props: {
     value: {
       type: String,
       required: true
     }
-  }
+  },
+  methods: {
+    clear(){
+      this.input = ''
+      this.$emit('clear')
+    }
+  },
+  components: { InputSearch, IconBase },
 }
 </script>
 
@@ -50,6 +65,17 @@ input {
   font-weight: 300;
   font-size: 0.5rem;
   margin-top: 0.9rem;
+}
+
+.clear {
+  font-family: var(--font-family--title);
+  color: var(--color-title);
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.clear:hover {
+  transform: scale(0.9);
 }
 
 </style>

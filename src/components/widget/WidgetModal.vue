@@ -28,7 +28,7 @@
               </button>
             <section class="header__section" v-if="search && !isLoading">
               <form action="#" @submit.prevent="$emit('change')">
-                <fild-search @change="$emit('change')"/>
+                <fild-search @change="$emit('change')" @clear="$store.dispatch(this.type, null)" />
               </form>
             </section>
             </div>
@@ -88,6 +88,7 @@ export default {
   },
   props: {
     layout: { type: String, required: false, default: 'icon-modal-folder' },
+    type: { type: String, required: false, default: '' },
     width: { type: String, required: false, default: '100%' },
     viewbox: { type: String, required: false, default: '0 0 700 500' },
     title: { type: String, required: true, default: '' },
@@ -117,7 +118,7 @@ export default {
     FildSearch,
     Loading,
     NoRegistry
-}
+  }
 }
 </script>
 

@@ -8,6 +8,7 @@
       :search="list.length"
       @change="submit"
       :noRegistry="!list.length"
+      :type="typeList"
     >
       <template v-slot:body>
         <ul v-if="list.length">
