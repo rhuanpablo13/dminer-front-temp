@@ -13,7 +13,8 @@
           @change="$emit('change')"
           placeholder="PESQUISAR"
         />
-        <span class="clear" @click="clear" v-if="input.length">X</span>
+        <!-- v-if="input.length" -->
+        <span class="clear" @click="clear" >X</span>
       </div>
     </input-search>
   </icon-base>
