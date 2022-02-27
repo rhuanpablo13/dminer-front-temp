@@ -17,7 +17,7 @@ export const wbDiminerImage = axios.create({
 })
 
 export const apiIntra = axios.create({
-  baseURL: 'https://dminer-api.herokuapp.com/api/',
+  baseURL: 'http://localhost:8081/api/', //'https://dminer-api.herokuapp.com/api/',
   headers: {
     'Content-Type': 'application/json'
   }
