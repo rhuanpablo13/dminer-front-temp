@@ -57,29 +57,44 @@ export const list = {
         commit('successNoRegistry', true)
       })
     },
-    deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
-      await deleteItem(typeList, id)
-      dispatch('getList', typeList)
+    deleteItemList: ({ commit, dispatch }, {typeList, id}) => {
+      return deleteItem(typeList, id).then(() => {
+        dispatch('getList', typeList)
+      },
+      (error) => {
+        dispatch('setLoading')
+        commit('successNoRegistry', true)
+      })
     },
-    createItemList: async ({ commit, dispatch, state}, {typeList, value}) => {
+    createItemList: ({ commit, dispatch, state}, {typeList, value}) => {
       dispatch('setLoading')
-      await create(typeList, value)
-      // if (getListItem.value.length) {
-      //   commit('success', { payload: getListItem.value, typeList})
-      // }
+      return create(typeList, value).then(() => {
         state[typeList].unshift(value)
         dispatch('setLoading')
         commit('success', { typeList, payload: state[typeList] })
+      },
+      (error) => {
+        dispatch('setLoading')
+        commit('successNoRegistry', true)
+      })
+      // if (getListItem.value.length) {
+      //   commit('success', { payload: getListItem.value, typeList})
+      // }
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
       dispatch('setLoading')
-      await update(typeList, value)
+      return update(typeList, value).then(() => {
+        dispatch('setLoading')
+        commit('success', { typeList, payload: state[typeList] })
+      }, 
+      (error) => {
+        dispatch('setLoading')
+        commit('successNoRegistry', true)
+      })
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
         // state.list.unshift(value)
-        dispatch('setLoading')
-        commit('success', { typeList, payload: state[typeList] })
     },
     setLoading({ commit }) {
       commit('loading')
