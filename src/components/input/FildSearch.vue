@@ -13,7 +13,7 @@
           @change="$emit('change')"
           placeholder="PESQUISAR"
         />
-        <span class="clear" @click="clear">X</span>
+        <span class="clear" @click="clear" v-if="input.length">X</span>
       </div>
     </input-search>
   </icon-base>
@@ -72,6 +72,8 @@ input {
   color: var(--color-title);
   font-weight: 300;
   cursor: pointer;
+
+  transition: all 05s ease;
 }
 
 .clear:hover {

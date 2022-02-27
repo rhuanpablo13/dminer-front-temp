@@ -7,7 +7,7 @@
       :search="list.length"
       @change="submit"
       :noRegistry="!list.length"
-      :type="typeList"
+      :typeList="typeList"
     >
       <template v-slot:body>
         <ul v-if="list.length">
@@ -104,7 +104,7 @@ export default {
       this.showModal = true
     },
     getCategory(id) {
-      return this.dropdownCategory.filter(_category => _category.id === id)[0].name
+      return this.dropdownCategory.length && this.dropdownCategory.filter(_category => _category.id === id)[0]?.name
     },
     edit(value) {
       this.isEdit = true
