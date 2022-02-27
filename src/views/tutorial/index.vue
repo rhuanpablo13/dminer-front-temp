@@ -5,7 +5,7 @@
       title="tutorial"
       :onClick="permissionADM ? () => setDoc() : null"
       @close="this.$router.push('/')"
-      :search="list.length"
+      search
       @change="submit"
       :noRegistry="!list.length"
       :typeList="typeList"

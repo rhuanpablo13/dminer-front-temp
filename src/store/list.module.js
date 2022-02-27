@@ -14,34 +14,48 @@ export const list = {
   state: initialState,
 
   actions: {
-    getList: async ({ commit, dispatch}, typeList) => {
+    getList: ({ commit, dispatch}, typeList) => {
       dispatch('setLoading')
       commit('successNoRegistry', true)
 
-      await setList(typeList)
-      commit('success', { payload: getListItem.value, typeList} )
-      dispatch('setLoading')
-      commit('successNoRegistry', !getListItem.value.length)
-
-    },
-    getItem: async ({ commit, dispatch}, {typeList, id}) => {
-      dispatch('setLoading')
-      commit('successNoRegistry', true)
-
-      await getId(typeList, id)
-      commit('ItemSuccess', getListItem.value)
-      dispatch('setLoading')
-      commit('successNoRegistry', !Object.keys(getListItem.value).length)
-
-    },
-    searchItemList: async ({ commit, dispatch }, {typeList, value}) => {
+      return setList(typeList).then(
+        () => {
+          commit('success', { payload: getListItem.value, typeList} )
+          dispatch('setLoading')
+          commit('successNoRegistry', !getListItem.value.length)
+        },
+        (error) => {
+          dispatch('setLoading')
+          commit('successNoRegistry', true)
+        },
+      )},
+    getItem: ({ commit, dispatch}, {typeList, id}) => {
       dispatch('setLoading')
       commit('successNoRegistry', true)
 
-      await search(typeList, value)
+      return getId(typeList, id).then(()=> {
+        commit('ItemSuccess', getListItem.value)
+        dispatch('setLoading')
+        commit('successNoRegistry', !Object.keys(getListItem.value).length)
+      },
+      (error) => {
+        dispatch('setLoading')
+        commit('successNoRegistry', true)
+      },
+    )},
+    searchItemList: ({ commit, dispatch }, {typeList, value}) => {
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+
+      return search(typeList, value).then(() => {
         commit('success', { payload: getListItem.value, typeList} )
         dispatch('setLoading')
         commit('successNoRegistry', !getListItem.value.length)
+      },
+      (error) => {
+        dispatch('setLoading')
+        commit('successNoRegistry', true)
+      })
     },
     deleteItemList: async ({ commit, dispatch }, {typeList, id}) => {
       await deleteItem(typeList, id)

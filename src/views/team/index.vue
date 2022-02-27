@@ -4,7 +4,7 @@
       v-if="showModalEquipe"
       title="Equipe"
       @close="this.$router.push('/')"
-      :search="list.length"
+      search
       @change="submit"
       :noRegistry="!list.length"
       :typeList="typeList"

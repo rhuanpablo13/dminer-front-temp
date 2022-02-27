@@ -6,7 +6,7 @@
       :onClick="openModal"
       @close="closeModalFeed"
       :overflow="false"
-      :search="posts.length"
+      search
       @change="submit"
       :noRegistry="!posts.length"
     >

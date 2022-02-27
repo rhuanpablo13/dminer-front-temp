@@ -4,7 +4,7 @@
       title="d-guide"
       :onClick="permissionADM ? () => setDoc() : null"
       @close="this.$router.push('/')"
-      :search="list.length"
+      search
       @change="submit"
       :noRegistry="!list.length"
       :typeList="typeList"
@@ -71,7 +71,7 @@ import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
-    return { showModalEquipe: true, showModal: false, value: {}, isEdit: false}
+    return { showModalEquipe: true, showModal: false, value: {}, isEdit: false, search: true}
   },
   setup() {
     const typeList =  'document'
@@ -83,6 +83,10 @@ export default {
       dispatch: store.dispatch,
       typeList
     }
+  },
+
+  created() {
+    this.search = !this.list.length
   },
 
   computed: mapState({
