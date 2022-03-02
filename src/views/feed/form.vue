@@ -86,11 +86,12 @@ export default {
             typeList: 'post', 
             value: this.value
           }
-        )  
+        ).then(()=> {
+          const data = { keyword: null, login: this.getUser }
+          this.$store.dispatch('home/search', data)
+          this.$emit('close')
+        })  
         
-        const data = { keyword: null, login: this.getUser }
-        this.$store.dispatch('home/search', data)
-        this.$emit('close')
       } else {
         this.$store.dispatch('form/setError')
       }
