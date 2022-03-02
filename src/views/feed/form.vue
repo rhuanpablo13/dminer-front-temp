@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, useStore } from 'vuex'
 import { reactive } from 'vue'
 
 import FormModal from '@/components/FormModal.vue'
@@ -55,6 +55,9 @@ export default {
     isEdit: false
   },
   setup() {
+    const store = useStore()
+    store.dispatch('list/setNoRegistry', false)
+
     const typeList = [
       { id: 1, name: 'Interno' },
       { id: 2, name: 'Externo' }
