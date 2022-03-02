@@ -158,7 +158,8 @@ export const list = {
 
       return getFavorites(this.state.user.login).then(
         (payload) => {
-          commit('successPosts', getListItem.value)
+          commit('success', { typeList: 'post', payload: getListItem.value })
+
           this.dispatch('form/setLoadingFavorite')
           this.dispatch('list/setLoading')
           commit('successNoRegistry', !getListItem.value.length)
