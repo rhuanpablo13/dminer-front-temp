@@ -73,11 +73,7 @@ export default {
 
   computed: {
     isError() {
-      if (typeof(this.value) === 'object') {
-        val = !this.value.length
-      } else {
-        val = this.value === null || this.value === undefined || this.value === '' || this.value == 0
-      }
+      const val = this.value === null || this.value === undefined || this.value === '' || this.value == 0 || !this.value.length
 
       const error = this.$store.state.form.isError && val
       const circle = document.querySelector(
