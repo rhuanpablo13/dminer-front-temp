@@ -126,6 +126,7 @@ export default {
       this.dispatch('list/getList', this.typeList)
       this.showModal = false
       this.isEdit = false
+      this.value = {}
     },
     submit(event) {
       if (!event) return;
