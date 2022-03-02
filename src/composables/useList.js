@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind, fetchSearchItem} from '@/api/request.js'
 import { fetchQuizAnswer } from '@/api/survey.js'
-import { fetchSearchAll } from '@/api/feed.js'
+import { fetchSearchAll, fetchCreateFavorite } from '@/api/feed.js'
 import { fetchAllFavorites } from '@/api/favorite'
 
 export default function useList() {
@@ -51,6 +51,10 @@ export default function useList() {
     getListItem.value =  await fetchAllFavorites(login)
   }
 
+  const favorite = async (item) => {
+    return await fetchCreateFavorite(item)
+  }
+
   return {
     getListItem,
     setList,
@@ -63,6 +67,7 @@ export default function useList() {
     getDropdown,
     updateCount,
     searchAll,
-    getFavorites
+    getFavorites,
+    favorite
   }
 }

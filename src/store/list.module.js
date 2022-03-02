@@ -1,6 +1,5 @@
 import { messagesFetch } from '@/util/toast'
 import useList from '@/composables/useList'
-import useFeed from '@/composables/useFeed'
 
 const initialState = {
   item: {},
@@ -8,8 +7,7 @@ const initialState = {
   noRegistry: true
 }
 
-const { getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll } = useList()
-const { favorite } = useFeed()
+const { getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll, favorite } = useList()
 
 export const list = {
   namespaced: true,
