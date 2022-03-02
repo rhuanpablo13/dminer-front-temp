@@ -132,7 +132,7 @@ export const list = {
       const login = this.state.user.login
       return favorite({...value, login}).then(
         (payload) => {
-          this.state[typeList].map(post => {
+          getListItem.value.map(post => {
             if (post.id === value.idPost) {
               const index = post.favorites.indexOf(login)
               if (index === -1) {
@@ -143,7 +143,7 @@ export const list = {
             }
           })
 
-          commit('success', this.state[typeList])
+          commit('success', getListItem.value)
         },
         (error) => {
           console.log(error)
