@@ -90,8 +90,8 @@ export const list = {
     },
     createItemList: ({ commit, dispatch, state}, {typeList, value}) => {
       dispatch('setLoading')
-      return create(typeList, value).then(() => {
-        state[typeList].unshift(value)
+      return create(typeList, value).then((payload) => {
+        state[typeList].unshift(payload)
         dispatch('setLoading')
         commit('successNoRegistry', !state[typeList].length)
         commit('success', { typeList, payload: state[typeList] })
