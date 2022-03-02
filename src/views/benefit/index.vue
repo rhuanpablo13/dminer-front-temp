@@ -108,7 +108,7 @@ export default {
     openModal() {
       this.showModal = true
     },
-    async edit(value) {
+    edit(value) {
       this.isEdit = true
       this.value =  value 
       this.setDoc(this.value)
@@ -124,6 +124,7 @@ export default {
     close() {
       this.dispatch('list/getList', this.typeList)
       this.showModal = false
+      this.isEdit = false
     },
     submit(event) {
       if (!event) return;

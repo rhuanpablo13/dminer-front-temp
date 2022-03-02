@@ -132,6 +132,7 @@ export default {
     close() {
       this.dispatch('list/getList', this.typeList)
       this.showModal = false
+      this.isEdit = false
     },
     submit(event) {
       if (!event) return;
