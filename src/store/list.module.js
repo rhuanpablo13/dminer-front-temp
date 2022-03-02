@@ -155,21 +155,21 @@ export const list = {
     },
     getFavorite({ commit }) {
       this.dispatch('form/setLoadingFavorite')
-      dispatch('setLoading')
+      this.dispatch('list/setLoading')
       commit('successNoRegistry', true)
 
       return getFavorites(this.state.user.login).then(
         (payload) => {
           commit('successPosts', getListItem.value)
           this.dispatch('form/setLoadingFavorite')
-          dispatch('setLoading')
+          this.dispatch('list/setLoading')
           commit('successNoRegistry', !getListItem.value.length)
 
         },
         (error) => {
           console.log(error)
           this.dispatch('form/setLoadingFavorite')
-          dispatch('setLoading')
+          this.dispatch('list/setLoading')
           commit('successNoRegistry', true)
 
           commit('error')
