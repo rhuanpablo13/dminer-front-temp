@@ -89,6 +89,12 @@ export const list = {
       dispatch('setLoading')
       return update(typeList, value).then(() => {
         dispatch('setLoading')
+        state[typeList].map((item, key) => {
+          if (value.id === item.id) {
+            state[typeList][key] = value
+          }
+        })
+
         commit('successNoRegistry', !state[typeList].length)
         commit('success', { typeList, payload: state[typeList] })
       }, 
