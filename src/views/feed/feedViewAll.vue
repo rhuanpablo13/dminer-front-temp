@@ -116,6 +116,7 @@ export default {
       this.showModal = true
     },
     close() {
+      dispatch('post/getPostViewAll')
       this.showModal = false
     },
     closeModalFeed() {

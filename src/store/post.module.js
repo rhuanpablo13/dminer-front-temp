@@ -19,17 +19,18 @@ export const post = {
 
   actions: {
     createPost({ commit, dispatch }, value) {
-      dispatch('form/setLoading')
+      this.dispatch('form/setLoading')
       return create(value).then(
         (payload) => {
           this.state.post.posts.unshift(payload)
           commit('successPosts', this.state.post.posts)
-          dispatch('form/setLoading')
+          this.dispatch('form/setLoading')
+          this.dispatch('list/setNoRegistry', !this.state.post.posts.length)
           dispatch('form/setSuccess')
         },
         (error) => {
           console.log(error)
-          dispatch('form/setLoading')
+          this.dispatch('form/setLoading')
           dispatch('form/setError')
           commit('error')
           return Promise.reject(error)
@@ -37,17 +38,19 @@ export const post = {
       )
     },
     updatePost({ commit, dispatch }, value) {
-      dispatch('form/setLoading')
+      this.dispatch('form/setLoading')
       return update(value).then(
         (payload) => {
           this.state.post.posts.unshift(payload)
           commit('successPosts', this.state.post.posts)
-          dispatch('form/setLoading')
+          this.dispatch('form/setLoading')
+          this.dispatch('list/setNoRegistry', !this.state.post.posts.length)
+
           dispatch('form/setSuccess')
         },
         (error) => {
           console.log(error)
-          dispatch('form/setLoading')
+          this.dispatch('form/setLoading')
           dispatch('form/setError')
           commit('error')
           return Promise.reject(error)
@@ -91,19 +94,19 @@ export const post = {
       )
     },
     goSearchViewAll({ commit }, value) {
-      this.dispatch('form/setLoading')
+      this.this.dispatch('form/setLoading')
       this.dispatch('list/setNoRegistry', true)
 
       return searchAll(value).then(
         (payload) => {
           commit('successPosts', getPostsAll.value)
-          this.dispatch('form/setLoading')
+          this.this.dispatch('form/setLoading')
           this.dispatch('form/setSuccess')
           this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
         },
         (error) => {
           console.log(error)
-          this.dispatch('form/setLoading')
+          this.this.dispatch('form/setLoading')
           this.dispatch('form/setError')
 
           commit('error')
@@ -124,7 +127,7 @@ export const post = {
         },
         (error) => {
           console.log(error)
-          this.dispatch('form/setLoading')
+          this.this.dispatch('form/setLoading')
           this.dispatch('form/setError')
 
           commit('error')
