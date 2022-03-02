@@ -1,5 +1,6 @@
 import { messagesFetch } from '@/util/toast'
 import useList from '@/composables/useList'
+import useFeed from '@/composables/useFeed'
 
 const initialState = {
   item: {},
@@ -8,6 +9,7 @@ const initialState = {
 }
 
 const { getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll } = useList()
+const { favorite } = useFeed()
 
 export const list = {
   namespaced: true,
@@ -125,6 +127,31 @@ export const list = {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
         // state.list.unshift(value)
+    },    
+    setFavorite({ commit }, { value, typeList }) {
+      const login = this.state.user.login
+      return favorite({...value, login}).then(
+        (payload) => {
+          state[typeList].map(post => {
+            if (post.id === value.idPost) {
+              const index = post.favorites.indexOf(login)
+              if (index === -1) {
+                post.favorites.push(login)
+              } else {
+                post.favorites.splice(index, 1);
+              }
+            }
+          })
+
+          commit('successPost', state[typeList])
+        },
+        (error) => {
+          console.log(error)
+
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
     },
     getFavorite({ commit }) {
       this.dispatch('form/setLoadingFavorite')

@@ -127,32 +127,7 @@ export const post = {
           return Promise.reject(error)
         }
       )
-    },      
-    setFavorite({ commit }, value) {
-      const login = this.state.user.login
-      return favorite({...value, login}).then(
-        (payload) => {
-          this.state.post.posts.map(post => {
-            if (post.id === value.idPost) {
-              const index = post.favorites.indexOf(login)
-              if (index === -1) {
-                post.favorites.push(login)
-              } else {
-                post.favorites.splice(index, 1);
-              }
-            }
-          })
-
-          commit('successPost', this.state.post.posts)
-        },
-        (error) => {
-          console.log(error)
-
-          commit('error')
-          return Promise.reject(error)
-        }
-      )
-    },
+    },  
     setLoading({ commit }) {
       commit('loading')
     },
