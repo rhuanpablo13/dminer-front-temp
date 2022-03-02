@@ -76,7 +76,7 @@ export default {
         title: '',
         content: '',
         permissions: null,
-        category: 0,
+        category: null,
         image: null
       }
     }
