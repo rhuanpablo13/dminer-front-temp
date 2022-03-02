@@ -60,7 +60,7 @@
       </template>
     </widget-modal>
   </transition>
-  <form-crud :showModal="showModal" @close="close" :isEdit="isEdit" />
+  <form-crud  v-if="showModal" :showModal="showModal" @close="close" :isEdit="isEdit" />
 </template>
 
 <script>
