@@ -54,7 +54,9 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('successNoRegistry', true)
+        commit('setError', error)
+
+        commit('successNoRegistry', !getListItem.value.length)
       })
     },
     deleteItemList: ({ commit, dispatch }, {typeList, id}) => {
@@ -63,7 +65,8 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('successNoRegistry', true)
+        commit('setError', error)
+        commit('successNoRegistry', !getListItem.value.length)
       })
     },
     createItemList: ({ commit, dispatch, state}, {typeList, value}) => {
@@ -75,7 +78,7 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('successNoRegistry', true)
+        commit('setError', error)
       })
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
@@ -89,7 +92,7 @@ export const list = {
       }, 
       (error) => {
         dispatch('setLoading')
-        commit('successNoRegistry', true)
+        commit('setError', error)
       })
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
@@ -99,8 +102,8 @@ export const list = {
     setLoading({ commit }) {
       commit('loading')
     },
-    setError({ commit }) {
-      commit('error')
+    setError({ commit }, error) {
+      commit('error', error)
     },
     setSuccess({ commit }) {
       commit('success')
@@ -119,8 +122,9 @@ export const list = {
     loading(state) {
       state.isLoading = !state.isLoading
     },
-    error(state) {
+    error(state, error) {
       state.isError = true
+      messagesFetch(400, error)
       setTimeout(() => {
         state.isError = false
       }, 3000)
