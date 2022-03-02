@@ -187,6 +187,10 @@ export default {
           borderColor: this.eventCalendar.backgroundColor,
           users: this.eventCalendar.users
         })
+
+        const data = { keyword: null, login: this.login, typeList: 'calendar' }
+        this.$store.dispatch('home/searchItem', data)
+
       } else {
         this.$store.dispatch('form/setError')
       }
