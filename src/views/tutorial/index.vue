@@ -118,6 +118,8 @@ export default {
       this.setDoc(value)
     },
     setDoc(value) {
+      this.dispatch('list/setNoRegistry', false)
+
       this.value = value
       this.openModal()
     },

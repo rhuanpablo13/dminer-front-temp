@@ -180,13 +180,16 @@ export default {
     }
   },
   computed: mapState({
-    dropdownUser: (state) =>  state.dropdown.user.map(us => {
-      return {
-        value: us.login,
-        name: us.userName,
-        image: us.avatar
-      }
-    }),    
+    dropdownUser: (state) =>  {
+      if (state.hasOwnProperty('dropdown') && state.dropdown.hasOwnProperty('user')) return []
+      return state.dropdown.user.map(us => {
+        return {
+          value: us.login,
+          name: us.userName,
+          image: us.avatar
+        }
+      })
+    },    
     getUser: (state) => state.user.login,
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
     list: (state) => state.home.noticeList,
