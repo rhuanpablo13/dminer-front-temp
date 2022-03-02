@@ -88,7 +88,7 @@ export default {
           }
         )  
         
-        const data = { keyword: null, login: this.login }
+        const data = { keyword: null, login: this.getUser }
         this.$store.dispatch('home/search', data)
         this.$emit('close')
       } else {
