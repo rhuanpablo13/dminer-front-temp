@@ -73,7 +73,9 @@ export default {
 
   computed: {
     isError() {
-      const error = this.$store.state.form.isError && !this.value.length
+      const val = typeof(this.value) === 'object' ? !this.value.length : (this.value === null || this.value === undefined || this.value === '' || this.value == 0)
+
+      const error = this.$store.state.form.isError && val
       const circle = document.querySelector(
         `.container_input_${this.text} .icon__line > .st1`
       )
