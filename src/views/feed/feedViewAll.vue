@@ -134,7 +134,8 @@ export default {
     },
     favoriteAction(post) {
       const toggle = this.hasUserIndex(post)
-      this.dispatch('list/setFavorite',  { idPost: post.id, toggle: toggle, typeList: this.typeList})
+      const value = { idPost: post.id, toggle: toggle }
+      this.dispatch('list/setFavorite',  { value , typeList: this.typeList})
     },
     hasUserIndex(post) {
       return post.favorites.indexOf(this.login) === -1
