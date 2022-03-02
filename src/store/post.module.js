@@ -10,7 +10,7 @@ const initialState = {
   posts: []
 }
 
-const { create, update, crateComment, getPostsAll, favorite } = useFeed()
+const { create, update, crateComment, getPostsAll } = useFeed()
 const { getPost, setPost, search, setReact } = usePost()
 
 export const post = {
@@ -53,42 +53,6 @@ export const post = {
           this.dispatch('form/setLoading')
           dispatch('form/setError')
           commit('error')
-          return Promise.reject(error)
-        }
-      )
-    },
-    // getPostViewAll({ commit }) {
-    //   this.dispatch('list/setNoRegistry', true)
-    //   this.dispatch('list/setLoading')
-
-    //   return setAllPost().then(
-    //     (payload) => {
-    //       commit('successPosts', getPostsAll.value)
-    //       this.dispatch('list/setLoading')
-    //       this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
-
-    //     },
-    //     (error) => {
-    //       console.log(error)
-    //       commit('error')
-    //       return Promise.reject(error)
-    //     }
-    //   )
-    // },
-    getPostView({ commit }, idParam) {
-      this.dispatch('list/setNoRegistry', true)
-      this.dispatch('list/setLoading')
-
-      return setPost(idParam).then(
-        (payload) => {
-          commit('successPost', getPost.value)
-          this.dispatch('list/setNoRegistry', !Object.keys(getPost.value).length)
-          this.dispatch('list/setLoading')
-        },
-        (error) => {
-          console.log(error)
-          commit('error')
-          this.dispatch('list/setLoading')
           return Promise.reject(error)
         }
       )
