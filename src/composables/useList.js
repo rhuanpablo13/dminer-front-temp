@@ -44,11 +44,11 @@ export default function useList() {
   }
 
   const searchAll = async (data) => {
-    getPostsAll.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
+    getListItem.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
   }  
   
   const getFavorites = async (login) => {
-    getPostsAll.value =  await fetchAllFavorites(login)
+    getListItem.value =  await fetchAllFavorites(login)
   }
 
   return {

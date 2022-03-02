@@ -142,6 +142,9 @@ export const list = {
         (error) => {
           console.log(error)
           this.dispatch('form/setLoadingFavorite')
+          dispatch('setLoading')
+          commit('successNoRegistry', true)
+
           commit('error')
           return Promise.reject(error)
         }
