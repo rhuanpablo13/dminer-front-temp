@@ -74,6 +74,7 @@ export const list = {
       return create(typeList, value).then(() => {
         state[typeList].unshift(value)
         dispatch('setLoading')
+        commit('successNoRegistry', !state[typeList].length)
         commit('success', { typeList, payload: state[typeList] })
       },
       (error) => {
@@ -88,6 +89,7 @@ export const list = {
       dispatch('setLoading')
       return update(typeList, value).then(() => {
         dispatch('setLoading')
+        commit('successNoRegistry', !state[typeList].length)
         commit('success', { typeList, payload: state[typeList] })
       }, 
       (error) => {
