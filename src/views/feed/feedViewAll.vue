@@ -16,7 +16,7 @@
             <ul class="post_container" >
               <li
                 class="feed_container_li"
-                v-for="item in posts"
+                v-for="item in list"
                 :key="item.id"
               >
                 <widget-layout-home
