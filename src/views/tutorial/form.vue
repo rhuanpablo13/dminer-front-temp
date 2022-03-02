@@ -109,7 +109,7 @@ export default {
       return  this.value.hasOwnProperty('title') && this.value?.title !== "" && 
               this.value.hasOwnProperty('content') && this.value?.content !== "" &&
               this.value.hasOwnProperty('permission') && 
-              this.value.hasOwnProperty('category') && this.value?.category !== 0 && 
+              this.value.hasOwnProperty('category') && 
               this.value.hasOwnProperty('image') && this.value?.image 
     }
   }
