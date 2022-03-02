@@ -9,6 +9,7 @@
       search
       @change="submit"
       :noRegistry="!posts.length"
+      :typeList="typeList"
     >
       <template v-slot:body>
         <div class="feed_container">
@@ -78,6 +79,7 @@ import FilterFeed from '@/components/Filter.vue'
 export default {
   data() {
     return {
+      typeList: 'post',
       showModalFeed: true,
       showModal: false,
       filterData: {
