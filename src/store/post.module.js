@@ -10,7 +10,7 @@ const initialState = {
   posts: []
 }
 
-const { create, update, crateComment, setAllPost, getPostsAll, searchAll, getFavorites, favorite } = useFeed()
+const { create, update, crateComment, getPostsAll, favorite } = useFeed()
 const { getPost, setPost, search, setReact } = usePost()
 
 export const post = {
@@ -57,24 +57,24 @@ export const post = {
         }
       )
     },
-    getPostViewAll({ commit }) {
-      this.dispatch('list/setNoRegistry', true)
-      this.dispatch('list/setLoading')
+    // getPostViewAll({ commit }) {
+    //   this.dispatch('list/setNoRegistry', true)
+    //   this.dispatch('list/setLoading')
 
-      return setAllPost().then(
-        (payload) => {
-          commit('successPosts', getPostsAll.value)
-          this.dispatch('list/setLoading')
-          this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
+    //   return setAllPost().then(
+    //     (payload) => {
+    //       commit('successPosts', getPostsAll.value)
+    //       this.dispatch('list/setLoading')
+    //       this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
 
-        },
-        (error) => {
-          console.log(error)
-          commit('error')
-          return Promise.reject(error)
-        }
-      )
-    },
+    //     },
+    //     (error) => {
+    //       console.log(error)
+    //       commit('error')
+    //       return Promise.reject(error)
+    //     }
+    //   )
+    // },
     getPostView({ commit }, idParam) {
       this.dispatch('list/setNoRegistry', true)
       this.dispatch('list/setLoading')
@@ -89,27 +89,6 @@ export const post = {
           console.log(error)
           commit('error')
           this.dispatch('list/setLoading')
-          return Promise.reject(error)
-        }
-      )
-    },
-    goSearchViewAll({ commit }, value) {
-      this.this.dispatch('form/setLoading')
-      this.dispatch('list/setNoRegistry', true)
-
-      return searchAll(value).then(
-        (payload) => {
-          commit('successPosts', getPostsAll.value)
-          this.this.dispatch('form/setLoading')
-          this.dispatch('form/setSuccess')
-          this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
-        },
-        (error) => {
-          console.log(error)
-          this.this.dispatch('form/setLoading')
-          this.dispatch('form/setError')
-
-          commit('error')
           return Promise.reject(error)
         }
       )
@@ -148,26 +127,7 @@ export const post = {
           return Promise.reject(error)
         }
       )
-    },    
-    getFavorite({ commit }) {
-      this.dispatch('form/setLoadingFavorite')
-      this.dispatch('list/setNoRegistry', true)
-
-      return getFavorites(this.state.user.login).then(
-        (payload) => {
-          commit('successPosts', getPostsAll.value)
-          this.dispatch('form/setLoadingFavorite')
-          this.dispatch('list/setNoRegistry', !getPostsAll.value.length)
-
-        },
-        (error) => {
-          console.log(error)
-          this.dispatch('form/setLoadingFavorite')
-          commit('error')
-          return Promise.reject(error)
-        }
-      )
-    },    
+    },      
     setFavorite({ commit }, value) {
       const login = this.state.user.login
       return favorite({...value, login}).then(

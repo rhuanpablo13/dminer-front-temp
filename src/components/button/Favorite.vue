@@ -5,7 +5,7 @@
     viewBox="0 0 500 500"
     width="10rem"
     height="10rem"
-    @click="()=> this.$store.dispatch('post/getFavorite')"
+    @click="()=> this.$store.dispatch('list/getFavorite')"
   >
     <component
       :is="isError ? 'icon-button-error' : 'icon-button-favorite'"

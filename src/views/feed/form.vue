@@ -71,7 +71,7 @@ export default {
       type: typeList[0].id
     })
 
-    return { typeList, value }
+    return { typeList, value , dispatch: store.dispatch}
   },
   computed: mapState({
     getUser: (state) => state.user.login
@@ -80,7 +80,13 @@ export default {
   methods: {
     sendForm() {
       if (this.validForm()) {
-        this.$store.dispatch(this.isEdit ? 'post/updatePost' : 'post/createPost', this.value)
+       this.dispatch(
+          this.isEdit ? 'list/updateItemList' : 'list/createItemList', 
+          {
+            typeList: 'post', 
+            value: this.value
+          }
+        )        
         this.$emit('close')
       } else {
         this.$store.dispatch('form/setError')

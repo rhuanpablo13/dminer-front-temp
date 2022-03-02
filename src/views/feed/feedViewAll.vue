@@ -8,8 +8,7 @@
       :overflow="false"
       search
       @change="submit"
-      :noRegistry="!posts.length"
-      :typeList="typeList"
+      typeList="post/search"
     >
       <template v-slot:body>
         <div class="feed_container">
@@ -90,11 +89,11 @@ export default {
     }
   },
   setup() {
-    const { dispatch } = useStore() 
+    const store = useStore() 
 
-    dispatch('post/getPostViewAll')
+    store.dispatch('list/getList', 'post')
 
-    return { dispatch }
+    return { dispatch: store.dispatch }
   },
 
   components: {
@@ -109,7 +108,7 @@ export default {
 
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
-    posts: (state) => state.post.posts,
+    list: (state) => state.list.post,
     login: (state) => state.user.login,
   }),
 
@@ -118,7 +117,6 @@ export default {
       this.showModal = true
     },
     close() {
-      this.dispatch('post/getPostViewAll')
       this.showModal = false
     },
     closeModalFeed() {

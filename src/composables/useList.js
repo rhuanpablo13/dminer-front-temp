@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropdown, fetchFind, fetchSearchItem} from '@/api/request.js'
 import { fetchQuizAnswer } from '@/api/survey.js'
+import { fetchSearchAll } from '@/api/feed.js'
+import { fetchAllFavorites } from '@/api/favorite'
 
 export default function useList() {
   const getListItem = ref([])
@@ -41,6 +43,14 @@ export default function useList() {
     return  fetchQuizAnswer(idQuiz, item, login)
   }
 
+  const searchAll = async (data) => {
+    getPostsAll.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
+  }  
+  
+  const getFavorites = async (login) => {
+    getPostsAll.value =  await fetchAllFavorites(login)
+  }
+
   return {
     getListItem,
     setList,
@@ -51,6 +61,8 @@ export default function useList() {
     search,
     getId,
     getDropdown,
-    updateCount
+    updateCount,
+    searchAll,
+    getFavorites
   }
 }

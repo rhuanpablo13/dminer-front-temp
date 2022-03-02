@@ -5,9 +5,6 @@ import {
   fetchCreate,
   fetchUpdate,
   fetchCreateComment,
-  fetchPost,
-  fetchAllPost,
-  fetchSearchAll
 } from '@/api/feed.js'
 
 import { fetchAllFavorites, fetchCreateFavorite } from '@/api/favorite'
@@ -36,28 +33,13 @@ export default function useFeed() {
     return await fetchUpdate(item)
   }
 
-  const setAllPost = async () => {
-    getPostsAll.value =  await fetchAllPost()
-  }
-
-  const searchAll = async (data) => {
-    getPostsAll.value =  await fetchSearchAll(dateHourFormarUs(data.date), data.user)
-  }  
-  
-  const getFavorites = async (login) => {
-    getPostsAll.value =  await fetchAllFavorites(login)
-  }
-
   return {
     getFeeds,
     setFeed,
     create,
     update,
     crateComment,
-    setAllPost,
     getPostsAll,
-    searchAll,
-    getFavorites,
     favorite
   }
 }

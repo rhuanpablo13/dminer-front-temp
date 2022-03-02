@@ -7,7 +7,7 @@ const initialState = {
   noRegistry: true
 }
 
-const { getListItem, setList, deleteItem, search, create, update, getId } = useList()
+const { getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll } = useList()
 
 export const list = {
   namespaced: true,
@@ -54,10 +54,29 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('setError', error)
+        commit('error', error)
 
         commit('successNoRegistry', !getListItem.value.length)
       })
+    },
+    goSearchViewAll({ commit }, value) {
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+
+      return searchAll(value).then(
+        (payload) => {
+          commit('success', { payload: getListItem.value, typeList} )
+          dispatch('setLoading')
+          commit('successNoRegistry', !getListItem.value.length)
+        },
+        (error) => {
+          console.log(error)
+          dispatch('setLoading')
+          commit('error', error)
+
+          return Promise.reject(error)
+        }
+      )
     },
     deleteItemList: ({ commit, dispatch }, {typeList, id}) => {
       return deleteItem(typeList, id).then(() => {
@@ -65,7 +84,7 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('setError', error)
+        commit('error', error)
         commit('successNoRegistry', !getListItem.value.length)
       })
     },
@@ -79,7 +98,7 @@ export const list = {
       },
       (error) => {
         dispatch('setLoading')
-        commit('setError', error)
+        commit('error', error)
       })
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
@@ -100,13 +119,34 @@ export const list = {
       }, 
       (error) => {
         dispatch('setLoading')
-        commit('setError', error)
+        commit('error', error)
       })
       // if (getListItem.value.length) {
       //   commit('success', { payload: getListItem.value, typeList})
       // }
         // state.list.unshift(value)
     },
+    getFavorite({ commit }) {
+      this.dispatch('form/setLoadingFavorite')
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+
+      return getFavorites(this.state.user.login).then(
+        (payload) => {
+          commit('successPosts', getListItem.value)
+          this.dispatch('form/setLoadingFavorite')
+          dispatch('setLoading')
+          commit('successNoRegistry', !getListItem.value.length)
+
+        },
+        (error) => {
+          console.log(error)
+          this.dispatch('form/setLoadingFavorite')
+          commit('error')
+          return Promise.reject(error)
+        }
+      )
+    },   
     setLoading({ commit }) {
       commit('loading')
     },
@@ -132,7 +172,7 @@ export const list = {
     },
     error(state, error) {
       state.isError = true
-      messagesFetch(400, error)
+      messagesFetch('list', 400, [],   error)
       setTimeout(() => {
         state.isError = false
       }, 3000)
