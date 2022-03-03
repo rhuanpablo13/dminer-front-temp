@@ -1,7 +1,7 @@
 import useAuth from '@/composables/useAuth'
 import { messagesFetch } from '@/util/toast.js'
 import { setupAxiosToken } from '@/api/http'
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
 const userLocalStorage = localStorage.user && JSON.parse(localStorage.user)
 
@@ -9,8 +9,8 @@ const initialState = userLocalStorage
   ? { status: { loggedIn: true } }
   : { status: { loggedIn: false } }
 
-const { login, logout } = useAuth()
-const route = useRoute()
+const { login, logoutUse } = useAuth()
+const router = useRouter()
 
 export const auth = {
   namespaced: true,
@@ -31,7 +31,9 @@ export const auth = {
       )
     },
     logout({ commit }) {
-      commit('logout')
+      logoutUse()
+      this.dispatch('user/setUserLogout', null)
+      commit('logoutSuccess')
     }
   },
   mutations: {
@@ -43,28 +45,18 @@ export const auth = {
     },
     loginFailure(state) {
       state.status.loggedIn = false
-      this.commit('user/success', null)
     },
-    logout(state) {
-      state.status.loggedIn = false
-      
-      let userReminder = {}
-      let reminderPassword = localStorage.reminderPassword
-      if (reminderPassword) {
-        userReminder = JSON.parse(localStorage.userReminder)
+    logoutSuccess(state) {
+
+      // Object.keys(this.state).map(key => {
+      //   this.state[key] = {}
+      // })
+      this.state.user = {}
+      this.state.auth = {
+        status: {
+          loggedIn : false
+        }
       }
-
-      localStorage.clear()
-
-      if (reminderPassword) {
-        localStorage.reminderPassword = reminderPassword
-        localStorage.userReminder = JSON.stringify(userReminder)
-      }
-      
-      sessionStorage.removeItem('timeout');
-
-      this.commit('user/success', null)
-      route.push('/login')
     },
     registerSuccess(state) {
       state.status.loggedIn = false

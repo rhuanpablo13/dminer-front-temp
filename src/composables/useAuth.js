@@ -11,7 +11,27 @@ export default function useAuth() {
      throw 400
   }
 
+  const logoutUse = () => {
+    let userReminder = {}
+    let reminderPassword = localStorage.reminderPassword
+    if (reminderPassword) {
+      userReminder = JSON.parse(localStorage.userReminder)
+    }
+
+    localStorage.clear()
+
+    if (reminderPassword) {
+      localStorage.reminderPassword = reminderPassword
+      localStorage.userReminder = JSON.stringify(userReminder)
+    }
+    
+    sessionStorage.removeItem('timeout');
+
+    return 200
+  }
+
   return {
     login,
+    logoutUse
   }
 }

@@ -24,6 +24,9 @@ export const user = {
       this.dispatch('user/avatar', state)
       // this.dispatch('home/search', null)
     },
+    setUserLogout({ commit }) {
+      commit('success', null)
+    },
     avatar({ commit, state }, user) {
       getAvatar(user.login).then(
         (response) => {
@@ -68,7 +71,7 @@ export const user = {
           return Promise.reject(error)
         }
       )
-    }
+    },
   },
   mutations: {
     userSuccess(state, user) {
