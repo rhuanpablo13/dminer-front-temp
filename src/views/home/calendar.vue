@@ -188,7 +188,7 @@ export default {
           users: this.eventCalendar.users
         })
 
-        const data = { keyword: null, login: this.login, typeList: 'calendar' }
+        const data = { keyword: null, login: this.login, typeList: 'notification' }
         this.$store.dispatch('home/searchItem', data)
 
       } else {
