@@ -97,6 +97,7 @@ import IconEdit from '@/components/svg/IconEdit.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
 import { dateHourFormart } from '@/util/date.js'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
@@ -117,7 +118,7 @@ export default {
   },
   computed: mapState({
     getUser: (state) => state.user.login,
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR,
     list: (state) => state.home.notificationList
   }),
   methods: {

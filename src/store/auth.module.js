@@ -2,6 +2,7 @@ import useAuth from '@/composables/useAuth'
 import { messagesFetch } from '@/util/toast.js'
 import { setupAxiosToken } from '@/api/http'
 import { useRouter } from "vue-router";
+import * as translation from '@/util/pt_BR.json'
 
 const userLocalStorage = sessionStorage.user && JSON.parse(sessionStorage.user)
 
@@ -39,7 +40,7 @@ export const auth = {
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true
-      const adminUser = user.adminUser === "ADMINISTRADOR" ? 1 : 0
+      const adminUser = user.adminUser === translation.SYSTEM.ADMINISTRADOR ? 1 : 0
       setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       this.dispatch('user/setUser', user)
     },

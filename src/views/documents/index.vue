@@ -90,7 +90,7 @@ export default {
   },
 
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR,
     list: (state) => state.list.document || [],
     dropdownCategory: (state) => state.dropdown.category,
   }),

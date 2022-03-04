@@ -132,6 +132,7 @@ import WidgetModal from '@/components/widget/WidgetModal.vue'
 import Title from '@/components/title/Title.vue'
 
 import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
@@ -154,7 +155,7 @@ export default {
   computed: mapState({
     dropdownUser: (state) => state.dropdown.user,
     getUser: (state) => state.user.login,
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR,
     list: (state) => state.home.reminderList
   }),
   methods: {

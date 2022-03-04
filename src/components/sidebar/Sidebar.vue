@@ -102,6 +102,7 @@ import IconPower from '@/components/svg/IconPower.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconOpen from '@/components/svg/IconOpen.vue'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   props: { isLoading: { type: Boolean, required: false, default: false}},
@@ -125,7 +126,7 @@ export default {
     user: (state) => state.user,
     collapsed: (state) => state.sidebar.collapsed,
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
-    permissionADM: (state) => state.user.adminUser  !== 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  !== translation.SYSTEM.ADMINISTRADOR
   }),
 
   methods: {

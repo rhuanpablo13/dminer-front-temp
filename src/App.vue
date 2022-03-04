@@ -10,6 +10,7 @@ import Login from '@/views/login/index.vue'
 
 import { diffDate } from '@/util/date'
 import { setupAxiosToken } from '@/api/http'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   setup(){
@@ -28,23 +29,23 @@ export default {
       }
     }
   },
-  created() {
-    window.addEventListener('beforeunload', (event) => {
-      // Cancel the event as stated by the standard.
-      event.preventDefault();
-      sessionStorage.removeItem('timeout');
-      // localStorage.clear();
+  // created() {
+  //   window.addEventListener('beforeunload', (event) => {
+  //     // Cancel the event as stated by the standard.
+  //     event.preventDefault();
+  //     // sessionStorage.removeItem('timeout');
+  //     // localStorage.clear();
 
-      //Para customizar o texto, e é necessário para funcionar no Safari e Chrome, IE e Firefox anterior a versão 4
-      event.returnValue = '';
-    });
-  },
+  //     //Para customizar o texto, e é necessário para funcionar no Safari e Chrome, IE e Firefox anterior a versão 4
+  //     event.returnValue = '';
+  //   });
+  // },
   components: { Sidebar, Banner, Content, Avatar, Login },
   computed: mapState({
     loggedIn: (state) => {
       if (state.auth.status.loggedIn) {
         const user = JSON.parse(sessionStorage?.user)
-        const adminUser = user.adminUser === "ADMINISTRADOR" ? 1 : 0
+        const adminUser = user.adminUser === translation.SYSTEM.ADMINISTRADOR ? 1 : 0
         setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       }
       return state.auth.status.loggedIn

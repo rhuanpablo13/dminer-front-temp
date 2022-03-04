@@ -106,7 +106,7 @@ import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
 import { dateHourFormarUs, minDateNow, dateConcat } from '@/util/date.js'
-
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
@@ -165,7 +165,7 @@ export default {
       })
     }, 
     login: (state) => state.user.login,
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR
   }),
   methods: {
     setMinDate(date) {

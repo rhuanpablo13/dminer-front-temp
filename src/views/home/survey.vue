@@ -112,6 +112,7 @@ import IconCountQuiz from '@/components/svg/IconCountQuiz.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
 import { dateHourFormarUs } from '@/util/date.js'
+import * as translation from '@/util/pt_BR.json'
 
 export default {
   data() {
@@ -129,7 +130,7 @@ export default {
     }
   },
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR,
     list: (state) => state.home.surveyList,
     getUser: (state) => state.user.login,
   }),

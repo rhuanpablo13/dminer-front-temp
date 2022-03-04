@@ -72,6 +72,8 @@ import ImageDetails from '@/components/ImageDetails.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
+import * as translation from '@/util/pt_BR.json'
+
 export default {
   data() {
     return {
@@ -91,7 +93,7 @@ export default {
     }
   },
   computed: mapState({
-    permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR',
+    permissionADM: (state) => state.user.adminUser  === translation.SYSTEM.ADMINISTRADOR,
     list: (state) => state.list.benefits || []
   }),
 
