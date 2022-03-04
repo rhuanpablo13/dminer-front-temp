@@ -20,7 +20,8 @@ export const list = {
 
       return setList(typeList).then(
         () => {
-          commit('success', { payload: getListItem.value, typeList} )
+          const type = typeList === 'post/search' ? 'post' : typeList
+          commit('success', { payload: getListItem.value, typeList: type} )
           dispatch('setLoading')
           commit('successNoRegistry', !getListItem.value.length)
         },
