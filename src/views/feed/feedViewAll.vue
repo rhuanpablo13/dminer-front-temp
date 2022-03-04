@@ -129,7 +129,7 @@ export default {
     },
     filter() {
       if (this.filterData ) {
-        this.dispatch('post/goSearchViewAll', this.filterData)
+        this.dispatch('list/goSearchViewAll', this.filterData)
       }
     },
     favoriteAction(post) {
