@@ -31,6 +31,10 @@ export const setupAxiosToken = (token, login, adminUser) => {
         config.headers["x-access-token"] = token; // for Node.js Express back-end
         config.headers["x-access-login"] = login; 
         config.headers["x-access-adminUser"] = adminUser; 
+      } else {
+        config.headers["x-access-token"] = null; // for Node.js Express back-end
+        config.headers["x-access-login"] = null; 
+        config.headers["x-access-adminUser"] = null; 
       }
       return config;
     },

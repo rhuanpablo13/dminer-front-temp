@@ -17,9 +17,9 @@ export default function useAuth() {
     if (reminderPassword) {
       userReminder = JSON.parse(localStorage.userReminder)
     }
-
+    
     localStorage.clear()
-
+    
     if (reminderPassword) {
       localStorage.reminderPassword = reminderPassword
       localStorage.userReminder = JSON.stringify(userReminder)
@@ -27,6 +27,7 @@ export default function useAuth() {
     
     sessionStorage.removeItem('timeout');
     sessionStorage.removeItem('user');
+    window.location.reload();
 
     return 200
   }
