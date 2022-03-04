@@ -135,7 +135,7 @@ export default {
 }
 
 .color-input .saturation-pointer {
-    top: inherit !important;
+    top: inherit !important; 
     width: 20px;
     height: 20px;
     position: absolute;
