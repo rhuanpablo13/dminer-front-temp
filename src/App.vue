@@ -43,8 +43,8 @@ export default {
   computed: mapState({
     loggedIn: (state) => {
       if (state.auth.status.loggedIn) {
-        const user = JSON.parse(localStorage?.user)
-        const adminUser = user.adminUser === "USUÁRIO-INTRANET" ? 0 : 1
+        const user = JSON.parse(sessionStorage?.user)
+        const adminUser = user.adminUser === "ADMINISTRADOR" ? 1 : 0
         setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       }
       return state.auth.status.loggedIn

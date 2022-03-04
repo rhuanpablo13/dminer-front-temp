@@ -5,7 +5,7 @@ export default function useAllUsers() {
   const getAllUsers = ref([])
 
   const setAllUsers = async () => {
-    const user = JSON.parse(localStorage.user)
+    const user = JSON.parse(sessionStorage.user)
     getAllUsers.value = await fetchAllUser(user.baererAuthentication)
   }
 

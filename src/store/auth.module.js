@@ -3,7 +3,7 @@ import { messagesFetch } from '@/util/toast.js'
 import { setupAxiosToken } from '@/api/http'
 import { useRouter } from "vue-router";
 
-const userLocalStorage = localStorage.user && JSON.parse(localStorage.user)
+const userLocalStorage = sessionStorage.user && JSON.parse(sessionStorage.user)
 
 const initialState = userLocalStorage
   ? { status: { loggedIn: true } }
@@ -39,7 +39,7 @@ export const auth = {
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true
-      const adminUser = user.adminUser === "USUÁRIO-INTRANET" ? 0 : 1
+      const adminUser = user.adminUser === "ADMINISTRADOR" ? 1 : 0
       setupAxiosToken(user.baererAuthentication, user.login, adminUser)
       this.dispatch('user/setUser', user)
     },

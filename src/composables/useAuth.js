@@ -4,7 +4,7 @@ export default function useAuth() {
   const login = async (user) => {
     const auth = await fetchtAuth(user)
     if (auth && auth.baererAuthentication) {
-      localStorage.user = JSON.stringify(auth)
+      sessionStorage.user = JSON.stringify(auth)
       return auth
     }
 
@@ -26,6 +26,7 @@ export default function useAuth() {
     }
     
     sessionStorage.removeItem('timeout');
+    sessionStorage.removeItem('user');
 
     return 200
   }

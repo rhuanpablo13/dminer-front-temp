@@ -7,8 +7,8 @@ const initialState = {
   login: '',
   adminUser: 'COMUM'
 }
-const userLocalStorage = localStorage.user
-  ? JSON.parse(localStorage.user)
+const userLocalStorage = sessionStorage.user
+  ? JSON.parse(sessionStorage.user)
   : initialState
 
 const { getAvatar, getBanner, updateBanner } = useUser()
