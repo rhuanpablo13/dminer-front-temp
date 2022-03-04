@@ -18,7 +18,7 @@
           width="96%"
           height="100%"
         >
-          <frame-notices>
+          <frame-notices style="cursor: pointer;">
             <div class="notices_container">
               <Title>
                 {{ item.warning }}
