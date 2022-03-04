@@ -155,7 +155,7 @@ export default {
   },
   computed: mapState({
     dropdownUser: (state) =>  {
-      if (state.hasOwnProperty('dropdown') && state.dropdown.hasOwnProperty('user')) return []
+      if (!state.hasOwnProperty('dropdown') && !state.dropdown.hasOwnProperty('user')) return []
       return state.dropdown.user.map(us => {
         return {
           value: us.login,
