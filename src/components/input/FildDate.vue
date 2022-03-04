@@ -81,6 +81,18 @@ export default {
   components: { IconLine, IconBase, Datepicker },
 
   methods: {
+    setMindate(date) {
+      if (!date) return new Date();
+
+      const _date = new Date(date)
+      const day = _date.getDay() -1
+      const month = _date.getMonth() + 1
+      const year = _date.getFullYear()
+
+      const new_date = new Date(`${month}-${day}-${year}`)
+
+      return new_date
+    },
     focus(e) {
       const input = document.getElementById(`container_input_${this.text}`)
       input.focus()

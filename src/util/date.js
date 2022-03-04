@@ -26,3 +26,16 @@ export const minDateNow = () => {
   var date = new Date();
   return date.setDate(date.getDate() - 1);
 }
+
+export const dateConcat = (date) => {
+  if (!date) return minDateNow();
+
+  const _date =  moment(date, 'YYYY/MM/DD')
+  const day = _date.date()
+  const month = _date.month() + 1
+  const year = _date.year()
+
+  const new_date =  moment(`${year}-${month}-${day}`).format('YYYY-MM-DD HH:mm:ss')
+
+  return new_date
+}

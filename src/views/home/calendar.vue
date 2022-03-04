@@ -46,7 +46,7 @@
                   :value="eventCalendar.end"
                   :required="false"
                   :isError="isError && !eventCalendar.end"
-                  :minDate="eventCalendar.start"
+                  :minDate="setMinDate(eventCalendar.start)"
                 />
                 <fild-multi-select
                   text="Usuários"
@@ -105,7 +105,7 @@ import EventCalendar from '@/components/calendar/EventCalendar.vue'
 import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
-import { dateHourFormarUs, minDateNow } from '@/util/date.js'
+import { dateHourFormarUs, minDateNow, dateConcat } from '@/util/date.js'
 
 
 export default {
@@ -168,6 +168,9 @@ export default {
     permissionADM: (state) => state.user.adminUser  === 'ADMINISTRADOR'
   }),
   methods: {
+    setMinDate(date) {
+      return dateConcat(date)
+    },
     clickCalendar() {
       this.dispatch('list/setNoRegistry', false)
 
@@ -299,7 +302,7 @@ export default {
 }
 
 .calendar_fild {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   height: 20rem;
 }
 

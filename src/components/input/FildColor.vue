@@ -117,9 +117,11 @@ export default {
 }
 
 .color-input .picker-popup {
-  position: revert !important;
+  /* position: revert !important; */
   z-index: 99999999999999999;
-  width: auto;
+  left: 0 !important;
+  top: 0 !important;
+  width:  auto;
   min-width: 165px;
   background-color: #fbfbfb;
   box-shadow: 0px 5px 10px rgb(15 15 15 / 40%);
@@ -129,6 +131,17 @@ export default {
   /* user-select: none; */
   color: #0f0f0f;
   transform: translate(-100%, 0);
+  overflow: hidden;
+}
+
+.color-input .saturation-pointer {
+    top: inherit !important;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10001;
 }
 
 .color-input .saturation-area {
