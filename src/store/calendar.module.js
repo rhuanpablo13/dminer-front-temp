@@ -31,6 +31,9 @@ export const calendar = {
         () => {
          this.dispatch('form/setLoading')
          this.dispatch('calendar/setEventsAll')
+
+         const data = { keyword: null, login: this.state.user.login, typeList: 'notification' }
+         this.dispatch('home/searchItem', data)
         },
         (error) => {
           console.log(error)
