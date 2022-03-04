@@ -65,7 +65,7 @@ export const list = {
 
       return searchAll(value).then(
         (payload) => {
-          commit('success', { payload: getListItem.value, typeList} )
+          commit('success', { payload: getListItem.value, typeList: 'post'} )
           dispatch('setLoading')
           commit('successNoRegistry', !getListItem.value.length)
         },
