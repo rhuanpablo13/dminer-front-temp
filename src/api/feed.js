@@ -34,7 +34,7 @@ export const fetchPost = async (id) => {
 
 
 export const fetchSearch = async (id, date, user) => {
-  const response = await apiIntra(`${URL}/search/${id}?date=${date}&user=${user}`)
+  const response = await apiIntra(`${URL}/search/id/${id}?date=${date}&user=${user}`)
   return response.status === 200 ? response.data.data : []
 }
 
