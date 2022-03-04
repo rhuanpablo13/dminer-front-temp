@@ -59,7 +59,7 @@ export const list = {
         commit('successNoRegistry', !getListItem.value.length)
       })
     },
-    goSearchViewAll({ commit }, value) {
+    goSearchViewAll({ commit, dispatch }, value) {
       dispatch('setLoading')
       commit('successNoRegistry', true)
 
