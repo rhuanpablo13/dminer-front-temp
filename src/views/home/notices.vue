@@ -88,8 +88,8 @@
 
           <div> 
             <span> Usuário(s) marcado(s): </span>
-            <ul>
-              <ol v-for="user in itemView.users" :key="user.id"> {{ user.login }} </ol>
+            <ul style="padding-inline-start: 0;">
+              <ol style="padding-inline-start: 0;" v-for="user in itemView.users" :key="user.id"> {{ user.login }} </ol>
             </ul>
           </div>
         </div>
