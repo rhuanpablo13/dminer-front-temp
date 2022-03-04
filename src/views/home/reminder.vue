@@ -14,7 +14,7 @@
         v-for="(item, key) in list"
         :key="key"
         :id="`reminder_li_${key}`"
-        :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)"
+        @click="setDoc(item)"
       >
         <icon-base
           viewBox="0 0 500 85.1"
@@ -47,7 +47,7 @@
       <template v-slot:body>
         <div class="item_view">
           <div style="display: flex"> 
-            <button class="team_btn_edit" style="margin-left: auto;" v-if="permissionADM">
+            <button class="team_btn_edit" style="margin-left: auto;">
               <icon-base
                 icon-name="icon"
                 class="team_icon_edit"
@@ -253,6 +253,7 @@ ul {
 
 li {
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .reminder_footer {

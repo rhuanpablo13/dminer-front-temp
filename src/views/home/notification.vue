@@ -9,7 +9,7 @@
     :typeList="typeList"
   >
     <ul>
-      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="setDoc(item)" v-for="item in list" :key="item.id" :title="item.notification">
+      <li @click="setDoc(item)" v-for="item in list" :key="item.id" :title="item.notification">
         <icon-base
           viewBox="0 0 500 85.1"
           icon-name="icon"
@@ -187,6 +187,7 @@ ul {
 
 li {
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .form_container {

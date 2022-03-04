@@ -11,7 +11,7 @@
     :typeList="typeList"
   >
     <ul>
-      <li :style="{'cursor': permissionADM ? 'pointer' : 'default'}" @click="permissionADM && setDoc(item)" v-for="item in list" :key="item.id">
+      <li  @click="setDoc(item)" v-for="item in list" :key="item.id">
         <icon-base
           viewBox="0 0 500 347.7"
           icon-name="icon"
