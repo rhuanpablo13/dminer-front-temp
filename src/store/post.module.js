@@ -78,10 +78,28 @@ export const post = {
         }
       )
     },
+    getPostView({ commit }, idParam) {
+      this.dispatch('list/setNoRegistry', true)
+      this.dispatch('list/setLoading')
+
+      return setPost(idParam).then(
+        (payload) => {
+          commit('successPost', getPost.value)
+          this.dispatch('list/setNoRegistry', !Object.keys(getPost.value).length)
+          this.dispatch('list/setLoading')
+        },
+        (error) => {
+          console.log(error)
+          commit('error')
+          this.dispatch('list/setLoading')
+          return Promise.reject(error)
+        }
+      )
+    },
     setLike({ commit }, value) {
       return setReact(value).then(
         (payload) => {
-          this.dispatch('post/getPostViewAll')
+          this.dispatch('list/getList', 'post')
           this.dispatch('post/getPostView', value.id)        
         },
         (error) => {
@@ -104,7 +122,7 @@ export const post = {
     setComment({ commit }, value) {
       return crateComment(value).then(
         (payload) => {
-          this.dispatch('post/getPostViewAll')
+          this.dispatch('list/getList', 'post')
           this.dispatch('post/getPostView', value.idPost)
         },
         (error) => {
