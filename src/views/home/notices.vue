@@ -35,6 +35,12 @@
                   {{ dateHourFormart(item.date) }}
                 </span>
               </div>
+              <div> 
+                <span> Usuário(s) marcado(s): </span>
+                <ul>
+                  <ol v-for="user in item.users" :key="user.id"> {{ user.login }} </ol>
+                </ul>
+              </div>
             </div>
           </frame-notices>
         </icon-base>
