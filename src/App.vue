@@ -22,7 +22,7 @@ export default {
       const date = new Date(timeout)
       const now = new Date() 
 
-      const diff = diffDate(now, date)
+      const diff = diffDate(date, now)
 
       if (diff >= 1800000 ) {
         store.dispatch('auth/logout')
