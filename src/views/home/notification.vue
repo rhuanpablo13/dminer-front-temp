@@ -72,6 +72,7 @@
     @submit="sendForm"
     @close="showModal = false"
   >
+   <template v-slot:body>
     <div class="form_container">
       <fild-input
         :text="'Notificação'"
@@ -80,6 +81,7 @@
         required
       />
     </div>
+   </template>
   </form-modal>
 </template>
 

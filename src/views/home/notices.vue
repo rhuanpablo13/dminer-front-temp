@@ -103,6 +103,7 @@
     @submit="sendForm"
     @close="showModal = false"
   >
+   <template v-slot:body>
     <div class="form_container">
       <div class="form_container_text">
 
@@ -137,6 +138,7 @@
         />
       </div>
     </div>
+   </template>
   </form-modal>
 </template>
 

@@ -1,31 +1,33 @@
 <template>
   <form-modal :showModal="showModal" title="post" @submit="sendForm">
-    <div class="tutorial_form_container">
-      <upload-image v-model="value.anexo" :propsImage="value.anexo" />
-      <div class="tutorial_form_container_text">
-        <fild-input
-          text="Tópico"
-          v-model="value.title"
-          :value="value.title"
-          required
-        />
-        <fild-select
-          text="Tipo"
-          v-model="value.type"
-          :value="value.type"
-          required
-          :options="typeList"
-        />
-      </div>
-    </div>
-    <div class="tutorial_textarea">
-      <fild-textarea
-        text="Conteúdo"
-        v-model="value.content"
-        :value="value.content"
-        required
-      />
-    </div>
+     <template v-slot:body>
+        <div class="tutorial_form_container">
+          <upload-image v-model="value.anexo" :propsImage="value.anexo" />
+          <div class="tutorial_form_container_text">
+            <fild-input
+              text="Tópico"
+              v-model="value.title"
+              :value="value.title"
+              required
+            />
+            <fild-select
+              text="Tipo"
+              v-model="value.type"
+              :value="value.type"
+              required
+              :options="typeList"
+            />
+          </div>
+        </div>
+        <div class="tutorial_textarea">
+          <fild-textarea
+            text="Conteúdo"
+            v-model="value.content"
+            :value="value.content"
+            required
+          />
+        </div>
+     </template>
   </form-modal>
 </template>
 

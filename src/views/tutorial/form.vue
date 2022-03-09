@@ -4,6 +4,7 @@
     title="cadastro de tutorial"
     @submit="sendForm"
   >
+   <template v-slot:body>
     <div class="tutorial_form_container">
       <upload-image v-model="value.image" :propsImage="value.image" />
       <div class="tutorial_form_container_text">
@@ -37,6 +38,7 @@
         required
       />
     </div>
+   </template>
   </form-modal>
 </template>
 

@@ -52,51 +52,57 @@
     @submit="()=> this.sendForm()"
     @close="showModal = false"
   >
-    <div class="form_container">
-      <div style="display: flex; justify-self: right;" v-if="isEdit"> 
-        <button class="team_btn_edit"  v-if="permissionADM">
-          <icon-base
-            icon-name="icon"
-            class="team_icon_edit"
-            @click="deleteBenefit(value.id)"
-            width="1rem"
-            heigth="1rem"
-          >
-            <icon-trash />
-          </icon-base>
-        </button>
+    <template v-slot:icon>    
+      <button class="team_btn_edit"  v-if="permissionADM">
+        <icon-base
+          icon-name="icon"
+          class="team_icon_edit"
+          @click="deleteBenefit(value.id)"
+          width="1rem"
+          heigth="1rem"
+          
+        >
+          <icon-trash />
+        </icon-base>
+      </button>
+    </template>
+    <template v-slot:body>
+      <div class="form_container">
+        <div style="display: flex; justify-self: right;" v-if="isEdit"> 
+          
+        </div>
+
+        <div class="form_container_text">
+          <fild-input
+            :text="'Pergunta'"
+            v-model="value.question"
+            :value="value.question"
+            required
+          />
+
+          <fild-input
+            :text="'Resposta A'"
+            v-model="value.optionA"
+            :value="value.optionA"
+            required
+          />
+
+          <fild-input
+            :text="'Resposta B'"
+            v-model="value.optionB"
+            :value="value.optionB"
+            required
+          />
+
+          <fild-date
+            :text="'Valido até'"
+            v-model="value.date"
+            :value="value.date"
+            required
+          />
+        </div>
       </div>
-
-      <div class="form_container_text">
-        <fild-input
-          :text="'Pergunta'"
-          v-model="value.question"
-          :value="value.question"
-          required
-        />
-
-        <fild-input
-          :text="'Resposta A'"
-          v-model="value.optionA"
-          :value="value.optionA"
-          required
-        />
-
-        <fild-input
-          :text="'Resposta B'"
-          v-model="value.optionB"
-          :value="value.optionB"
-          required
-        />
-
-        <fild-date
-          :text="'Valido até'"
-          v-model="value.date"
-          :value="value.date"
-          required
-        />
-      </div>
-    </div>
+    </template>
   </form-modal>
 </template>
 
@@ -336,5 +342,7 @@ button > span {
   border: none;
   background: transparent;
   cursor: pointer;
+  width: 90%;
+  text-align: end;
 }
 </style>

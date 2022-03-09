@@ -4,6 +4,7 @@
     title="cadastro de perfil"
     @submit="sendForm"
   >
+   <template v-slot:body>
     <div class="benefit_form_container">
       <div class="benefit_form_container_text">
           <fild-input
@@ -14,6 +15,7 @@
           />
       </div>
     </div>
+   </template>
   </form-modal>
 </template>
 

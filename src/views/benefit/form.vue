@@ -4,6 +4,7 @@
     title="cadastro de benefícios"
     @submit="sendForm"
   >
+   <template v-slot:body>
     <div class="benefit_form_container">
       <upload-image v-model="value.image" :propsImage="value.image" />
       <div class="benefit_form_container_text">
@@ -29,6 +30,7 @@
         />
       </div>
     </div>
+   </template>
   </form-modal>
 </template>
 
