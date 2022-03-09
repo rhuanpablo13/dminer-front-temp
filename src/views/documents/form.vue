@@ -62,7 +62,7 @@ export default {
       required: false,
       default: {
         title: '',
-        category: 0,
+        category: null,
         permission: false,
         contentLink: ''
       }
@@ -83,7 +83,6 @@ export default {
         )
         this.$emit('close')
       } else {
-        this.dispatch('form/setLoading')
         this.dispatch('form/setError')
       }
     },

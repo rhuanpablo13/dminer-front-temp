@@ -101,7 +101,6 @@ export default {
         )
         this.$emit('close')
       } else {
-        this.dispatch('form/setLoading')
         this.dispatch('form/setError')
       }
     },

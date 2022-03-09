@@ -66,7 +66,7 @@ export default {
       default: {
         title: '',
         content: '',
-        permission: 0,
+        permission: null,
         image: null
       }
     }
