@@ -91,6 +91,9 @@ export default {
       return error
     }
   },
+  created() {
+    this.config.value = this.value
+  },
   components: { IconLine, IconBase, Multiselect },
   props: {
     text: { type: String, required: false },

@@ -89,7 +89,7 @@
           <div> 
             <span> Usuário(s) marcado(s): </span>
             <ul style="padding-inline-start: 0;">
-              <ol style="padding-inline-start: 0;" v-for="user in itemView.users" :key="user.id"> {{ user.login }} </ol>
+              <ol style="padding-inline-start: 0;" v-for="user in itemView.users" :key="user"> {{ user.login }} </ol>
             </ul>
           </div>
         </div>
@@ -192,7 +192,7 @@ export default {
   computed: mapState({
     dropdownUser: (state) =>  {
       if (!state.hasOwnProperty('dropdown') && !state.dropdown.hasOwnProperty('user')) return []
-      return state.dropdown.user.map(us => {
+      return state.dropdown.user && state.dropdown.user.map(us => {
         return {
           value: us.login,
           name: us.userName,
@@ -222,6 +222,15 @@ export default {
     IconTrash
   },
   methods: {
+    getUserSelected() {
+      if (this.value.users.length) {
+        const users = []
+        this.value.users.map(item => {
+          users.push(item.login)
+        })
+        this.value.users = users
+      }
+    },
     openAddNotices() {
       this.dispatch('list/setNoRegistry', false)
 
@@ -243,6 +252,9 @@ export default {
           {typeList: this.typeList, 
           value: this.value}
         )
+        this.itemView = this.value
+
+        this.userModal()
         this.showModal = false
       } else {
         this.dispatch('form/setError')
@@ -264,12 +276,27 @@ export default {
     edit(value) {
       this.isEdit = true
       this.value = value
+      this.getUserSelected()
       this.showModal = true
     },
     deleteBenefit(id) {
       this.dispatch('home/deleteItemList', {typeList:this.typeList, id})
       this.showModalView = false
     },
+    userModal() {
+      const items = []
+
+      this.value.users.map(item => {
+        const userIndex = this.dropdownUser.findIndex(us => item === us.value)
+
+        if (userIndex !== -1) {
+          items.push({
+            login: item
+          })
+        }
+      })
+      this.itemView.users = items
+    }
   }
 }
 </script>
