@@ -162,8 +162,6 @@ export default {
   }),
   methods: {
     sendForm() {
-      this.$store.dispatch('form/setLoading')
-
       if (this.validForm()) {
         this.value.date  =  dateHourFormarUs(this.value.date)
         this.value.action  = false

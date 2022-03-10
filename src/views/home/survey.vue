@@ -162,6 +162,10 @@ export default {
             login: this.getUser
           }
         )
+
+        const data = { keyword: null, login: this.getUser, typeList: 'notification' }
+        this.$store.dispatch('home/searchItem', data)
+
         this.showModal = false
       } else {
         this.$store.dispatch('form/setError')
