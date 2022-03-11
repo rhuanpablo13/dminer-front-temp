@@ -11,6 +11,7 @@
         v-bind="config"
         :options="options"
         @select="changeInput"
+        @deselect="changeInput"
       >
         <template v-slot:tag="{ option, handleTagRemove, disabled }">
           <div class="multiselect-tag is-user">
