@@ -121,20 +121,20 @@
           required
         />
 
-        <fild-select
-          text="Prioridade"
-          v-model="value.priority"
-          :value="value.priority"
-          required
-          :options="dropdownPriority"
-        />
-
         <fild-multi-select
           text="Usuários"
           v-model="value.users"
           :value="value.users"
           required
           :options="dropdownUser"
+        />
+
+        <fild-select
+          text="Prioridade"
+          v-model="value.priority"
+          :value="value.priority"
+          required
+          :options="dropdownPriority"
         />
       </div>
     </div>

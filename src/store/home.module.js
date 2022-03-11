@@ -40,7 +40,7 @@ export const home = {
         const payload = await getSearchItem(item, keyword, login)
         
         // if (payload.length) {
-          localStorage[`${item}List`] = JSON.stringify(payload)
+          localStorage[`${item}List`] = JSON.stringify( payload ?  payload : []) 
           commit('success', {typeList: item, payload})
         // }
       })

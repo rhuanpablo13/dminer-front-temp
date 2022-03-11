@@ -1,5 +1,5 @@
 <template>
-  <div class="container_input" @click="focus($event)">
+  <div class="container_input">
     <div>
       <div v-if="text" class="input_label">
         {{ text }}
@@ -168,6 +168,18 @@ export default {
   display: flex;
   align-items: center;
   white-space: nowrap;
+}
+
+ .multiselect-tags {
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-wrap: wrap;
+    margin: var(--ms-tag-my,.25rem) 0 0;
+    padding-left: var(--ms-py,.5rem);
+    align-items: center;
+    max-height: 5rem;
+    overflow-y: auto;
 }
 
 .multiselect {
