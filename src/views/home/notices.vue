@@ -101,7 +101,7 @@
     :showModal="showModal"
     title="cadastro de avisos"
     @submit="sendForm"
-    @close="showModal = false"
+    @close="close"
   >
    <template v-slot:body>
     <div class="form_container">
@@ -296,6 +296,10 @@ export default {
         }
       })
       this.itemView.users = items
+    },
+    close() {
+      this.userModal()
+      this.showModal = false
     }
   }
 }
