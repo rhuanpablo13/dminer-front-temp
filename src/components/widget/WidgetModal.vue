@@ -27,9 +27,7 @@
                 </icon-base>
               </button>
             <section class="header__section" v-if="search && !isLoading">
-              <form action="#" @submit.prevent="$emit('change')">
-                <fild-search @change="$emit('change')" @clear="$store.dispatch('list/getList', typeList )" />
-              </form>
+              <fild-search @change="$emit('change')" @clear="$store.dispatch('list/getList', typeList )" />
             </section>
             </div>
 
@@ -118,7 +116,8 @@ export default {
     FildSearch,
     Loading,
     NoRegistry
-  }
+
+  },
 }
 </script>
 

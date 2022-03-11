@@ -10,8 +10,8 @@
       <div class="container__provisorio">
         <input
           v-model="input"
-          @change="$emit('change')"
           placeholder="PESQUISAR"
+          @keyup.enter="$emit('change')"
         />
         <!-- v-if="input.length" -->
         <span class="clear" @click="clear" >X</span>
@@ -73,6 +73,7 @@ input {
   color: var(--color-title);
   font-weight: 300;
   cursor: pointer;
+  margin-top: 1rem;
 
   transition: all 05s ease;
 }
