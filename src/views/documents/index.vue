@@ -15,7 +15,7 @@
             <a href="#"   @click="appendTheFile(item.contentLink)">
               {{ item.title }}
             </a>
-            <div class="image_details_categorie" v-if="item.category">
+            <div class="image_details_categorie">
              {{  getCategory(item.category) }}
             </div>
             <button class="team_btn_edit" v-if="permissionADM">
