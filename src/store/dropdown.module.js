@@ -28,6 +28,9 @@ export const dropdown = {
     getDropdownUser({ commit }) {
       return getDropdown('user').then(
         (payload) => {
+          payload.sort(function(a,b) {
+            return a.userName < b.userName ? -1 : a.userName > b.userName ? 1 : 0;
+        });
           commit('dropdownUserSuccess', payload)
           return Promise.resolve(payload)
         },

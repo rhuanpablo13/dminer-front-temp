@@ -284,18 +284,20 @@ export default {
       this.showModalView = false
     },
     userModal() {
-      const items = []
-
-      this.value.users.map(item => {
-        const userIndex = this.dropdownUser.findIndex(us => item === us.value)
-
-        if (userIndex !== -1) {
-          items.push({
-            login: item
-          })
-        }
-      })
-      this.itemView.users = items
+      if (this.value.users && this.value.users.length) {
+        const items = []
+  
+        this.value.users.map(item => {
+          const userIndex = this.dropdownUser.findIndex(us => item === us.value)
+  
+          if (userIndex !== -1) {
+            items.push({
+              login: item
+            })
+          }
+        })
+        this.itemView.users = items
+      }
     },
     close() {
       this.userModal()
