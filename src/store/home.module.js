@@ -130,7 +130,9 @@ export const home = {
       state.home = payload
     },
     success(state, {typeList, payload}) {
-      localStorage[`${typeList}List`] = JSON.stringify(payload)
+      if (typeList !== 'user') {
+        localStorage[`${typeList}List`] = JSON.stringify(payload)
+      }
       state[`${typeList}List`] = payload
     },
     searchFailure(state) {

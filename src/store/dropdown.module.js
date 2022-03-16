@@ -25,8 +25,8 @@ export const dropdown = {
   state: dropdownInit,
 
   actions: {
-    getDropdownUser({ commit }) {
-      return getDropdown('user').then(
+    getDropdownUser({ commit }, { avatar }) {
+      return getDropdown('user', avatar).then(
         (payload) => {
           payload.sort(function(a,b) {
             return a.userName < b.userName ? -1 : a.userName > b.userName ? 1 : 0;

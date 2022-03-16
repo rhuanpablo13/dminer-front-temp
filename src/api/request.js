@@ -36,8 +36,9 @@ export const fetchSearchItem = async (URL, keyword, login) => {
   return response.status === 200 ? response.data.data : []
 }
 
-export const fetchDropdown = async (URL) => {
-  const response = await apiIntra.post(`${URL}/dropdown`)
+export const fetchDropdown = async (URL, hasBoolean) => {
+  const _URL = URL === "user" ? `${URL}/dropdown/${hasBoolean}` : `${URL}/dropdown`
+  const response = await apiIntra.post(_URL)
   return response.status === 200 ? response.data.data : []
 }
 

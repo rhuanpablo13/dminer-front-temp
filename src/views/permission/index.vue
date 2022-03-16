@@ -44,7 +44,7 @@ import IconLine from '@/components/svg/IconLine.vue'
 export default {
   setup() {
     const { dispatch } = useStore()
-    dispatch('dropdown/getDropdownUser')
+    dispatch('dropdown/getDropdownUser', { avatar: false})
 
     return {
       showModalPrimary: true,

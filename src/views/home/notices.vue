@@ -171,6 +171,8 @@ export default {
   },
   setup() {
     const { dispatch } = useStore()
+    dispatch('dropdown/getDropdownUser', {avatar: true})
+
     return {
       dispatch,
       dateHourFormart,

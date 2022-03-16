@@ -36,8 +36,8 @@ export default function useList() {
     getListItem.value = await fetchFind(URL,id)
   }
 
-  const getDropdown = async (URL) => {
-    return await fetchDropdown(URL)
+  const getDropdown = async (URL, hasBoolean) => {
+    return await fetchDropdown(URL, hasBoolean)
   }
 
   const updateCount = async (idQuiz, item , login) => {

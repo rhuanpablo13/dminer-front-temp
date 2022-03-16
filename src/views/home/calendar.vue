@@ -119,7 +119,7 @@ export default {
   },
   setup(props) {
     const { dispatch } = useStore()
-    dispatch('dropdown/getDropdownUser')
+    dispatch('dropdown/getDropdownUser', {avatar: true})
 
     const calendar = ref([])
     const eventCalendar = reactive({
@@ -156,7 +156,7 @@ export default {
   computed: mapState({
     dropdownUser: (state) =>  {
       if (!state.hasOwnProperty('dropdown') && !state.dropdown.hasOwnProperty('user')) return []
-      return state.dropdown.user.map(us => {
+      return state.dropdown.user && state.dropdown.user.map(us => {
         return {
           value: us.login,
           name: us.userName,
