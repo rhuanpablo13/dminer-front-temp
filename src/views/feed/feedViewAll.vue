@@ -7,7 +7,6 @@
       @close="closeModalFeed"
       :overflow="false"
       search
-      @change="submit"
       typeList="post/search"
     >
       <template v-slot:body>
@@ -139,15 +138,6 @@ export default {
     },
     hasUserIndex(post) {
       return post.favorites.indexOf(this.login) === -1
-    },
-    submit(event) {
-      if (!event) return;
-
-      if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:'post', value: event.target.value})
-      } else if(event.target.value === '') {
-        this.dispatch('list/getList', 'post')
-      }
     },
   }
 }

@@ -27,7 +27,7 @@
                 </icon-base>
               </button>
             <section class="header__section" v-if="search && !isLoading">
-              <fild-search @change="$emit('change')" @clear="$store.dispatch('list/getList', typeList )" />
+              <fild-search @change="submit" @clear="$store.dispatch('list/getList', typeList )" />
             </section>
             </div>
 
@@ -118,6 +118,19 @@ export default {
     NoRegistry
 
   },
+  methods: {
+    submit(event) {
+      if (!event) return;
+
+      const type = this.typeList === 'post/search' ? 'post': this.typeList
+
+      if (event.target && event.target.value) {
+        this.$store.dispatch('list/searchItemList', {typeList:type, value: event.target.value})
+      } else if(event.target.value === '') {
+        this.$store.dispatch('list/getList', type)
+      }
+    },
+  }
 }
 </script>
 

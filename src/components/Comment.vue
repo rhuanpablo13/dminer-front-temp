@@ -1,12 +1,12 @@
 <template>
-  <form action="#" @submit.prevent="send">
+  <form action="#">
     <div class="feed_comment_input">
       <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
 
       <fild-input text="Comentar" v-model="value.content" :value="value.content" required />
       <send
         @click="send"
-        type="submit"
+        type="button"
         width="100%"
         text="Enviar"
       ></send>
@@ -55,9 +55,9 @@ export default {
     Send
 },
   methods: {
-    send() {
+    send(e) {
+      e.preventDefault();
       this.value.login = this.getUser
-
       this.$store.dispatch('post/setComment', this.value).then(()=> {
         this.value.content = ''
       })
@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .feed_comment_input {
   display: flex;
   height: 4rem;
@@ -75,5 +75,9 @@ export default {
   font-size: 0.5rem;
   margin: auto;
   /* margin-top: -2rem; */
+}
+
+#container_input_Comentar{
+  width: 13rem !important;
 }
 </style>

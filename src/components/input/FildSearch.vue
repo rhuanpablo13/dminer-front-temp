@@ -11,7 +11,7 @@
         <input
           v-model="input"
           placeholder="PESQUISAR"
-          @keyup.enter="$emit('change')"
+          @keyup.enter="$emit('change', input)"
         />
         <!-- v-if="input.length" -->
         <span class="clear" @click="clear" >X</span>
