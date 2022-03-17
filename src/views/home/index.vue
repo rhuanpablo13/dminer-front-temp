@@ -12,7 +12,7 @@
         </div>
       </draggable>
     </section>
-    <section class="footer__section"> {{ $store.getters.appVersion }} </section>
+    <section class="footer__section"> {{ appVersion }} </section>
   </div>
 </template>
 
@@ -37,11 +37,12 @@ export default {
       enabled: true,
       dragging: false,
       inputValue: '',
-      update: false
+      update: false,
+    appVersion: 'versão 0.8.1'
     }
   },
   computed: mapState({
-    login: (state) => state.user.login
+    login: (state) => state.user.login,
   }),
   mounted() {
     if (localStorage.position_components_home) {
@@ -144,9 +145,15 @@ export default {
 }
 
 .footer__section {
-  position: fixed;
-  bottom: 0;
-  background-color: gray;
-  height: 3rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #8080805e;
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+    color: var(--color-title);
+    font-size: 0.8rem;
+    padding: 0.5rem;
 }
 </style>
