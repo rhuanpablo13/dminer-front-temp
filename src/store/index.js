@@ -8,6 +8,8 @@ import { dropdown } from './dropdown.module'
 import { post } from './post.module'
 import { calendar } from './calendar.module'
 import { list } from './list.module'
+import { version } from './version.module'
+
 
 const store = createStore({
   modules: {
@@ -20,6 +22,7 @@ const store = createStore({
     post,
     calendar,
     list,
+    version
   }
 })
 

@@ -12,6 +12,7 @@
         </div>
       </draggable>
     </section>
+    <section class="footer__section"> {{ $store.getters.appVersion }} </section>
   </div>
 </template>
 
@@ -40,7 +41,7 @@ export default {
     }
   },
   computed: mapState({
-    login: (state) => state.user.login,
+    login: (state) => state.user.login
   }),
   mounted() {
     if (localStorage.position_components_home) {
@@ -69,6 +70,7 @@ export default {
 
   setup() {
     const search = ref('')
+
     return {
       search
     }
@@ -139,5 +141,12 @@ export default {
 
 .list-group-item {
   cursor: not-allowed;
+}
+
+.footer__section {
+  position: fixed;
+  bottom: 0;
+  background-color: gray;
+  height: 3rem;
 }
 </style>

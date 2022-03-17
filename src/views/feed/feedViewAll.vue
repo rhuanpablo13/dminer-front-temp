@@ -195,4 +195,6 @@ export default {
   font-size: 0.5rem;
   margin-right: -1rem;
 }
+
+
 </style>

@@ -9,6 +9,14 @@
       :noRegistry="!post"
     >
       <template v-slot:body>
+        <icon-base
+            icon-name="icon"       
+            class="back_icon"
+            @click="backAll"
+            width="1rem"
+          >
+          <icon-open/>
+        </icon-base>
         <div class="feed_container">
           <div class="feed_all_container">
             <post :value="post"  v-if="post.user" />
@@ -51,6 +59,8 @@ import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 import formCrud from './form.vue'
+import IconOpen from '@/components/svg/IconOpen.vue'
+import IconBase from '@/components/svg/IconBase.vue'
 
 import { useRoute } from "vue-router";
 
@@ -90,9 +100,14 @@ export default {
     Post,
     WidgetLayoutHome,
     FilterFeed,
-    formCrud
+    formCrud,
+    IconOpen,
+    IconBase
   },
   methods: {
+    backAll() {
+      this.$router.push('/feed')
+    },
     openModal() {
       this.showModal = true
     },
@@ -163,5 +178,13 @@ export default {
 .feed_view_filter {
   font-size: 0.5rem;
   margin-right: -1rem;
+}
+
+.back_icon {
+  position: absolute;
+  left: 4rem;
+  top: -1.5rem;
+  transform: rotateY(180deg);
+  cursor: pointer;
 }
 </style>

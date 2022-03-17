@@ -121,11 +121,10 @@ export default {
 .tutorial_form_container {
   display: flex;
   height: 100%;
-  margin: auto;
   padding: 2rem;
 
   width: 80%;
-  margin: auto;
+  margin: -2rem auto;
   gap: 1rem;
   justify-content: center;
 }

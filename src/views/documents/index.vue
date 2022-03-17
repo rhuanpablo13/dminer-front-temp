@@ -211,6 +211,7 @@ a {
   top: -0.4rem;
   background: transparent;
   cursor: pointer;
+  z-index: 4;
 }
 .team_icon_edit {
   width: 24%;

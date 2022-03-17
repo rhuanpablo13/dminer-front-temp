@@ -8,7 +8,7 @@ const fs = require('fs')
 export default defineConfig({
   plugins: [vue(), svgLoader()],
   define: {
-    'process.env': process.env
+    'process.env': {...process.env, VERSION: require('./package.json').version}
     // 'server.hmr.overlay': false
     // 'server.hmr': false
   },
@@ -16,7 +16,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src')
     }
-  }
+  },
 
   // devServer: {
   //   disableHostCheck: true,
