@@ -74,10 +74,9 @@
           <div class="reminder">
               <fild-checkbox
                 :text="itemView.reminder"
-                v-model="itemView.checked"
                 :value="itemView.checked"
                 type="checkbox"
-                @change="()=> change(itemView, true)"
+                @change="(e)=> change(e)"
                 full
               />
             </div>
@@ -188,12 +187,12 @@ export default {
 
       this.showModal = true
     }, 
-    change(item, local) {
+    change() {
       this.itemView.checked = !this.itemView.checked
       this.$store.dispatch('home/updateItemList',           
       {
         typeList: this.typeList, 
-        value: item,
+        value: this.itemView,
         hasLogin: true,
         login: this.getUser
       })
