@@ -7,7 +7,7 @@ const initialState = {
   noRegistry: true
 }
 
-const { getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll, favorite } = useList()
+const { getDropdown, getListItem, setList, deleteItem, search, create, update, getId, getFavorites, searchAll, favorite } = useList()
 
 export const list = {
   namespaced: true,
@@ -177,6 +177,24 @@ export const list = {
         }
       )
     },   
+    getListUser({ commit , dispatch}, { avatar }) {
+      dispatch('setLoading')
+      commit('successNoRegistry', true)
+      return getDropdown('user', avatar).then(
+        (payload) => {
+          payload.sort(function(a,b) {
+            return a.userName < b.userName ? -1 : a.userName > b.userName ? 1 : 0;
+          });
+          commit('success', { payload: payload, typeList: 'user'} )
+          dispatch('setLoading')
+          commit('successNoRegistry', !payload.length)
+        },
+        (error) => {
+          dispatch('setLoading')
+          commit('successNoRegistry', true)
+        },
+      )
+    },
     setLoading({ commit }) {
       commit('loading')
     },

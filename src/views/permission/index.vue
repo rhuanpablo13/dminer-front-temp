@@ -4,11 +4,12 @@
       v-if="showModalPrimary"
       title="permissão"
       @close="this.$router.push('/')"
-      :noRegistry="!dropdownUser.length"
+      :noRegistry="!list.length"
+      :overflow="false"
     >
       <template v-slot:body>
         <ul>
-          <li v-for="(item, key) in dropdownUser" :key="key">
+          <li v-for="(item, key) in list" :key="key">
             <div class="permission_label">
               <label>{{ item.userName }}</label>
             </div>
@@ -44,8 +45,9 @@ import IconLine from '@/components/svg/IconLine.vue'
 export default {
   setup() {
     const { dispatch } = useStore()
-    dispatch('dropdown/getDropdownUser', { avatar: false})
-
+    dispatch('list/getListUser', { avatar: false})
+    dispatch('dropdown/getDropdownPermission')
+    
     return {
       showModalPrimary: true,
       showModal: false,
@@ -62,7 +64,7 @@ export default {
     IconLine
   },
   computed: mapState({
-    dropdownUser: (state) => state.dropdown.user,
+    list: (state) => state.list.user || [],
     dropdownPermission: (state) => state.dropdown.permissions
   }),
   methods: {

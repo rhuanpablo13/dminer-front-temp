@@ -189,7 +189,7 @@ export default {
       this.showModal = true
     }, 
     change(item, local) {
-      item.checked = !item.checked
+      this.itemView.checked = !this.itemView.checked
       this.$store.dispatch('home/updateItemList',           
       {
         typeList: this.typeList, 
