@@ -26,10 +26,8 @@
             <div class="reminder">
               <fild-checkbox
                 :text="item.reminder"
-                v-model="item.checked"
                 :value="item.checked"
                 type="checkbox"
-                @change="change(item)"
               />
             </div>
           </frame-notification>
@@ -79,7 +77,7 @@
                 v-model="itemView.checked"
                 :value="itemView.checked"
                 type="checkbox"
-                @change="change(itemView, true)"
+                @change="()=> change(itemView, true)"
                 full
               />
             </div>
@@ -199,9 +197,6 @@ export default {
         hasLogin: true,
         login: this.getUser
       })
-      if (local) {
-        this.itemView.checked = !this.itemView.checked
-      }
     },
     setDoc(_item) {
       this.$store.dispatch('list/setNoRegistry', false)

@@ -17,30 +17,9 @@
           >
           <icon-open/>
         </icon-base>
-        <div class="feed_container">
+        <div class="feed_container_view">
           <div class="feed_all_container">
             <post :value="post"  v-if="post.user" />
-          </div>
-
-         <div>
-          <filter-feed
-            @submit="filter"
-            class="feed_view_filter"
-            text="Filtrar"
-          >
-            <fild-date
-              text="Filtrar por data"
-              v-model="filterData.date"
-              :value="filterData.date"
-            />
-
-            <fild-select
-              text="Filtrar por pessoa"
-              v-model="filterData.user"
-              :value="filterData.user"
-              :options="dropdownUser"
-            />
-          </filter-feed>
           </div>
         </div>
       </template>
@@ -165,13 +144,13 @@ export default {
   height: 16rem;
 }
 
-.feed_container {
+.feed_container_view {
   height: 365px;
   /* width: 90%; */
   margin: auto;
 
   display: grid;
-  grid-template-columns: 75% 20%;
+  /* grid-template-columns: 75% 20%; */ 
   /* margin-left: 4rem; */
 }
 

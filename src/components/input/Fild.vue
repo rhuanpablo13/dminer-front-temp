@@ -115,6 +115,6 @@ export default {
   font-size: 0.5rem;
   color: red;
   text-align: start;
-  margin-top: -1.5rem;
+  margin-top: -2rem;
 }
 </style>
