@@ -77,7 +77,7 @@ export default {
       default: {
         title: '',
         content: '',
-        permissions: null,
+        permission: null,
         category: null,
         image: null
       }
@@ -107,6 +107,16 @@ export default {
     validForm() {
       this.value.date = dateHourFormarUs(new Date())
       this.value.creator = this.login
+      
+      if (typeof(this.value.category) === 'string') {
+        const indexCategory = this.dropdownCategory.findIndex(category => category.name === this.value.category)
+        this.value.category = this.dropdownCategory[indexCategory].id
+      }
+
+      if (typeof(this.value.permission) === 'string') {
+        this.value.permission = parseInt(this.value.permission)
+      }
+
       return  this.value.hasOwnProperty('title') && this.value?.title !== "" && 
               this.value.hasOwnProperty('content') && this.value?.content !== "" &&
               this.value.hasOwnProperty('permission') && 

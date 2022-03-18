@@ -107,11 +107,11 @@ export const list = {
     },
     updateItemList: async ({ commit, dispatch, state }, {typeList, value}) => {
       dispatch('setLoading')
-      return update(typeList, value).then(() => {
+      return update(typeList, value).then((payload) => {
         dispatch('setLoading')
         state[typeList].map((item, key) => {
           if (value.id === item.id) {
-            state[typeList][key] = value
+            state[typeList][key] = payload
           }
         })
 
