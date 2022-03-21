@@ -5,7 +5,6 @@
       title="Equipe"
       @close="this.$router.push('/')"
       search
-      @change="submit"
       :noRegistry="!list.length"
       :typeList="typeList"
     >
@@ -100,15 +99,6 @@ export default {
     close() {
       this.dispatch('list/getList', this.typeList)
       this.showModal = false
-    },
-    submit(event) {
-      if (!event) return;
-
-      if (event.target && event.target.value) {
-        this.dispatch('list/searchItemList', {typeList:this.typeList, value: event.target.value})
-      } else if(event.target.value === '') {
-        this.dispatch('list/getList', this.typeList)
-      }
     }
   }
 }
