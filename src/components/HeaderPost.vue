@@ -4,21 +4,27 @@
     <div class="feed_header_text">
       <h1>{{ username }}</h1>
       <h3>{{ text }}</h3>
+      <h4>{{ dateHourFormart(datahora) }}</h4>
     </div>
   </div>
 </template>
 
 <script>
 import Avatar from '@/components/Avatar.vue'
+import { dateHourFormart } from '@/util/date'
 
 export default {
   props: {
     avatar: { type: String, required: true },
     username: { type: String, required: false, default: '' },
+    datahora: { type: String, required: false, default: '' },
     text: { type: String, required: false, default: '' }
   },
   components: {
     Avatar,
+  },
+  setup() {
+    return { dateHourFormart}
   }
 }
 </script>
@@ -41,6 +47,8 @@ export default {
 
 h3 {
   margin-top: -2rem;
+  word-break: break-word;
+  width: 77%;
 }
 
 h1 {
@@ -52,5 +60,9 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 14rem;
+}
+
+h4{
+  margin-top: -1rem;
 }
 </style>

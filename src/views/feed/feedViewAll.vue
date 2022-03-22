@@ -45,6 +45,8 @@
               text="Filtrar por data"
               v-model="filterData.date"
               :value="filterData.date"
+              :enableTimePicker="false"
+              :format="dateFormart"
             />
 
             <fild-select
@@ -74,6 +76,8 @@ import Post from '@/components/Post.vue'
 import WidgetLayoutHome from '@/components/widget/WidgetLayoutHome.vue'
 import FilterFeed from '@/components/Filter.vue'
 
+import { dateFormart } from '@/util/date'
+
 export default {
   data() {
     return {
@@ -81,7 +85,7 @@ export default {
       showModalFeed: true,
       showModal: false,
       filterData: {
-        date: new Date(),
+        date: '',
         user: ''
       },
       isEdit: false
@@ -91,8 +95,10 @@ export default {
     const store = useStore() 
 
     store.dispatch('list/getList', 'post')
+    store.dispatch('dropdown/getDropdownUser', {avatar: false})
 
-    return { dispatch: store.dispatch }
+
+    return { dispatch: store.dispatch, dateFormart }
   },
 
   components: {

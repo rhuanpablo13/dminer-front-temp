@@ -3,6 +3,7 @@
     :avatar="value.user.avatar"
     :username="value.user.userName"
     :text="value.title"
+    :datahora="value.dateCreated"
   />
 
   <div class="feed_contant">
@@ -30,7 +31,7 @@
     <div class="feed_container_comments">
       <ul v-if="value.comments.length">
         <li v-for="comment in value.comments" :key="comment.id">
-          <comment-post :avatar="comment.user.avatar" :text="comment.content" />
+          <comment-post :avatar="comment.user.avatar" :text="comment.content"  :isLoading="!!comment.user.avatar" :username="comment.user.login"/>
         </li>
       </ul>
       <div class="comment_input">
@@ -115,6 +116,7 @@ export default {
   margin: auto;
   overflow: auto;
   max-height: 85%;
+  margin-top: 2rem;
 }
 
 /* .feed_container_imagem {
@@ -151,7 +153,8 @@ export default {
   text-align: start;
   width: 20rem;
   /* font-size: 1rem; */
-  margin:  1rem auto;
+     margin: auto;
+    margin-top: 2rem;
 
 }
 
@@ -174,18 +177,18 @@ export default {
   gap: 1.5rem;
   text-align: center;
   margin-top: 1rem;
-  width: 23rem;
+  /* width: 23rem; */
   overflow: hidden;
 }
 
 .comment_input {
-  width: 18rem;
+  width: 90%;
   margin: auto;
   margin-top: 1rem;
 }
 
 ul {
-  width: 18rem;
+  width: 80%;
   max-height: 10rem;
   list-style-type: none;
 

@@ -17,9 +17,10 @@
         inputFormat="dd-MM-yyyy"
         selectText="selecionar"
         cancelText="cancelar"
-        :format="dateHourFormart"
-        :previewFormat="dateHourFormart"
+        :format="format"
+        :previewFormat="format"
         :minDate="minDate"
+        :enableTimePicker="enableTimePicker"
       ></Datepicker>
 
       <div>
@@ -53,7 +54,9 @@ export default {
     text: { type: String, required: false },
     value: { type: String, required: false },
     minDate: { type: String, required: false },
-    required: { type: Boolean, required: false, default: false }
+    required: { type: Boolean, required: false, default: false },
+    format: { type: Function, required: false, default: dateHourFormart },
+    enableTimePicker: { type: Boolean, required: false, default: true }
   },
 
   setup(props) {

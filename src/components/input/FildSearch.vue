@@ -11,7 +11,7 @@
         <input
           v-model="input"
           placeholder="PESQUISAR"
-          @keyup.enter="$emit('change', input)"
+          @keyup.enter="submit"
         />
         <!-- v-if="input.length" -->
         <span class="clear" @click="clear" >X</span>
@@ -43,6 +43,10 @@ export default {
     clear(){
       this.input = ''
       this.$emit('clear')
+    }, 
+    submit(e){
+      e.preventDefault()
+      this.$emit('change', input)
     }
   },
   components: { InputSearch, IconBase },

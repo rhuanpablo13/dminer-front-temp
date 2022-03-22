@@ -47,6 +47,13 @@ export default {
   mounted() {
     if (localStorage.position_components_home) {
       this.listComponents = JSON.parse(localStorage.position_components_home)
+
+      const data = { keyword: null, login: this.login }
+      this.$store.dispatch('home/search', data)
+      this.$store.dispatch('dropdown/getDropdownPermission')
+      this.$store.dispatch('dropdown/getDropdownCategory')
+      this.$store.dispatch('dropdown/getDropdownPriority')
+
     } else {
       this.listComponents = [
         'notification',
@@ -56,7 +63,6 @@ export default {
         'reminder',
         'survey'
       ]
-
       localStorage.position_components_home = JSON.stringify(
         this.listComponents
       )
@@ -66,6 +72,7 @@ export default {
       this.$store.dispatch('dropdown/getDropdownPermission')
       this.$store.dispatch('dropdown/getDropdownCategory')
       this.$store.dispatch('dropdown/getDropdownPriority')
+
     }
   },
 

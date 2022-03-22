@@ -1,6 +1,10 @@
 <template>
   <div class="feed_comments">
-    <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar>
+  <div class="container_header_comment"> 
+      <Avatar v-if="isLoading" :avatar="image" width="1rem" height="1rem"></Avatar>
+      <span> {{ username }} </span>
+  </div>
+
     <div class="feed_comments_text">
       <span>{{ text }}</span>
     </div>
@@ -12,9 +16,20 @@ import Avatar from '@/components/Avatar.vue'
 import Title from '@/components/title/Title.vue'
 
 export default {
+  data() {
+    return { image: ""}
+  },
   props: {
     avatar: { type: String, required: true },
-    text: { type: String, required: false, default: '' }
+    username: { type: String, required: true},
+    text: { type: String, required: false, default: '' },
+    isLoading: { type: Boolean, require: true, default: false}
+  },
+  updated() {
+    debugger
+    if (this.isLoading) {
+      this.image = this.avatar
+    }
   },
   components: {
     Avatar,
@@ -36,5 +51,12 @@ export default {
   color: var(--color-text);
   font-size: 0.5rem;
   margin-top: -2rem;
+}
+
+.container_header_comment{
+  display: grid;
+  font-size: 0.3rem;
+  justify-content: center;
+  justify-items: center;
 }
 </style>

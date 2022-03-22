@@ -126,7 +126,6 @@ export default {
       typeList: 'survey',
       showModal: false,
       isEdit: false,
-      isDelete: false,
       value: {
         question: '',
         date: new Date() + 1,
@@ -152,7 +151,7 @@ export default {
       })
     },
     sendForm() {
-      if (this.validForm() && !this.isDelete) {
+      if (this.validForm()) {
         this.$store.dispatch(
           this.isEdit ? 'home/updateItemList' : 'home/createItemList', 
           {
@@ -185,12 +184,10 @@ export default {
     edit(_value) {
       this.$store.dispatch('list/setNoRegistry', false)
       this.isEdit = true
-      this.isDelete = false
       this.value = _value
       this.showModal = true
     },
     deleteBenefit(id) {
-      this.isDelete = true
       this.$store.dispatch('home/deleteItemList', 
         {
           typeList: this.typeList, 
