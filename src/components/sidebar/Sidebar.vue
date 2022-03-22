@@ -12,12 +12,12 @@
     </span>
     <div class="container-avatar" v-show="!collapsed">
       <div>
-        <Avatar
-          :avatar="user.avatar"
+        <avatar-perfil
+          :avatar="image"
           :username="user.usuario"
           v-model="user.avatar"
-          width="8rem"
-          height="9rem"
+          width="10rem"
+          height="11rem"
         />
       </div>
     </div>
@@ -92,7 +92,7 @@
 import { mapState } from 'vuex'
 
 import SidebarLink from './SidebarLink.vue'
-import Avatar from '@/components/Avatar.vue'
+import AvatarPerfil from '@/components/AvatarPerfil.vue'
 import IconBenefits from '@/components/svg/IconBenefits.vue'
 import IconPermissions from '@/components/svg/IconPermissions.vue'
 import IconTeam from '@/components/svg/IconTeam.vue'
@@ -107,10 +107,13 @@ import IconOpen from '@/components/svg/IconOpen.vue'
 import * as translation from '@/util/pt_BR.json'
 
 export default {
+  data() {
+    return { image: ''}
+  },
   props: { isLoading: { type: Boolean, required: false, default: false}},
   components: {
     SidebarLink,
-    Avatar,
+    AvatarPerfil,
     IconBenefits,
     IconDocument,
     IconPermissions,
@@ -130,6 +133,10 @@ export default {
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
     permissionADM: (state) => state.user.adminUser  !== translation.SYSTEM.ADMINISTRADOR
   }),
+
+  mounted() {
+    this.image = this.user.avatar
+  },
 
   methods: {
     updateUser() {

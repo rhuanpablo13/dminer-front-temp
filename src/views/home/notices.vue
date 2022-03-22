@@ -75,7 +75,7 @@
             </button>
           </div>
           <div style="display: flex">
-            <span> {{ itemView.creator  }} | {{ dateHourFormart(itemView.date) }}</span>
+            <span> {{ itemView.creator  }} | {{ dateFormart(itemView.date) }}</span>
             <span style="margin-left: auto;"> 
               <b>Prioridade:</b>
               {{ getPriority(itemView.priority) }}
@@ -158,7 +158,7 @@ import WidgetModal from '@/components/widget/WidgetModal.vue'
 import IconEdit from '@/components/svg/IconEdit.vue'
 import IconTrash from '@/components/svg/IconTrash.vue'
 
-import { dateHourFormart, dateHourFormarUs } from '@/util/date.js'
+import { dateFormart, dateFormartUs } from '@/util/date.js'
 import * as translation from '@/util/pt_BR.json'
 
 export default {
@@ -175,7 +175,7 @@ export default {
 
     return {
       dispatch,
-      dateHourFormart,
+      dateFormart,
       lastScrollTop: 0,
       value: {
         warning: '',
@@ -247,7 +247,7 @@ export default {
     sendForm() {
       if (this.validForm()) {
         this.value.users = this.value.users
-        this.value.date  =  dateHourFormarUs(this.value.date)
+        this.value.date  =  dateFormartUs(this.value.date)
 
         this.dispatch(
           this.isEdit ? 'home/updateItemList' : 'home/createItemList', 

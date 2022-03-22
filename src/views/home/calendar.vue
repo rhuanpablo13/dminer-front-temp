@@ -39,6 +39,8 @@
                   required
                   :isError="isError && !eventCalendar.start"
                   :minDate="minDateNow()"
+                  :format="dateHourFormart"
+                  enableTimePicker
                 />
                 <fild-date
                   text="Fim"
@@ -47,6 +49,8 @@
                   :required="false"
                   :isError="isError && !eventCalendar.end"
                   :minDate="setMinDate(eventCalendar.start)"
+                  :format="dateHourFormart"
+                  enableTimePicker
                 />
                 <fild-multi-select
                   text="Usuários"
@@ -105,7 +109,7 @@ import EventCalendar from '@/components/calendar/EventCalendar.vue'
 import FildMultiSelect from '@/components/input/FildMultiSelect.vue'
 import FildCheckbox from '@/components/input/FildCheckbox.vue'
 
-import { dateHourFormarUs, minDateNow, dateConcat } from '@/util/date.js'
+import { dateHourFormarUs, minDateNow, dateConcat, dateHourFormart } from '@/util/date.js'
 import * as translation from '@/util/pt_BR.json'
 
 export default {
@@ -137,7 +141,8 @@ export default {
       dispatch,
       eventCalendar,
       calendar,
-      minDateNow
+      minDateNow,
+      dateHourFormart
     }
   },
 

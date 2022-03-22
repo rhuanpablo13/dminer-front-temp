@@ -44,7 +44,7 @@ import { ref } from 'vue'
 import IconBase from '@/components/svg/IconBase.vue'
 import IconLine from '@/components/svg/IconLine.vue'
 
-import { dateHourFormart } from '@/util/date'
+import { dateFormart } from '@/util/date'
 
 import Datepicker from 'vue3-date-time-picker'
 import 'vue3-date-time-picker/dist/main.css'
@@ -55,8 +55,8 @@ export default {
     value: { type: String, required: false },
     minDate: { type: String, required: false },
     required: { type: Boolean, required: false, default: false },
-    format: { type: Function, required: false, default: dateHourFormart },
-    enableTimePicker: { type: Boolean, required: false, default: true }
+    format: { type: Function, required: false, default: dateFormart },
+    enableTimePicker: { type: Boolean, required: false, default: false }
   },
 
   setup(props) {
@@ -65,7 +65,7 @@ export default {
 
     return {
       date,
-      dateHourFormart
+      dateFormart
     }
   },
   computed: {

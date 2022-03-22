@@ -118,7 +118,7 @@ export default {
 <style>
 
 .feed_all_container {
-  overflow-y: auto;
+  overflow: hidden;
   width: 90%;
   margin-left: 1rem;
   margin-top: -2rem;

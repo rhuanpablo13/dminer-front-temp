@@ -1,9 +1,9 @@
 <template>
   <form action="#">
     <div class="feed_comment_input">
-      <div class="container_header_comment_com"> 
+      <!-- <div class="container_header_comment_com"> 
         <Avatar :avatar="image" width="1rem" height="1rem"></Avatar> 
-      </div>
+      </div> -->
       <fild-input text="Comentar" v-model="value.content" :value="value.content" required />
       <send
         @click="send"
@@ -42,10 +42,7 @@ export default {
   },
   setup(props) {
     const { crateComment } = useFeed()
-     const { setPost } = usePost()
-
-     debugger
-
+    const { setPost } = usePost()
     return { crateComment, setPost, image: props.avatar }
   },
   computed: mapState({

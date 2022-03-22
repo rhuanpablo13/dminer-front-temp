@@ -3,7 +3,7 @@ import { fetchAll, fetchCreate, fetchUpdate, fetchDelete, fetchSearch,fetchDropd
 import { fetchQuizAnswer } from '@/api/survey.js'
 import { fetchSearchAll } from '@/api/feed.js'
 import { fetchAllFavorites, fetchCreateFavorite } from '@/api/favorite'
-import { dateFormarUs } from '@/util/date.js'
+import { dateFormartUs } from '@/util/date.js'
 
 export default function useList() {
   const getListItem = ref([])
@@ -45,7 +45,7 @@ export default function useList() {
   }
 
   const searchAll = async (data) => {
-    const date = data.date ? dateFormarUs(data.date) : ''
+    const date = data.date ? dateFormartUs(data.date) : ''
     getListItem.value =  await fetchSearchAll(date, data.user)
   }  
   

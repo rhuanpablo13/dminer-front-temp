@@ -45,7 +45,6 @@
               text="Filtrar por data"
               v-model="filterData.date"
               :value="filterData.date"
-              :enableTimePicker="false"
               :format="dateFormart"
             />
 
