@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div
+    <!-- <div
       class="hex"
       :style="{
         'background-image': `url(${
@@ -9,7 +9,12 @@
         width: width,
         height: height
       }"
-    ></div>
+    ></div> -->
+
+  <img :src="previewImage ||'../src/assets/widget/avatar.svg'" :style="{
+        width: width,
+        height: height
+      }"/>
     <div class="username">
       <h2>{{ username }}</h2>
     </div>

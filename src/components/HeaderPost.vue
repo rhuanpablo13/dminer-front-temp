@@ -1,6 +1,6 @@
 <template>
   <div class="feed_header">
-    <Avatar :avatar="avatar" width="4rem" height="4rem"></Avatar>
+    <Avatar :avatar="image" width="4rem" height="4rem"></Avatar>
     <div class="feed_header_text">
       <h1>{{ username }}</h1>
       <h3>{{ text }}</h3>
@@ -14,6 +14,9 @@ import Avatar from '@/components/Avatar.vue'
 import { dateHourFormart } from '@/util/date'
 
 export default {
+  data() {
+    return { image:'' }
+  },
   props: {
     avatar: { type: String, required: true },
     username: { type: String, required: false, default: '' },
@@ -22,6 +25,9 @@ export default {
   },
   components: {
     Avatar,
+  },
+  mounted() {
+    this.image = this.avatar
   },
   setup() {
     return { dateHourFormart}

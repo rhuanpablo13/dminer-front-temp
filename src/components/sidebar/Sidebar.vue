@@ -16,6 +16,8 @@
           :avatar="user.avatar"
           :username="user.usuario"
           v-model="user.avatar"
+          width="8rem"
+          height="9rem"
         />
       </div>
     </div>

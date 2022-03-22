@@ -1,8 +1,8 @@
 <template>
   <form action="#">
     <div class="feed_comment_input">
-      <div class="container_header_comment"> 
-        <Avatar :avatar="avatar" width="1rem" height="1rem"></Avatar> 
+      <div class="container_header_comment_com"> 
+        <Avatar :avatar="image" width="1rem" height="1rem"></Avatar> 
       </div>
       <fild-input text="Comentar" v-model="value.content" :value="value.content" required />
       <send
@@ -40,14 +40,16 @@ export default {
     avatar: { type: String, required: true },
     idPost: { type: String, required: true},
   },
-  setup() {
+  setup(props) {
     const { crateComment } = useFeed()
      const { setPost } = usePost()
 
-    return { crateComment, setPost }
+     debugger
+
+    return { crateComment, setPost, image: props.avatar }
   },
   computed: mapState({
-    getUser: (state) => state.user.login
+    getUser: (state) => state.user.login,
   }),
 
   components: {
@@ -83,7 +85,10 @@ export default {
   width: 20rem !important;
 }
 
-.container_header_comment {
-  display: flex;
+.container_header_comment_com {
+  display: grid;
+  font-size: 0.3rem;
+  justify-content: center;
+  justify-items: center;
 }
 </style>

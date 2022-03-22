@@ -35,7 +35,7 @@
         </li>
       </ul>
       <div class="comment_input">
-       <comment :avatar="value.user.avatar" :idPost="value.id"/>
+       <comment :avatar="getAvatar" :idPost="value.id"/>
       </div>
     </div>
   </div>
@@ -87,6 +87,7 @@ export default {
   }, 
   computed: mapState({
     login: (state) => state.user.login,
+    getAvatar: (state) => state.user.avatar,
   }),
 
   methods: {
