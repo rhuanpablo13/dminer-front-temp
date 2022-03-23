@@ -13,7 +13,7 @@
     <div class="container-avatar" v-show="!collapsed">
       <div>
         <avatar-perfil
-          :avatar="image"
+          :avatar="user.avatar"
           :username="user.usuario"
           v-model="user.avatar"
           width="10rem"
@@ -107,9 +107,6 @@ import IconOpen from '@/components/svg/IconOpen.vue'
 import * as translation from '@/util/pt_BR.json'
 
 export default {
-  data() {
-    return { image: ''}
-  },
   props: { isLoading: { type: Boolean, required: false, default: false}},
   components: {
     SidebarLink,
@@ -133,10 +130,6 @@ export default {
     sidebarWidth: (state) => state.sidebar.sidebarWidth,
     permissionADM: (state) => state.user.adminUser  !== translation.SYSTEM.ADMINISTRADOR
   }),
-
-  mounted() {
-    this.image = this.user.avatar
-  },
 
   methods: {
     updateUser() {
